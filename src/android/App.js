@@ -10,7 +10,7 @@ import VinScanner from './components/VinScanner'
 import ErrorView from './views/ErrorView'
 import SearchCarList from './views/SearchCarList'
 import SelectCarMake from './views/SelectCarMake'
-import SelectCarModel from './views/SelectCarModel'
+//import SelectCarModel from './views/SelectCarModel'
 import SelectStorage from './views/SelectStorage'
 import SelectRow from './views/SelectRow'
 import SelectColumn from './views/SelectColumn'
@@ -20,6 +20,8 @@ import parkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
 import selectStorageForCarList from './views/SelectStorageForCarList'
+import AddCar from './views/AddCar'
+import SelectEntrust from './views/SelectEntrust'
 
 
 export default class App extends Component {
@@ -32,7 +34,7 @@ export default class App extends Component {
         return (
             <Router >
                 <Scene key="root">
-                    <Scene key="welcome"  initial={true} component={Welcome} hideNavBar />
+                    <Scene key="welcome" component={Welcome} hideNavBar />
                     <Scene key="login" component={Login} hideNavBar />
                     <Scene key="main" component={MainRoot} hideNavBar />
                     <Scene key="password" component={Password} hideNavBar />
@@ -42,7 +44,7 @@ export default class App extends Component {
                     <Scene key="ErrorView" component={ErrorView} hideNavBar />
                     <Scene key="SearchCarList" component={SearchCarList} hideNavBar />
                     <Scene key="SelectCarMake" component={SelectCarMake} hideNavBar />
-                    <Scene key="SelectCarModel" component={SelectCarModel} hideNavBar />
+                    {/*<Scene key="SelectCarModel" component={SelectCarModel} hideNavBar />*/}
                     <Scene key="SelectStorage" component={SelectStorage} hideNavBar />
                     <Scene key="SelectRow" component={SelectRow} hideNavBar />
                     <Scene key="SelectColumn" component={SelectColumn} hideNavBar />
@@ -52,6 +54,8 @@ export default class App extends Component {
                     <Scene key="ImagePageForCarInfo" component={ImagePageForCarInfo} hideNavBar />
                     <Scene key="ImagePageForImportCar" component={ImagePageForImportCar} hideNavBar />
                     <Scene key="selectStorageForCarList" component={selectStorageForCarList} hideNavBar />
+                    <Scene key="SelectEntrust" component={SelectEntrust} hideNavBar />
+                    <Scene key="addCar" component={AddCar}   initial={true} hideNavBar />
                 </Scene>
             </Router>
 

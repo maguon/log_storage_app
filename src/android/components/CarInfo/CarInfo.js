@@ -7,12 +7,12 @@ import { Actions } from 'react-native-router-flux'
 const window = Dimensions.get('window')
 
 const CarInfo = ({ car, exportCar, moveCar, changeViewType }) => {
-    let { col, row, plan_out_time, real_out_time, pro_date, engine_num, remark, storage_name, make_name, model_name } = car
+    let { col, row, plan_out_time, real_out_time, order_date, engine_num, remark, storage_name, make_name, model_name } = car
 
     col = col ? col.toString() : ''
     row = row ? row.toString() : ''
     plan_out_time = plan_out_time ? plan_out_time : ''
-    pro_date = pro_date ? pro_date : ''
+    pro_date = order_date ? (new Date(order_date)).toLocaleDateString() : ''
     engine_num = engine_num ? engine_num : ''
     real_out_time = real_out_time ? (new Date(real_out_time)).toLocaleString() : ''
     remark = remark ? remark : ''

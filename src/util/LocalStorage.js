@@ -20,7 +20,7 @@ class LocalStorage {
     saveKey(key, object) {
         this.storage.save({
             key: key,
-            rawData: object
+            data: object
         })
     }
 
@@ -28,7 +28,7 @@ class LocalStorage {
         this.storage.save({
             key: key,
             id: id,
-            rawData: object
+            data: object
         })
     }
     loadKey(key, callback) {

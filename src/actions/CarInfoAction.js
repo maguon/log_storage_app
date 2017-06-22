@@ -5,7 +5,7 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const getCarInformation = (param) => (dispatch) => {
     let urls = [`${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`,
-    `${base_host}/user/${param.requiredParam.userId}/car?${ObjectToUrl(param.optionalParam)}`]
+    `${base_host}/car?${ObjectToUrl(param.optionalParam)}`]
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
     httpRequest
         .getAll(urls, (err, res) => {
@@ -34,6 +34,7 @@ export const getCarInformation = (param) => (dispatch) => {
 
 export const exportCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/carStorageRel/${param.requiredParam.relId}/relStatus/${param.requiredParam.relStatus}?${ObjectToUrl(param.optionalParam)}`
+   //console.log(url)
     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_WAITING, payload: {} })
     httpRequest
         .put(url, {}, (err, res) => {
@@ -105,18 +106,19 @@ export const moveCar = (param) => (dispatch) => {
 export const updateCarInfo = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}`
     dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_WAITING, payload: {} })
-    httpRequest
-        .put(url, param.putParam, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS, payload: { data: param.putParam } })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
+    console.log(param)
+    // httpRequest
+    //     .put(url, param.putParam, (err, res) => {
+    //         if (err) {
+    //             dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_ERROR, payload: { data: err } })
+    //         } else {
+    //             if (res.success) {
+    //                 dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS, payload: { data: param.putParam } })
+    //             } else {
+    //                 dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_FAILED, payload: { data: res.msg } })
+    //             }
+    //         }
+    //     })
 }
 
 export const updateCarInfoPlanOutTime = (param) => (dispatch) => {

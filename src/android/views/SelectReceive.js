@@ -35,7 +35,6 @@ class SelectCarMake extends Component {
                 console.log('carMakesReducer.carMakes执行失败')
             }
         }
-
         /**************************************************************************** */
         return true
     }
@@ -44,7 +43,6 @@ class SelectCarMake extends Component {
         this.props.onSelectMake(param)
         Actions.pop()
     }
-
 
     render() {
         let { carMakeList } = this.props.carMakesReducer.carMakes.data
@@ -65,7 +63,6 @@ class SelectCarMake extends Component {
         )
     }
 }
-
 
 const mapStateToProps = (state) => {
     return {

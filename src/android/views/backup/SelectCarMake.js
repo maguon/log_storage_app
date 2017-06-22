@@ -10,9 +10,6 @@ import { List, ListItem } from 'native-base'
 class SelectCarMake extends Component {
     constructor(props) {
         super(props)
-
-
-        this.onSelectMake = this.onSelectMake.bind(this)
     }
 
     componentDidMount() {
@@ -24,7 +21,7 @@ class SelectCarMake extends Component {
         /** homeReducer.getStoragesHome */
         if (carMakesReducer.carMakes.isExecStatus == 1) {
             console.log('carMakesReducer.carMakes', '开始执行')
-        }
+        } 
         else if (carMakesReducer.carMakes.isExecStatus == 2) {
             if (carMakesReducer.carMakes.isResultStatus == 0) {
                 console.log('carMakesReducer.carMakes执行成功')
@@ -40,16 +37,11 @@ class SelectCarMake extends Component {
         return true
     }
 
-    onSelectMake(param) {
-        this.props.onSelectMake(param)
-        Actions.pop()
-    }
-
 
     render() {
         let { carMakeList } = this.props.carMakesReducer.carMakes.data
         let carMakes = carMakeList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectMake({ makeId: item.id, makeName: item.make_name })}>
+            return (<ListItem button key={item.id} onPress={() => Actions.SelectCarModel({ makeId: item.id, makeName: item.make_name, onSelectModel: this.props.onSelectModel })}>
                 <Text>{item.make_name}</Text>
             </ListItem>)
         })

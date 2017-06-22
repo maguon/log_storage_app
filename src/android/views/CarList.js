@@ -20,9 +20,9 @@ class CarList extends Component {
         let { userId } = this.props.user
         let { selectStorageListForCarList } = this.props.selectStorageForCarListReducer
         let param = {
-            requiredParam: {
-                userid: userId
-            },
+            // requiredParam: {
+            //     userid: userId
+            // },
             optionalParam: {
                 start: 0,
                 size: 20,
@@ -92,9 +92,9 @@ class CarList extends Component {
         let { carList } = this.props.carListReducer.getCarList.data
         let { selectStorageListForCarList } = this.props.selectStorageForCarListReducer
         let param = {
-            requiredParam: {
-                userid: userId
-            },
+            // requiredParam: {
+            //     userid: userId
+            // },
             optionalParam: {
                 start: carList.length,
                 size: 20,

@@ -351,7 +351,6 @@ export default handleActions({
         const { payload: { data } } = action
         let editCarInfo, carImportAgain
         let { vin, make_name, model_name, pro_date, colour, engine_num, remark, id } = state.getCarInfo.data.car
-        // console.log(state.getCarInfo.data.car)
         if (data == 0) {
             editCarInfo = { ...state.editCarInfo, isExecStatus: 0 }
             carImportAgain = { ...state.carImportAgain, isExecStatus: 0 }
