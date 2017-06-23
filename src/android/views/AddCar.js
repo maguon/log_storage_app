@@ -109,7 +109,7 @@ class AddCar extends Component {
                                 <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => { }}>
+                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectReceive({ onSelectReceive: this.changeAddCarField })}>
                             <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>经销商：</Text>
                                 <Text style={{ fontSize: 14, flex: 10 }}>{receive}</Text>

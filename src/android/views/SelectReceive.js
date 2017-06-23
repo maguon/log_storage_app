@@ -3,52 +3,52 @@ import { Text, View, Button, ScrollView, } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import NavBar from '../components/Bar/NavBar'
-import * as CarMakeAction from '../../actions/CarMakeAction'
+import * as SelectReceiveAction from '../../actions/SelectReceiveAction'
 import { List, ListItem } from 'native-base'
 
 
-class SelectCarMake extends Component {
+class SelectReceive extends Component {
     constructor(props) {
         super(props)
 
 
-        this.onSelectMake = this.onSelectMake.bind(this)
+        this.onSelectReceive = this.onSelectReceive.bind(this)
     }
 
     componentDidMount() {
-        this.props.getCarMakesAll()
+        this.props.getReceiveAll()
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let { carMakesReducer } = nextProps
+        let { SelectReceiveReducer } = nextProps
         /** homeReducer.getStoragesHome */
-        if (carMakesReducer.carMakes.isExecStatus == 1) {
-            console.log('carMakesReducer.carMakes', '开始执行')
+        if (SelectReceiveReducer.receives.isExecStatus == 1) {
+            console.log('SelectReceiveReducer.receives', '开始执行')
         }
-        else if (carMakesReducer.carMakes.isExecStatus == 2) {
-            if (carMakesReducer.carMakes.isResultStatus == 0) {
-                console.log('carMakesReducer.carMakes执行成功')
-            } else if (carMakesReducer.carMakes.isResultStatus == 1) {
-                console.log('carMakesReducer.carMakes执行错误')
+        else if (SelectReceiveReducer.receives.isExecStatus == 2) {
+            if (SelectReceiveReducer.receives.isResultStatus == 0) {
+                console.log('SelectReceiveReducer.receives执行成功')
+            } else if (SelectReceiveReducer.receives.isResultStatus == 1) {
+                console.log('SelectReceiveReducer.receives执行错误')
             }
-            else if (carMakesReducer.carMakes.isResultStatus == 2) {
-                console.log('carMakesReducer.carMakes执行失败')
+            else if (SelectReceiveReducer.receives.isResultStatus == 2) {
+                console.log('SelectReceiveReducer.receives执行失败')
             }
         }
         /**************************************************************************** */
         return true
     }
 
-    onSelectMake(param) {
-        this.props.onSelectMake(param)
+    onSelectReceive(param) {
+        this.props.onSelectReceive(param)
         Actions.pop()
     }
 
     render() {
-        let { carMakeList } = this.props.carMakesReducer.carMakes.data
-        let carMakes = carMakeList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectMake({ makeId: item.id, makeName: item.make_name })}>
-                <Text>{item.make_name}</Text>
+        let { receiveList } = this.props.SelectReceiveReducer.receives.data
+        let receives = receiveList.map(item => {
+            return (<ListItem button key={item.id} onPress={() => this.onSelectReceive({ receiveId: item.id, receive: item.receive_name })}>
+                <Text>{item.receive_name}</Text>
             </ListItem>)
         })
         return (
@@ -56,7 +56,7 @@ class SelectCarMake extends Component {
                 <NavBar title={'选择品牌'} />
                 <ScrollView>
                     <List>
-                        {carMakes}
+                        {receives}
                     </List>
                 </ScrollView>
             </View>
@@ -66,15 +66,15 @@ class SelectCarMake extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        carMakesReducer: state.CarMakeReducer,
+        SelectReceiveReducer: state.SelectReceiveReducer,
         user: state.UserReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCarMakesAll: () => {
-        dispatch(CarMakeAction.getCarMakesAll())
+    getReceiveAll: () => {
+        dispatch(SelectReceiveAction.getReceiveAll())
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectCarMake)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectReceive)

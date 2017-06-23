@@ -22,6 +22,7 @@ import ImagePageForImportCar from './views/ImagePageForImportCar'
 import selectStorageForCarList from './views/SelectStorageForCarList'
 import AddCar from './views/AddCar'
 import SelectEntrust from './views/SelectEntrust'
+import SelectReceive from './views/SelectReceive'
 
 
 export default class App extends Component {
@@ -55,6 +56,7 @@ export default class App extends Component {
                     <Scene key="ImagePageForImportCar" component={ImagePageForImportCar} hideNavBar />
                     <Scene key="selectStorageForCarList" component={selectStorageForCarList} hideNavBar />
                     <Scene key="SelectEntrust" component={SelectEntrust} hideNavBar />
+                    <Scene key="SelectReceive" component={SelectReceive} hideNavBar />
                     <Scene key="addCar" component={AddCar}   initial={true} hideNavBar />
                 </Scene>
             </Router>
