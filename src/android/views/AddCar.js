@@ -19,6 +19,8 @@ class AddCar extends Component {
         super(props)
 
         this.changeAddCarField = this.changeAddCarField.bind(this)
+        this.onSelectRouteStart = this.onSelectRouteStart.bind(this)
+        this.onSelectRouteEnd = this.onSelectRouteEnd.bind(this)
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -52,7 +54,7 @@ class AddCar extends Component {
     }
 
 
-    async showPicker(stateKey, options) {      
+    async showPicker(stateKey, options) {
         try {
             const { action, year, month, day } = await DatePickerAndroid.open(options)
             if (action !== DatePickerAndroid.dismissedAction) {
@@ -66,16 +68,22 @@ class AddCar extends Component {
         }
     }
 
-    changeAddCarField(param) {
-        this.props.changeAddCarField(param)
-        //console.log(this.props)
+    onSelectRouteStart(param) {
+        this.props.changeAddCarField({ routeStartId: param.cityId, routeStart: param.city })
     }
 
+    onSelectRouteEnd(param) {
+        this.props.changeAddCarField({ routeEndId: param.cityId, routeEnd: param.city })
+    }
+
+    changeAddCarField(param) {
+        this.props.changeAddCarField(param)
+    }
 
     render() {
         // entrustId makeId makeName orderDate receiveId remark routeEnd routeEndId routeStart routeStartId vin
 
-        let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate } = this.props.AddCarReducer.addCar.data
+        let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, remark } = this.props.AddCarReducer.addCar.data
         console.log(this.props.AddCarReducer.addCar.data)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
@@ -116,7 +124,7 @@ class AddCar extends Component {
                                 <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => { }}>
+                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectCity({ onSelectCity: this.onSelectRouteStart })}>
                             <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>起始城市：</Text>
                                 <Text style={{ fontSize: 14, flex: 10 }}>{routeStart}</Text>
@@ -126,11 +134,11 @@ class AddCar extends Component {
                         <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => { }}>
                             <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>起始地址：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>1111111111111111111111111111111</Text>
+                                <Text style={{ fontSize: 14, flex: 10 }}>未实现</Text>
                                 <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => { }}>
+                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectCity({ onSelectCity: this.onSelectRouteEnd })}>
                             <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>目的城市：</Text>
                                 <Text style={{ fontSize: 14, flex: 10 }}>{routeEnd}</Text>
@@ -146,15 +154,15 @@ class AddCar extends Component {
                         </TouchableHighlight>
                     </View>
                     <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => { }}>
+                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.RichText({ onGetValue: this.changeAddCarField, richTextValue: remark })}>
                             <View style={{ flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>备注：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>11111111111</Text>
+                                <Text style={{ fontSize: 14, flex: 10 }}>{remark}</Text>
                                 <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
                             </View>
                         </TouchableHighlight>
                     </View>
-                    <View style={{ marginTop: 10, paddingHorizontal: 20, flexDirection: 'row' }}>
+                    <View style={{ marginVertical: 10, paddingHorizontal: 20, flexDirection: 'row' }}>
                         <Button block style={{ flex: 1, marginRight: 10, backgroundColor: '#00cade' }} onPress={() => { }}>
                             <Text style={{ color: '#fff' }}>完成并提交</Text>
                         </Button>

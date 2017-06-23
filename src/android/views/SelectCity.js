@@ -3,36 +3,36 @@ import { Text, View, Button, ScrollView, } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import NavBar from '../components/Bar/NavBar'
-import * as CarMakeAction from '../../actions/CarMakeAction'
+import * as SelectCityAction from '../../actions/SelectCityAction'
 import { List, ListItem } from 'native-base'
 
 
-class SelectCarMake extends Component {
+class SelectCity extends Component {
     constructor(props) {
         super(props)
 
 
-        this.onSelectMake = this.onSelectMake.bind(this)
+        this.onSelectCity = this.onSelectCity.bind(this)
     }
 
     componentDidMount() {
-        this.props.getCarMakesAll()
+        this.props.getCityAll()
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        let { carMakesReducer } = nextProps
+        let { SelectCityReducer } = nextProps
         /** homeReducer.getStoragesHome */
-        if (carMakesReducer.carMakes.isExecStatus == 1) {
-            console.log('carMakesReducer.carMakes', '开始执行')
+        if (SelectCityReducer.citys.isExecStatus == 1) {
+            console.log('SelectCityReducer.citys', '开始执行')
         }
-        else if (carMakesReducer.carMakes.isExecStatus == 2) {
-            if (carMakesReducer.carMakes.isResultStatus == 0) {
-                console.log('carMakesReducer.carMakes执行成功')
-            } else if (carMakesReducer.carMakes.isResultStatus == 1) {
-                console.log('carMakesReducer.carMakes执行错误')
+        else if (SelectCityReducer.citys.isExecStatus == 2) {
+            if (SelectCityReducer.citys.isResultStatus == 0) {
+                console.log('SelectCityReducer.citys执行成功')
+            } else if (SelectCityReducer.citys.isResultStatus == 1) {
+                console.log('SelectCityReducer.citys执行错误')
             }
-            else if (carMakesReducer.carMakes.isResultStatus == 2) {
-                console.log('carMakesReducer.carMakes执行失败')
+            else if (SelectCityReducer.citys.isResultStatus == 2) {
+                console.log('SelectCityReducer.citys执行失败')
             }
         }
 
@@ -40,25 +40,25 @@ class SelectCarMake extends Component {
         return true
     }
 
-    onSelectMake(param) {
-        this.props.onSelectMake(param)
+    onSelectCity(param) {
+        this.props.onSelectCity(param)
         Actions.pop()
     }
 
 
     render() {
-        let { carMakeList } = this.props.carMakesReducer.carMakes.data
-        let carMakes = carMakeList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectMake({ makeId: item.id, makeName: item.make_name })}>
-                <Text>{item.make_name}</Text>
+        let { cityList } = this.props.SelectCityReducer.citys.data
+        let citys = cityList.map(item => {
+            return (<ListItem button key={item.id} onPress={() => this.onSelectCity({ cityId: item.id, city: item.city_name })}>
+                <Text>{item.city_name}</Text>
             </ListItem>)
         })
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择品牌'} />
+                <NavBar title={'选择城市'} />
                 <ScrollView>
                     <List>
-                        {carMakes}
+                        {citys}
                     </List>
                 </ScrollView>
             </View>
@@ -69,15 +69,15 @@ class SelectCarMake extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        carMakesReducer: state.CarMakeReducer,
+        SelectCityReducer: state.SelectCityReducer,
         user: state.UserReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCarMakesAll: () => {
-        dispatch(CarMakeAction.getCarMakesAll())
+    getCityAll: () => {
+        dispatch(SelectCityAction.getCityAll())
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectCarMake)
+export default connect(mapStateToProps, mapDispatchToProps)(SelectCity)
