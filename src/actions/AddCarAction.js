@@ -4,32 +4,20 @@ import * as actionTypes from './actionTypes'
 import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const addCar = (param) => (dispatch) => {
-    // let urls = [`${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`,
-    // `${base_host}/car?${ObjectToUrl(param.optionalParam)}`]
-    // dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
-    // httpRequest
-    //     .getAll(urls, (err, res) => {
-    //         if (err) {
-    //             dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_ERROR, payload: { data: err } })
-    //         } else {
-    //             if (res[0].success && res[1].success) {
-    //                 dispatch({
-    //                     type: actionTypes.carInfoTypes.GET_CARINFO_SUCCESS, payload: {
-    //                         data: {
-    //                             recordList: res[0].result[0].comment,
-    //                             imageList: res[0].result[0].storage_image.map(item => {
-    //                                 return `${file_host}image/${item.url}`
-    //                             }),
-    //                             recordId: res[0].result[0]._id,
-    //                             car: res[1].result[0]
-    //                         }
-    //                     }
-    //                 })
-    //             } else {
-    //                 dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_FAILED, payload: { data: `${res[0].msg}&&${res[1].msg}` } })
-    //             }
-    //         }
-    //     })
+    let url = `${base_host}/user/${param.requiredParam.userId}/car`
+    dispatch({ type: actionTypes.addCarTypes.ADD_CAR_WAITING, payload: {} })
+    httpRequest
+        .post(url, param.postParam, (err, res) => {
+            if (err) {
+                dispatch({ type: actionTypes.addCarTypes.ADD_CAR_ERROR, payload: { data: err } })
+            } else {
+                if (res.success) {
+                    dispatch({ type: actionTypes.addCarTypes.ADD_CAR_SUCCESS, payload: {} })
+                } else {
+                    dispatch({ type: actionTypes.addCarTypes.ADD_CAR_FAILED, payload: { data: res.msg } })
+                }
+            }
+        })
 }
 
 export const changeAddCarField = (param) => (dispatch) => {
