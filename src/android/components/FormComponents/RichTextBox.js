@@ -44,7 +44,7 @@ const baseStyles = {
     }
 }
 
-export default class Select extends Component {
+export default class RichTextBox extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,7 +52,7 @@ export default class Select extends Component {
             warnMessageList: []
         }
         this.changeValue = this.changeValue.bind(this)
-        this.showList = this.showList.bind(this)
+        this.showRichText = this.showRichText.bind(this)
     }
 
     componentWillMount() {
@@ -60,24 +60,21 @@ export default class Select extends Component {
     }
 
     changeValue(param) {
-        let state = { value: param.value }
-        let warnMessageList = validate(param.value, this.props.verifications)
-        if (warnMessageList.length > 0) {
-            state.warnMessageList = warnMessageList
-        } else {
-            state.warnMessageList = []
-        }
-        this.setState({ ...state })
-        this.props.onValueChange(param)
-        let flag = !(warnMessageList.length > 0)
+        this.setState({ value: param.value })
+        this.props.onValueChange(param.value)
         if (this.props.isRequire) {
-            flag = !((param.value == this.props.defaultValue) || !flag)
+            param.flag = !((param.value == this.props.defaultValue) || !param.flag)
         }
-        this.props.onRequire(flag)
+        this.props.onRequire(param.flag)
     }
 
-    showList() {
-        this.props.showList({ onSelect: this.changeValue })
+    showRichText() {
+        console.log(this.props.defaultValue)
+        this.props.showRichText({
+            onGetValue: this.changeValue,
+            richTextValue: this.props.defaultValue,
+            verifications: this.props.verifications
+        })
     }
 
     static defaultProps = {
@@ -89,7 +86,7 @@ export default class Select extends Component {
         messageSytle: styles.messageSytle
     }
 
-    renderValidateMessage() {
+    /*renderValidateMessage() {
         let warnMessage
         if (this.state.warnMessageList.length > 0) {
             warnMessage = this.state.warnMessageList.reduce((acc, val) => {
@@ -100,7 +97,7 @@ export default class Select extends Component {
             </View>)
         }
         return warnMessage
-    }
+    }*/
 
     renderTag() {
         if (this.props.isRequire) {
@@ -115,24 +112,35 @@ export default class Select extends Component {
         return (
             <TouchableHighlight
                 underlayColor='rgba(0,0,0,0.1)'
-                onPress={this.showList}>
-                
-                    <View style={this.props.containerSytle}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
-                            <Text style={this.props.textStyle}>{this.state.value}</Text>
-                            <Icon
-                                name='ios-arrow-forward'
-                                style={this.props.iconSytle} />
-                        </View>
-                        {this.renderValidateMessage()}
+                onPress={this.showRichText}>
+
+                <View style={this.props.containerSytle}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
+                        <Text style={this.props.textStyle}>{this.state.value}</Text>
+                        <Icon
+                            name='ios-arrow-forward'
+                            style={this.props.iconSytle} />
                     </View>
-              
+                    {/*{this.renderValidateMessage()}*/}
+                </View>
+
 
             </TouchableHighlight>
         )
     }
 }
+
+
+                    /*<View style={{ marginTop: 10, backgroundColor: '#fff' }}>
+                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.RichText({ onGetValue: this.changeAddCarField, richTextValue: remark })}>
+                            <View style={{ flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>备注：</Text>
+                                <Text style={{ fontSize: 14, flex: 10 }}>{remark}</Text>
+                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
+                            </View>
+                        </TouchableHighlight>
+                    </View>*/
 
 
 

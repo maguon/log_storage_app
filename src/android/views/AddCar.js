@@ -13,10 +13,18 @@ import NavBar from '../components/Bar/NavBar'
 import DateTimePicker from '../components/FormComponents/DateTimePicker'
 import Select from '../components/FormComponents/Select'
 import TextBox from '../components/FormComponents/TextBox'
+import RichTextBox from '../components/FormComponents/RichTextBox'
 import { Button, Input, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import * as AddCarAction from '../../actions/AddCarAction'
 
+
+// verifications={[]}
+// {
+// type: 'isLength',
+// arguments: [8, 23],
+// message: '长度必须在20-23之间'
+// }
 
 class AddCar extends Component {
     constructor(props) {
@@ -29,7 +37,8 @@ class AddCar extends Component {
             routeStartRequire: true,
             routeEndRequire: true,
             vinRequire: false,
-            baseAddrRequire: false
+            baseAddrRequire: true,
+            remarkRequire: true
         }
         this.changeAddCarField = this.changeAddCarField.bind(this)
 
@@ -64,12 +73,7 @@ class AddCar extends Component {
     }
 
     addCar() {
-        // verifications={[]}
-        // {
-        // type: 'isLength',
-        // arguments: [8, 23],
-        // message: '长度必须在20-23之间'
-        // }
+
     }
 
 
@@ -157,14 +161,17 @@ class AddCar extends Component {
                             onRequire={(param) => { this.setState({ orderDateRequire: param }) }}
                         />
                     </View>
+
                     <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.RichText({ onGetValue: this.changeAddCarField, richTextValue: remark })}>
-                            <View style={{ flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>备注：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{remark}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
+                        <RichTextBox
+                            isRequire={false}
+                            title='备注：'
+                            verifications={[]}
+                            defaultValue={remark ? remark : ''}
+                            onValueChange={(param) => this.changeAddCarField({ remark: param })}
+                            onRequire={(flag) => { this.setState({ remarkRequire: flag }) }}
+                            showRichText={Actions.RichText}
+                        />
                     </View>
                     <View style={{ marginVertical: 10, paddingHorizontal: 20, flexDirection: 'row' }}>
                         <Button
@@ -176,7 +183,8 @@ class AddCar extends Component {
                                 && this.state.routeStartRequire
                                 && this.state.routeEndRequire
                                 && this.state.vinRequire
-                                && this.state.baseAddrRequire)}
+                                && this.state.baseAddrRequire
+                                && this.state.remarkRequire)}
                             style={(this.state.orderDateRequire
                                 && this.state.carMakeRequire
                                 && this.state.entrustRequire
@@ -184,7 +192,8 @@ class AddCar extends Component {
                                 && this.state.routeStartRequire
                                 && this.state.routeEndRequire
                                 && this.state.vinRequire
-                                && this.state.baseAddrRequire) ? styles.btnSytle : styles.btnDisabledSytle}
+                                && this.state.baseAddrRequire
+                                && this.state.remarkRequire) ? styles.btnSytle : styles.btnDisabledSytle}
                             onPress={() => { console.log(22222) }}>
                             <Text style={{ color: '#fff' }}>完成并提交</Text>
                         </Button>
@@ -197,7 +206,8 @@ class AddCar extends Component {
                                 && this.state.routeStartRequire
                                 && this.state.routeEndRequire
                                 && this.state.vinRequire
-                                && this.state.baseAddrRequire)}
+                                && this.state.baseAddrRequire
+                                && this.state.remarkRequire)}
                             style={(this.state.orderDateRequire
                                 && this.state.carMakeRequire
                                 && this.state.entrustRequire
@@ -205,7 +215,8 @@ class AddCar extends Component {
                                 && this.state.routeStartRequire
                                 && this.state.routeEndRequire
                                 && this.state.vinRequire
-                                && this.state.baseAddrRequire) ? styles.btnSytle : styles.btnDisabledSytle}
+                                && this.state.baseAddrRequire
+                                && this.state.remarkRequire) ? styles.btnSytle : styles.btnDisabledSytle}
                             onPress={() => { console.log(11111) }}>
                             <Text style={{ color: '#fff' }}>继续入库</Text>
                         </Button>
