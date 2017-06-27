@@ -11,20 +11,20 @@ const initialState = {
         errorMsg: '',
         failedMsg: '',
         serviceErrorMsg: '',
-        data: {
-            vin: '',
-            makeName: '请选择',
-            makeId: 0,
-            receiveId: 0,
-            receive: '请选择',
-            entrustId: 0,
-            entrust: '清选择',
-            remark: '',
-            orderDate: '请选择',
-            routeStartId: 0,
-            routeStart: '请选择',
-            routeEndId: 0,
-            routeEnd: '请选择'
+        data:{
+            // vin: '',
+            // makeName: '请选择',
+            // makeId: 0,
+            // receiveId: 0,
+            // receive: '请选择',
+            // entrustId: 0,
+            // entrust: '清选择',
+            // remark: '',
+            // orderDate: '请选择',
+            // routeStartId: 0,
+            // routeStart: '请选择',
+            // routeEndId: 0,
+            // routeEnd: '请选择'
         }
     }
 }

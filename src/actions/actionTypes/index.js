@@ -20,6 +20,7 @@ import * as selectEntrustTypes from './SelectEntrustTypes'
 import * as selectCityTypes from './SelectCityTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchCarListTypes from './SearchCarListTypes'
+import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
 
 
 export {
@@ -44,5 +45,6 @@ export {
     addCarTypes,
     selectEntrustTypes,
     selectCityTypes,
-    selectReceiveTypes
+    selectReceiveTypes,
+    selectBaseAddrTypes
 }

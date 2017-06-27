@@ -41,7 +41,7 @@ class SelectCarMake extends Component {
     }
 
     onSelectMake(param) {
-        this.props.onSelectMake(param)
+        this.props.onSelect(param)
         Actions.pop()
     }
 
@@ -49,7 +49,7 @@ class SelectCarMake extends Component {
     render() {
         let { carMakeList } = this.props.carMakesReducer.carMakes.data
         let carMakes = carMakeList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectMake({ makeId: item.id, makeName: item.make_name })}>
+            return (<ListItem button key={item.id} onPress={() => this.onSelectMake({ id: item.id, value: item.make_name })}>
                 <Text>{item.make_name}</Text>
             </ListItem>)
         })

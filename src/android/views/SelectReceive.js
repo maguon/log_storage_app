@@ -40,14 +40,14 @@ class SelectReceive extends Component {
     }
 
     onSelectReceive(param) {
-        this.props.onSelectReceive(param)
+        this.props.onSelect(param)
         Actions.pop()
     }
 
     render() {
         let { receiveList } = this.props.SelectReceiveReducer.receives.data
         let receives = receiveList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectReceive({ receiveId: item.id, receive: item.receive_name })}>
+            return (<ListItem button key={item.id} onPress={() => this.onSelectReceive({ id: item.id, value: item.receive_name })}>
                 <Text>{item.receive_name}</Text>
             </ListItem>)
         })

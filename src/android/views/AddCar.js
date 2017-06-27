@@ -6,9 +6,13 @@ import {
     ScrollView,
     DatePickerAndroid,
     TouchableHighlight,
+    StyleSheet
 } from 'react-native'
 
 import NavBar from '../components/Bar/NavBar'
+import DateTimePicker from '../components/FormComponents/DateTimePicker'
+import Select from '../components/FormComponents/Select'
+import TextBox from '../components/FormComponents/TextBox'
 import { Button, Input, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import * as AddCarAction from '../../actions/AddCarAction'
@@ -17,11 +21,21 @@ import * as AddCarAction from '../../actions/AddCarAction'
 class AddCar extends Component {
     constructor(props) {
         super(props)
-
+        this.state = {
+            orderDateRequire: true,
+            carMakeRequire: false,
+            entrustRequire: false,
+            receiveRequire: true,
+            routeStartRequire: true,
+            routeEndRequire: true,
+            vinRequire: false,
+            baseAddrRequire: false
+        }
         this.changeAddCarField = this.changeAddCarField.bind(this)
-        this.onSelectRouteStart = this.onSelectRouteStart.bind(this)
-        this.onSelectRouteEnd = this.onSelectRouteEnd.bind(this)
+
+
     }
+
 
     shouldComponentUpdate(nextProps, nextState) {
         let { AddCarReducer } = nextProps
@@ -50,31 +64,15 @@ class AddCar extends Component {
     }
 
     addCar() {
-
+        // verifications={[]}
+        // {
+        // type: 'isLength',
+        // arguments: [8, 23],
+        // message: '长度必须在20-23之间'
+        // }
     }
 
 
-    async showPicker(stateKey, options) {
-        try {
-            const { action, year, month, day } = await DatePickerAndroid.open(options)
-            if (action !== DatePickerAndroid.dismissedAction) {
-                let param = {}
-                param[stateKey] = `${year}-${month + 1}-${day}`
-                console.log(param)
-                this.changeAddCarField(param)
-            }
-        } catch ({ code, message }) {
-            console.warn(`Error in example '${stateKey}': `, message)
-        }
-    }
-
-    onSelectRouteStart(param) {
-        this.props.changeAddCarField({ routeStartId: param.cityId, routeStart: param.city })
-    }
-
-    onSelectRouteEnd(param) {
-        this.props.changeAddCarField({ routeEndId: param.cityId, routeEnd: param.city })
-    }
 
     changeAddCarField(param) {
         this.props.changeAddCarField(param)
@@ -89,69 +87,75 @@ class AddCar extends Component {
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <NavBar title={'车辆入库'} />
                 <ScrollView>
-                    <View style={{ marginTop: 10, paddingHorizontal: 10, backgroundColor: '#fff' }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <View style={{ flexDirection: 'row', flex: 1, alignItems: 'center' }}>
-                                <Text style={{ color: 'red' }}>*</Text>
-                                <Text style={{ color: '#00cade', marginLeft: 10, fontSize: 18, flex: 1 }}>VIN：</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', flex: 4 }}>
-                                <Input
-                                    onChangeText={(text) => this.changeAddCarField({ vin: text })}
-                                    style={{ color: '#00cade', fontSize: 18 }} />
-                            </View>
-                        </View>
-                    </View>
+                    <TextBox
+                        isRequire={true}
+                        title='VIN:'
+                        defaultValue=''
+                        verifications={[{
+                            type: 'isLength',
+                            arguments: [6, 17],
+                            message: '长度必须在6-17之间'
+                        }]}
+                        onValueChange={(param) => this.changeAddCarField({ vin: param })}
+                        onRequire={(param) => { this.setState({ vinRequire: param }) }}
+                        placeholder='请输入vin码'
+                    />
                     <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectCarMake({ onSelectMake: this.changeAddCarField })}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>品牌：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{makeName}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectEntrust({ onSelectEntrust: this.changeAddCarField })}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>委托方：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{entrust}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectReceive({ onSelectReceive: this.changeAddCarField })}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>经销商：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{receive}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectCity({ onSelectCity: this.onSelectRouteStart })}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>起始城市：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{routeStart}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => { }}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>起始地址：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>未实现</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.SelectCity({ onSelectCity: this.onSelectRouteEnd })}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>目的城市：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{routeEnd}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => this.showPicker('orderDate', { date: new Date(), mode: 'spinner' })}>
-                            <View style={{ flexDirection: 'row', borderBottomWidth: 0.5, paddingHorizontal: 10, borderColor: '#dddddd', paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>指令日期：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{orderDate}</Text>
-                                <Icon name='md-arrow-dropdown' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
+                        <Select
+                            isRequire={true}
+                            title='品牌：'
+                            showList={Actions.SelectCarMake}
+                            onValueChange={(param) => this.changeAddCarField({ makeId: param.id, makeName: param.value })}
+                            onRequire={(param) => this.setState({ carMakeRequire: param })}
+                            defaultValue='请选择'
+                        />
+                        <Select
+                            isRequire={true}
+                            title='委托方：'
+                            showList={Actions.SelectEntrust}
+                            onValueChange={(param) => this.changeAddCarField({ entrustId: param.id, entrust: param.value })}
+                            onRequire={(param) => this.setState({ entrustRequire: param })}
+                            defaultValue='请选择'
+                        />
+                        <Select
+                            isRequire={false}
+                            title='经销商：'
+                            showList={Actions.SelectReceive}
+                            onValueChange={(param) => this.changeAddCarField({ receiveId: param.id, receive: param.value })}
+                            onRequire={(param) => this.setState({ receiveRequire: param })}
+                            defaultValue='请选择'
+                        />
+                        <Select
+                            isRequire={false}
+                            title='起始城市：'
+                            showList={Actions.SelectCity}
+                            onValueChange={(param) => this.changeAddCarField({ routeStartId: param.id, routeStart: param.value })}
+                            onRequire={(param) => this.setState({ routeStartRequire: param })}
+                            defaultValue='请选择'
+                        />
+                        <Select
+                            isRequire={false}
+                            title='起始地址：'
+                            showList={Actions.SelectBaseAddr}
+                            onValueChange={(param) => this.changeAddCarField({ baseAddrId: param.id, baseAddr: param.value })}
+                            onRequire={(param) => this.setState({ baseAddrRequire: param })}
+                            defaultValue='请选择'
+                        />
+                        <Select
+                            isRequire={false}
+                            title='目的城市：'
+                            showList={Actions.SelectCity}
+                            onValueChange={(param) => this.changeAddCarField({ routeEndId: param.id, routeEnd: param.value })}
+                            onRequire={(param) => this.setState({ routeEndRequire: param })}
+                            defaultValue='请选择'
+                        />
+                        <DateTimePicker
+                            isRequire={false}
+                            title='指令时间：'
+                            defaultValue='请选择'
+                            onValueChange={(param) => this.changeAddCarField({ orderDate: param })}
+                            onRequire={(param) => { this.setState({ orderDateRequire: param }) }}
+                        />
                     </View>
                     <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                         <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.RichText({ onGetValue: this.changeAddCarField, richTextValue: remark })}>
@@ -163,15 +167,53 @@ class AddCar extends Component {
                         </TouchableHighlight>
                     </View>
                     <View style={{ marginVertical: 10, paddingHorizontal: 20, flexDirection: 'row' }}>
-                        <Button block style={{ flex: 1, marginRight: 10, backgroundColor: '#00cade' }} onPress={() => { }}>
+                        <Button
+                            block
+                            disabled={!(this.state.orderDateRequire
+                                && this.state.carMakeRequire
+                                && this.state.entrustRequire
+                                && this.state.receiveRequire
+                                && this.state.routeStartRequire
+                                && this.state.routeEndRequire
+                                && this.state.vinRequire
+                                && this.state.baseAddrRequire)}
+                            style={(this.state.orderDateRequire
+                                && this.state.carMakeRequire
+                                && this.state.entrustRequire
+                                && this.state.receiveRequire
+                                && this.state.routeStartRequire
+                                && this.state.routeEndRequire
+                                && this.state.vinRequire
+                                && this.state.baseAddrRequire) ? styles.btnSytle : styles.btnDisabledSytle}
+                            onPress={() => { console.log(22222) }}>
                             <Text style={{ color: '#fff' }}>完成并提交</Text>
                         </Button>
-                        <Button block style={{ flex: 1, marginLeft: 10, backgroundColor: '#00cade' }} onPress={() => { }}>
+                        <Button
+                            block
+                            disabled={!(this.state.orderDateRequire
+                                && this.state.carMakeRequire
+                                && this.state.entrustRequire
+                                && this.state.receiveRequire
+                                && this.state.routeStartRequire
+                                && this.state.routeEndRequire
+                                && this.state.vinRequire
+                                && this.state.baseAddrRequire)}
+                            style={(this.state.orderDateRequire
+                                && this.state.carMakeRequire
+                                && this.state.entrustRequire
+                                && this.state.receiveRequire
+                                && this.state.routeStartRequire
+                                && this.state.routeEndRequire
+                                && this.state.vinRequire
+                                && this.state.baseAddrRequire) ? styles.btnSytle : styles.btnDisabledSytle}
+                            onPress={() => { console.log(11111) }}>
                             <Text style={{ color: '#fff' }}>继续入库</Text>
                         </Button>
                     </View>
                 </ScrollView>
             </View>
+
+
         )
     }
 }
@@ -190,3 +232,17 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCar)
+
+
+const styles = {
+    btnSytle: {
+        flex: 1,
+        marginLeft: 10,
+        backgroundColor: '#00cade'
+    },
+    btnDisabledSytle: {
+        flex: 1,
+        marginLeft: 10,
+        backgroundColor: '#888888'
+    }
+}

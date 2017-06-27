@@ -10,7 +10,6 @@ import { Input, Button } from 'native-base'
 export default class RichText extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             richTextValue: ''
         }

@@ -41,7 +41,7 @@ class SelectEntrust extends Component {
     }
 
     onSelectEntrust(param) {
-        this.props.onSelectEntrust(param)
+        this.props.onSelect(param)
         Actions.pop()
 
     }
@@ -49,7 +49,7 @@ class SelectEntrust extends Component {
     render() {
         let { entrustList } = this.props.SelectEntrustReducer.entrusts.data
         let entrusts = entrustList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectEntrust({ entrustId: item.id, entrust: item.short_name })}>
+            return (<ListItem button key={item.id} onPress={() => this.onSelectEntrust({ id: item.id, value: item.short_name })}>
                 <Text>{item.short_name}</Text>
             </ListItem>)
         })

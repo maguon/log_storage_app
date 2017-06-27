@@ -41,7 +41,7 @@ class SelectCity extends Component {
     }
 
     onSelectCity(param) {
-        this.props.onSelectCity(param)
+        this.props.onSelect(param)
         Actions.pop()
     }
 
@@ -49,7 +49,7 @@ class SelectCity extends Component {
     render() {
         let { cityList } = this.props.SelectCityReducer.citys.data
         let citys = cityList.map(item => {
-            return (<ListItem button key={item.id} onPress={() => this.onSelectCity({ cityId: item.id, city: item.city_name })}>
+            return (<ListItem button key={item.id} onPress={() => this.onSelectCity({ id: item.id, value: item.city_name })}>
                 <Text>{item.city_name}</Text>
             </ListItem>)
         })

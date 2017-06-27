@@ -23,8 +23,10 @@ import selectStorageForCarList from './views/SelectStorageForCarList'
 import AddCar from './views/AddCar'
 import SelectEntrust from './views/SelectEntrust'
 import SelectReceive from './views/SelectReceive'
+import SelectBaseAddr from './views/SelectBaseAddr'
 import SelectCity from './views/SelectCity'
 import RichText from './views/RichText'
+
 
 
 export default class App extends Component {
@@ -61,6 +63,7 @@ export default class App extends Component {
                     <Scene key="SelectReceive" component={SelectReceive} hideNavBar />
                     <Scene key="SelectCity" component={SelectCity} hideNavBar />
                     <Scene key="RichText" component={RichText} hideNavBar />
+                    <Scene key="SelectBaseAddr" component={SelectBaseAddr} hideNavBar />
                     <Scene key="addCar" component={AddCar}   initial={true} hideNavBar />
                 </Scene>
             </Router>
