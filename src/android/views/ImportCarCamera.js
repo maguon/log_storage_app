@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, StatusBar, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import TopBar from '../components/Bar/TopBar'
+import NavBar from '../components/Bar/NavBar'
 import CarCamera from '../components/CarCamera/CarCamera'
 import { Actions } from 'react-native-router-flux'
 import * as ImportCarCameraAction from '../../actions/ImportCarCameraAction'
 import { Button } from 'native-base'
 
-
+const window = Dimensions.get('window')
 
 class ImportCarCamera extends Component {
     constructor(props) {
@@ -34,6 +34,11 @@ class ImportCarCamera extends Component {
             userType: userType,
         }
         this.props.pushCarImage(param)
+    }
+
+    static defaultProps = {
+        carId: 516,
+        vin: '11111111231231231'
     }
 
 
@@ -76,19 +81,25 @@ class ImportCarCamera extends Component {
 
         return true
     }
-
+    //images={imageList}
 
     render() {
         let { imageList } = this.props.ImportCarCameraReducer.importCarImage.data
         return (
             <View style={{ flex: 1 }}>
-                <TopBar title='上传图片' />
-                <ScrollView>
-                    <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
-                    <Button block onPress={() => Actions.pop({ popNum: 2 })} style={{ marginHorizontal: 30, marginVertical: 30, backgroundColor: '#00cade' }} >
-                        <Text style={{ color: '#ffffff' }}>返回</Text>
-                    </Button>
-                </ScrollView>
+                <NavBar title='上传图片' />
+                <View style={{ flex: 1 }}>
+                    <ScrollView>
+                        <View style={{
+                            minHeight: window.height - StatusBar.currentHeight - 56 - 60,
+                        }}>
+                            <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
+                        </View>
+                        <Button block onPress={() => { }} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
+                            <Text style={{ color: '#ffffff' }}>下一步</Text>
+                        </Button>
+                    </ScrollView>
+                </View>
             </View>
         )
     }

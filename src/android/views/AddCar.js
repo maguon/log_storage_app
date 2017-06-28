@@ -41,7 +41,6 @@ class AddCar extends Component {
             baseAddrRequire: true,
             remarkRequire: true,
         }
-        // this.changeAddCarField = this.changeAddCarField.bind(this)
         this.addCar = this.addCar.bind(this)
     }
 
@@ -55,6 +54,7 @@ class AddCar extends Component {
             console.log('AddCarReducer.addCar', '执行完毕')
             if (AddCarReducer.addCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('保存成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
+                Actions.ImportCarCamera({ carId: AddCarReducer.addCar.data.id, vin: AddCarReducer.addCar.data.vin })
                 console.log('AddCarReducer.addCar执行成功')
 
             } else if (AddCarReducer.addCar.isResultStatus == 1) {
@@ -82,10 +82,6 @@ class AddCar extends Component {
         }
         this.props.addCar(param)
     }
-
-    // changeAddCarField(param) {
-    //     this.props.changeAddCarField(param)
-    // }
 
     render() {
         // entrustId makeId makeName orderDate receiveId remark routeEnd routeEndId routeStart routeStartId vin

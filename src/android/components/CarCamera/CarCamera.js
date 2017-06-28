@@ -7,7 +7,7 @@ import ImageCropPicker from 'react-native-image-crop-picker'
 import CarCameraItem from './CarCameraItem'
 
 const window = Dimensions.get('window')
-let ImageWidth = (window.width - 50) / 2
+let ImageWidth = (window.width - 30) / 2
 let ImageHeight = ImageWidth / 16 * 9
 
 var photoOptions = {
@@ -27,6 +27,40 @@ var photoOptions = {
         path: 'images'
     }
 }
+
+
+const baseStyle = {
+    cameraButtonStyle: {
+        borderRadius: 35,
+        width: 70,
+        height: 70,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#00cade',
+        alignSelf: 'center'
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        marginTop: 10,
+        marginHorizontal: 10,
+        justifyContent: 'center',
+    },
+    item: {
+        width: ImageWidth,
+        height: ImageHeight,
+        marginBottom: 10,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: '#000'
+
+    },
+
+})
 
 export default class CarCamera extends Component {
     constructor(props) {
@@ -58,7 +92,6 @@ export default class CarCamera extends Component {
                                 imageName: response.fileName
                             }
                         }
-                        // console.log(resizedImageUri)
 
                         this.props.postImage(param)
                     }).catch((err) => {
@@ -102,78 +135,56 @@ export default class CarCamera extends Component {
         })
     }
 
+    renderCameraButton() {
+        let cameraButtonStyle = {
+            width: ImageWidth,
+            height: ImageHeight,
+            marginBottom: 10,
+            flexDirection: 'row',
+            justifyContent: 'center'
+        }
+        if (this.props.images.length == 0) cameraButtonStyle.alignSelf = 'center'
+        else if (this.props.images.length % 2 == 0) cameraButtonStyle.left = -(window.width - 10) / 4
+
+        return <View style={cameraButtonStyle}>
+            <Button
+                style={baseStyle.cameraButtonStyle}
+                onPress={this.launchCamera}
+                title='上传照片' >
+                <Icon name='camera' />
+            </Button>
+        </View>
+    }
+
+    renderImages() {
+        return this.props.images.map((item, i) => {
+            const leftImageStyle = {
+                width: ImageWidth,
+                height: ImageHeight,
+                marginRight: 10,
+                marginBottom: 10
+            }
+            const rightImageStyle = {
+                width: ImageWidth,
+                height: ImageHeight,
+                marginBottom: 10
+            }
+            return <CarCameraItem
+                key={i}
+                imgIndex={i}
+                imageStyle={(i % 2 == 1) ? rightImageStyle : leftImageStyle}
+                uri={item}
+                showImagePage={this.props.showImagePage} />
+        })
+    }
+
 
     render() {
-        let i = 1
-        let images = this.props.images.map(item => {
-            let image = (
-                <CarCameraItem key={i} imgIndex={i} uri={item} showImagePage={this.props.showImagePage} />
-            )
-            i = i + 1
-            return image
-        })
-        let btn
-        if (i == 1) {
-            btn = (<View style={[styles.item, { marginRight: 10, flexDirection: 'row', backgroundColor: '#ffffff' }]}>
-
-                <Button
-                    style={{
-                        borderRadius: 35,
-                        width: 70,
-                        height: 70,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#00cade',
-                        alignSelf: 'center'
-                    }}
-                    onPress={this.launchCamera}
-                    title='上传照片' >
-                    <Icon name='camera' />
-                </Button>
-            </View>)
-        }
-        else if (i % 2 == 1) {
-            btn = (<View style={[styles.item, { marginRight: 10, flexDirection: 'row', backgroundColor: '#ffffff' }]}>
-
-                <Button
-                    style={{
-                        borderRadius: 35,
-                        width: 70,
-                        height: 70,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#00cade',
-                        alignSelf: 'center'
-                    }}
-                    onPress={this.launchCamera}
-                    title='上传照片' >
-                    <Icon name='camera' />
-                </Button>
-            </View>)
-        } else {
-            btn = (<View style={[styles.item, { flexDirection: 'row', backgroundColor: '#ffffff' }]}>
-                <Button
-                    style={{
-                        borderRadius: 35,
-                        width: 70,
-                        height: 70,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#00cade',
-                        alignSelf: 'center'
-                    }}
-                    onPress={this.launchCamera}
-                    title='上传照片' >
-                    <Icon name='camera' />
-                </Button>
-            </View>)
-        }
         return (
             <View style={styles.container}>
+                {this.renderImages()}
 
-                {images}
-
-                {btn}
+                {this.renderCameraButton()}
                 <View>
                     <Modal
                         animationType={"fade"}
@@ -198,23 +209,7 @@ export default class CarCamera extends Component {
 }
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        marginTop: 20,
-        marginHorizontal: 20
-    },
-    item: {
-        width: ImageWidth,
-        height: ImageHeight,
-        backgroundColor: '#cccccc',
-        marginBottom: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
+
 
 
 

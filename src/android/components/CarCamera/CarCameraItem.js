@@ -16,54 +16,30 @@ export default class CarCameraItem extends Component {
     }
 
     render() {
-        let { imgIndex, uri, showImagePage} = this.props
-        let image
-        if (imgIndex % 2 == 1) {
-            image = (
-                <TouchableOpacity onPress={() => { showImagePage({ index: imgIndex - 1 }) }}>
-                    <View style={[{ marginRight: 10, }, styles.item]}>
-                        <Image source={{ uri: uri }}
-                            style={{ width: ImageWidth, height: ImageHeight }}
-                            onLoadStart={() => { this.setState({ spinnerDisplay: true }) }}
-                            onLoad={() => { this.setState({ spinnerDisplay: false }) }}
-                            onLoadEnd={() => { this.setState({ spinnerDisplay: false }) }}
-                        />
-                        <Spinner color='#00cade' animating={this.state.spinnerDisplay} style={{ position: 'absolute' }} />
-                    </View>
-                </TouchableOpacity>)
-        }
-        else {
-            image = (
-                <TouchableOpacity onPress={() => { showImagePage({ index: imgIndex - 1, imgList: this.props.images }) }}>
-                    <View style={styles.item}>
-                        <Image source={{ uri: uri }}
-                            style={{ width: ImageWidth, height: ImageHeight }}
-                            onLoadStart={() => { this.setState({ spinnerDisplay: true }) }}
-                            onLoad={() => { this.setState({ spinnerDisplay: false }) }}
-                            onLoadEnd={() => { this.setState({ spinnerDisplay: false }) }}
-                        />
-                        <Spinner color='#00cade' animating={this.state.spinnerDisplay} style={{ position: 'absolute' }} />
-                    </View>
-                </TouchableOpacity>)
-        }
-        return image
+        let { imgIndex, uri, showImagePage } = this.props
+        console.log(showImagePage)
+        return <TouchableOpacity onPress={() => { showImagePage({ index: imgIndex , imgList: this.props.images }) }}>
+            <View style={styles.item}>
+                <Image source={{ uri: uri }}
+                    style={this.props.imageStyle}
+                    onLoadStart={() => { this.setState({ spinnerDisplay: true }) }}
+                    onLoad={() => { this.setState({ spinnerDisplay: false }) }}
+                    onLoadEnd={() => { this.setState({ spinnerDisplay: false }) }}
+                />
+                <Spinner color='#00cade' animating={this.state.spinnerDisplay} style={{ position: 'absolute' }} />
+            </View>
+        </TouchableOpacity>
     }
 }
-
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        marginTop: 20,
-        marginHorizontal: 20
+
     },
     item: {
-        width: ImageWidth,
-        height: ImageHeight,
-        backgroundColor: '#cccccc',
-        marginBottom: 10,
         justifyContent: 'center',
         alignItems: 'center'
     }
