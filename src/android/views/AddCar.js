@@ -41,7 +41,7 @@ class AddCar extends Component {
             baseAddrRequire: true,
             remarkRequire: true,
         }
-        this.changeAddCarField = this.changeAddCarField.bind(this)
+        // this.changeAddCarField = this.changeAddCarField.bind(this)
         this.addCar = this.addCar.bind(this)
     }
 
@@ -63,6 +63,7 @@ class AddCar extends Component {
 
             } else if (AddCarReducer.addCar.isResultStatus == 2) {
                 ToastAndroid.showWithGravity(AddCarReducer.addCar.failedMsg, ToastAndroid.LONG, ToastAndroid.CENTER)
+                this.props.resetAddCarStatus()
                 console.log('AddCarReducer.addCar执行失败')
 
             } else if (AddCarReducer.addCar.isResultStatus == 3) {
@@ -80,12 +81,11 @@ class AddCar extends Component {
             postParam: { ...this.props.AddCarReducer.addCar.data }
         }
         this.props.addCar(param)
-        // console.log(param)
     }
 
-    changeAddCarField(param) {
-        this.props.changeAddCarField(param)
-    }
+    // changeAddCarField(param) {
+    //     this.props.changeAddCarField(param)
+    // }
 
     render() {
         // entrustId makeId makeName orderDate receiveId remark routeEnd routeEndId routeStart routeStartId vin
@@ -106,7 +106,7 @@ class AddCar extends Component {
                                 arguments: [17, 17],
                                 message: '长度必须是17位'
                             }]}
-                            onValueChange={(param) => this.changeAddCarField({ vin: param })}
+                            onValueChange={(param) => this.props.changeAddCarField({ vin: param })}
                             onRequire={(param) => { this.setState({ vinRequire: param }) }}
                             placeholder='请输入vin码'
                         />
@@ -115,7 +115,7 @@ class AddCar extends Component {
                                 isRequire={true}
                                 title='品牌：'
                                 showList={Actions.SelectCarMake}
-                                onValueChange={(param) => this.changeAddCarField({ makeId: param.id, makeName: param.value })}
+                                onValueChange={(param) => this.props.changeAddCarField({ makeId: param.id, makeName: param.value })}
                                 onRequire={(param) => this.setState({ carMakeRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -123,7 +123,7 @@ class AddCar extends Component {
                                 isRequire={true}
                                 title='委托方：'
                                 showList={Actions.SelectEntrust}
-                                onValueChange={(param) => this.changeAddCarField({ entrustId: param.id })}
+                                onValueChange={(param) => this.props.changeAddCarField({ entrustId: param.id })}
                                 onRequire={(param) => this.setState({ entrustRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -131,7 +131,7 @@ class AddCar extends Component {
                                 isRequire={false}
                                 title='经销商：'
                                 showList={Actions.SelectReceive}
-                                onValueChange={(param) => this.changeAddCarField({ receiveId: param.id })}
+                                onValueChange={(param) => this.props.changeAddCarField({ receiveId: param.id })}
                                 onRequire={(param) => this.setState({ receiveRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -139,7 +139,7 @@ class AddCar extends Component {
                                 isRequire={false}
                                 title='起始城市：'
                                 showList={Actions.SelectCity}
-                                onValueChange={(param) => this.changeAddCarField({ routeStartId: param.id, routeStart: param.value })}
+                                onValueChange={(param) => this.props.changeAddCarField({ routeStartId: param.id, routeStart: param.value })}
                                 onRequire={(param) => this.setState({ routeStartRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -147,7 +147,7 @@ class AddCar extends Component {
                                 isRequire={false}
                                 title='起始地址：'
                                 showList={Actions.SelectBaseAddr}
-                                onValueChange={(param) => this.changeAddCarField({ baseAddrId: param.id })}
+                                onValueChange={(param) => this.props.changeAddCarField({ baseAddrId: param.id })}
                                 onRequire={(param) => this.setState({ baseAddrRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -155,7 +155,7 @@ class AddCar extends Component {
                                 isRequire={false}
                                 title='目的城市：'
                                 showList={Actions.SelectCity}
-                                onValueChange={(param) => this.changeAddCarField({ routeEndId: param.id, routeEnd: param.value })}
+                                onValueChange={(param) => this.props.changeAddCarField({ routeEndId: param.id, routeEnd: param.value })}
                                 onRequire={(param) => this.setState({ routeEndRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -163,7 +163,7 @@ class AddCar extends Component {
                                 isRequire={false}
                                 title='指令时间：'
                                 defaultValue='请选择'
-                                onValueChange={(param) => this.changeAddCarField({ orderDate: param })}
+                                onValueChange={(param) => this.props.changeAddCarField({ orderDate: param })}
                                 onRequire={(param) => { this.setState({ orderDateRequire: param }) }}
                             />
                         </View>
@@ -174,7 +174,7 @@ class AddCar extends Component {
                                 title='备注：'
                                 verifications={[]}
                                 defaultValue={remark ? remark : ''}
-                                onValueChange={(param) => this.changeAddCarField({ remark: param })}
+                                onValueChange={(param) => this.props.changeAddCarField({ remark: param })}
                                 onRequire={(flag) => { this.setState({ remarkRequire: flag }) }}
                                 showRichText={Actions.RichText}
                             />
@@ -201,30 +201,7 @@ class AddCar extends Component {
                                     && this.state.baseAddrRequire
                                     && this.state.remarkRequire) ? styles.btnSytle : styles.btnDisabledSytle}
                                 onPress={this.addCar}>
-                                <Text style={{ color: '#fff' }}>完成并提交</Text>
-                            </Button>
-                            <Button
-                                block
-                                disabled={!(this.state.orderDateRequire
-                                    && this.state.carMakeRequire
-                                    && this.state.entrustRequire
-                                    && this.state.receiveRequire
-                                    && this.state.routeStartRequire
-                                    && this.state.routeEndRequire
-                                    && this.state.vinRequire
-                                    && this.state.baseAddrRequire
-                                    && this.state.remarkRequire)}
-                                style={(this.state.orderDateRequire
-                                    && this.state.carMakeRequire
-                                    && this.state.entrustRequire
-                                    && this.state.receiveRequire
-                                    && this.state.routeStartRequire
-                                    && this.state.routeEndRequire
-                                    && this.state.vinRequire
-                                    && this.state.baseAddrRequire
-                                    && this.state.remarkRequire) ? styles.btnSytle : styles.btnDisabledSytle}
-                                onPress={this.addCar}>
-                                <Text style={{ color: '#fff' }}>继续入库</Text>
+                                <Text style={{ color: '#fff' }}>下一步</Text>
                             </Button>
                         </View>
                         {/*<Spinner animating={true} color='#blue' style={{ position: 'absolute', alignSelf: 'center' }} />*/}
@@ -251,6 +228,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     addCar: (param) => {
         dispatch(AddCarAction.addCar(param))
+    },
+    resetAddCarStatus: () => {
+        dispatch(AddCarAction.resetAddCarStatus())
     }
 })
 

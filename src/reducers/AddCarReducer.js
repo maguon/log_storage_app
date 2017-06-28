@@ -11,7 +11,7 @@ const initialState = {
         errorMsg: '',
         failedMsg: '',
         serviceErrorMsg: '',
-        data:{
+        data: {
             // vin: '',
             // makeName: '请选择',
             // makeId: 0,
@@ -32,12 +32,17 @@ const initialState = {
 
 export default handleActions({
     [actionTypes.addCarTypes.ADD_CAR_SUCCESS]: (state, action) => {
+        const { payload: { data } } = action
         return {
             ...state,
             addCar: {
                 ...state.addCar,
                 isExecStatus: 2,
-                isResultStatus: 0
+                isResultStatus: 0,
+                data: {
+                    ...state.addCar.data,
+                    id: data
+                }
             }
         }
     },
@@ -105,19 +110,7 @@ export default handleActions({
                 errorMsg: '',
                 failedMsg: '',
                 serviceErrorMsg: '',
-                data: {
-                    vin: '',
-                    makeName: '',
-                    makeId: 0,
-                    receiveId: 0,
-                    entrustId: 0,
-                    remark: '',
-                    orderDate: '',
-                    routeStartId: 0,
-                    routeStart: '',
-                    routeEndId: 0,
-                    routeEnd: ''
-                }
+                data: {}
             }
         }
     },
