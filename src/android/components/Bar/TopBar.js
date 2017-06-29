@@ -4,7 +4,7 @@ import { Header, Title, Button } from 'native-base'
 
 const NavBar = ({ title }) => {
     return (
-        <Header style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#00cade' }}>
+        <Header androidStatusBarColor='#00cade' style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#00cade' }}>
             <Title>{title}</Title>
         </Header>
     )

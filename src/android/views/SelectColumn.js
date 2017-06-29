@@ -12,15 +12,15 @@ export default class SelectColumn extends Component {
 
     chageParkingId(param) {
         this.props.chageParkingId(param)
-        Actions.pop({ popNum: this.props._popNum })
+        // Actions.pop({ popNum: this.props._popNum })
     }
     render() {
         let columns = this.props.columns.map(item => {
             return (
                 
                 <ListItem key={item.col} button onPress={() => this.chageParkingId({
-                    row: this.props.row,
-                    column: item.col,
+                    /*row: this.props.row,
+                    column: item.col,*/
                     storageName: this.props.storageName,
                     storageId: this.props.storageId,
                     parkingId: item.parkingId,

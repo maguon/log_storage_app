@@ -9,24 +9,11 @@ const initialState = {
         isExecStatus: 0,
         errorMsg: '',
         failedMsg: '',
-        data: {
-            carId: -1,
-            vin: '',
-            makeId: -1,
-            makeName: '',
-            modelId: -1,
-            modelName: '',
-            proDate: '',
-            color: 'FFFFFF',
-            engineNum: '',
-            remark: '',
-            parkingId: '',
-            storageId: 0,
-            storageName: '',
-            planOutTime: '',
-            row: '',
-            column: ''
-        }
+        // data: {
+        //     parkingId: 0,
+        //     storageId: 0,
+        //     storageName: ''
+        // }
     }
 }
 
@@ -40,10 +27,10 @@ export default handleActions({
                 ...state.importCar,
                 isResultStatus: 0,
                 isExecStatus: 2,
-                data: {
-                    ...state.importCar.data,
-                    carId: data
-                }
+                // data: {
+                //     ...state.importCar.data,
+                //     carId: data
+                // }
             }
         }
     },
@@ -90,43 +77,30 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.imporCarTypes.IMPORT_CAR_RESET]: (state, action) => {
-        return {
-            ...state,
-            importCar: {
-                isResultStatus: 0,
-                isExecStatus: 0,
-                errorMsg: '',
-                failedMsg: '',
-                data: {
-                    carId: -1,
-                    vin: '',
-                    makeId: -1,
-                    makeName: '',
-                    modelId: -1,
-                    modelName: '',
-                    proDate: '',
-                    color: 'FFFFFF',
-                    engineNum: '',
-                    remark: '',
-                    parkingId: '',
-                    storageId: 0,
-                    storageName: '',
-                    planOutTime: '',
-                    row: '',
-                    column: ''
-                }
-            }
-        }
-    },
-    [actionTypes.imporCarTypes.CHANGE_IMPORTCAR_FIELD]: (state, action) => {
-        const { payload: { data } } = action
-        let param = { ...state }
-        for (key in data) {
-            param.importCar.data[key] = data[key]
-        }
-        return param
-    }
+    // [actionTypes.imporCarTypes.IMPORT_CAR_RESET]: (state, action) => {
+    //     return {
+    //         ...state,
+    //         importCar: {
+    //             isResultStatus: 0,
+    //             isExecStatus: 0,
+    //             errorMsg: '',
+    //             failedMsg: '',
+    //             data: {
+    //                 parkingId: 0,
+    //                 storageId: 0,
+    //                 storageName: ''
+    //             }
+    //         }
+    //     }
+    // },
+    // [actionTypes.imporCarTypes.CHANGE_IMPORTCAR_FIELD]: (state, action) => {
+    //     const { payload: { data } } = action
+    //     let param = { ...state }
+    //     for (key in data) {
+    //         param.importCar.data[key] = data[key]
+    //     }
+    //     return param
+    // }
 
 }, initialState)
 

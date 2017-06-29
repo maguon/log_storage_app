@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StatusBar, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import NavBar from '../components/Bar/NavBar'
+import TopBar from '../components/Bar/TopBar'
 import CarCamera from '../components/CarCamera/CarCamera'
 import { Actions } from 'react-native-router-flux'
 import * as ImportCarCameraAction from '../../actions/ImportCarCameraAction'
@@ -87,7 +87,7 @@ class ImportCarCamera extends Component {
         let { imageList } = this.props.ImportCarCameraReducer.importCarImage.data
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title='上传图片' />
+                <TopBar title='上传图片' />
                 <View style={{ flex: 1 }}>
                     <ScrollView>
                         <View style={{
@@ -95,7 +95,7 @@ class ImportCarCamera extends Component {
                         }}>
                             <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
                         </View>
-                        <Button block onPress={() => { }} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
+                        <Button block onPress={() => { Actions.ImportCar() }} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
                             <Text style={{ color: '#ffffff' }}>下一步</Text>
                         </Button>
                     </ScrollView>
