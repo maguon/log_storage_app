@@ -19,24 +19,32 @@ class ImportCar extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         let { ImporCarReducer } = nextProps
         /*getStorageParkingList 执行状态*/
-        if (ImporCarReducer.getStorageParkingList.isExecStatus == 1) {
-            console.log('ImporCarReducer.getStorageParkingList开始执行')
-        } else if (ImporCarReducer.getStorageParkingList.isExecStatus == 2) {
-            console.log('ImporCarReducer.getStorageParkingList执行完毕')
-            if (ImporCarReducer.getStorageParkingList.isResultStatus == 0) {
-                console.log('ImporCarReducer.getStorageParkingList执行成功')
-            } else if (ImporCarReducer.getStorageParkingList.isResultStatus == 1) {
-                console.log('ImporCarReducer.getStorageParkingList执行错误')
-            } else if (ImporCarReducer.getStorageParkingList.isResultStatus == 2) {
-                console.log('ImporCarReducer.getStorageParkingList执行失败')
+        if (ImporCarReducer.importCar.isExecStatus == 1) {
+            console.log('ImporCarReducer.importCar开始执行')
+        } else if (ImporCarReducer.importCar.isExecStatus == 2) {
+            console.log('ImporCarReducer.importCar执行完毕')
+            if (ImporCarReducer.importCar.isResultStatus == 0) {
+                console.log('ImporCarReducer.importCar执行成功')
+            } else if (ImporCarReducer.importCar.isResultStatus == 1) {
+                console.log('ImporCarReducer.importCar执行错误')
+            } else if (ImporCarReducer.importCar.isResultStatus == 2) {
+                console.log('ImporCarReducer.importCar执行失败',ImporCarReducer.importCar.failedMsg)
             }
         }
         /************************************************************************************************/
         return true
     }
+    static defaultProps = {
+        carId: 514,
+        vin: '11231233453245544'
+    }
 
     onGetParkingId(param) {
-        console.log(param)
+        this.props.importCar({
+            requiredParam: { userId: this.props.user.userId, carId: this.props.carId },
+            OptionalParam: { vin: this.props.vin },
+            putParam: { parkingId: param.parkingId, storageId: param.storageId, storageName: param.storageName }
+        })
     }
 
     render() {
@@ -72,11 +80,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    pushCarImage: (param) => {
-        dispatch(ImporCarAction.pushCarImage(param))
+    importCar: (param) => {
+        dispatch(ImporCarAction.importCar(param))
     },
-    resetDelImage: () => {
-        dispatch(ImporCarAction.resetDelImage())
+    resetImportCarExecuteStatus: () => {
+        dispatch(ImporCarAction.resetImportCarExecuteStatus())
     }
 })
 
