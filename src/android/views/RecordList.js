@@ -5,6 +5,7 @@ import NavBar from '../components/Bar/NavBar'
 import { Segment, Button, Text } from 'native-base'
 import * as RecordListAction from '../../actions/RecordListAction'
 import RecordListItem from '../components/RecordListForHome/RecordListItem'
+import { Actions } from 'react-native-router-flux'
 
 const window = Dimensions.get('window')
 
@@ -47,7 +48,7 @@ class RecordList extends Component {
                 console.log('recordListReducer.getRecordListMore执行成功')
 
             } else if (recordListReducer.getRecordListMore.isResultStatus == 1) {
-                console.log('recordListReducer.getRecordListMore执行错误',recordListReducer.getRecordListMore.errorMsg)
+                console.log('recordListReducer.getRecordListMore执行错误', recordListReducer.getRecordListMore.errorMsg)
 
             }
             else if (recordListReducer.getRecordListMore.isResultStatus == 2) {
@@ -107,7 +108,7 @@ class RecordList extends Component {
         let { changeRecordListTab } = this.props
         let { selectedTab } = this.props.recordListReducer.selectRecordListTab
         let { recordList } = this.props.recordListReducer.getRecordList.data
-         console.log(recordList)
+        console.log(recordList)
 
 
         let records = recordList
@@ -129,10 +130,9 @@ class RecordList extends Component {
                 return { data: item.data, key: item.created_on }
             })
 
-
+         
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title='工作记录' />
                 <Segment style={{ backgroundColor: '#00cade' }}>
                     <Button active={selectedTab == 'all' ? true : false} onPress={() => changeRecordListTab('all')}>
                         <Text style={selectedTab == 'all' ? { color: '#00bfd8' } : { color: '#ffffff' }}>所有</Text>
@@ -149,7 +149,7 @@ class RecordList extends Component {
                 </Segment>
                 <SectionList style={{ paddingVertical: 10, paddingHorizontal: 10 }}
                     renderItem={({ item }) => {
-                        return (<RecordListItem recordItem={item} key={item._id} />)
+                        return (<RecordListItem recordItem={item} key={item._id} routerPos={Actions.carInfoForRecordList}/>)
                     }}
                     renderSectionHeader={({ section }) => {
                         return (<View style={{ width: window.width / 2, backgroundColor: '#f1f1f1', borderRadius: 15, alignItems: 'center', marginBottom: 5 }}>

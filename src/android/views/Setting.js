@@ -48,7 +48,7 @@ class Setting extends Component {
         let viewStyle = { backgroundColor: '#00cade' }
         return (
             <Container style={{ flex: 1 }}>
-                <SearchBar viewStyle={viewStyle} changeSearchVin={this.props.changeSearchVin} />
+                <SearchBar viewStyle={viewStyle} routerPos={Actions.searchCarListForSetting}/>
                 <View style={{ flex: 1 }}>
                     <List>
                         <ListItem onPress={() => { Actions.recordList() }}>

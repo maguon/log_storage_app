@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, Image, Dimensions, StyleSheet } from 'react-native'
+import { View, Text, Image, Dimensions, StyleSheet, StatusBar } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { Button } from 'native-base'
 
@@ -22,6 +22,7 @@ const Welcome = ({ version, lastVersion, force_update, url, linkDownload, valida
     }
     return (
         <View style={styles.container}>
+            <StatusBar hidden={true} />
             <Image source={{ uri: 'welcom_back' }}
                 style={styles.image}
             />

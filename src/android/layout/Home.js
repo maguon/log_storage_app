@@ -11,6 +11,7 @@ import {
 import RecordList from '../components/RecordListForHome/RecordList'
 import StorageList from '../components/StorageListForHome/StorageList'
 import SearchBar from '../components/Bar/SearchBar'
+import {  Actions } from 'react-native-router-flux'
 
 const window = Dimensions.get('window')
 
@@ -18,17 +19,18 @@ const Home = ({ storages, recordList, changeSearchVin }) => {
     let viewStyle = { backgroundColor: 'rgba(0,0,0,0.16)' }
     return (
         <View style={{ flex: 1 }}>
-            <View>
+            {/*<View>
                 <Image source={{ uri: 'banner_back' }} style={styles.image} />
-                <View style={styles.search}>
-                    <SearchBar viewStyle={viewStyle} changeSearchVin={changeSearchVin} />
+                 <View style={styles.search}>
+                  
                 </View>
-            </View>
+            </View>*/}
+            <SearchBar viewStyle={viewStyle} changeSearchVin={changeSearchVin} routerPos={Actions.searchCarListForHome}/>
             <ScrollView showsVerticalScrollIndicator={false}
                 overScrollMode='auto'>
 
                 <StorageList storages={storages} />
-                <RecordList recordList={recordList} />
+                <RecordList recordList={recordList} routerPos={Actions.carInfoForHome} />
             </ScrollView>
         </View>
     )

@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Car from '../components/CarList/CarListItem'
 import { Actions } from 'react-native-router-flux'
 import SearchBar from '../components/Bar/SearchBar'
+import NavBar from '../components/Bar/NavBar'
 import CarListComponent from '../components/CarList/CarList'
 import Loading from '../components/Loading/Loading'
 
@@ -15,7 +16,8 @@ const CarList = ({ cars, getCarListWaiting, getCarListMore, storageName, getCarL
         <View style={{ flex: 1, width: window.width }}>
             <SearchBar
                 viewStyle={viewStyle}
-                changeSearchVin={changeSearchVin} />
+                changeSearchVin={changeSearchVin}
+                routerPos={Actions.searchCarListForCar} />
             <CarListComponent
                 cars={cars}
                 getCarListWaiting={getCarListWaiting}

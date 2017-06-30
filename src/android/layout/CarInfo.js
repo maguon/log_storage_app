@@ -53,10 +53,10 @@ const CarInfo = ({ car,
             importAgain={importAgain}
         />
     }
-
+ //console.log('tttt',this.props)
     return (
         <View style={{ flex: 1 }}>
-            <NavBar title={'车辆详情'} />
+            {/*<NavBar title={'车辆详情'} />*/}
             <ScrollView>
                 {_CarInfoComponent}
                 <CarCamera images={images} postImage={postImage} showImagePage={Actions.ImagePageForCarInfo}/>

@@ -52,17 +52,17 @@ class Welcome extends Component {
         }
 
         if (welcomeReducer.valdateToken.isExecStatus == 1) {
-            console.log('welcome.valdateToken', '开始执行')
+            console.log('welcome.valdateToken', '开始执行') 
         } else if (welcomeReducer.valdateToken.isExecStatus == 2) {
             if (welcomeReducer.valdateToken.isResultStatus == 0) {
-                Actions.main()
+                Actions.mainRoot()
                 console.log('welcome.valdateToken 执行成功', welcomeReducer.getVersion.data)
             } else if (welcomeReducer.valdateToken.isResultStatus == 1) {
 
                 console.log('welcome.valdateToken 执行错误', welcomeReducer.getVersion.errorMsg)
             }
             else if (welcomeReducer.valdateToken.isResultStatus == 2) {
-                Actions.login()
+                Actions.mainRoot()
                 console.log('welcome.valdateToken 执行失败', welcomeReducer.getVersion.failedMsg)
             }
         }

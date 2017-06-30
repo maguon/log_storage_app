@@ -13,7 +13,7 @@ const initialState = {
         // userType: 1,
         // userStatus: 1,
         // mobile: '18888'
-        userId: 38,
+        userId: 0,
         token: '',
         userType: 1,
         userStatus: 1,

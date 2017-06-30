@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View ,StatusBar} from 'react-native'
 import { Header, Title, Button, Item, Input, Icon, Left, Right } from 'native-base'
 //import Icon from 'react-native-vector-icons/Entypo'
 import { Actions } from 'react-native-router-flux'
@@ -7,8 +7,7 @@ import { Actions } from 'react-native-router-flux'
 
 const NavSearchBar = ({ changeSearchVin, searchVin, searchCarList }) => {
     return (
-        <Header searchBar style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#00cade' }}>
-
+        <Header androidStatusBarColor='#00cade' searchBar style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#00cade' }}>
             <Left style={{ flex: 1 }}>
                 <Button transparent onPress={Actions.pop}>
                     <Icon name="ios-arrow-back" type="ionicons" />
@@ -28,7 +27,6 @@ const NavSearchBar = ({ changeSearchVin, searchVin, searchCarList }) => {
                 </Item>
             </View>
             <Right style={{ flex: 1 }}>
-
             </Right>
         </Header>
     )

@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Image, Dimensions } from 'react-native';
-import { Provider, connect } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import ReduxThunk from 'redux-thunk';
-import reducers from '../../reducers/index';
-import * as LoginAction from '../../actions/LoginAction';
-import { Actions } from 'react-native-router-flux';
+import { View, Image, Dimensions, StatusBar } from 'react-native'
+import { Provider, connect } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import ReduxThunk from 'redux-thunk'
+import reducers from '../../reducers/index'
+import * as LoginAction from '../../actions/LoginAction'
+import { Actions } from 'react-native-router-flux'
 import { Button, Icon, Form, Item, Text, Label, Input, Left, Body, Right, Title, List, ListItem } from 'native-base'
 
 
@@ -19,9 +19,10 @@ export default class Login extends Component {
     }
 
     render() {
-        let { login, changPassword, changUserName,textUserName,textPassword } = this.props
+        let { login, changPassword, changUserName, textUserName, textPassword } = this.props
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <StatusBar hidden={true} />
                 <Image
                     source={{ uri: 'login_back' }}
                     style={{ width: window.width, height: window.width / 9 * 16 }} />

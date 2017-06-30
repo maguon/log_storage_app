@@ -28,11 +28,12 @@ export default class RecordListItem extends Component {
             opImgUri.uri = 'icon_note_out'
             textStyle = styles.outText
         }
-
+        
         return (
             <TouchableHighlight key={_id} underlayColor='rgba(0,0,0,0.1)' onPress={() => {
-                
-                Actions.carInfo({ carId: id })
+                //Actions.profile({key:'home'})
+               // console.log(this.props.routerPos)
+                this.props.routerPos({ carId: id })
             }}>
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 2, marginRight: 5, justifyContent: 'center' }}>

@@ -98,6 +98,7 @@ class CarList extends Component {
     }
 
     render() {
+        
         let { carList } = this.props.searchCarListReducer.searchCarList.data
         let { vin } = this.props.searchCarListReducer.searchVin
         let { changeSearchVin } = this.props

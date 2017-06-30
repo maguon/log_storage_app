@@ -68,7 +68,7 @@ class Password extends Component {
         return (
 
             <Container>
-                <NavBar title='修改密码' />
+                {/*<NavBar title='修改密码' />*/}
                 <Body style={{ flex: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start" }}>
                     <Form style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                         <Item floatingLabel  >
