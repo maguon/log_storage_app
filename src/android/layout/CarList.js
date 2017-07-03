@@ -17,7 +17,7 @@ const CarList = ({ cars, getCarListWaiting, getCarListMore, storageName, getCarL
             <SearchBar
                 viewStyle={viewStyle}
                 changeSearchVin={changeSearchVin}
-                routerPos={Actions.searchCarListForCar} />
+                routerPos={() => Actions.searchVinAtCar({ carInfoPos: Actions.carInfo })} />
             <CarListComponent
                 cars={cars}
                 getCarListWaiting={getCarListWaiting}

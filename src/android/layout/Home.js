@@ -16,7 +16,6 @@ import {  Actions } from 'react-native-router-flux'
 const window = Dimensions.get('window')
 
 const Home = ({ storages, recordList, changeSearchVin }) => {
-    let viewStyle = { backgroundColor: 'rgba(0,0,0,0.16)' }
     return (
         <View style={{ flex: 1 }}>
             {/*<View>
@@ -25,7 +24,7 @@ const Home = ({ storages, recordList, changeSearchVin }) => {
                   
                 </View>
             </View>*/}
-            <SearchBar viewStyle={viewStyle} changeSearchVin={changeSearchVin} routerPos={Actions.searchCarListForHome}/>
+            <SearchBar  changeSearchVin={changeSearchVin} routerPos={Actions.searchVinAtHome}/>
             <ScrollView showsVerticalScrollIndicator={false}
                 overScrollMode='auto'>
 

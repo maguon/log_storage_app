@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CarListAction from '../../actions/CarListAction'
-import * as searchCarListAction from '../../actions/SearchCarListAction'
 import { Actions } from 'react-native-router-flux'
 import CarListLayout from '../layout/CarList'
 
@@ -59,20 +58,20 @@ class CarList extends Component {
 
 
         /*getCarListMore 执行状态*/
-        if (carListReducer.getCarListMore.isExecStatus == 1) {
-            console.log('carListReducer.getCarListMore开始执行')
-        } else if (carListReducer.getCarListMore.isExecStatus == 2) {
-            console.log('carListReducer.getCarListMore执行完毕')
-            if (carListReducer.getCarListMore.isResultStatus == 0) {
-                console.log('carListReducer.getCarListMore执行成功没有到底')
-            } else if (carListReducer.getCarListMore.isResultStatus == 1) {
-                console.log('carListReducer.getCarListMore执行错误')
-            } else if (carListReducer.getCarListMore.isResultStatus == 2) {
-                console.log('carListReducer.getCarListMore执行失败')
-            } else if (carListReducer.getCarListMore.isResultStatus == 3) {
-                console.log('carListReducer.getCarListMore已经到底')
-            }
-        }
+        // if (carListReducer.getCarListMore.isExecStatus == 1) {
+        //     console.log('carListReducer.getCarListMore开始执行')
+        // } else if (carListReducer.getCarListMore.isExecStatus == 2) {
+        //     console.log('carListReducer.getCarListMore执行完毕')
+        //     if (carListReducer.getCarListMore.isResultStatus == 0) {
+        //         console.log('carListReducer.getCarListMore执行成功没有到底')
+        //     } else if (carListReducer.getCarListMore.isResultStatus == 1) {
+        //         console.log('carListReducer.getCarListMore执行错误')
+        //     } else if (carListReducer.getCarListMore.isResultStatus == 2) {
+        //         console.log('carListReducer.getCarListMore执行失败')
+        //     } else if (carListReducer.getCarListMore.isResultStatus == 3) {
+        //         console.log('carListReducer.getCarListMore已经到底')
+        //     }
+        // }
 
         /************************************************************************************************/
 
@@ -139,9 +138,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     resetGetCarList: () => {
         dispatch(CarListAction.resetGetCarList())
-    }, 
-    changeSearchVin: (param) => {
-        dispatch(searchCarListAction.changeSearchVin(param))
     }
 })
 

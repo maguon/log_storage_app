@@ -90,7 +90,7 @@ class AddCar extends Component {
         console.log(this.props.AddCarReducer.addCar.data)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
-                <NavBar title={'车辆入库'} />
+                {/*<NavBar title={'车辆入库'} />*/}
                 <ScrollView>
                     <View style={{ flex: 1 }}>
                         <TextBox

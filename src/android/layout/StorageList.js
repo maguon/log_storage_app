@@ -16,7 +16,7 @@ const StorageList = ({ storages, changeSearchVin }) => {
             <SearchBar
                 viewStyle={viewStyle}
                 changeSearchVin={changeSearchVin}
-                routerPos={Actions.searchCarListForStorage} />
+                routerPos={Actions.searchVinAtStorage} />
             <StorageListComponent
                 storages={storages}
             />

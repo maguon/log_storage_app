@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as StorageListAction from '../../actions/StorageListAction'
-import * as searchCarListAction from '../../actions/SearchCarListAction'
 import StorageListLayout from '../layout/StorageList'
 
 class StorageList extends Component {
@@ -64,9 +63,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
     getStorageList: (param) => {
         dispatch(StorageListAction.getStorageList(param))
-    },
-    changeSearchVin: (param) => {
-        dispatch(searchCarListAction.changeSearchVin(param))
     }
 })
 

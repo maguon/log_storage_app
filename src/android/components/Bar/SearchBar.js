@@ -18,7 +18,7 @@ export default class SearchBar extends Component {
 
     barcodeReceived(e) {
         if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate()
-        if (e.data.length == 13)
+        if (e.data.length == 17)
             this.setState({
                 barcode: e.data,
                 barcodeModalVisible: false
@@ -31,44 +31,36 @@ export default class SearchBar extends Component {
     }
 
     render() {
-        let { viewStyle ,routerPos} = this.props
-        // console.log(routerPos)
+        let { routerPos } = this.props
         return (
-               <Header androidStatusBarColor='#00cade' searchBar style={{backgroundColor: '#00cade'}}>
-                    <Left style={{ flex: 1 }}>
-                        <Button transparent onPress={() => { this.setState({ barcodeModalVisible: true }) }}>
-                            <Icon name="md-qr-scanner" type="ionicons" />
-                        </Button>
-                    </Left>
-                    <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }}>
-                        <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
-                            <Input style={{ color: '#ffffff', fontSize: 14 }}
-                                value={this.state.barcode}
-                                onChangeText={(text) => this.setState({ barcode: text })}
-                                //onKeyPress={Actions.searchCarList}
-                                onTouchStart={routerPos}
-                               // onFocus={Actions.searchCarList}
-                                //onBlur={Actions.searchCarList}
-                               // onPress={Actions.searchCarList}
-                            />
-                            <Icon name="md-search"
-                                type="ionicons"
-                                style={{ color: '#ffffff' }}
-                                onPress={this.search} />
-                        </Item>
-                    </View>
-                   <Right style={{ flex: 1 }}>
-                      {/*<Button transparent onPress={() => { Actions.ImportCar() }}>
-                        <Icon Icon name="md-add" type="ionicons" />
-                    </Button>*/}
-                    </Right>
-                    <Modal
-                        animationType={"none"}
-                        visible={this.state.barcodeModalVisible}
-                        onRequestClose={() => { this.setState({ barcodeModalVisible: false }) }}
-                    ><VinScanner barcodeReceived={this.barcodeReceived.bind(this)} />
-                    </Modal>
-                </Header >
+            <Header androidStatusBarColor='#00cade' searchBar style={{ backgroundColor: '#00cade' }}>
+                <Left style={{ flex: 1 }}>
+                    <Button transparent onPress={() => { this.setState({ barcodeModalVisible: true }) }}>
+                        <Icon name="md-qr-scanner" type="ionicons" />
+                    </Button>
+                </Left>
+                <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }}>
+                    <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
+                        <Input style={{ color: '#ffffff', fontSize: 14 }}
+                            value={this.state.barcode}
+                            onTouchStart={routerPos}
+                        />
+                        <Icon name="md-search"
+                            type="ionicons"
+                            style={{ color: '#ffffff' }}
+                            onPress={this.search} />
+                    </Item>
+                </View>
+                <Right style={{ flex: 1 }}>
+                </Right>
+                <Modal
+                    animationType={"none"}
+                    visible={this.state.barcodeModalVisible}
+                    onRequestClose={() => { this.setState({ barcodeModalVisible: false }) }}
+                >
+                    <VinScanner barcodeReceived={this.barcodeReceived.bind(this)} />
+                </Modal>
+            </Header >
 
         )
     }

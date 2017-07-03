@@ -19,7 +19,7 @@ import * as addCarTypes from './AddCarTypes'
 import * as selectEntrustTypes from './SelectEntrustTypes'
 import * as selectCityTypes from './SelectCityTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
-import * as searchCarListTypes from './SearchCarListTypes'
+import * as searchVinTypes from './SearchVinTypes'
 import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
 
 
@@ -39,7 +39,7 @@ export {
     selectStorageForCarListTypes,
     importCarCameraTypes,
     mainRootTypes,
-    searchCarListTypes,
+    searchVinTypes,
     recordListTypes,
     parkingViewTypes,
     addCarTypes,

@@ -14,7 +14,6 @@ import { Button, Container, Content, Header, Icon, Left, Body, Right, Title, Lis
 import SearchBar from '../components/Bar/SearchBar'
 import ConfirmModal from '../components/ConfirmModal'
 import * as app from '../../android_app.json'
-import * as searchCarListAction from '../../actions/SearchCarListAction'
 
 
 class Setting extends Component {
@@ -48,7 +47,7 @@ class Setting extends Component {
         let viewStyle = { backgroundColor: '#00cade' }
         return (
             <Container style={{ flex: 1 }}>
-                <SearchBar viewStyle={viewStyle} routerPos={Actions.searchCarListForSetting}/>
+                <SearchBar viewStyle={viewStyle} routerPos={Actions.searchVinAtSetting}/>
                 <View style={{ flex: 1 }}>
                     <List>
                         <ListItem onPress={() => { Actions.recordList() }}>
@@ -102,9 +101,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    changeSearchVin: (param) => {
-        dispatch(searchCarListAction.changeSearchVin(param))
-    }
+
 })
 
 

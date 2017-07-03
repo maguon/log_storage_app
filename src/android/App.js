@@ -19,10 +19,13 @@ import Setting from './views/Setting'
 
 import Password from './views/Password'
 
+
+import SearchVin from './views/SearchVin'
+
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 import ErrorView from './views/ErrorView'
-import SearchCarList from './views/SearchCarList'
+
 import SelectCarMake from './views/SelectCarMake'
 import SelectStorage from './views/SelectStorage'
 import SelectRow from './views/SelectRow'
@@ -97,26 +100,32 @@ export default class App extends Component {
                             <Scene key="homeBlock" initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
                                 <Scene key="home" initial={true} component={Home} hideNavBar />
                                 <Scene key="carInfoForHome" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
-                                <Scene key="searchCarListForHome" component={SearchCarList} hideTabBar hideNavBar={true} />
+                                <Scene key="searchVinAtHome" component={SearchVin} hideTabBar hideNavBar={true} />
+                                <Scene key="addCarForHome" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="carList" initial={true} component={CarList} hideNavBar />
                                 <Scene key="carInfo" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
-                                <Scene key="searchCarListForCar" component={SearchCarList} hideTabBar hideNavBar={true} />
+                                <Scene key="searchVinAtCar" component={SearchVin} hideTabBar hideNavBar={true} />
+                                <Scene key="addCarForCar" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                             </Scene>
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
                                 <Scene key="storageList" component={StorageList} initial={true} hideNavBar />
                                 <Scene key="parkingView" navBar={NavBar} title="车位分布图" component={ParkingView} hideTabBar hideNavBar={false} />
-                                <Scene key="searchCarListForStorage" component={SearchCarList} hideTabBar hideNavBar={true} />
+                                <Scene key="searchVinAtStorage" component={SearchVin} hideTabBar hideNavBar={true} />
+                                <Scene key="addCarForStorage" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                             </Scene>
                             <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
                                 <Scene key="setting" component={Setting} hideNavBar={true} navBar={NavBar} />
                                 <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInfoForRecordList" component={CarInfo} title="车辆详细信息" navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="password" component={Password} title='修改密码' navBar={NavBar} hideTabBar hideNavBar={false} />
-                                <Scene key="searchCarListForSetting" component={SearchCarList} hideTabBar hideNavBar={true} />
+                                <Scene key="searchVinAtSetting" component={SearchVin} hideTabBar hideNavBar={true} />
+                                <Scene key="addCarForSetting" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                             </Scene>
                         </Scene>
+
+                        
                     </Scene>
                 </Scene>
             </Router>

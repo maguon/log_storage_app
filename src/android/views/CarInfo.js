@@ -6,7 +6,6 @@ import { Alert } from 'react-native'
 import { connect } from 'react-redux'
 import * as CarInfoAction from '../../actions/CarInfoAction'
 import * as CarListAction from '../../actions/CarListAction'
-import * as SearchCarListAction from '../../actions/SearchCarListAction'
 import { Actions } from 'react-native-router-flux'
 import CarInfoLayout from '../layout/CarInfo'
 
@@ -421,9 +420,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     removeCar: (carId) => {
         dispatch(CarListAction.removeCar(carId))
-    },
-    removeSearchCar: (carId) => {
-        dispatch(SearchCarListAction.removeSearchCar(carId))
     },
     resetExportCar: () => {
         dispatch(CarInfoAction.resetExportCar())

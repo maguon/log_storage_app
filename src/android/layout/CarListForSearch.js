@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 
-export default class SearchCarList extends Component {
+export default class CarListForSearch extends Component {
     constructor(props) {
         super(props)
     }
@@ -10,7 +10,7 @@ export default class SearchCarList extends Component {
     render() {
         return (
             <View>
-                <Text>SearchCarList</Text>
+                <Text>CarListForSearch</Text>
             </View>
         )
     }
