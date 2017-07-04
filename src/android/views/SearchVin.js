@@ -76,7 +76,7 @@ class SearchVin extends Component {
     }
 
     onPressIcon() {
-        
+
         console.log(this.props.SearchVinReducer)
     }
 
@@ -91,6 +91,7 @@ class SearchVin extends Component {
     }
 
     render() {
+        console.log(this.props)
         let { vinList } = this.props.SearchVinReducer.getVinList.data
 
         return (

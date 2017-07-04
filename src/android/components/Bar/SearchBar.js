@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { View, Vibration, Modal, Text, TextInput, StatusBar } from 'react-native'
 import { Item, Header, Input, Button, Left, Right, Icon } from 'native-base'
-import { Actions } from 'react-native-router-flux'
+//import { Actions } from 'react-native-router-flux'
 import VinScanner from '../../components/VinScanner'
+import * as  RouterDirection from '../../../util/RouterDirection'
 
 
 
@@ -13,7 +14,7 @@ export default class SearchBar extends Component {
             barcodeModalVisible: false,
             barcode: ''
         }
-        this.search = this.search.bind(this)
+        this._onPressIcon = this._onPressIcon.bind(this)
     }
 
     barcodeReceived(e) {
@@ -25,10 +26,11 @@ export default class SearchBar extends Component {
             })
     }
 
-    search() {
+    _onPressIcon() {
+        console.log(this.props)
         // this.props.changeSearchVin(this.state.barcode)
         // Actions.searchCarList()
-        this.props.routerPos({ vin: '11111111111111111' })
+       // RouterDirection.searchVin({ vin: '11111111111111111' })
     }
 
     render() {
@@ -49,7 +51,7 @@ export default class SearchBar extends Component {
                         <Icon name="md-search"
                             type="ionicons"
                             style={{ color: '#ffffff' }}
-                            onPress={this.search} />
+                            onPress={this._onPressIcon} />
                     </Item>
                 </View>
                 <Right style={{ flex: 1 }}>

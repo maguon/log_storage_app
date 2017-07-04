@@ -18,16 +18,9 @@ const window = Dimensions.get('window')
 const Home = ({ storages, recordList, changeSearchVin }) => {
     return (
         <View style={{ flex: 1 }}>
-            {/*<View>
-                <Image source={{ uri: 'banner_back' }} style={styles.image} />
-                 <View style={styles.search}>
-                  
-                </View>
-            </View>*/}
-            <SearchBar  changeSearchVin={changeSearchVin} routerPos={Actions.searchVinAtHome}/>
+            <SearchBar  changeSearchVin={changeSearchVin} />
             <ScrollView showsVerticalScrollIndicator={false}
                 overScrollMode='auto'>
-
                 <StorageList storages={storages} />
                 <RecordList recordList={recordList} routerPos={Actions.carInfoForHome} />
             </ScrollView>
