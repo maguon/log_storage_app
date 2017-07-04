@@ -31,44 +31,27 @@ class SearchVin extends Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        //  let { searchCarListReducer } = nextProps
+        let { SearchVinReducer } = nextProps
         /*getCarList 执行状态*/
-        // if (searchCarListReducer.searchCarList.isExecStatus == 1) {
-        //     console.log('searchCarListReducer.searchCarList开始执行')
-        // } else if (searchCarListReducer.searchCarList.isExecStatus == 2) {
-        //     console.log('searchCarListReducer.searchCarList执行完毕')
-        //     if (searchCarListReducer.searchCarList.isResultStatus == 0) {
-        //         console.log('searchCarListReducer.searchCarList执行成功')
-        //         this.props.resetSearchCarList()
-        //     } else if (searchCarListReducer.searchCarList.isResultStatus == 1) {
-        //         console.log('searchCarListReducer.searchCarList执行错误', searchCarListReducer.searchCarList.errorMsg)
-        //         this.props.resetSearchCarList()
-        //     } else if (searchCarListReducer.searchCarList.isResultStatus == 2) {
-        //         console.log('searchCarListReducer.searchCarList执行失败')
-        //         this.props.resetSearchCarList()
-        //     }
-        // }
+        if (SearchVinReducer.searchVin.isExecStatus == 1) {
+            console.log('SearchVinReducer.searchVin开始执行')
+        } else if (SearchVinReducer.searchVin.isExecStatus == 2) {
+            console.log('SearchVinReducer.searchVin执行完毕')
+            if (SearchVinReducer.searchVin.isResultStatus == 0) {
+                console.log('SearchVinReducer.searchVin执行成功')
+                this.props.resetSearchVinListStatus()
+            } else if (SearchVinReducer.searchVin.isResultStatus == 1) {
+                console.log('SearchVinReducer.searchVin执行错误', SearchVinReducer.searchVin.errorMsg)
+                this.props.resetSearchVinListStatus()
+            } else if (SearchVinReducer.searchVin.isResultStatus == 2) {
+                console.log('SearchVinReducer.searchVin执行失败')
+                this.props.resetSearchVinListStatus()
+            }
+        }
 
 
         /************************************************************************************************/
 
-        /*getCarListMore 执行状态*/
-        // if (searchCarListReducer.searchCarListMore.isExecStatus == 1) {
-        //     console.log('searchCarListReducer.searchCarListMore开始执行')
-        // } else if (searchCarListReducer.searchCarListMore.isExecStatus == 2) {
-        //     console.log('searchCarListReducer.searchCarListMore执行完毕')
-        //     if (searchCarListReducer.searchCarListMore.isResultStatus == 0) {
-        //         console.log('searchCarListReducer.searchCarListMore执行成功没有到底')
-        //     } else if (searchCarListReducer.searchCarListMore.isResultStatus == 1) {
-        //         console.log('searchCarListReducer.searchCarListMore执行错误')
-        //     } else if (searchCarListReducer.searchCarListMore.isResultStatus == 2) {
-        //         console.log('searchCarListReducer.searchCarListMore执行失败')
-        //     } else if (searchCarListReducer.searchCarListMore.isResultStatus == 3) {
-        //         console.log('searchCarListReducer.searchCarListMore已经到底')
-        //     }
-        // }
-
-        /************************************************************************************************/
 
         return true
 
@@ -79,19 +62,23 @@ class SearchVin extends Component {
         const timeStamp = new Date().getTime()
         let pageSize = 15
         if (vin.length >= 6 && vin.length <= 17) {
-            // if (this.props.SearchVinReducer.searchVin.isExecStatus == 0) {
-            let param = {
-                requiredParam: {
-                    userid: user.userId
-                },
-                optionalParam: {
-                    start: this.props.SearchVinReducer.searchVin.data.vinList.length,
-                    size: pageSize,
-                    vinCode: vin
+            console.log(this.props.SearchVinReducer.searchVin.isComplete)
+            if (this.props.SearchVinReducer.searchVin.isExecStatus == 0) {
+                if (!this.props.SearchVinReducer.searchVin.isComplete || vin != this.props.SearchVinReducer.searchVin.vin) {
+                    let param = {
+                        requiredParam: {
+                            userid: user.userId
+                        },
+                        optionalParam: {
+                            start: this.props.SearchVinReducer.searchVin.data.vinList.length,
+                            size: pageSize,
+                            vinCode: vin
+                        }
+                    }
+                    this.props.searchVinList(param, timeStamp, vin, pageSize)
                 }
+
             }
-            this.props.searchVinList(param, timeStamp, vin, pageSize)
-            //  }
         } else if (vin.length < 6 || vin.length > 17) {
             this.props.resetSearchVinList(timeStamp)
         }
@@ -141,11 +128,14 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    searchVinList: (param, timeStamp, vin,pageSize) => {
-        dispatch(searchVinAction.searchVinList(param, timeStamp, vin,pageSize))
+    searchVinList: (param, timeStamp, vin, pageSize) => {
+        dispatch(searchVinAction.searchVinList(param, timeStamp, vin, pageSize))
     },
     resetSearchVinList: (timeStamp) => {
         dispatch(searchVinAction.resetSearchVinList(timeStamp))
+    },
+    resetSearchVinListStatus: () => {
+        dispatch(searchVinAction.resetSearchVinListStatus())
     }
 })
 

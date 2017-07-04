@@ -24,3 +24,9 @@ export const searchVinList = (param, timeStamp, vin, pageSize) => (dispatch) => 
 export const resetSearchVinList = (timeStamp) => (dispatch) => {
     dispatch({ type: actionTypes.searchVinTypes.RESET_SEARCH_VINLIST, payload: { timeStamp } })
 }
+
+
+export const resetSearchVinListStatus = (timeStamp) => (dispatch) => {
+    dispatch({ type: actionTypes.searchVinTypes.RESET_SEARCH_VINLIST_STATUS, payload: {} })
+}
+

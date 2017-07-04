@@ -24,7 +24,7 @@ export default handleActions({
         const { payload: { data, timeStamp, vin, pageSize } } = action
         if (state.searchVin.timeStamp < timeStamp) {
             let vinList = (vin != state.searchVin.vin) ? data : [...state.searchVin.data.vinList, ...data]
-            let isComplete = (data % pageSize) != 0 || data == 0
+            let isComplete = (data.length % pageSize) != 0 || data.length == 0
             return {
                 ...state,
                 searchVin: {
