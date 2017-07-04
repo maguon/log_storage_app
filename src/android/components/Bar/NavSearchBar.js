@@ -7,9 +7,9 @@ import { Actions } from 'react-native-router-flux'
 export default class NavSearchBar extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            vin: ''
-        }
+        // this.state = {
+        //     vin: ''
+        // }
         this._onChangeSearchText = this._onChangeSearchText.bind(this)
         this._onPressTextInput = this._onPressTextInput.bind(this)
         this._onPressIcon = this._onPressIcon.bind(this)
@@ -30,7 +30,7 @@ export default class NavSearchBar extends Component {
 
     //回调函数，当用户输入vin码时触发
     _onChangeSearchText(param) {
-        this.setState({ vin: param })
+        // this.setState({ vin: param })
         this.props.onChangeSearchText(param)
     }
 
@@ -60,7 +60,7 @@ export default class NavSearchBar extends Component {
                 <View style={{ flex: 6, paddingTop: 10, paddingBottom: 10 }}>
                     <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
                         <Input style={{ color: '#ffffff', fontSize: 14 }}
-                            value={this.state.vin}
+                            value={this.props.vin}
                             onChangeText={(param) => this._onChangeSearchText(param)}
                             onTouchStart={this._onPressTextInput}
                         />

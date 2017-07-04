@@ -6,7 +6,6 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 export const searchVinList = (param, timeStamp) => (dispatch) => {
     dispatch({ type: actionTypes.searchVinTypes.SEARCH_VINLIST_WAITING, payload: {} })
     let url = `${base_host}/car?${ObjectToUrl(param.optionalParam)}`
-    console.log(url)
     httpRequest
         .get(url, (err, res) => {
             if (err) {

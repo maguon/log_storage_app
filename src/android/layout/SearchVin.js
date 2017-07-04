@@ -11,12 +11,7 @@ import NavSearchBar from '../components/Bar/NavSearchBar'
 
 const window = Dimensions.get('window')
 
-const CarList = ({ vinList, carInfoRouter, vin, onPressIcon, onChangeSearchText, onEndReached }) => {
-
-    let searchResultCmpt = vinList.length > 0 ? <SearchVinList
-        vinList={vinList}
-        onEndReached={onEndReached}
-        carInfoRouter={carInfoRouter} /> : <SearchNoResult />
+const CarList = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText, onEndReached }) => {
     return (
         <View style={{ flex: 1, width: window.width }}>
             <NavSearchBar
@@ -27,7 +22,8 @@ const CarList = ({ vinList, carInfoRouter, vin, onPressIcon, onChangeSearchText,
             <SearchVinList
                 vinList={vinList}
                 onEndReached={onEndReached}
-                carInfoRouter={carInfoRouter} />
+                onPressItem={onPressItem}
+            />
         </View>
     )
 }

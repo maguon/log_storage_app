@@ -10,17 +10,19 @@ export default class SearchVinList extends Component {
     }
 
     _onEndReached() {
-        console.log('_onEndReached')
         this.props.onEndReached()
     }
 
+    _onPressItem(vin) {
+        this.props.onPressItem(vin)
+    }
+
     render() {
-        console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
                     data={this.props.vinList}
-                    renderItem={({ item }) => <ListItem><Text>{item.vin}</Text></ListItem>}
+                    renderItem={({ item }) => <ListItem onPress={() => this._onPressItem(item.vin)}><Text>{item.vin}</Text></ListItem>}
                     onEndReached={this._onEndReached}
                     onEndReachedThreshold={0.5}
                 />

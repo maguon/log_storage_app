@@ -8,23 +8,25 @@ import { View } from 'react-native'
 class SearchVin extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            vin: ''
+        }
+
         this.searchVinList = this.searchVinList.bind(this)
         this.onChangeSearchText = this.onChangeSearchText.bind(this)
         this.onPressIcon = this.onPressIcon.bind(this)
+        this.onPressItem = this.onPressItem.bind(this)
+        this.onEndReached = this.onEndReached.bind(this)
     }
     componentWillMount() {
-        if (this.props.vin) { this.vin = this.props.vin }
-        else {
-            console.log('componentWillMount-this.props.vin', this.vin)
-            this.vin = ''
+        if (this.props.vin) {
+            this.setState({ vin: this.props.vin })
         }
-
     }
 
     componentDidMount() {
         if (this.props.vin) {
-            console.log('componentDidMount-this.props.vin', this.vin)
-            this.searchVinList()
+            this.searchVinList(this.props.vin)
         }
     }
 
@@ -72,10 +74,10 @@ class SearchVin extends Component {
 
     }
 
-    searchVinList() {
+    searchVinList(vin) {
         let { user } = this.props
         const timeStamp = new Date().getTime()
-        if (this.vin.length >= 6) {
+        if (vin.length >= 6 && vin.length <= 17) {
             let param = {
                 requiredParam: {
                     userid: user.userId
@@ -83,22 +85,18 @@ class SearchVin extends Component {
                 optionalParam: {
                     start: 0,
                     size: 15,
-                    vinCode: this.vin
+                    vinCode: vin
                 }
             }
             this.props.searchVinList(param, timeStamp)
-        } else {
+        } else if (vin.length < 6 || vin.length > 17) {
             this.props.resetSearchVinList(timeStamp)
         }
-
-
     }
 
     onChangeSearchText(param) {
-        this.vin = param
-        console.log('this.vin', this.vin)
-        console.log(this.props.SearchVinReducer)
-        this.searchVinList()
+        this.setState({ vin: param })
+        this.searchVinList(param)
     }
 
     onPressIcon() {
@@ -109,17 +107,23 @@ class SearchVin extends Component {
 
     }
 
+    onPressItem(param) {
+        this.setState({ vin: param })
+        const timeStamp = new Date().getTime()
+        this.props.resetSearchVinList(timeStamp)
+    }
+
     render() {
         let { vinList } = this.props.SearchVinReducer.searchVin.data
-        console.log(vinList)
+
         return (
             <SearchCarListLayout
                 vinList={vinList}
-                vin={this.vin}
+                vin={this.state.vin}
                 onPressIcon={this.onPressIcon}
                 onChangeSearchText={this.onChangeSearchText}
                 onEndReached={this.onEndReached}
-                carInfoRouter={this.props.carInfoRouter}
+                onPressItem={this.onPressItem}
             />
         )
     }

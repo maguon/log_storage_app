@@ -11,17 +11,16 @@ const initialState = {
         failedMsg: '',
         serviceFailedMsg: '',
         timeStamp: '',
+        isComplete: false,
         data: {
             vinList: []
         },
-
     }
 }
 
 export default handleActions({
     [actionTypes.searchVinTypes.SEARCH_VINLIST_SUCCESS]: (state, action) => {
         const { payload: { data, timeStamp } } = action
-
         if (state.searchVin.timeStamp < timeStamp) {
             return {
                 ...state,
@@ -98,7 +97,6 @@ export default handleActions({
     },
     [actionTypes.searchVinTypes.RESET_SEARCH_VINLIST]: (state, action) => {
         const { payload: { timeStamp } } = action
-
         console.log('RESET_SEARCH_VINLIST')
         return {
             searchVin: {
@@ -107,6 +105,7 @@ export default handleActions({
                 errorMsg: '',
                 failedMsg: '',
                 serviceFailedMsg: '',
+                isComplete: false,
                 data: {
                     vinList: []
                 },
