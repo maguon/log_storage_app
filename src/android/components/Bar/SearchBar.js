@@ -26,8 +26,9 @@ export default class SearchBar extends Component {
     }
 
     search() {
-        this.props.changeSearchVin(this.state.barcode)
-        Actions.searchCarList()
+        // this.props.changeSearchVin(this.state.barcode)
+        // Actions.searchCarList()
+        this.props.routerPos({ vin: '11111111111111111' })
     }
 
     render() {

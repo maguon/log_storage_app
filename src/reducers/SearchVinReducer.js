@@ -17,9 +17,9 @@ const initialState = {
 }
 
 export default handleActions({
-    [actionTypes.searchVinTypes.SEARCH_CARLIST_SUCCESS]: (state, action) => {
+    [actionTypes.searchVinTypes.SEARCH_VINLIST_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
-
+        console.log(data)
         return {
             ...state,
             searchVin: {
@@ -32,7 +32,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.searchVinTypes.SEARCH_CARLIST_FAILED]: (state, action) => {
+    [actionTypes.searchVinTypes.SEARCH_VINLIST_FAILED]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -45,7 +45,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.searchVinTypes.SEARCH_CARLIST_WAITING]: (state, action) => {
+    [actionTypes.searchVinTypes.SEARCH_VINLIST_WAITING]: (state, action) => {
         return {
             ...state,
             searchVin: {
@@ -54,7 +54,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.searchVinTypes.SEARCH_CARLIST_ERROR]: (state, action) => {
+    [actionTypes.searchVinTypes.SEARCH_VINLIST_ERROR]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,

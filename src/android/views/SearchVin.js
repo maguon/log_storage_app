@@ -10,9 +10,9 @@ class SearchVin extends Component {
         super(props)
         this.searchVinList = this.searchVinList.bind(this)
         this.onChangeVin = this.onChangeVin.bind(this)
+        this.onPressIcon = this.onPressIcon.bind(this)
     }
     componentWillMount() {
-
         if (this.props.vin) { this.vin = this.props.vin }
         else {
             console.log('componentWillMount-this.props.vin', this.vin)
@@ -25,6 +25,7 @@ class SearchVin extends Component {
         if (this.props.vin) {
             console.log('componentDidMount-this.props.vin', this.vin)
             //this.searchCarList()
+            this.searchVinList()
         }
     }
 
@@ -94,17 +95,21 @@ class SearchVin extends Component {
         console.log(param)
     }
 
+    onPressIcon() {
 
+    }
 
     render() {
         let { vinList } = this.props.SearchVinReducer.searchVin.data
-
+        console.log(vinList)
         return (
             <SearchCarListLayout
-                cars={vinList}
+                vinList={vinList}
                 vin={this.vin}
+                onPressIcon={this.onPressIcon}
                 onChangeVin={this.onChangeVin}
-                carInfoPos={this.props.carInfoPos}
+                onEndReached={onEndReached}
+                carInfoRouter={this.props.carInfoRouter}
             />
         )
     }
