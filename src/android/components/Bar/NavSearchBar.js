@@ -31,7 +31,7 @@ export default class NavSearchBar extends Component {
     //回调函数，当用户输入vin码时触发
     _onChangeSearchText(param) {
         this.setState({ vin: param })
-        this.props.onChangeVin(param)
+        this.props.onChangeSearchText(param)
     }
 
     _onPressTextInput() {
@@ -45,7 +45,7 @@ export default class NavSearchBar extends Component {
             Actions.pop()
         }
         else {
-            this.props.onSearch()
+            this.props.onPressIcon()
         }
     }
 

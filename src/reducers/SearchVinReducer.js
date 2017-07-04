@@ -10,25 +10,33 @@ const initialState = {
         errorMsg: '',
         failedMsg: '',
         serviceFailedMsg: '',
+        timeStamp: '',
         data: {
             vinList: []
-        }
+        },
+
     }
 }
 
 export default handleActions({
     [actionTypes.searchVinTypes.SEARCH_VINLIST_SUCCESS]: (state, action) => {
-        const { payload: { data } } = action
-        console.log(data)
-        return {
-            ...state,
-            searchVin: {
-                ...state.searchVin,
-                isResultStatus: 0,
-                isExecStatus: 2,
-                data: {
-                    vinList: data
+        const { payload: { data, timeStamp } } = action
+
+        if (state.searchVin.timeStamp < timeStamp) {
+            return {
+                ...state,
+                searchVin: {
+                    ...state.searchVin,
+                    isResultStatus: 0,
+                    isExecStatus: 2,
+                    data: {
+                        vinList: data
+                    }
                 }
+            }
+        } else {
+            return {
+                ...state
             }
         }
     },
@@ -81,23 +89,28 @@ export default handleActions({
     },
     [actionTypes.searchVinTypes.RESET_SEARCH_VINLIST_STATUS]: (state, action) => {
         return {
+            ...state,
+            searchVin: {
+                ...state.searchVin,
+                isExecStatus: 0
+            }
+        }
+    },
+    [actionTypes.searchVinTypes.RESET_SEARCH_VINLIST]: (state, action) => {
+        const { payload: { timeStamp } } = action
+
+        console.log('RESET_SEARCH_VINLIST')
+        return {
             searchVin: {
                 isResultStatus: 0,
                 isExecStatus: 0,
                 errorMsg: '',
                 failedMsg: '',
+                serviceFailedMsg: '',
                 data: {
                     vinList: []
-                }
-            }
-        }
-    },
-    [actionTypes.searchVinTypes.RESET_SEARCH_VINLIST]: (state, action) => {
-        return {
-            ...state,
-            searchVin: {
-                ...state.searchVin,
-                isExecStatus: 0
+                },
+                timeStamp
             }
         }
     }

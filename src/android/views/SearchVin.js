@@ -9,7 +9,7 @@ class SearchVin extends Component {
     constructor(props) {
         super(props)
         this.searchVinList = this.searchVinList.bind(this)
-        this.onChangeVin = this.onChangeVin.bind(this)
+        this.onChangeSearchText = this.onChangeSearchText.bind(this)
         this.onPressIcon = this.onPressIcon.bind(this)
     }
     componentWillMount() {
@@ -24,7 +24,6 @@ class SearchVin extends Component {
     componentDidMount() {
         if (this.props.vin) {
             console.log('componentDidMount-this.props.vin', this.vin)
-            //this.searchCarList()
             this.searchVinList()
         }
     }
@@ -75,6 +74,7 @@ class SearchVin extends Component {
 
     searchVinList() {
         let { user } = this.props
+        const timeStamp = new Date().getTime()
         if (this.vin.length >= 6) {
             let param = {
                 requiredParam: {
@@ -86,16 +86,26 @@ class SearchVin extends Component {
                     vinCode: this.vin
                 }
             }
-            this.props.searchVinList(param)
+            this.props.searchVinList(param, timeStamp)
+        } else {
+            this.props.resetSearchVinList(timeStamp)
         }
+
+
     }
 
-    onChangeVin(param) {
+    onChangeSearchText(param) {
         this.vin = param
-        console.log(param)
+        console.log('this.vin', this.vin)
+        console.log(this.props.SearchVinReducer)
+        this.searchVinList()
     }
 
     onPressIcon() {
+        console.log(this.props.SearchVinReducer)
+    }
+
+    onEndReached() {
 
     }
 
@@ -107,8 +117,8 @@ class SearchVin extends Component {
                 vinList={vinList}
                 vin={this.vin}
                 onPressIcon={this.onPressIcon}
-                onChangeVin={this.onChangeVin}
-                onEndReached={onEndReached}
+                onChangeSearchText={this.onChangeSearchText}
+                onEndReached={this.onEndReached}
                 carInfoRouter={this.props.carInfoRouter}
             />
         )
@@ -123,11 +133,11 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    searchVinList: (param) => {
-        dispatch(searchVinAction.searchVinList(param))
+    searchVinList: (param, timeStamp) => {
+        dispatch(searchVinAction.searchVinList(param, timeStamp))
     },
-    resetSearchCarList: () => {
-        dispatch(searchVinAction.resetSearchCarList())
+    resetSearchVinList: (timeStamp) => {
+        dispatch(searchVinAction.resetSearchVinList(timeStamp))
     }
 })
 
