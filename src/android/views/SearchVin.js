@@ -12,7 +12,7 @@ class SearchVin extends Component {
             vin: ''
         }
 
-        this.searchVinList = this.searchVinList.bind(this)
+        this.getVinList = this.getVinList.bind(this)
         this.onChangeSearchText = this.onChangeSearchText.bind(this)
         this.onPressIcon = this.onPressIcon.bind(this)
         this.onPressItem = this.onPressItem.bind(this)
@@ -26,67 +26,54 @@ class SearchVin extends Component {
 
     componentDidMount() {
         if (this.props.vin) {
-            this.searchVinList(this.props.vin)
+            this.getVinList(this.props.vin)
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { SearchVinReducer } = nextProps
         /*getCarList 执行状态*/
-        if (SearchVinReducer.searchVin.isExecStatus == 1) {
-            console.log('SearchVinReducer.searchVin开始执行')
-        } else if (SearchVinReducer.searchVin.isExecStatus == 2) {
-            console.log('SearchVinReducer.searchVin执行完毕')
-            if (SearchVinReducer.searchVin.isResultStatus == 0) {
-                console.log('SearchVinReducer.searchVin执行成功')
-                this.props.resetSearchVinListStatus()
-            } else if (SearchVinReducer.searchVin.isResultStatus == 1) {
-                console.log('SearchVinReducer.searchVin执行错误', SearchVinReducer.searchVin.errorMsg)
-                this.props.resetSearchVinListStatus()
-            } else if (SearchVinReducer.searchVin.isResultStatus == 2) {
-                console.log('SearchVinReducer.searchVin执行失败')
-                this.props.resetSearchVinListStatus()
+        if (SearchVinReducer.getVinList.isExecStatus == 2) {
+            if (SearchVinReducer.getVinList.isResultStatus == 0) {
+                this.props.resetGetVinListStatus()
+            } else if (SearchVinReducer.getVinList.isResultStatus == 1) {
+                this.props.resetGetVinListStatus()
+            } else if (SearchVinReducer.getVinList.isResultStatus == 2) {
+                this.props.resetGetVinListStatus()
             }
         }
-
-
         /************************************************************************************************/
-
-
-        return true
-
     }
 
-    searchVinList(vin) {
+    getVinList(vin) {
         let { user } = this.props
         const timeStamp = new Date().getTime()
         let pageSize = 15
         if (vin.length >= 6 && vin.length <= 17) {
-            console.log(this.props.SearchVinReducer.searchVin.isComplete)
-            if (this.props.SearchVinReducer.searchVin.isExecStatus == 0) {
-                if (!this.props.SearchVinReducer.searchVin.isComplete || vin != this.props.SearchVinReducer.searchVin.vin) {
+            if (this.props.SearchVinReducer.getVinList.isExecStatus == 0) {
+                if (!this.props.SearchVinReducer.getVinList.isComplete || vin != this.props.SearchVinReducer.getVinList.vin) {
+                    let start = (vin != this.props.SearchVinReducer.getVinList.vin) ? 0 : this.props.SearchVinReducer.getVinList.data.vinList.length
                     let param = {
                         requiredParam: {
                             userid: user.userId
                         },
                         optionalParam: {
-                            start: this.props.SearchVinReducer.searchVin.data.vinList.length,
+                            start,
                             size: pageSize,
                             vinCode: vin
                         }
                     }
-                    this.props.searchVinList(param, timeStamp, vin, pageSize)
+                    this.props.getVinList(param, timeStamp, vin, pageSize)
                 }
-
             }
         } else if (vin.length < 6 || vin.length > 17) {
-            this.props.resetSearchVinList(timeStamp)
+            this.props.resetGetVinList(timeStamp)
         }
     }
 
     onChangeSearchText(param) {
         this.setState({ vin: param })
-        this.searchVinList(param)
+        this.getVinList(param)
     }
 
     onPressIcon() {
@@ -94,18 +81,17 @@ class SearchVin extends Component {
     }
 
     onEndReached() {
-        console.log(this.props.SearchVinReducer.searchVin.data.vinList)
-        this.searchVinList(this.state.vin)
+        this.getVinList(this.state.vin)
     }
 
     onPressItem(param) {
         this.setState({ vin: param })
         const timeStamp = new Date().getTime()
-        this.props.resetSearchVinList(timeStamp)
+        this.props.resetGetVinList(timeStamp)
     }
 
     render() {
-        let { vinList } = this.props.SearchVinReducer.searchVin.data
+        let { vinList } = this.props.SearchVinReducer.getVinList.data
 
         return (
             <SearchCarListLayout
@@ -128,14 +114,14 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    searchVinList: (param, timeStamp, vin, pageSize) => {
-        dispatch(searchVinAction.searchVinList(param, timeStamp, vin, pageSize))
+    getVinList: (param, timeStamp, vin, pageSize) => {
+        dispatch(searchVinAction.getVinList(param, timeStamp, vin, pageSize))
     },
-    resetSearchVinList: (timeStamp) => {
-        dispatch(searchVinAction.resetSearchVinList(timeStamp))
+    resetGetVinList: (timeStamp) => {
+        dispatch(searchVinAction.resetGetVinList(timeStamp))
     },
-    resetSearchVinListStatus: () => {
-        dispatch(searchVinAction.resetSearchVinListStatus())
+    resetGetVinListStatus: () => {
+        dispatch(searchVinAction.resetGetVinListStatus())
     }
 })
 

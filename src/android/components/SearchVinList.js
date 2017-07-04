@@ -11,7 +11,6 @@ export default class SearchVinList extends Component {
     }
 
     _onEndReached() {
-        console.log('onEndReached')
         this.props.onEndReached()
     }
 
