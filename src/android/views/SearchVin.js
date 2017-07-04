@@ -11,7 +11,6 @@ class SearchVin extends Component {
         this.state = {
             vin: ''
         }
-
         this.getVinList = this.getVinList.bind(this)
         this.onChangeSearchText = this.onChangeSearchText.bind(this)
         this.onPressIcon = this.onPressIcon.bind(this)
@@ -77,6 +76,7 @@ class SearchVin extends Component {
     }
 
     onPressIcon() {
+        
         console.log(this.props.SearchVinReducer)
     }
 

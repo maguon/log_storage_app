@@ -19,7 +19,7 @@ export default class NavSearchBar extends Component {
     }
 
     static defaultProps = {
-        Type: 'custom',// custom点击TextInput为不跳转 back点击TextInput返回searchVinList
+        Type: 'custom',// custom点击TextInput为不跳转 back点击TextInput返回
         onChangeSearchText: (param) => { console.log('this.props.onChangeSearchText', param) },
         onPressIcon: () => { console.log('this.props.onPressIcon') }
     }
@@ -35,7 +35,7 @@ export default class NavSearchBar extends Component {
             Actions.pop()
         }
     }
-    
+
     //回调函数，当用户点击搜索按钮时触发
     _onPressIcon() {
         if (this.props.type == 'back') {
