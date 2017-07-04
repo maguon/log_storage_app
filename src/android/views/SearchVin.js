@@ -77,18 +77,21 @@ class SearchVin extends Component {
     searchVinList(vin) {
         let { user } = this.props
         const timeStamp = new Date().getTime()
+        let pageSize = 15
         if (vin.length >= 6 && vin.length <= 17) {
+            // if (this.props.SearchVinReducer.searchVin.isExecStatus == 0) {
             let param = {
                 requiredParam: {
                     userid: user.userId
                 },
                 optionalParam: {
-                    start: 0,
-                    size: 15,
+                    start: this.props.SearchVinReducer.searchVin.data.vinList.length,
+                    size: pageSize,
                     vinCode: vin
                 }
             }
-            this.props.searchVinList(param, timeStamp)
+            this.props.searchVinList(param, timeStamp, vin, pageSize)
+            //  }
         } else if (vin.length < 6 || vin.length > 17) {
             this.props.resetSearchVinList(timeStamp)
         }
@@ -104,7 +107,8 @@ class SearchVin extends Component {
     }
 
     onEndReached() {
-
+        console.log(this.props.SearchVinReducer.searchVin.data.vinList)
+        this.searchVinList(this.state.vin)
     }
 
     onPressItem(param) {
@@ -137,8 +141,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    searchVinList: (param, timeStamp) => {
-        dispatch(searchVinAction.searchVinList(param, timeStamp))
+    searchVinList: (param, timeStamp, vin,pageSize) => {
+        dispatch(searchVinAction.searchVinList(param, timeStamp, vin,pageSize))
     },
     resetSearchVinList: (timeStamp) => {
         dispatch(searchVinAction.resetSearchVinList(timeStamp))

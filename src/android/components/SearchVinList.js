@@ -7,9 +7,11 @@ export default class SearchVinList extends Component {
     constructor(props) {
         super(props)
         this._onEndReached = this._onEndReached.bind(this)
+        this._onPressItem = this._onPressItem.bind(this)
     }
 
     _onEndReached() {
+        console.log('onEndReached')
         this.props.onEndReached()
     }
 

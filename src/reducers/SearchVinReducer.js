@@ -15,13 +15,16 @@ const initialState = {
         data: {
             vinList: []
         },
+        vin: ''
     }
 }
 
 export default handleActions({
     [actionTypes.searchVinTypes.SEARCH_VINLIST_SUCCESS]: (state, action) => {
-        const { payload: { data, timeStamp } } = action
+        const { payload: { data, timeStamp, vin, pageSize } } = action
         if (state.searchVin.timeStamp < timeStamp) {
+            let vinList = (vin != state.searchVin.vin) ? data : [...state.searchVin.data.vinList, ...data]
+            let isComplete = (data % pageSize) != 0 || data == 0
             return {
                 ...state,
                 searchVin: {
@@ -29,8 +32,10 @@ export default handleActions({
                     isResultStatus: 0,
                     isExecStatus: 2,
                     data: {
-                        vinList: data
-                    }
+                        vinList
+                    },
+                    vin,
+                    isComplete
                 }
             }
         } else {
@@ -97,7 +102,6 @@ export default handleActions({
     },
     [actionTypes.searchVinTypes.RESET_SEARCH_VINLIST]: (state, action) => {
         const { payload: { timeStamp } } = action
-        console.log('RESET_SEARCH_VINLIST')
         return {
             searchVin: {
                 isResultStatus: 0,
@@ -109,7 +113,8 @@ export default handleActions({
                 data: {
                     vinList: []
                 },
-                timeStamp
+                timeStamp,
+                vin: ''
             }
         }
     }
