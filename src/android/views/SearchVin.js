@@ -49,7 +49,12 @@ class SearchVin extends Component {
             if (SearchVinReducer.search.isResultStatus == 0) {
                 console.log('SearchVinReducer.search.isResultStatus == 0')
                 console.log(nextProps)
-                RouterDirection.addCar(nextProps.parent)()
+                let searchResult = SearchVinReducer.search
+                this.props.resetSearch()
+                if (typeof (searchResult.car) == "undefined") {
+                    RouterDirection.addCar(nextProps.parent)({ vin: this.state.vin })
+                }
+
                 //this.props.resetGetVinListStatus()
             } else if (SearchVinReducer.search.isResultStatus == 1) {
                 console.log('SearchVinReducer.search.isResultStatus == 1')
@@ -144,7 +149,11 @@ const mapDispatchToProps = (dispatch) => ({
     },
     search: (param) => {
         dispatch(searchVinAction.search(param))
+    },
+    resetSearch: () => {
+        dispatch(searchVinAction.resetSearch())
     }
 })
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchVin)

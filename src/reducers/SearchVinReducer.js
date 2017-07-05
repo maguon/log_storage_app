@@ -128,7 +128,6 @@ export default handleActions({
             }
         }
     },
-
     [actionTypes.searchVinTypes.SEARCH_CAR_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
         return {
@@ -183,6 +182,19 @@ export default handleActions({
                 isResultStatus: 3,
                 isExecStatus: 2,
                 serviceFailedMsg: data
+            }
+        }
+    },
+    [actionTypes.searchVinTypes.RESET_SEARCH_CAR]: (state, action) => {
+        return {
+            ...state,
+            search: {
+                isResultStatus: 0,
+                isExecStatus: 0,
+                errorMsg: '',
+                failedMsg: '',
+                serviceFailedMsg: '',
+                car: {}
             }
         }
     }

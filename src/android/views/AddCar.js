@@ -44,6 +44,13 @@ class AddCar extends Component {
         this.addCar = this.addCar.bind(this)
     }
 
+    componentWillMount() {
+        if (this.props.vin) {
+            this.props.changeAddCarField({ vin: this.props.vin })
+        }
+    }
+
+
     shouldComponentUpdate(nextProps, nextState) {
         let { AddCarReducer } = nextProps
         console.log(AddCarReducer)
@@ -84,13 +91,10 @@ class AddCar extends Component {
     }
 
     render() {
-        // entrustId makeId makeName orderDate receiveId remark routeEnd routeEndId routeStart routeStartId vin
-
         let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, remark } = this.props.AddCarReducer.addCar.data
         console.log(this.props.AddCarReducer.addCar.data)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
-                {/*<NavBar title={'车辆入库'} />*/}
                 <ScrollView>
                     <View style={{ flex: 1 }}>
                         <TextBox
