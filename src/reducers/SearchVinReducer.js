@@ -16,6 +16,15 @@ const initialState = {
             vinList: []
         },
         vin: ''
+    },
+    search: {
+        isResultStatus: 0,
+        isExecStatus: 0,
+        errorMsg: '',
+        failedMsg: '',
+        serviceFailedMsg: '',
+        car: {}
+        //relStatus: 0   //0为没有查询到，1为已入库，2未入库,3已出库
     }
 }
 
@@ -103,6 +112,7 @@ export default handleActions({
     [actionTypes.searchVinTypes.RESET_GET_VINLIST]: (state, action) => {
         const { payload: { timeStamp } } = action
         return {
+            ...state,
             getVinList: {
                 isResultStatus: 0,
                 isExecStatus: 0,
@@ -117,7 +127,63 @@ export default handleActions({
                 vin: ''
             }
         }
+    },
+
+    [actionTypes.searchVinTypes.SEARCH_CAR_SUCCESS]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            search: {
+                ...state.search,
+                isResultStatus: 0,
+                isExecStatus: 2,
+                car: data
+            }
+        }
+    },
+    [actionTypes.searchVinTypes.SEARCH_CAR_FAILED]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            search: {
+                ...state.search,
+                isResultStatus: 2,
+                isExecStatus: 2,
+                failedMsg: data
+            }
+        }
+    },
+    [actionTypes.searchVinTypes.SEARCH_CAR_WAITING]: (state, action) => {
+        return {
+            ...state,
+            search: {
+                ...state.search,
+                isExecStatus: 1
+            }
+        }
+    },
+    [actionTypes.searchVinTypes.SEARCH_CAR_ERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            search: {
+                ...state.search,
+                isResultStatus: 1,
+                isExecStatus: 2,
+                errorMsg: data
+            }
+        }
+    },
+    [actionTypes.searchVinTypes.SEARCH_CAR_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            search: {
+                ...state.search,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceFailedMsg: data
+            }
+        }
     }
 }, initialState)
-
-

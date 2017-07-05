@@ -53,9 +53,6 @@ class SearchVin extends Component {
                 if (!this.props.SearchVinReducer.getVinList.isComplete || vin != this.props.SearchVinReducer.getVinList.vin) {
                     let start = (vin != this.props.SearchVinReducer.getVinList.vin) ? 0 : this.props.SearchVinReducer.getVinList.data.vinList.length
                     let param = {
-                        requiredParam: {
-                            userid: user.userId
-                        },
                         optionalParam: {
                             start,
                             size: pageSize,
@@ -76,7 +73,12 @@ class SearchVin extends Component {
     }
 
     onPressIcon() {
-
+        let param = {
+            optionalParam: {
+                vin: this.state.vin
+            }
+        }
+        this.props.search(param)
         console.log(this.props.SearchVinReducer)
     }
 
@@ -123,6 +125,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     resetGetVinListStatus: () => {
         dispatch(searchVinAction.resetGetVinListStatus())
+    },
+    search: (param) => {
+        dispatch(searchVinAction.search(param))
     }
 })
 

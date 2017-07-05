@@ -5,7 +5,7 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const getVinList = (param, timeStamp, vin, pageSize) => (dispatch) => {
     dispatch({ type: actionTypes.searchVinTypes.GET_VINLIST_WAITING, payload: {} })
-    let url = `${base_host}/car?${ObjectToUrl(param.optionalParam)}`
+    let url = `${base_host}/carList?${ObjectToUrl(param.optionalParam)}`
     httpRequest
         .get(url, (err, res) => {
             if (err) {
@@ -19,6 +19,26 @@ export const getVinList = (param, timeStamp, vin, pageSize) => (dispatch) => {
             }
 
         })
+}
+
+export const search = (param, vin) => (dispatch) => {
+    dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_WAITING, payload: {} })
+    let url = `${base_host}/car?${ObjectToUrl(param.optionalParam)}`
+    httpRequest
+        .get(url, (err, res) => {
+            if (err) {
+                dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_ERROR, payload: { data: err } })
+            } else {
+                if (res.success) {
+                    let data = (res.result.length > 0) ? res.result.shift() : {}
+                    dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_SUCCESS, payload: { data } })
+                } else {
+                    dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_FAILED, payload: { data: res.msg } })
+                }
+            }
+
+        })
+
 }
 
 export const resetGetVinList = (timeStamp) => (dispatch) => {
