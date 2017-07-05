@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as StorageListAction from '../../actions/StorageListAction'
-import StorageListLayout from '../layout/StorageList'
+import * as StorageListAction from '../../../actions/StorageListAction'
+import StorageListLayout from '../../layout/StorageList'
+import { Actions } from 'react-native-router-flux'
 
 class StorageList extends Component {
     constructor(props) {
         super(props)
+
+        this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
+        this.onPressIcon = this.onPressIcon.bind(this)
+        this.onPressTextInput = this.onPressTextInput.bind(this)
     }
 
     componentDidMount() {
@@ -23,6 +28,16 @@ class StorageList extends Component {
                 dateEnd: now
             }
         })
+    }
+
+    onBarcodeReceived(param) {
+        Actions.searchVinAtStorageBlock({ vin: param })
+    }
+    onPressIcon() {
+        Actions.searchVinAtStorageBlock()
+    }
+    onPressTextInput() {
+        Actions.searchVinAtStorageBlock()
     }
 
 
@@ -48,8 +63,11 @@ class StorageList extends Component {
     render() {
         let { storageList } = this.props.storageListReducer.getStorageList.data
         return <StorageListLayout
+            onBarcodeReceived={this.onBarcodeReceived}
+            onPressIcon={this.onPressIcon}
+            onPressTextInput={this.onPressTextInput}
             storages={storageList}
-            changeSearchVin={this.props.changeSearchVin}
+
         />
     }
 }

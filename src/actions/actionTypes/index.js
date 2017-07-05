@@ -9,7 +9,6 @@ import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
 import * as importCarCameraTypes from './ImportCarCameraTypes'
 import * as carInfoTypes from './CarInfoTypes'
-import * as mainRootTypes from './MainRootTypes' 
 import * as homeTypes from './HomeTypes'
 import * as selectStorageTypes from './SelectStorageTypes'
 import * as recordListTypes from './RecordListTypes'
@@ -38,7 +37,6 @@ export {
     imporCarTypes,
     selectStorageForCarListTypes,
     importCarCameraTypes,
-    mainRootTypes,
     searchVinTypes,
     recordListTypes,
     parkingViewTypes,

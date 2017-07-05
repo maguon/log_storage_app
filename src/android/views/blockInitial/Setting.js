@@ -6,14 +6,14 @@ import { View, Picker, Modal, StyleSheet, Text } from 'react-native'
 import { Provider, connect } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import ReduxThunk from 'redux-thunk'
-import reducers from '../../reducers/index'
-import localStorageKey from '../../util/LocalStorageKey'
+import reducers from '../../../reducers/index'
+import localStorageKey from '../../../util/LocalStorageKey'
 import { Actions, ActionConst } from 'react-native-router-flux'
-import localStorage from '../../util/LocalStorage'
+import localStorage from '../../../util/LocalStorage'
 import { Button, Container, Content, Header, Icon, Left, Body, Right, Title, List, ListItem, Thumbnail, Toast } from 'native-base'
-import SearchBar from '../components/Bar/SearchBar'
-import ConfirmModal from '../components/ConfirmModal'
-import * as app from '../../android_app.json'
+import SearchBar from '../../components/Bar/SearchBar'
+import ConfirmModal from '../../components/ConfirmModal'
+import * as app from '../../../android_app.json'
 
 
 class Setting extends Component {
@@ -22,10 +22,23 @@ class Setting extends Component {
         this.state = {
             confirmModalVisible: false
         }
+        this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
+        this.onPressIcon = this.onPressIcon.bind(this)
+        this.onPressTextInput = this.onPressTextInput.bind(this)
 
     }
     componentDidMount() {
 
+    }
+
+    onBarcodeReceived(param) {
+        Actions.searchVinAtSettingBlock({ vin: param })
+    }
+    onPressIcon() {
+        Actions.searchVinAtSettingBlock()
+    }
+    onPressTextInput() {
+        Actions.searchVinAtSettingBlock()
     }
 
     exitApp() {
@@ -47,7 +60,12 @@ class Setting extends Component {
         let viewStyle = { backgroundColor: '#00cade' }
         return (
             <Container style={{ flex: 1 }}>
-                <SearchBar viewStyle={viewStyle} routerPos={Actions.searchVinAtSetting}/>
+                <SearchBar
+                    viewStyle={viewStyle}
+                    onBarcodeReceived={this.onBarcodeReceived}
+                    onPressIcon={this.onPressIcon}
+                    onPressTextInput={this.onPressTextInput}
+                />
                 <View style={{ flex: 1 }}>
                     <List>
                         <ListItem onPress={() => { Actions.recordList() }}>

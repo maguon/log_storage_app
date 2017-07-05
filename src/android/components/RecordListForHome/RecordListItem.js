@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 import { View, Image, Text, StyleSheet, TouchableHighlight } from 'react-native'
-import { Actions } from 'react-native-router-flux'
 
 export default class RecordListItem extends Component {
     constructor(props) {
         super(props)
+        this._onPressItem = this._onPressItem.bind(this)
+    }
+
+    static defaultProps = {
+        onPressItem: () => { console.log('this.props.onPressItem') }
+    }
+
+    _onPressItem(param) {
+        this.props.onPressItem(param)
     }
 
     render() {
@@ -28,12 +36,10 @@ export default class RecordListItem extends Component {
             opImgUri.uri = 'icon_note_out'
             textStyle = styles.outText
         }
-        
+
         return (
             <TouchableHighlight key={_id} underlayColor='rgba(0,0,0,0.1)' onPress={() => {
-                //Actions.profile({key:'home'})
-               // console.log(this.props.routerPos)
-                this.props.routerPos({ carId: id })
+                this._onPressItem({ carId: id })
             }}>
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 2, marginRight: 5, justifyContent: 'center' }}>

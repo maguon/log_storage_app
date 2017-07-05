@@ -10,37 +10,37 @@ import SearchBar from './components/Bar/SearchBar'
 
 import Welcome from './views/Welcome'
 import Login from './views/Login'
-import Home from './views/Home'
+
+
+import Home from './views/blockInitial/Home'
+import CarList from './views/blockInitial/CarList'
+import StorageList from './views/blockInitial/StorageList'
+import Setting from './views/blockInitial/Setting'
+
+
 import CarInfo from './views/CarInfo'
-import CarList from './views/CarList'
-import StorageList from './views/StorageList'
-import Setting from './views/Setting'
-
-
 import Password from './views/Password'
-
-
 import SearchVin from './views/SearchVin'
 
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 import ErrorView from './views/ErrorView'
 
-import SelectCarMake from './views/SelectCarMake'
-import SelectStorage from './views/SelectStorage'
-import SelectRow from './views/SelectRow'
-import SelectColumn from './views/SelectColumn'
+import SelectCarMake from './views/form/select/SelectCarMake'
+import SelectStorage from './views/form/select/SelectStorage'
+import SelectRow from './views/form/select/SelectRow'
+import SelectColumn from './views/form/select/SelectColumn'
 import ImportCarCamera from './views/ImportCarCamera'
 import RecordList from './views/RecordList'
 import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
-import selectStorageForCarList from './views/SelectStorageForCarList'
+import selectStorageForCarList from './views/form/select/SelectStorageForCarList'
 import AddCar from './views/AddCar'
-import SelectEntrust from './views/SelectEntrust'
-import SelectReceive from './views/SelectReceive'
-import SelectBaseAddr from './views/SelectBaseAddr'
-import SelectCity from './views/SelectCity'
+import SelectEntrust from './views/form/select/SelectEntrust'
+import SelectReceive from './views/form/select/SelectReceive'
+import SelectBaseAddr from './views/form/select/SelectBaseAddr'
+import SelectCity from './views/form/select/SelectCity'
 import RichText from './views/RichText'
 
 const styles = StyleSheet.create({

@@ -3,7 +3,7 @@ import { ScrollView, View, Text, Image } from 'react-native'
 import Record from './RecordListHeader'
 
 
-const RecordList = ({ recordList, isHome = true,routerPos }) => {
+const RecordList = ({ recordList, isHome = true, onPressItem }) => {
     let records = recordList
         .reduce((acc, val) => {
             let obj = acc.find((item) => {
@@ -20,7 +20,7 @@ const RecordList = ({ recordList, isHome = true,routerPos }) => {
             return a.created_on < b.created_on
         })
         .map((item) => {
-            return <Record record={item} key={item.key} routerPos={routerPos}/>
+            return <Record record={item} key={item.key} onPressItem={onPressItem} />
         })
 
     let header = isHome ? (<View style={{ marginLeft: 10, marginRight: 10, marginTop: 10, paddingBottom: 10, flexDirection: 'row', borderBottomWidth: 1, borderColor: '#00bfd8' }}>

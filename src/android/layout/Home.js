@@ -11,18 +11,27 @@ import {
 import RecordList from '../components/RecordListForHome/RecordList'
 import StorageList from '../components/StorageListForHome/StorageList'
 import SearchBar from '../components/Bar/SearchBar'
-import {  Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux'
+
 
 const window = Dimensions.get('window')
 
-const Home = ({ storages, recordList, changeSearchVin }) => {
+const Home = ({ storages, recordList, onBarcodeReceived, onPressIcon, onPressTextInput, onPressItem }) => {
     return (
         <View style={{ flex: 1 }}>
-            <SearchBar  changeSearchVin={changeSearchVin} />
-            <ScrollView showsVerticalScrollIndicator={false}
+            <SearchBar
+                onBarcodeReceived={onBarcodeReceived}
+                onPressIcon={onPressIcon}
+                onPressTextInput={onPressTextInput}
+            />
+            <ScrollView
+                showsVerticalScrollIndicator={false}
                 overScrollMode='auto'>
                 <StorageList storages={storages} />
-                <RecordList recordList={recordList} routerPos={Actions.carInfoForHome} />
+                <RecordList
+                    recordList={recordList}
+                    onPressItem={onPressItem}
+                />
             </ScrollView>
         </View>
     )

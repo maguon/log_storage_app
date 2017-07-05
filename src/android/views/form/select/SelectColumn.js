@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import NavBar from '../components/Bar/NavBar'
+import NavBar from '../../../components/Bar/NavBar'
 import { Actions } from 'react-native-router-flux'
 import { List, ListItem } from 'native-base'
 

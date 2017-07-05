@@ -1,40 +1,43 @@
 import React, { Component } from 'react'
 import { View, Vibration, Modal, Text, TextInput, StatusBar } from 'react-native'
 import { Item, Header, Input, Button, Left, Right, Icon } from 'native-base'
-//import { Actions } from 'react-native-router-flux'
 import VinScanner from '../../components/VinScanner'
-import * as  RouterDirection from '../../../util/RouterDirection'
-
-
 
 export default class SearchBar extends Component {
     constructor(props) {
         super(props)
         this.state = {
             barcodeModalVisible: false,
-            barcode: ''
         }
         this._onPressIcon = this._onPressIcon.bind(this)
+        this._onPressTextInput = this._onPressTextInput.bind(this)
+        this._onBarcodeReceived = this._onBarcodeReceived.bind(this)
     }
 
-    barcodeReceived(e) {
+    static defaultProps = {
+        onBarcodeReceived: (param) => { console.log('this.props.onBarcodeReceived', param) },
+        onPressIcon: () => { console.log('this.props.onPressIcon') },
+        onPressTextInput: () => { console.log('this.props.onPressTextInput') }
+    }
+
+    _onBarcodeReceived(e) {
         if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate()
         if (e.data.length == 17)
             this.setState({
-                barcode: e.data,
                 barcodeModalVisible: false
             })
+        this.props.onBarcodeReceived(e.data)
     }
 
     _onPressIcon() {
-        console.log(this.props)
-        // this.props.changeSearchVin(this.state.barcode)
-        // Actions.searchCarList()
-       // RouterDirection.searchVin({ vin: '11111111111111111' })
+        this.props.onPressIcon()
+    }
+
+    _onPressTextInput() {
+        this.props.onPressTextInput()
     }
 
     render() {
-        let { routerPos } = this.props
         return (
             <Header androidStatusBarColor='#00cade' searchBar style={{ backgroundColor: '#00cade' }}>
                 <Left style={{ flex: 1 }}>
@@ -44,9 +47,9 @@ export default class SearchBar extends Component {
                 </Left>
                 <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }}>
                     <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
-                        <Input style={{ color: '#ffffff', fontSize: 14 }}
-                            value={this.state.barcode}
-                            onTouchStart={routerPos}
+                        <Input
+                            style={{ color: '#ffffff', fontSize: 14 }}
+                            onTouchStart={this._onPressTextInput}
                         />
                         <Icon name="md-search"
                             type="ionicons"
@@ -61,7 +64,7 @@ export default class SearchBar extends Component {
                     visible={this.state.barcodeModalVisible}
                     onRequestClose={() => { this.setState({ barcodeModalVisible: false }) }}
                 >
-                    <VinScanner barcodeReceived={this.barcodeReceived.bind(this)} />
+                    <VinScanner barcodeReceived={this._onBarcodeReceived} />
                 </Modal>
             </Header >
 

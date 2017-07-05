@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { View, ScrollView, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
-import NavBar from '../components/Bar/NavBar'
+import NavBar from '../../../components/Bar/NavBar'
 import { Actions } from 'react-native-router-flux'
-import * as SelectStorageAction from '../../actions/SelectStorageAction'
+import * as SelectStorageAction from '../../../../actions/SelectStorageAction'
 import { List, ListItem, Text, Right } from 'native-base'
 
 class SelectStorage extends Component {

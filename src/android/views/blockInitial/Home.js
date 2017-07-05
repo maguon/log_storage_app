@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import LayoutHome from '../layout/Home'
-import * as HomeAction from '../../actions/HomeAction'
-import Loading from '../components/Loading/Loading'
+import LayoutHome from '../../layout/Home'
+import * as HomeAction from '../../../actions/HomeAction'
+import Loading from '../../components/Loading/Loading'
+import { Actions } from 'react-native-router-flux'
 
 class Home extends Component {
     constructor(props) {
         super(props)
+
+        this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
+        this.onPressIcon = this.onPressIcon.bind(this)
+        this.onPressTextInput = this.onPressTextInput.bind(this)
+        this.onPressItem = this.onPressItem.bind(this)
     }
 
     componentDidMount() {
@@ -68,15 +74,29 @@ class Home extends Component {
         return true
     }
 
+    onBarcodeReceived(param) {
+        Actions.searchVinAtHomeBlock({ vin: param })
+    }
+    onPressIcon() {
+        Actions.searchVinAtHomeBlock()
+    }
+    onPressTextInput() {
+        Actions.searchVinAtHomeBlock()
+    }
+
+    onPressItem(param) {
+        Actions.carInfoAtHomeBlock(param)
+    }
+
     render() {
-
-        console.log(this.props)
-
         let { storageList } = this.props.homeReducer.getStoragesHome.data
         let { recordList } = this.props.homeReducer.getRecordsHome.data
         return (
             <LayoutHome
-                carInfoRouter={}
+                onBarcodeReceived={this.onBarcodeReceived}
+                onPressIcon={this.onPressIcon}
+                onPressTextInput={this.onPressTextInput}
+                onPressItem={this.onPressItem}
                 storages={storageList}
                 recordList={recordList}
             />

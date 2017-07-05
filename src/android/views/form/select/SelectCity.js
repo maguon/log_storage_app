@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, Button, ScrollView, } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import NavBar from '../components/Bar/NavBar'
-import * as SelectCityAction from '../../actions/SelectCityAction'
+import NavBar from '../../../components/Bar/NavBar'
+import * as SelectCityAction from '../../../../actions/SelectCityAction'
 import { List, ListItem } from 'native-base'
 
 
