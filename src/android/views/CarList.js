@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as CarListAction from '../../../actions/CarListAction'
+import * as CarListAction from '../../actions/CarListAction'
 import { Actions } from 'react-native-router-flux'
-import CarListLayout from '../../layout/CarList'
+import CarListLayout from '../layout/CarList'
 
 class CarList extends Component {
     constructor(props) {

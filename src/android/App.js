@@ -13,11 +13,11 @@ import Login from './views/Login'
 
 
 import Home from './views/blockInitial/Home'
-import CarList from './views/blockInitial/CarList'
+import Query from './views/blockInitial/Query'
 import StorageList from './views/blockInitial/StorageList'
 import Setting from './views/blockInitial/Setting'
 
-
+import CarList from './views/CarList'
 import CarInfo from './views/CarInfo'
 import Password from './views/Password'
 import SearchVin from './views/SearchVin'
@@ -104,7 +104,9 @@ export default class App extends Component {
                                 <Scene key="addCarAtHomeBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
-                                <Scene key="carList" initial={true} component={CarList} hideNavBar />
+
+                                <Scene key="query" initial={true} component={Query} hideNavBar />
+                                <Scene key="carList" component={CarList} hideNavBar />
                                 <Scene key="carInfoAtcarBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
@@ -161,7 +163,6 @@ export default class App extends Component {
                 <Scene key="RichText" component={RichText} hideNavBar />
                 <Scene key="SelectBaseAddr" component={SelectBaseAddr} hideNavBar />
                 <Scene key="addCar" component={AddCar} hideNavBar />*/
-
 
 
 
