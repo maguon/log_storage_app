@@ -33,6 +33,7 @@ export default class Query extends Component {
                     onPressIcon={this.onPressIcon}
                     onPressTextInput={this.onPressTextInput}
                 />
+                <Text>Query</Text>
             </View>
         )
     }

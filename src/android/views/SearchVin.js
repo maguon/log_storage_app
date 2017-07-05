@@ -4,6 +4,7 @@ import * as searchVinAction from '../../actions/SearchVinAction'
 import { Actions } from 'react-native-router-flux'
 import SearchCarListLayout from '../layout/SearchVin'
 import { View } from 'react-native'
+import * as RouterDirection from '../../util/RouterDirection'
 
 class SearchVin extends Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class SearchVin extends Component {
 
     componentWillReceiveProps(nextProps) {
         let { SearchVinReducer } = nextProps
-        /*getCarList 执行状态*/
+        /*getVinList 执行状态*/
         if (SearchVinReducer.getVinList.isExecStatus == 2) {
             if (SearchVinReducer.getVinList.isResultStatus == 0) {
                 this.props.resetGetVinListStatus()
@@ -39,6 +40,23 @@ class SearchVin extends Component {
                 this.props.resetGetVinListStatus()
             } else if (SearchVinReducer.getVinList.isResultStatus == 2) {
                 this.props.resetGetVinListStatus()
+            }
+        }
+        /************************************************************************************************/
+
+        /*getCarList 执行状态*/
+        if (SearchVinReducer.search.isExecStatus == 2) {
+            if (SearchVinReducer.search.isResultStatus == 0) {
+                console.log('SearchVinReducer.search.isResultStatus == 0')
+                console.log(nextProps)
+                RouterDirection.addCar(nextProps.parent)()
+                //this.props.resetGetVinListStatus()
+            } else if (SearchVinReducer.search.isResultStatus == 1) {
+                console.log('SearchVinReducer.search.isResultStatus == 1')
+                //this.props.resetGetVinListStatus()
+            } else if (SearchVinReducer.search.isResultStatus == 2) {
+                console.log('SearchVinReducer.search.isResultStatus == 2')
+                //this.props.resetGetVinListStatus()
             }
         }
         /************************************************************************************************/
@@ -79,7 +97,6 @@ class SearchVin extends Component {
             }
         }
         this.props.search(param)
-        console.log(this.props.SearchVinReducer)
     }
 
     onEndReached() {
@@ -93,7 +110,6 @@ class SearchVin extends Component {
     }
 
     render() {
-        console.log(this.props)
         let { vinList } = this.props.SearchVinReducer.getVinList.data
 
         return (
