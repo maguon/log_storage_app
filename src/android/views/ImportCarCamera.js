@@ -6,6 +6,7 @@ import CarCamera from '../components/CarCamera/CarCamera'
 import { Actions } from 'react-native-router-flux'
 import * as ImportCarCameraAction from '../../actions/ImportCarCameraAction'
 import { Button } from 'native-base'
+import * as RouterDirection from '../../util/RouterDirection'
 
 const window = Dimensions.get('window')
 
@@ -95,7 +96,7 @@ class ImportCarCamera extends Component {
                         }}>
                             <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
                         </View>
-                        <Button block onPress={() => { Actions.ImportCar() }} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
+                        <Button block onPress={RouterDirection.importCar(this.props.parent)} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
                             <Text style={{ color: '#ffffff' }}>下一步</Text>
                         </Button>
                     </ScrollView>

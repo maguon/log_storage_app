@@ -9,6 +9,7 @@ import { Button } from 'native-base'
 
 import * as ImporCarAction from '../../actions/ImporCarAction'
 import { Actions } from 'react-native-router-flux'
+import * as RouterDirection from '../../util/RouterDirection'
 
 class ImportCar extends Component {
     constructor(props) {
@@ -28,7 +29,7 @@ class ImportCar extends Component {
             } else if (ImporCarReducer.importCar.isResultStatus == 1) {
                 console.log('ImporCarReducer.importCar执行错误')
             } else if (ImporCarReducer.importCar.isResultStatus == 2) {
-                console.log('ImporCarReducer.importCar执行失败',ImporCarReducer.importCar.failedMsg)
+                console.log('ImporCarReducer.importCar执行失败', ImporCarReducer.importCar.failedMsg)
             }
         }
         /************************************************************************************************/
@@ -48,9 +49,10 @@ class ImportCar extends Component {
     }
 
     render() {
+        
         return (
             <View style={{ flex: 1 }}>
-                <TopBar title='车辆入库' />
+                {/*<TopBar title='车辆入库' />*/}
                 <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 20 }}>
                     <Button
                         full
@@ -61,8 +63,14 @@ class ImportCar extends Component {
                     <Button
                         full
                         onPress={() => { }}
+                        style={{ marginBottom: 20, backgroundColor: '#00cade' }}>
+                        <Text style={{ color: '#fff' }}>继续增加车辆</Text>
+                    </Button>
+                    <Button
+                        full
+                        onPress={() => { }}
                         style={{ backgroundColor: '#00cade' }}>
-                        <Text style={{ color: '#fff' }}>返回车辆列表</Text>
+                        <Text style={{ color: '#fff' }}>返回</Text>
                     </Button>
                 </View>
             </View>

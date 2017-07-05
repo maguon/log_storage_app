@@ -63,3 +63,11 @@ export const importCarCamera = (parent) => {
     if (parent === 'settingBlock') return Actions.importCarCameraAtSettingBlock
 }
 
+
+export const importCar = (parent) => {
+    if (parent === 'homeBlock') return Actions.importCarAtHomeBlock
+    if (parent === 'carBlock') return Actions.importCarAtCarBlock
+    if (parent === 'storageBlock') return Actions.importCarAtStorageBlock
+    if (parent === 'settingBlock') return Actions.importCarAtSettingBlock
+}
+
