@@ -102,6 +102,12 @@ export default class App extends Component {
                                 <Scene key="carInfoAtHomeBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+                               
+                                <Scene key="selectEntrustAtHomeBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar}/>
+                                <Scene key="selectReceiveAtHomeBlock" component={SelectReceive} title='新增车辆' hideNavBar={false} hideTabBar />
+                                <Scene key="selectCityAtHomeBlock" component={SelectCity} title='新增车辆' hideNavBar={false} hideTabBar />
+                                <Scene key="richTextAtHomeBlock" component={RichText} title='新增车辆' hideNavBar={false} hideTabBar />
+                                <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='新增车辆' hideNavBar={false} hideTabBar />
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
 

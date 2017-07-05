@@ -18,14 +18,8 @@ import RichTextBox from '../components/FormComponents/RichTextBox'
 import { Button, Input, Icon, Spinner } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import * as AddCarAction from '../../actions/AddCarAction'
+import * as RouterDirection from '../../util/RouterDirection'
 
-
-// verifications={[]}
-// {
-// type: 'isLength',
-// arguments: [8, 23],
-// message: '长度必须在20-23之间'
-// }
 
 class AddCar extends Component {
     constructor(props) {
@@ -90,9 +84,11 @@ class AddCar extends Component {
         this.props.addCar(param)
     }
 
+
     render() {
         let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, remark } = this.props.AddCarReducer.addCar.data
         console.log(this.props.AddCarReducer.addCar.data)
+        console.log(this.props)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -122,7 +118,7 @@ class AddCar extends Component {
                             <Select
                                 isRequire={true}
                                 title='委托方：'
-                                showList={Actions.SelectEntrust}
+                                showList={RouterDirection.selectEntrust(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ entrustId: param.id })}
                                 onRequire={(param) => this.setState({ entrustRequire: param })}
                                 defaultValue='请选择'
@@ -249,3 +245,13 @@ const styles = {
         backgroundColor: '#888888'
     }
 }
+
+
+
+
+// verifications={[]}
+// {
+// type: 'isLength',
+// arguments: [8, 23],
+// message: '长度必须在20-23之间'
+// }
