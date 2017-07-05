@@ -53,7 +53,6 @@ class SelectReceive extends Component {
         })
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择经销商'} />
                 <ScrollView>
                     <List>
                         {receives}

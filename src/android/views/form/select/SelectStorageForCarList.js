@@ -60,7 +60,6 @@ class SelectStorageForCarList extends Component {
         })
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择仓库'} />
                 <ScrollView>
                     <List>
                         {storages}

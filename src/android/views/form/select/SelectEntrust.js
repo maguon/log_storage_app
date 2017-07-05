@@ -55,7 +55,6 @@ class SelectEntrust extends Component {
         })
         return (
             <View style={{ flex: 1 }}>
-                {/*<NavBar title={'选择委托方'} />*/}
                 <ScrollView>
                     <List>
                         {entrusts}

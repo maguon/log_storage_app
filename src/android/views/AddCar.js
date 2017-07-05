@@ -55,7 +55,7 @@ class AddCar extends Component {
             console.log('AddCarReducer.addCar', '执行完毕')
             if (AddCarReducer.addCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('保存成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
-                Actions.ImportCarCamera({ carId: AddCarReducer.addCar.data.id, vin: AddCarReducer.addCar.data.vin })
+                RouterDirection.importCarCamera(this.props.parent)({ carId: AddCarReducer.addCar.data.id, vin: AddCarReducer.addCar.data.vin })
                 console.log('AddCarReducer.addCar执行成功')
 
             } else if (AddCarReducer.addCar.isResultStatus == 1) {
@@ -110,7 +110,7 @@ class AddCar extends Component {
                             <Select
                                 isRequire={true}
                                 title='品牌：'
-                                showList={Actions.SelectCarMake}
+                                showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ makeId: param.id, makeName: param.value })}
                                 onRequire={(param) => this.setState({ carMakeRequire: param })}
                                 defaultValue='请选择'
@@ -126,7 +126,7 @@ class AddCar extends Component {
                             <Select
                                 isRequire={false}
                                 title='经销商：'
-                                showList={Actions.SelectReceive}
+                                showList={RouterDirection.selectReceive(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ receiveId: param.id })}
                                 onRequire={(param) => this.setState({ receiveRequire: param })}
                                 defaultValue='请选择'
@@ -134,15 +134,15 @@ class AddCar extends Component {
                             <Select
                                 isRequire={false}
                                 title='起始城市：'
-                                showList={Actions.SelectCity}
+                                showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ routeStartId: param.id, routeStart: param.value })}
                                 onRequire={(param) => this.setState({ routeStartRequire: param })}
                                 defaultValue='请选择'
                             />
                             <Select
                                 isRequire={false}
-                                title='起始地址：'
-                                showList={Actions.SelectBaseAddr}
+                                title='发货地址：'
+                                showList={RouterDirection.selectBaseAddr(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ baseAddrId: param.id })}
                                 onRequire={(param) => this.setState({ baseAddrRequire: param })}
                                 defaultValue='请选择'
@@ -150,7 +150,7 @@ class AddCar extends Component {
                             <Select
                                 isRequire={false}
                                 title='目的城市：'
-                                showList={Actions.SelectCity}
+                                showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ routeEndId: param.id, routeEnd: param.value })}
                                 onRequire={(param) => this.setState({ routeEndRequire: param })}
                                 defaultValue='请选择'
@@ -172,7 +172,7 @@ class AddCar extends Component {
                                 defaultValue={remark ? remark : ''}
                                 onValueChange={(param) => this.props.changeAddCarField({ remark: param })}
                                 onRequire={(flag) => { this.setState({ remarkRequire: flag }) }}
-                                showRichText={Actions.RichText}
+                                showRichText={RouterDirection.richText(this.props.parent)}
                             />
                         </View>
                         <View style={{ marginVertical: 10, paddingHorizontal: 20, flexDirection: 'row' }}>

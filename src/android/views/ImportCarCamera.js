@@ -87,7 +87,7 @@ class ImportCarCamera extends Component {
         let { imageList } = this.props.ImportCarCameraReducer.importCarImage.data
         return (
             <View style={{ flex: 1 }}>
-                <TopBar title='上传图片' />
+                {/*<TopBar title='上传图片' />*/}
                 <View style={{ flex: 1 }}>
                     <ScrollView>
                         <View style={{

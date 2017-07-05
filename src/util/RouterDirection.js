@@ -20,24 +20,35 @@ export const selectEntrust = (parent) => {
     if (parent === 'storageBlock') return Actions.selectEntrustAtStorageBlock
     if (parent === 'settingBlock') return Actions.selectEntrustAtSettingBlock
 }
+
+export const selectCarMake = (parent) => {
+    if (parent === 'homeBlock') return Actions.selectCarMakeAtHomeBlock
+    if (parent === 'carBlock') return Actions.selectCarMakeAtCarBlock
+    if (parent === 'storageBlock') return Actions.selectCarMakeAtStorageBlock
+    if (parent === 'settingBlock') return Actions.selectCarMakeAtSettingBlock
+}
+
 export const selectReceive = (parent) => {
     if (parent === 'homeBlock') return Actions.selectReceiveAtHomeBlock
     if (parent === 'carBlock') return Actions.selectReceiveAtCarBlock
     if (parent === 'storageBlock') return Actions.selectReceiveAtStorageBlock
     if (parent === 'settingBlock') return Actions.selectReceiveAtSettingBlock
 }
+
 export const selectCity = (parent) => {
     if (parent === 'homeBlock') return Actions.selectCityAtHomeBlock
     if (parent === 'carBlock') return Actions.selectCityAtCarBlock
     if (parent === 'storageBlock') return Actions.selectCityAtStorageBlock
     if (parent === 'settingBlock') return Actions.selectCityAtSettingBlock
 }
+
 export const richText = (parent) => {
     if (parent === 'homeBlock') return Actions.richTextAtHomeBlock
     if (parent === 'carBlock') return Actions.richTextAtCarBlock
     if (parent === 'storageBlock') return Actions.richTextAtStorageBlock
     if (parent === 'settingBlock') return Actions.richTextAtSettingBlock
 }
+
 export const selectBaseAddr = (parent) => {
     if (parent === 'homeBlock') return Actions.selectBaseAddrAtHomeBlock
     if (parent === 'carBlock') return Actions.selectBaseAddrAtCarBlock
@@ -45,9 +56,10 @@ export const selectBaseAddr = (parent) => {
     if (parent === 'settingBlock') return Actions.selectBaseAddrAtSettingBlock
 }
 
+export const importCarCamera = (parent) => {
+    if (parent === 'homeBlock') return Actions.importCarCameraAtHomeBlock
+    if (parent === 'carBlock') return Actions.importCarCameraAtCarBlock
+    if (parent === 'storageBlock') return Actions.importCarCameraAtStorageBlock
+    if (parent === 'settingBlock') return Actions.importCarCameraAtSettingBlock
+}
 
-                                //     <Scene key="SelectEntrustAtHomeBlock" component={SelectEntrust} title='新增车辆' hideNavBar={false} hideTabBar/>
-                                // <Scene key="SelectReceiveAtHomeBlock" component={SelectReceive} title='新增车辆' hideNavBar={false} hideTabBar />
-                                // <Scene key="SelectCityAtHomeBlock" component={SelectCity} title='新增车辆' hideNavBar={false} hideTabBar />
-                                // <Scene key="RichTextAtHomeBlock" component={RichText} title='新增车辆' hideNavBar={false} hideTabBar />
-                                // <Scene key="SelectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='新增车辆' hideNavBar={false} hideTabBar />

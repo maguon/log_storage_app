@@ -73,7 +73,6 @@ class SelectRow extends Component {
 
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择排'} />
                 <ScrollView>
                     <List>
                         {storageParkings}

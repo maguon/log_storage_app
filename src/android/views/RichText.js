@@ -97,7 +97,6 @@ export default class RichText extends Component {
 
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
-                <NavBar title={'填写备注'} />
                 <View style={{ flex: 1, marginHorizontal: 10, marginVertical: 10 }}>
                     <View style={{ flex: 1 }}>
                         <TextInput

@@ -54,8 +54,7 @@ class SelectCarMake extends Component {
             </ListItem>)
         })
         return (
-            <View style={{ flex: 1 }}>
-                <NavBar title={'选择品牌'} />
+            <View style={{ flex: 1 }}>    
                 <ScrollView>
                     <List>
                         {carMakes}

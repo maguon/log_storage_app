@@ -55,7 +55,6 @@ class SelectCity extends Component {
         })
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择城市'} />
                 <ScrollView>
                     <List>
                         {citys}

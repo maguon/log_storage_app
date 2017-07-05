@@ -102,26 +102,43 @@ export default class App extends Component {
                                 <Scene key="carInfoAtHomeBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
-                               
-                                <Scene key="selectEntrustAtHomeBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar}/>
-                                <Scene key="selectReceiveAtHomeBlock" component={SelectReceive} title='新增车辆' hideNavBar={false} hideTabBar />
-                                <Scene key="selectCityAtHomeBlock" component={SelectCity} title='新增车辆' hideNavBar={false} hideTabBar />
-                                <Scene key="richTextAtHomeBlock" component={RichText} title='新增车辆' hideNavBar={false} hideTabBar />
-                                <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='新增车辆' hideNavBar={false} hideTabBar />
+
+                                <Scene key="selectCarMakeAtHomeBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectEntrustAtHomeBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectReceiveAtHomeBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectCityAtHomeBlock" component={SelectCity} title='选择城市' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar}/>
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
-
                                 <Scene key="query" initial={true} component={Query} hideNavBar />
                                 <Scene key="carList" component={CarList} hideNavBar />
                                 <Scene key="carInfoAtcarBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+
+                                <Scene key="selectCarMakeAtCarBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectEntrustAtCarBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectReceiveAtCarBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectCityAtCarBlock" component={SelectCity} title='选择城市' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="richTextAtCarBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectBaseAddrAtCarBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtCarBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar}/>
                             </Scene>
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
                                 <Scene key="storageList" component={StorageList} initial={true} hideNavBar />
                                 <Scene key="parkingView" navBar={NavBar} title="车位分布图" component={ParkingView} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+
+                                <Scene key="selectCarMakeAtStorageBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectEntrustAtStorageBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectReceiveAtStorageBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectCityAtStorageBlock" component={SelectCity} title='选择城市' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="richTextAtStorageBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectBaseAddrAtStorageBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtStorageBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar}/>
                             </Scene>
                             <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
                                 <Scene key="setting" component={Setting} hideNavBar={true} navBar={NavBar} />
@@ -130,6 +147,14 @@ export default class App extends Component {
                                 <Scene key="password" component={Password} title='修改密码' navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+
+                                <Scene key="selectCarMakeAtSettingBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectEntrustAtSettingBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectReceiveAtSettingBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectCityAtSettingBlock" component={SelectCity} title='选择城市' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="richTextAtSettingBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="selectBaseAddrAtSettingBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtSettingBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar}/>
                             </Scene>
                         </Scene>
 

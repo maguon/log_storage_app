@@ -55,7 +55,6 @@ class SelectBaseAddr extends Component {
         })
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择起始地址'} />
                 <ScrollView>
                     <List>
                         {baseAddrs}

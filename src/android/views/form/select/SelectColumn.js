@@ -32,7 +32,6 @@ export default class SelectColumn extends Component {
         })
         return (
             <View style={{ flex: 1 }}>
-                <NavBar title={'选择道位'} />
                 <ScrollView>
                     <List>
                         {columns}
