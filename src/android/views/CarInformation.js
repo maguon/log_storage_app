@@ -21,6 +21,9 @@ class CarInformation extends Component {
         this.onPressExport = this.onPressExport.bind(this)
         this.onPressExportOk = this.onPressExportOk.bind(this)
         this.onPressExportCancel = this.onPressExportCancel.bind(this)
+        this.state = {
+            car: {}
+        }
     }
 
     componentWillMount() {
@@ -263,6 +266,7 @@ class CarInformation extends Component {
 
     onSelect(param) {
         console.log(param)
+
     }
 
     onPressExportOk() {
@@ -492,63 +496,33 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCarInfo: (param) => {
-        dispatch(CarInfoAction.getCarInformation(param))
-    },
     exportCar: (param) => {
         dispatch(CarInfoAction.exportCar(param))
-    },
-    moveCar: (param) => {
-        dispatch(CarInfoAction.moveCar(param))
-    },
-    appendImage: (param) => {
-        dispatch(CarInfoAction.appendImage(param))
-    },
-    removeCar: (carId) => {
-        dispatch(CarListAction.removeCar(carId))
     },
     resetExportCar: () => {
         dispatch(CarInfoAction.resetExportCar())
     },
-    resetAppendCarImage: () => {
-        dispatch(CarInfoAction.resetAppendCarImage())
-    },
-    resetGetCarInfo: () => {
-        dispatch(CarInfoAction.resetGetCarInfo())
+    moveCar: (param) => {
+        dispatch(CarInfoAction.moveCar(param))
     },
     resetMoveCar: () => {
         dispatch(CarInfoAction.resetMoveCar())
     },
-    changeViewType: (param) => {
-        dispatch(CarInfoAction.changeViewType(param))
+    appendImage: (param) => {
+        dispatch(CarInfoAction.appendImage(param))
     },
-    updateCarInfo: (param) => {
-        dispatch(CarInfoAction.updateCarInfo(param))
-    },
-    updateCarInfoPlanOutTime: (param) => {
-        dispatch(CarInfoAction.updateCarInfoPlanOutTime(param))
-    },
-    changeParkingForImportAgain: (param) => {
-        dispatch(CarInfoAction.changeImportAgainParking(param))
-    },
-    changePlanOutTimeForImportAgain: (param) => {
-        dispatch(CarInfoAction.changeImportAgainPlanOutTime(param))
-    },
-    importAgain: (param) => {
-        dispatch(CarInfoAction.importAgain(param))
-    },
-    resetImportAgain: () => {
-        dispatch(CarInfoAction.resetImportAgain())
-    },
-    changeEditCarInfoField: (param) => {
-        dispatch(CarInfoAction.changeEditCarInfoField(param))
+    resetAppendCarImage: () => {
+        dispatch(CarInfoAction.resetAppendCarImage())
     },
     delImage: (param) => {
         dispatch(CarInfoAction.delImage(param))
     },
     resetDelImage: () => {
         dispatch(CarInfoAction.resetDelImage())
-    }
+    },
+    updateCarInfo: (param) => {
+        dispatch(CarInfoAction.updateCarInfo(param))
+    },
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarInformation)
