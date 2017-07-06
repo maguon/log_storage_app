@@ -15,8 +15,8 @@ const styles = StyleSheet.create({
     containerSytle: {
         borderBottomWidth: 0.5,
         paddingHorizontal: 10,
-        borderColor: '#dddddd',
         paddingVertical: 10,
+        borderColor: '#dddddd',       
         justifyContent: 'space-between',
         alignItems: 'center'
     },
