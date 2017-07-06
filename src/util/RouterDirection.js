@@ -63,7 +63,6 @@ export const importCarCamera = (parent) => {
     if (parent === 'settingBlock') return Actions.importCarCameraAtSettingBlock
 }
 
-
 export const importCar = (parent) => {
     if (parent === 'homeBlock') return Actions.importCarAtHomeBlock
     if (parent === 'carBlock') return Actions.importCarAtCarBlock
@@ -77,4 +76,27 @@ export const carInformation = (parent) => {
     if (parent === 'storageBlock') return Actions.carInformationAtStorageBlock
     if (parent === 'settingBlock') return Actions.carInformationAtSettingBlock
 }
+
+export const selectStorage = (parent) => {
+    if (parent === 'homeBlock') return Actions.selectStorageAtHomeBlock
+    if (parent === 'carBlock') return Actions.selectStorageAtCarBlock
+    if (parent === 'storageBlock') return Actions.selectStorageAtStorageBlock
+    if (parent === 'settingBlock') return Actions.selectStorageAtSettingBlock
+}
+
+export const selectRow = (parent) => {
+    if (parent === 'homeBlock') return Actions.selectRowAtHomeBlock
+    if (parent === 'carBlock') return Actions.selectRowAtCarBlock
+    if (parent === 'storageBlock') return Actions.selectRowAtStorageBlock
+    if (parent === 'settingBlock') return Actions.selectRowAtSettingBlock
+}
+
+export const selectColumn = (parent) => {
+    if (parent === 'homeBlock') return Actions.selectColumnAtHomeBlock
+    if (parent === 'carBlock') return Actions.selectColumnAtCarBlock
+    if (parent === 'storageBlock') return Actions.selectColumnAtStorageBlock
+    if (parent === 'settingBlock') return Actions.selectColumnAtSettingBlock
+}
+
+
 

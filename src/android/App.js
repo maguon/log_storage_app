@@ -101,10 +101,14 @@ export default class App extends Component {
                         <Scene key="main" initial={true} tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
                             <Scene key="homeBlock" initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
                                 <Scene key="home" component={Home} hideNavBar />
-                                <Scene key="carInformationAtHomeBlock"   initial={true} title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
+                                <Scene key="carInformationAtHomeBlock" initial={true} title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="carInfoAtHomeBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+
+                                <Scene key="selectStorageAtHomeBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
+                                <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
+                                <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
 
                                 <Scene key="selectCarMakeAtHomeBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtHomeBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -119,10 +123,13 @@ export default class App extends Component {
                                 <Scene key="query" initial={true} component={Query} hideNavBar />
                                 <Scene key="carList" component={CarList} hideNavBar />
                                 <Scene key="carInformationAtCarBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                               
                                 <Scene key="carInfoAtcarBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+
+                                <Scene key="selectStorageAtCarBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
+                                <Scene key="selectRowAtCarBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
+                                <Scene key="selectColumnAtCarBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
 
                                 <Scene key="selectCarMakeAtCarBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtCarBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -140,6 +147,10 @@ export default class App extends Component {
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="carInformationAtStorageBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
 
+                                <Scene key="selectStorageAtStorageBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
+                                <Scene key="selectRowAtStorageBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
+                                <Scene key="selectColumnAtStorageBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
+
                                 <Scene key="selectCarMakeAtStorageBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtStorageBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectReceiveAtStorageBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -152,11 +163,15 @@ export default class App extends Component {
                             <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
                                 <Scene key="setting" component={Setting} hideNavBar={true} navBar={NavBar} />
                                 <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
-                                <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />                                
+                                <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="carInfoAtSettingBlock" component={CarInfo} title="车辆详细信息" navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="password" component={Password} title='修改密码' navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+
+                                <Scene key="selectStorageAtSettingBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
+                                <Scene key="selectRowAtSettingBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
+                                <Scene key="selectColumnAtSettingBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
 
                                 <Scene key="selectCarMakeAtSettingBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtSettingBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />

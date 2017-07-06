@@ -27,7 +27,12 @@ class CarInformation extends Component {
     }
 
     componentWillMount() {
-        console.log(this.props.car)
+        if (typeof (this.props.car) == "undefined") {
+            this.props.carInfoInit(this.props.car)
+        }
+        else {
+            this.props.getCarInfo({ vin: this.props.vin })
+        }
     }
 
 
@@ -264,15 +269,38 @@ class CarInformation extends Component {
         console.log(param)
     }
 
-    onSelect(param) {
-        console.log(param)
 
+
+    //     {
+    //   "vin": "string",
+    //   "makeId": 0,
+    //   "makeName": "string",
+    //   "modelId": 0,
+    //   "modelName": "string",
+    //   "routeStartId": 0,
+    //   "routeStart": "string",
+    //   "baseAddrId": 0,
+    //   "routeEndId": 0,
+    //   "routeEnd": "string",
+    //   "receiveId": 0,
+    //   "entrustId": 0,
+    //   "orderDate": "string",
+    //   "colour": "string",
+    //   "engineNum": "string",
+    //   "remark": "string"
+    // }
+
+    onSelect(param) {
+        this.props.updateCarInfo({
+            ...CarInfoReducer.car,
+            ...param
+        })
+        console.log(param)
     }
 
     onPressExportOk() {
 
     }
-
 
     onPressExportCancel() {
 
@@ -391,8 +419,6 @@ class CarInformation extends Component {
         )
     }
 
-
-
     renderNeverImport() {
         let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.car
         return (
@@ -470,7 +496,6 @@ class CarInformation extends Component {
                     </View>
                 </ScrollView>
             </View>
-
         )
     }
 
@@ -485,8 +510,6 @@ class CarInformation extends Component {
         )
     }
 }
-
-
 
 const mapStateToProps = (state) => {
     return {
@@ -523,6 +546,12 @@ const mapDispatchToProps = (dispatch) => ({
     updateCarInfo: (param) => {
         dispatch(CarInfoAction.updateCarInfo(param))
     },
+    carInfoInit: (param) => {
+        console.log(param)
+    },
+    getCarInfo: (param) => {
+        console.log(param)
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarInformation)
