@@ -87,8 +87,6 @@ class AddCar extends Component {
 
     render() {
         let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, remark } = this.props.AddCarReducer.addCar.data
-        console.log(this.props.AddCarReducer.addCar.data)
-        console.log(this.props)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>

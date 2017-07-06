@@ -86,7 +86,8 @@ export default class Select extends Component {
         labelStyle: styles.labelStyle,
         textStyle: styles.textStyle,
         iconSytle: baseStyles.iconSytle,
-        messageSytle: styles.messageSytle
+        messageSytle: styles.messageSytle,
+        onRequire: (param) => { }
     }
 
     renderValidateMessage() {
@@ -116,19 +117,16 @@ export default class Select extends Component {
             <TouchableHighlight
                 underlayColor='rgba(0,0,0,0.1)'
                 onPress={this.showList}>
-                
-                    <View style={this.props.containerSytle}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
-                            <Text style={this.props.textStyle}>{this.state.value}</Text>
-                            <Icon
-                                name='ios-arrow-forward'
-                                style={this.props.iconSytle} />
-                        </View>
-                        {this.renderValidateMessage()}
+                <View style={this.props.containerSytle}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
+                        <Text style={this.props.textStyle}>{this.state.value}</Text>
+                        <Icon
+                            name='ios-arrow-forward'
+                            style={this.props.iconSytle} />
                     </View>
-              
-
+                    {this.renderValidateMessage()}
+                </View>
             </TouchableHighlight>
         )
     }

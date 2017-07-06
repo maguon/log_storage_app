@@ -53,6 +53,9 @@ class SearchVin extends Component {
                 if (typeof (searchResult.car) == "undefined") {
                     RouterDirection.addCar(nextProps.parent)({ vin: this.state.vin })
                 }
+                else {
+                    RouterDirection.carInformation(nextProps.parent)(SearchVinReducer.search.car)
+                }
                 this.props.resetSearch()
             } else if (SearchVinReducer.search.isResultStatus == 1) {
                 console.log('SearchVinReducer.search.isResultStatus == 1')

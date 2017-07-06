@@ -71,3 +71,10 @@ export const importCar = (parent) => {
     if (parent === 'settingBlock') return Actions.importCarAtSettingBlock
 }
 
+export const carInformation = (parent) => {
+    if (parent === 'homeBlock') return Actions.carInformationAtHomeBlock
+    if (parent === 'carBlock') return Actions.carInformationAtCarBlock
+    if (parent === 'storageBlock') return Actions.carInformationAtStorageBlock
+    if (parent === 'settingBlock') return Actions.carInformationAtSettingBlock
+}
+
