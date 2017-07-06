@@ -54,7 +54,7 @@ class SearchVin extends Component {
                     RouterDirection.addCar(nextProps.parent)({ vin: this.state.vin })
                 }
                 else {
-                    RouterDirection.carInformation(nextProps.parent)(SearchVinReducer.search.car)
+                    RouterDirection.carInformation(nextProps.parent)({ car: SearchVinReducer.search.car })
                 }
                 this.props.resetSearch()
             } else if (SearchVinReducer.search.isResultStatus == 1) {
