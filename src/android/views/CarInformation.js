@@ -580,7 +580,14 @@ class CarInformation extends Component {
                             images={[]}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
-                        <Button block onPress={RouterDirection.selectStorage(this.props.parent)} style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                        <Button
+                            block
+                            onPress={() => RouterDirection.selectStorage(this.props.parent)({
+                                popName: this.props.name,
+                                routerList: [RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
+                                onSelect: this.onPressImport
+                            })}
+                            style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>
                     </View>

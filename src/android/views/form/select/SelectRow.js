@@ -9,8 +9,11 @@ import { List, ListItem, Text } from 'native-base'
 class SelectRow extends Component {
     constructor(props) {
         super(props)
+
+        this._onPressItem = this._onPressItem.bind(this)
     }
-    componentDidMount() {
+
+    componentWillMount() {
         this.props.getStorageParkingList({
             optionalParam: {
                 storageId: this.props.storageId
@@ -37,6 +40,25 @@ class SelectRow extends Component {
         return true
     }
 
+    _onPressItem(param) {
+        let { popName, routerList, onSelect, storageId, storageName } = this.props
+        let nextPage = routerList.shift()
+        if (nextPage) {
+            nextPage({
+                ...param,
+                storageId,
+                storageName,
+                popName,
+                onSelect,
+                routerList
+            })
+        }
+        else {
+            onSelect({...param,storageId,storageName})
+            Actions.popTo(popName)
+        }
+    }
+
     render() {
         let { sorageParkingList } = this.props.selectRowReducer.getStorageParkingList.data
         let storageParkings = sorageParkingList.reduce((acc, val) => {
@@ -55,17 +77,9 @@ class SelectRow extends Component {
             return a.row - b.row
         })
 
-        storageParkings = storageParkings.map(item => {
+        storageParkings = storageParkings.map((item,i) => {
             return (
-                <ListItem key={item.row} button onPress={() =>
-                    Actions.SelectColumn({
-                        columns: item.columns,
-                        row: item.row,
-                        storageId: this.props.storageId,
-                        storageName: this.props.storageName,
-                        _popNum: this.props._popNum,
-                        chageParkingId: this.props.chageParkingId
-                    })}>
+                <ListItem key={i} button onPress={(item) => this._onPressItem({ columns: item.columns, row: item.row })}>
                     <Text>{item.row.toString()}</Text>
                 </ListItem>
             )

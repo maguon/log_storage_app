@@ -9,9 +9,11 @@ import { List, ListItem, Text, Right } from 'native-base'
 class SelectStorage extends Component {
     constructor(props) {
         super(props)
+
+        this._onPressItem = this._onPressItem.bind(this)
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.getSelectStorageList({
             optionalParam: {
                 storageStatus: 1
@@ -38,19 +40,29 @@ class SelectStorage extends Component {
         return true
     }
 
+    _onPressItem(param) {
+        let { popName, routerList, onSelect } = this.props
+        let nextPage = routerList.shift()
+        if (nextPage) {
+            nextPage({
+                ...param,
+                popName,
+                onSelect,
+                routerList
+            })
+        }
+        else {
+            onSelect(param)
+            Actions.popTo(popName)
+        }
+    }
+
     render() {
+        console.log(this.props)
         let { selectStorageList } = this.props.selectStorageReducer.getSelectStorageList.data
-        let i = 0
-        let storages = selectStorageList.map(item => {
-            i++
+        let storages = selectStorageList.map((item, i) => {
             return (
-                <ListItem key={i} button onPress={() =>
-                    Actions.SelectRow({
-                        storageId: item.id,
-                        storageName: item.storage_name,
-                        _popNum: this.props._popNum,
-                        chageParkingId: this.props.chageParkingId
-                    })}>
+                <ListItem key={i} button onPress={(item) => this._onPressItem({ storageId: item.id, storageName: item.storage_name })}>
                     <Text key={i} >{item.storage_name}</Text>
                 </ListItem>
             )

@@ -195,10 +195,8 @@ export default class App extends Component {
 
 
 
-                   /*<Scene key="welcome" initial={true} component={Welcome} hideNavBar />
-                <Scene key="login" component={Login} hideNavBar />
-                <Scene key="main" component={MainRoot} hideNavBar />
-                <Scene key="password" component={Password} hideNavBar />
+                   /*
+
                 <Scene key="carInfo" component={CarInfo} hideNavBar />
                 <Scene key="ImportCar" component={ImportCar} hideNavBar />
                 <Scene key="VinScanner" component={VinScanner} hideNavBar />
@@ -214,12 +212,8 @@ export default class App extends Component {
                 <Scene key="ImagePageForCarInfo" component={ImagePageForCarInfo} hideNavBar />
                 <Scene key="ImagePageForImportCar" component={ImagePageForImportCar} hideNavBar />
                 <Scene key="selectStorageForCarList" component={selectStorageForCarList} hideNavBar />
-                <Scene key="SelectEntrust" component={SelectEntrust} hideNavBar />
-                <Scene key="SelectReceive" component={SelectReceive} hideNavBar />
-                <Scene key="SelectCity" component={SelectCity} hideNavBar />
                 <Scene key="RichText" component={RichText} hideNavBar />
-                <Scene key="SelectBaseAddr" component={SelectBaseAddr} hideNavBar />
-                <Scene key="addCar" component={AddCar} hideNavBar />*/
+                */
 
 
 
