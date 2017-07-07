@@ -28,36 +28,53 @@ class CarInformation extends Component {
 
     componentWillMount() {
         if (typeof (this.props.car) == "undefined") {
-            this.props.carInfoInit(this.props.car)
+            this.props.getCarInformation({
+                requiredParam: {
+                    userId: this.props.user.userId,
+                    carId: this.props.carId
+                },
+                optionalParam: {
+                    vin: this.props.vin
+                }
+            })
         }
         else {
-            this.props.getCarInfo({ vin: this.props.vin })
+
+            this.props.carInfoInit({
+                requiredParam: {
+                    userId: this.props.user.userId,
+                    carId: this.props.car.id
+                },
+                car: this.props.car
+            })
         }
     }
 
 
     componentWillReceiveProps(nextProps) {
         let { CarInfoReducer } = nextProps
-        let { removeCar, resetExportCar, resetMoveCar, resetAppendCarImage, resetGetCarInfo, removeSearchCar } = nextProps
-        // let { carId } = this.props
+
 
         /*getCarInfo 执行状态*/
 
-        // if (CarInfoReducer.getCarInfo.isExecStatus == 1) {
-        //     console.log('CarInfoReducer.getCarInfo', '开始执行')
-        // } else if (CarInfoReducer.getCarInfo.isExecStatus == 2) {
-        //     console.log('CarInfoReducer.getCarInfo', '执行完毕')
-        //     if (CarInfoReducer.getCarInfo.isResultStatus == 0) {
-        //         console.log('CarInfoReducer.getCarInfo', '执行成功')
-        //         resetGetCarInfo()
-        //     } else if (CarInfoReducer.getCarInfo.isResultStatus == 1) {
-        //         console.log('CarInfoReducer.getCarInfo执行错误', CarInfoReducer.getCarInfo.errorMsg)
-        //         resetGetCarInfo()
-        //     } else if (CarInfoReducer.getCarInfo.isResultStatus == 2) {
-        //         console.log('CarInfoReducer.getCarInfo', '执行失败')
-        //         resetGetCarInfo()
-        //     }
-        // }
+        if (CarInfoReducer.getCarInfo.isExecStatus == 1) {
+            console.log('CarInfoReducer.getCarInfo', '开始执行')
+        } else if (CarInfoReducer.getCarInfo.isExecStatus == 2) {
+            console.log('CarInfoReducer.getCarInfo', '执行完毕')
+            if (CarInfoReducer.getCarInfo.isResultStatus == 0) {
+                console.log('CarInfoReducer.getCarInfo', '执行成功')
+                this.props.resetGetCarInfo()
+            } else if (CarInfoReducer.getCarInfo.isResultStatus == 1) {
+                console.log('CarInfoReducer.getCarInfo执行错误', CarInfoReducer.getCarInfo.errorMsg)
+                this.props.resetGetCarInfo()
+            } else if (CarInfoReducer.getCarInfo.isResultStatus == 2) {
+                console.log('CarInfoReducer.getCarInfo', '执行失败')
+                this.props.resetGetCarInfo()
+            } else if (CarInfoReducer.getCarInfo.isResultStatus == 3) {
+                console.log('CarInfoReducer.getCarInfo', '服务器错误')
+                this.props.resetGetCarInfo()
+            }
+        }
         /************************************************************************************************/
 
         /*exportCar 执行状态*/
@@ -519,6 +536,15 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+    carInfoInit: (param) => {
+        dispatch(CarInfoAction.carInfoInit(param))
+    },
+    getCarInformation: (param) => {
+        dispatch(CarInfoAction.getCarInformation(param))
+    },
+    resetGetCarInfo: () => {
+        dispatch(CarInfoAction.resetGetCarInfo())
+    },
     exportCar: (param) => {
         dispatch(CarInfoAction.exportCar(param))
     },
@@ -545,13 +571,8 @@ const mapDispatchToProps = (dispatch) => ({
     },
     updateCarInfo: (param) => {
         dispatch(CarInfoAction.updateCarInfo(param))
-    },
-    carInfoInit: (param) => {
-        console.log(param)
-    },
-    getCarInfo: (param) => {
-        console.log(param)
     }
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarInformation)

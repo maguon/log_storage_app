@@ -26,15 +26,55 @@ export const getCarInformation = (param) => (dispatch) => {
                         }
                     })
                 } else {
-                    dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_FAILED, payload: { data: `${res[0].msg}&&${res[1].msg}` } })
+                    if (res[0].code || res[0].code) {
+                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_SERVICEERROR, payload: { data: `${res[0].message}&&${res[1].message}` } })
+                    } else {
+                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_FAILED, payload: { data: `${res[0].msg}&&${res[1].msg}` } })
+                    }
                 }
             }
         })
 }
 
+export const carInfoInit = (param) => (dispatch) => {
+    let url = `${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`
+    dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
+    httpRequest
+        .get(url, (err, res) => {
+            if (err) {
+                dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_ERROR, payload: { data: err } })
+            } else {
+                if (res.success) {
+                    dispatch({
+                        type: actionTypes.carInfoTypes.GET_CARINFO_SUCCESS, payload: {
+                            data: {
+                                recordList: res.result[0].comment,
+                                imageList: res.result[0].storage_image.map(item => {
+                                    return `${file_host}image/${item.url}`
+                                }),
+                                recordId: res.result[0]._id,
+                                car: param.car
+                            }
+                        }
+                    })
+                } else {
+                    if (res.code) {
+                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_SERVICEERROR, payload: { data: res.message } })
+                    } else {
+                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_FAILED, payload: { data: res.msg } })
+                    }
+                }
+            }
+        })
+}
+
+export const resetGetCarInfo = () => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.RESET_GET_CARINFO, payload: {} })
+}
+
 export const exportCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/carStorageRel/${param.requiredParam.relId}/relStatus/${param.requiredParam.relStatus}?${ObjectToUrl(param.optionalParam)}`
-   //console.log(url)
+    //console.log(url)
     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_WAITING, payload: {} })
     httpRequest
         .put(url, {}, (err, res) => {
@@ -49,6 +89,10 @@ export const exportCar = (param) => (dispatch) => {
                 }
             }
         })
+}
+
+export const resetExportCar = () => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.RESET_EXPORT_CAR, payload: {} })
 }
 
 export const appendImage = (param) => (dispatch) => {
@@ -85,6 +129,10 @@ export const appendImage = (param) => (dispatch) => {
         })
 }
 
+export const resetAppendCarImage = () => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.RESET_APPEND_CAR_IMAGE, payload: {} })
+}
+
 export const moveCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/storageParking/${param.requiredParam.parkingId}?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_WAITING, payload: {} })
@@ -102,6 +150,9 @@ export const moveCar = (param) => (dispatch) => {
         })
 }
 
+export const resetMoveCar = () => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.RESET_MOVE_CAR, payload: {} })
+}
 
 export const updateCarInfo = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}`
@@ -119,70 +170,6 @@ export const updateCarInfo = (param) => (dispatch) => {
     //             }
     //         }
     //     })
-}
-
-export const updateCarInfoPlanOutTime = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/carStorageRel/${param.requiredParam.relId}/planOutTime`
-
-    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_PLANOUTTIME_WAITING, payload: {} })
-    httpRequest
-        .put(url, param.putParam, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_PLANOUTTIME_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_PLANOUTTIME_SUCCESS, payload: { data: param.putParam } })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_PLANOUTTIME_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
-}
-
-export const resetExportCar = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_EXPORT_CAR, payload: {} })
-}
-
-export const resetAppendCarImage = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_APPEND_CAR_IMAGE, payload: {} })
-}
-export const resetMoveCar = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_MOVE_CAR, payload: {} })
-}
-export const resetGetCarInfo = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_GET_CARINFO, payload: {} })
-}
-export const changeViewType = (param) => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.CHANGE_VIEWTYPE, payload: { data: param } })
-}
-
-export const changeImportAgainPlanOutTime = (param) => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.CHANGE_IMPORTAGAIN_PLANOUTIME, payload: { data: param } })
-}
-
-export const changeImportAgainParking = (param) => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.CHANGE_IMPORTAGAIN_PARKING, payload: { data: param } })
-}
-
-export const importAgain = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/againCarStorageRel?carId=${param.requiredParam.carId}&vin=${param.requiredParam.vin}`
-    dispatch({ type: actionTypes.carInfoTypes.IMPORT_AGAIN_WAITING, payload: {} })
-    httpRequest
-        .post(url, param.postParam, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.IMPORT_AGAIN_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.IMPORT_AGAIN_SUCCESS, payload: { data: param.updateParam } })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.IMPORT_AGAIN_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
-}
-
-export const resetImportAgain = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_IMPORT_AGAIN, payload: {} })
 }
 
 export const changeEditCarInfoField = (param) => (dispatch) => {
