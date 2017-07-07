@@ -44,6 +44,7 @@ class SelectStorage extends Component {
         let { popName, routerList, onSelect } = this.props
         let nextPage = routerList.shift()
         if (nextPage) {
+            console.log('param', param)
             nextPage({
                 ...param,
                 popName,
@@ -58,12 +59,12 @@ class SelectStorage extends Component {
     }
 
     render() {
-        console.log(this.props)
+        console.log('this.props', this.props)
         let { selectStorageList } = this.props.selectStorageReducer.getSelectStorageList.data
         let storages = selectStorageList.map((item, i) => {
             return (
-                <ListItem key={i} button onPress={(item) => this._onPressItem({ storageId: item.id, storageName: item.storage_name })}>
-                    <Text key={i} >{item.storage_name}</Text>
+                <ListItem key={i} button onPress={() => this._onPressItem({ storageId: item.id, storageName: item.storage_name })}>
+                    <Text>{item.storage_name}</Text>
                 </ListItem>
             )
         })

@@ -60,6 +60,7 @@ class SelectRow extends Component {
     }
 
     render() {
+        console.log('this.props',this.props)
         let { sorageParkingList } = this.props.selectRowReducer.getStorageParkingList.data
         let storageParkings = sorageParkingList.reduce((acc, val) => {
             if (val.car_id == 0) {
@@ -79,7 +80,7 @@ class SelectRow extends Component {
 
         storageParkings = storageParkings.map((item,i) => {
             return (
-                <ListItem key={i} button onPress={(item) => this._onPressItem({ columns: item.columns, row: item.row })}>
+                <ListItem key={i} button onPress={() => this._onPressItem({ columns: item.columns, row: item.row })}>
                     <Text>{item.row.toString()}</Text>
                 </ListItem>
             )

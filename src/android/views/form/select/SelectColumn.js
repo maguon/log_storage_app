@@ -38,6 +38,7 @@ export default class SelectColumn extends Component {
 
 
     render() {
+        console.log('this.props',this.props)
         let columns = this.props.columns.map((item, i) => {
             return (
                 <ListItem key={i} button onPress={() => this._onPressItem({ parkingId: item.parkingId })}>
