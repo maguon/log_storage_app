@@ -83,7 +83,8 @@ export default class RichTextBox extends Component {
         labelStyle: styles.labelStyle,
         textStyle: styles.textStyle,
         iconSytle: baseStyles.iconSytle,
-        messageSytle: styles.messageSytle
+        messageSytle: styles.messageSytle,
+        onRequire: (param) => { }
     }
 
     /*renderValidateMessage() {

@@ -73,7 +73,8 @@ export default class TextBox extends Component {
         containerSytle: styles.containerSytle,
         labelStyle: styles.labelStyle,
         inputStyle: baseStyles.inputStyle,
-        messageSytle: styles.messageSytle
+        messageSytle: styles.messageSytle,
+        onRequire: (param) => { }
     }
 
 

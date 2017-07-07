@@ -9,6 +9,7 @@ import Select from '../components/FormComponents/Select'
 import DateTimePicker from '../components/FormComponents/DateTimePicker'
 import * as CarInfoAction from '../../actions/CarInfoAction'
 import * as CarListAction from '../../actions/CarListAction'
+import RichTextBox from '../components/FormComponents/RichTextBox'
 
 class CarInformation extends Component {
     constructor(props) {
@@ -73,6 +74,29 @@ class CarInformation extends Component {
             } else if (CarInfoReducer.getCarInfo.isResultStatus == 3) {
                 console.log('CarInfoReducer.getCarInfo', '服务器错误')
                 this.props.resetGetCarInfo()
+            }
+        }
+        /************************************************************************************************/
+
+
+        /*updateCarInfo 执行状态*/
+
+        if (CarInfoReducer.updateCarInfo.isExecStatus == 1) {
+            console.log('CarInfoReducer.updateCarInfo', '开始执行')
+        } else if (CarInfoReducer.updateCarInfo.isExecStatus == 2) {
+            console.log('CarInfoReducer.updateCarInfo', '执行完毕')
+            if (CarInfoReducer.updateCarInfo.isResultStatus == 0) {
+                console.log('CarInfoReducer.updateCarInfo', '执行成功')
+                //this.props.resetGetCarInfo()
+            } else if (CarInfoReducer.updateCarInfo.isResultStatus == 1) {
+                console.log('CarInfoReducer.updateCarInfo执行错误', CarInfoReducer.updateCarInfo.errorMsg)
+                //this.props.resetGetCarInfo()
+            } else if (CarInfoReducer.updateCarInfo.isResultStatus == 2) {
+                console.log('CarInfoReducer.updateCarInfo', '执行失败')
+                //this.props.resetGetCarInfo()
+            } else if (CarInfoReducer.updateCarInfo.isResultStatus == 3) {
+                console.log('CarInfoReducer.updateCarInfo', '服务器错误')
+                //this.props.resetGetCarInfo()
             }
         }
         /************************************************************************************************/
@@ -257,7 +281,7 @@ class CarInformation extends Component {
             rel_status: null,
             remark: null,
             route_end: "鞍山",
-            route_end_id: 101,
+            route_end_id: 102,
             route_start: "大连",
             route_start_id: 110,
             row: null,
@@ -274,8 +298,35 @@ class CarInformation extends Component {
 
     }
 
-    onPressImport() {
+    onPressImport(param) {
+        const { vin, make_id, make_name, route_start_id, route_start, base_addr_id, route_end_id, route_end, receive_id, entrust_id, order_date, remark }
+            = this.props.CarInfoReducer.data.car
+        let postParam = {
+            vin: vin,
+            makeId: make_id,
+            makeName: make_name,
+            routeStartId: route_start_id,
+            routeStart: route_start,
+            baseAddrId: base_addr_id,
+            routeEndId: route_end_id,
+            routeEnd: route_end,
+            receiveId: receive_id,
+            entrustId: entrust_id,
+            orderDate: order_date,
+            remark,
+            ...param
+            //"parkingId": 0,
+            //"storageId": 0,
+            //"storageName": "string",
+        }
 
+        for (item in postParam) {
+            if (!postParam[item]) {
+                delete postParam[item]
+            }
+        }
+        //this.props.importCar({ requiredParam: { userId: this.props.user.userId }, postParam })
+        console.log({ requiredParam: { userId: this.props.user.userId }, postParam })
     }
 
     onPressExport() {
@@ -286,33 +337,45 @@ class CarInformation extends Component {
         console.log(param)
     }
 
-
-
-    //     {
-    //   "vin": "string",
-    //   "makeId": 0,
-    //   "makeName": "string",
-    //   "modelId": 0,
-    //   "modelName": "string",
-    //   "routeStartId": 0,
-    //   "routeStart": "string",
-    //   "baseAddrId": 0,
-    //   "routeEndId": 0,
-    //   "routeEnd": "string",
-    //   "receiveId": 0,
-    //   "entrustId": 0,
-    //   "orderDate": "string",
-    //   "colour": "string",
-    //   "engineNum": "string",
-    //   "remark": "string"
-    // }
-
     onSelect(param) {
-        this.props.updateCarInfo({
-            ...CarInfoReducer.car,
+        const { vin, make_id, make_name, route_start_id, route_start, base_addr_id, route_end_id, route_end, receive_id, entrust_id, order_date, remark }
+            = this.props.CarInfoReducer.data.car
+        let putParam = {
+            vin: vin,
+            makeId: make_id,
+            makeName: make_name,
+            routeStartId: route_start_id,
+            routeStart: route_start,
+            baseAddrId: base_addr_id,
+            routeEndId: route_end_id,
+            routeEnd: route_end,
+            receiveId: receive_id,
+            entrustId: entrust_id,
+            orderDate: order_date,
+            remark,
             ...param
+        }
+        for (item in putParam) {
+            if (!putParam[item]) {
+                delete putParam[item]
+            }
+        }
+        if (putParam.orderDate) {
+            putParam.orderDate = new Date(putParam.orderDate).toLocaleDateString()
+        }
+        if (route_end_id != putParam.routeEndId) {
+            delete putParam['entrustId']
+        }
+        if (route_start_id != putParam.routeStartId) {
+            delete putParam['receiveId']
+        }
+        this.props.updateCarInfo({
+            requiredParam: {
+                userId: this.props.user.userId,
+                carId: this.props.car.id
+            },
+            putParam
         })
-        console.log(param)
     }
 
     onPressExportOk() {
@@ -503,11 +566,21 @@ class CarInformation extends Component {
                             <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
                             <Text style={{ flex: 13 }}>未入库</Text>
                         </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
+                            <RichTextBox
+                                isRequire={false}
+                                verifications={[]}
+                                title='备注：'
+                                defaultValue={''}
+                                onValueChange={(param) => this.onSelect({ remark: param })}
+                                showRichText={RouterDirection.richText(this.props.parent)}
+                            />
+                        </View>
                         <CarCamera
                             images={[]}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
-                        <Button block onPress={this.onPressImport} style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                        <Button block onPress={RouterDirection.selectStorage(this.props.parent)} style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>
                     </View>
@@ -545,6 +618,15 @@ const mapDispatchToProps = (dispatch) => ({
     resetGetCarInfo: () => {
         dispatch(CarInfoAction.resetGetCarInfo())
     },
+    updateCarInfo: (param) => {
+        dispatch(CarInfoAction.updateCarInfo(param))
+    },
+    importCar: (param) => {
+        dispatch(CarInfoAction.importCar(param))
+    },
+    resetImportCar: () => {
+        dispatch(CarInfoAction.resetImportCar())
+    },
     exportCar: (param) => {
         dispatch(CarInfoAction.exportCar(param))
     },
@@ -568,9 +650,6 @@ const mapDispatchToProps = (dispatch) => ({
     },
     resetDelImage: () => {
         dispatch(CarInfoAction.resetDelImage())
-    },
-    updateCarInfo: (param) => {
-        dispatch(CarInfoAction.updateCarInfo(param))
     }
 
 })

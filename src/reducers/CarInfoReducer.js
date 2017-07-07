@@ -8,9 +8,17 @@ const initialState = {
         recordList: [],
         imageList: [],
         car: {},
-        recordId: ''
+        recordId: '',
+        carId: 0
     },
     getCarInfo: {
+        isResultStatus: 0,
+        isExecStatus: 0,
+        errorMsg: '',
+        failedMsg: '',
+        serviceErrorMsg: ''
+    },
+    updateCarInfo: {
         isResultStatus: 0,
         isExecStatus: 0,
         errorMsg: '',
@@ -121,29 +129,18 @@ export default handleActions({
 
     [actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
-        const { vin, makeId, makeName, modelId, modelName, proDate, colour, engineNum, remark } = data
+        console.log('data',data)
         return {
             ...state,
-            getCarInfo: {
-                ...state.getCarInfo,
-                data: {
-                    ...state.getCarInfo.data,
-                    car: {
-                        ...state.getCarInfo.data.car,
-                        vin: vin,
-                        make_id: makeId,
-                        make_name: makeName,
-                        model_id: modelId,
-                        model_name: modelName,
-                        pro_date: proDate,
-                        colour: colour,
-                        engine_num: engineNum,
-                        remark: remark
-                    }
-                }
-            },
-            editCarInfo: {
-                ...state.editCarInfo,
+            // data: {
+            //     ...state.data,
+            //     car: {
+            //         ...state.data.car,
+            //         ...data
+            //     }
+            // },
+            updateCarInfo: {
+                ...state.updateCarInfo,
                 isExecStatus: 2,
                 isResultStatus: 0
             }
@@ -153,8 +150,8 @@ export default handleActions({
         const { payload: { data } } = action
         return {
             ...state,
-            editCarInfo: {
-                ...state.editCarInfo,
+            updateCarInfo: {
+                ...state.updateCarInfo,
                 isExecStatus: 2,
                 isResultStatus: 1,
                 errorMsg: data
@@ -164,8 +161,8 @@ export default handleActions({
     [actionTypes.carInfoTypes.UPDATE_CARINFO_WAITING]: (state, action) => {
         return {
             ...state,
-            editCarInfo: {
-                ...state.editCarInfo,
+            updateCarInfo: {
+                ...state.updateCarInfo,
                 isExecStatus: 1
             }
         }
@@ -174,14 +171,40 @@ export default handleActions({
         const { payload: { data } } = action
         return {
             ...state,
-            editCarInfo: {
-                ...state.editCarInfo,
+            updateCarInfo: {
+                ...state.updateCarInfo,
                 isExecStatus: 2,
-                isResultStatus: 1,
+                isResultStatus: 2,
                 failedMsg: data
             }
         }
     },
+    [actionTypes.carInfoTypes.UPDATE_CARINFO_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            updateCarInfo: {
+                ...state.updateCarInfo,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.RESET_UPDATE_CARINFO]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            updateCarInfo: {
+                isResultStatus: 0,
+                isExecStatus: 0,
+                errorMsg: '',
+                failedMsg: '',
+                serviceErrorMsg: ''
+            }
+        }
+    },
+
 
     [actionTypes.carInfoTypes.APPEND_CAR_IMAGE_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
