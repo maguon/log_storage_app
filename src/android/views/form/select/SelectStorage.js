@@ -41,12 +41,11 @@ class SelectStorage extends Component {
     }
 
     _onPressItem(param) {
-        let { popName, routerList, onSelect } = this.props
-        let nextPage = routerList.shift()
-        if (nextPage) {
-            console.log('param', param)
-            nextPage({
+        let { routerIndex, popName, routerList, onSelect } = this.props
+        if (routerList.length > 0 && routerIndex < routerList.length) {
+            routerList[routerIndex]({
                 ...param,
+                routerIndex: routerIndex + 1,
                 popName,
                 onSelect,
                 routerList
@@ -59,7 +58,6 @@ class SelectStorage extends Component {
     }
 
     render() {
-        console.log('this.props', this.props)
         let { selectStorageList } = this.props.selectStorageReducer.getSelectStorageList.data
         let storages = selectStorageList.map((item, i) => {
             return (

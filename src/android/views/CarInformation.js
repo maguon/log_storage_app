@@ -315,9 +315,6 @@ class CarInformation extends Component {
             orderDate: order_date,
             remark,
             ...param
-            //"parkingId": 0,
-            //"storageId": 0,
-            //"storageName": "string",
         }
 
         for (item in postParam) {
@@ -401,52 +398,52 @@ class CarInformation extends Component {
                                 title='品牌：'
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value })}
-                                defaultValue={make_name}
+                                defaultValue={make_name ? make_name : '请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='委托方：'
                                 showList={RouterDirection.selectEntrust(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ entrustId: param.id })}
-                                defaultValue={en_short_name}
+                                defaultValue={en_short_name ? en_short_name : '请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='经销商：'
                                 showList={RouterDirection.selectReceive(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
-                                defaultValue={re_short_name}
+                                defaultValue={re_short_name ? re_short_name : '请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='起始城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
-                                defaultValue={route_start}
+                                defaultValue={route_start ? route_start : '请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='发货地址：'
                                 showList={RouterDirection.selectBaseAddr(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
-                                defaultValue={addr_name}
+                                defaultValue={addr_name ? addr_name : '请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='目的城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
-                                defaultValue={route_end}
+                                defaultValue={route_end ? route_end : '请选择'}
                             />
                             <DateTimePicker
                                 isRequire={false}
                                 title='指令时间：'
-                                defaultValue={new Date(order_date).toLocaleDateString()}
+                                defaultValue={order_date ? new Date(order_date).toLocaleDateString() : '请选择'}
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Text>当前位置:{storage_name}{row.toString()}-{col.toString()}</Text>
+                            <Text>当前位置:{storage_name ? `${storage_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
                         </View>
                         <CarCamera
                             images={[]}
@@ -515,14 +512,14 @@ class CarInformation extends Component {
                                 title='品牌：'
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value })}
-                                defaultValue={make_name}
+                                defaultValue={make_name ? make_name : '请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='委托方：'
                                 showList={RouterDirection.selectEntrust(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ entrustId: param.id })}
-                                defaultValue={en_short_name}
+                                defaultValue={en_short_name ? en_short_name : ''}
                             /></View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
@@ -530,14 +527,14 @@ class CarInformation extends Component {
                                 title='起始城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
-                                defaultValue={route_start}
+                                defaultValue={route_start ? route_start : ''}
                             />
                             <Select
                                 isRequire={false}
                                 title='发货地址：'
                                 showList={RouterDirection.selectBaseAddr(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
-                                defaultValue={addr_name}
+                                defaultValue={addr_name ? addr_name : ''}
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
@@ -546,19 +543,19 @@ class CarInformation extends Component {
                                 title='目的城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
-                                defaultValue={route_end}
+                                defaultValue={route_end ? route_end : ''}
                             />
                             <Select
                                 isRequire={false}
                                 title='经销商：'
                                 showList={RouterDirection.selectReceive(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
-                                defaultValue={re_short_name}
+                                defaultValue={re_short_name ? re_short_name : ''}
                             />
                             <DateTimePicker
                                 isRequire={false}
                                 title='指令时间：'
-                                defaultValue={new Date(order_date).toLocaleDateString()}
+                                defaultValue={order_date?new Date(order_date).toLocaleDateString():''}
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
                             />
                         </View>
@@ -583,6 +580,7 @@ class CarInformation extends Component {
                         <Button
                             block
                             onPress={() => RouterDirection.selectStorage(this.props.parent)({
+                                routerIndex: 0,
                                 popName: this.props.name,
                                 routerList: [RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
                                 onSelect: this.onPressImport

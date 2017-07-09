@@ -94,7 +94,7 @@ class AddCar extends Component {
                         <TextBox
                             isRequire={true}
                             title='VIN:'
-                            defaultValue=''
+                            defaultValue={this.props.vin ? this.props.vin : ''}
                             verifications={[{
                                 type: 'isLength',
                                 arguments: [17, 17],

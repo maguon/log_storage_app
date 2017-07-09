@@ -18,11 +18,11 @@ export default class SelectColumn extends Component {
 
 
     _onPressItem(param) {
-        let { popName, routerList, onSelect, storageId, storageName } = this.props
-        let nextPage = routerList.shift()
-        if (nextPage) {
-            nextPage({
+        let { popName,routerIndex, routerList, onSelect, storageId, storageName } = this.props
+        if (routerList.length > 0 && routerIndex < routerList.length) {
+             routerList[routerIndex]({
                 ...param,
+                routerIndex: routerIndex + 1,
                 storageId,
                 storageName,
                 popName,
@@ -38,7 +38,6 @@ export default class SelectColumn extends Component {
 
 
     render() {
-        console.log('this.props',this.props)
         let columns = this.props.columns.map((item, i) => {
             return (
                 <ListItem key={i} button onPress={() => this._onPressItem({ parkingId: item.parkingId })}>

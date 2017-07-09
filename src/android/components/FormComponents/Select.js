@@ -16,9 +16,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         paddingHorizontal: 10,
         paddingVertical: 10,
-        borderColor: '#dddddd',       
+        borderColor: '#dddddd',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        // backgroundColor: 'rgba(0,0,0,0.1)'
     },
     labelStyle: {
         fontSize: 14,
@@ -53,6 +54,8 @@ export default class Select extends Component {
         }
         this.changeValue = this.changeValue.bind(this)
         this.showList = this.showList.bind(this)
+        this.renderEnable = this.renderEnable.bind(this)
+        this.renderDisable = this.renderDisable.bind(this)
     }
 
     componentWillMount() {
@@ -87,7 +90,8 @@ export default class Select extends Component {
         textStyle: styles.textStyle,
         iconSytle: baseStyles.iconSytle,
         messageSytle: styles.messageSytle,
-        onRequire: (param) => { }
+        onRequire: (param) => { },
+        isEnable: true,
     }
 
     renderValidateMessage() {
@@ -112,7 +116,8 @@ export default class Select extends Component {
         }
     }
 
-    render() {
+
+    renderEnable() {
         return (
             <TouchableHighlight
                 underlayColor='rgba(0,0,0,0.1)'
@@ -128,6 +133,30 @@ export default class Select extends Component {
                     {this.renderValidateMessage()}
                 </View>
             </TouchableHighlight>
+        )
+    }
+
+    renderDisable() {
+        return (
+            <View style={[this.props.containerSytle, { backgroundColor: 'rgba(0,0,0,0.1)' }]}>
+                <View style={{ flexDirection: 'row' }}>
+                    <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
+                    <Text style={this.props.textStyle}>{this.state.value}</Text>
+                    <Icon
+                        name='ios-arrow-forward'
+                        style={this.props.iconSytle} />
+                </View>
+                {this.renderValidateMessage()}
+            </View>
+        )
+    }
+
+    render() {
+        return (
+            <View>
+                {this.props.isEnable ? this.renderEnable() : this.renderDisable()}
+            </View>
+
         )
     }
 }

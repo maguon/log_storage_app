@@ -41,11 +41,11 @@ class SelectRow extends Component {
     }
 
     _onPressItem(param) {
-        let { popName, routerList, onSelect, storageId, storageName } = this.props
-        let nextPage = routerList.shift()
-        if (nextPage) {
-            nextPage({
+        let { routerIndex, popName, routerList, onSelect, storageId, storageName } = this.props
+        if (routerList.length > 0 && routerIndex < routerList.length) {
+            routerList[routerIndex]({
                 ...param,
+                routerIndex: routerIndex + 1,
                 storageId,
                 storageName,
                 popName,
@@ -54,13 +54,12 @@ class SelectRow extends Component {
             })
         }
         else {
-            onSelect({...param,storageId,storageName})
+            onSelect({ ...param, storageId, storageName })
             Actions.popTo(popName)
         }
     }
 
     render() {
-        console.log('this.props',this.props)
         let { sorageParkingList } = this.props.selectRowReducer.getStorageParkingList.data
         let storageParkings = sorageParkingList.reduce((acc, val) => {
             if (val.car_id == 0) {
@@ -78,7 +77,7 @@ class SelectRow extends Component {
             return a.row - b.row
         })
 
-        storageParkings = storageParkings.map((item,i) => {
+        storageParkings = storageParkings.map((item, i) => {
             return (
                 <ListItem key={i} button onPress={() => this._onPressItem({ columns: item.columns, row: item.row })}>
                     <Text>{item.row.toString()}</Text>
