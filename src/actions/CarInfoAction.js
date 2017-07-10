@@ -115,7 +115,7 @@ export const importCar = (param) => (dispatch) => {
 }
 
 export const resetImportCar = () => (dispatch) => {
-    dispatch({ type: actionTypes.imporCarTypes.IMPORT_CAR_RESET_EXECUTE_STATUS, payload: {} })
+    dispatch({ type: actionTypes.carInfoTypes.RESET_IMPORT_CAR, payload: {} })
 }
 
 export const exportCar = (param) => (dispatch) => {

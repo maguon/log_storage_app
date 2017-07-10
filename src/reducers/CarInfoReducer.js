@@ -35,6 +35,13 @@ const initialState = {
         failedMsg: '',
         serviceErrorMsg: ''
     },
+    importCar: {
+        isResultStatus: 0,
+        isExecStatus: 0,
+        errorMsg: '',
+        failedMsg: '',
+        serviceErrorMsg: ''
+    },
     exportCar: {
         isResultStatus: 0,
         isExecStatus: 0,
@@ -194,18 +201,212 @@ export default handleActions({
         }
     },
     [actionTypes.carInfoTypes.RESET_UPDATE_CARINFO]: (state, action) => {
-        const { payload: { data } } = action
         return {
             ...state,
             updateCarInfo: {
-                isResultStatus: 0,
-                isExecStatus: 0,
-                errorMsg: '',
-                failedMsg: '',
-                serviceErrorMsg: ''
+                ...state.updateCarInfo,
+                isExecStatus: 0
             }
         }
     },
+
+
+    [actionTypes.carInfoTypes.IMPORT_CAR_SUCCESS]: (state, action) => {
+        return {
+            ...state,
+            importCar: {
+                ...state.importCar,
+                isResultStatus: 0,
+                isExecStatus: 2
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.IMPORT_CAR_FAILED]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            importCar: {
+                ...state.importCar,
+                isResultStatus: 2,
+                isExecStatus: 2,
+                failedMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.IMPORT_CAR_WAITING]: (state, action) => {
+        return {
+            ...state,
+            importCar: {
+                ...state.importCar,
+                isExecStatus: 1
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.IMPORT_CAR_ERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            importCar: {
+                ...state.importCar,
+                isResultStatus: 1,
+                isExecStatus: 2,
+                errorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.IMPORT_CAR_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            importCar: {
+                ...state.importCar,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.RESET_IMPORT_CAR]: (state, action) => {
+        return {
+            ...state,
+            importCar: {
+                ...state.importCar,
+                isExecStatus: 0
+            }
+        }
+    },
+
+
+    [actionTypes.carInfoTypes.MOVE_CAR_SUCCESS]: (state, action) => {
+        return {
+            ...state,
+            moveCar: {
+                isResultStatus: 0,
+                isExecStatus: 2
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.MOVE_CAR_FAILED]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            moveCar: {
+                ...state.moveCar,
+                isResultStatus: 2,
+                isExecStatus: 2,
+                failedMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.MOVE_CAR_WAITING]: (state, action) => {
+        return {
+            ...state,
+            moveCar: {
+                ...state.moveCar,
+                isExecStatus: 1
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.MOVE_CAR_ERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            moveCar: {
+                ...state.moveCar,
+                isResultStatus: 1,
+                isExecStatus: 2,
+                errorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.MOVE_CAR_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            moveCar: {
+                ...state.moveCar,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.RESET_MOVE_CAR]: (state, action) => {
+        return {
+            ...state,
+            moveCar: {
+                ...state.moveCar,
+                isExecStatus: 0
+            }
+        }
+    },
+
+
+    [actionTypes.carInfoTypes.EXPORT_CAR_SUCCESS]: (state, action) => {
+        return {
+            ...state,
+            exportCar: {
+                ...state.exportCar,
+                isResultStatus: 0,
+                isExecStatus: 2
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.EXPORT_CAR_FAILED]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            exportCar: {
+                ...state.exportCar,
+                isResultStatus: 2,
+                isExecStatus: 2,
+                failedMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.EXPORT_CAR_WAITING]: (state, action) => {
+        return {
+            ...state,
+            exportCar: {
+                ...state.exportCar,
+                isExecStatus: 1
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.EXPORT_CAR_ERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            exportCar: {
+                ...state.exportCar,
+                isResultStatus: 1,
+                isExecStatus: 2,
+                failedMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.EXPORT_CAR_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            exportCar: {
+                ...state.exportCar,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.RESET_EXPORT_CAR]: (state, action) => {
+        return {
+            ...state,
+            exportCar: {
+                ...state.exportCar,
+                isExecStatus: 0
+            }
+        }
+    },
+
 
 
     [actionTypes.carInfoTypes.APPEND_CAR_IMAGE_SUCCESS]: (state, action) => {
@@ -269,66 +470,6 @@ export default handleActions({
     },
 
 
-
-
-
-
-
-    [actionTypes.carInfoTypes.MOVE_CAR_SUCCESS]: (state, action) => {
-        return {
-            ...state,
-            moveCar: {
-                ...state.moveCar,
-                isResultStatus: 0,
-                isExecStatus: 2
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.MOVE_CAR_FAILED]: (state, action) => {
-        const { payload: { data } } = action
-        return {
-            ...state,
-            moveCar: {
-                ...state.moveCar,
-                isResultStatus: 2,
-                isExecStatus: 2,
-                failedMsg: data
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.MOVE_CAR_WAITING]: (state, action) => {
-        return {
-            ...state,
-            moveCar: {
-                ...state.moveCar,
-                isExecStatus: 1
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.MOVE_CAR_ERROR]: (state, action) => {
-        const { payload: { data } } = action
-        return {
-            ...state,
-            moveCar: {
-                ...state.moveCar,
-                isResultStatus: 1,
-                isExecStatus: 2,
-                errorMsg: data
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.RESET_MOVE_CAR]: (state, action) => {
-        return {
-            ...state,
-            moveCar: {
-                ...state.moveCar,
-                isExecStatus: 0
-            }
-        }
-    },
-
-
-
     [actionTypes.carInfoTypes.DELETE_IMAGE_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
         return {
@@ -386,68 +527,5 @@ export default handleActions({
         }
     },
 
-
-    [actionTypes.carInfoTypes.EXPORT_CAR_SUCCESS]: (state, action) => {
-        return {
-            ...state,
-            getCarInfo: {
-                ...state.getCarInfo,
-                data: {
-                    ...state.getCarInfo.data,
-                    car: {
-                        ...state.getCarInfo.data.car,
-                        rel_status: 0
-                    }
-                }
-            },
-            exportCar: {
-                ...state.exportCar,
-                isResultStatus: 0,
-                isExecStatus: 2
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.EXPORT_CAR_FAILED]: (state, action) => {
-        const { payload: { data } } = action
-        return {
-            ...state,
-            exportCar: {
-                ...state.exportCar,
-                isResultStatus: 2,
-                isExecStatus: 2,
-                failedMsg: data
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.EXPORT_CAR_WAITING]: (state, action) => {
-        return {
-            ...state,
-            exportCar: {
-                ...state.exportCar,
-                isExecStatus: 1
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.EXPORT_CAR_ERROR]: (state, action) => {
-        const { payload: { data } } = action
-        return {
-            ...state,
-            exportCar: {
-                ...state.exportCar,
-                isResultStatus: 1,
-                isExecStatus: 2,
-                failedMsg: data
-            }
-        }
-    },
-    [actionTypes.carInfoTypes.RESET_EXPORT_CAR]: (state, action) => {
-        return {
-            ...state,
-            exportCar: {
-                ...state.exportCar,
-                isExecStatus: 0
-            }
-        }
-    },
 }, initialState)
 
