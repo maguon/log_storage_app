@@ -40,7 +40,6 @@ class CarInformation extends Component {
             })
         }
         else {
-
             this.props.carInfoInit({
                 requiredParam: {
                     userId: this.props.user.userId,
@@ -87,6 +86,7 @@ class CarInformation extends Component {
             console.log('CarInfoReducer.updateCarInfo', '执行完毕')
             if (CarInfoReducer.updateCarInfo.isResultStatus == 0) {
                 console.log('CarInfoReducer.updateCarInfo', '执行成功')
+
                 //this.props.resetGetCarInfo()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 1) {
                 console.log('CarInfoReducer.updateCarInfo执行错误', CarInfoReducer.updateCarInfo.errorMsg)
@@ -250,50 +250,6 @@ class CarInformation extends Component {
 
     }
 
-    static defaultProps = {
-        car: {
-            addr_name: "大连庞大",
-            base_addr_id: 110,
-            car_status: 1,
-            col: null,
-            colour: null,
-            created_on: "2017-07-06T06:51:59.000Z",
-            en_short_name: "安吉迅达",
-            engine_num: null,
-            enter_time: null,
-            entrust_id: 100,
-            entrust_name: "上海安吉迅达汽车运输有限公司辽宁分公司",
-            id: 1070,
-            make_id: 100,
-            make_name: "奔驰",
-            model_id: null,
-            model_name: null,
-            order_date: "2017-07-05T16:00:00.000Z",
-            p_id: null,
-            parking_status: null,
-            plan_out_time: null,
-            port_time: null,
-            r_id: null,
-            re_short_name: "大连庞大",
-            real_out_time: null,
-            receive_id: 100,
-            receive_name: "大连庞大华通汽车贸易有限公司",
-            rel_status: null,
-            remark: null,
-            route_end: "鞍山",
-            route_end_id: 102,
-            route_start: "大连",
-            route_start_id: 110,
-            row: null,
-            storage_id: null,
-            storage_name: null,
-            updated_on: "2017-07-06T06:51:59.000Z",
-            upload_id: null,
-            user_id: 0,
-            vin: "12345621231231123"
-        } //neverImport
-    }
-
     onPressMove() {
 
     }
@@ -316,14 +272,12 @@ class CarInformation extends Component {
             remark,
             ...param
         }
-
         for (item in postParam) {
             if (!postParam[item]) {
                 delete postParam[item]
             }
         }
-        //this.props.importCar({ requiredParam: { userId: this.props.user.userId }, postParam })
-        console.log({ requiredParam: { userId: this.props.user.userId }, postParam })
+        this.props.importCar({ requiredParam: { userId: this.props.user.userId }, postParam })
     }
 
     onPressExport() {
@@ -389,15 +343,16 @@ class CarInformation extends Component {
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
                     <View style={{ flex: 1 }}>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Text>vin:{vin}</Text>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ color: '#00cade', flex: 4, textAlign: 'right' }}>vin：</Text>
+                            <Text style={{ color: '#00cade', flex: 13 }}>{vin}</Text>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
                                 title='品牌：'
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value })}
+                                onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value }, {})}
                                 defaultValue={make_name ? make_name : '请选择'}
                             />
                             <Select
@@ -407,13 +362,9 @@ class CarInformation extends Component {
                                 onValueChange={(param) => this.onSelect({ entrustId: param.id })}
                                 defaultValue={en_short_name ? en_short_name : '请选择'}
                             />
-                            <Select
-                                isRequire={false}
-                                title='经销商：'
-                                showList={RouterDirection.selectReceive(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ receiveId: param.id })}
-                                defaultValue={re_short_name ? re_short_name : '请选择'}
-                            />
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
+
                             <Select
                                 isRequire={false}
                                 title='起始城市：'
@@ -428,12 +379,21 @@ class CarInformation extends Component {
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
                                 defaultValue={addr_name ? addr_name : '请选择'}
                             />
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
                                 title='目的城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
                                 defaultValue={route_end ? route_end : '请选择'}
+                            />
+                            <Select
+                                isRequire={false}
+                                title='经销商：'
+                                showList={RouterDirection.selectReceive(this.props.parent)}
+                                onValueChange={(param) => this.onSelect({ receiveId: param.id })}
+                                defaultValue={re_short_name ? re_short_name : '请选择'}
                             />
                             <DateTimePicker
                                 isRequire={false}
@@ -442,18 +402,19 @@ class CarInformation extends Component {
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
                             />
                         </View>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Text>当前位置:{storage_name ? `${storage_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
+                            <Text style={{ flex: 13 }}>{storage_name ? `${storage_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
                         </View>
                         <CarCamera
                             images={[]}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
-                        <Button full onPress={this.onPressMove}>
-                            <Text>移位</Text>
+                        <Button full onPress={this.onPressMove} style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                            <Text style={{ color: '#fff' }}>移位</Text>
                         </Button>
-                        <Button full onPress={this.onPressExport}>
-                            <Text>出库</Text>
+                        <Button full onPress={this.onPressExport} style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                            <Text style={{ color: '#fff' }}>出库</Text>
                         </Button>
                     </View>
                 </ScrollView>
@@ -467,27 +428,57 @@ class CarInformation extends Component {
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
                     <View style={{ flex: 1 }}>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Text>vin:{vin}</Text>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ color: '#00cade', flex: 4, textAlign: 'right' }}>vin：</Text>
+                            <Text style={{ color: '#00cade', flex: 13 }}>{vin}</Text>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Text>品牌:{make_name}</Text>
-                            <Text>委托方:{en_short_name}</Text>
-                            <Text>经销商:{re_short_name}</Text>
-                            <Text>起始城市:{route_start}</Text>
-                            <Text>发货地址:{addr_name}</Text>
-                            <Text>目的城市:{route_end}</Text>
-                            <Text>指令时间:{new Date(order_date).toLocaleDateString()}</Text>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>品牌：</Text>
+                                <Text style={{ flex: 13 }}>{make_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>委托方：</Text>
+                                <Text style={{ flex: 13 }}>{en_short_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>经销商：</Text>
+                                <Text style={{ flex: 13 }}>{re_short_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>起始城市：</Text>
+                                <Text style={{ flex: 13 }}>{route_start}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>发货地址：</Text>
+                                <Text style={{ flex: 13 }}>{addr_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>目的城市：</Text>
+                                <Text style={{ flex: 13 }}>{route_end}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right' }}>指令时间：</Text>
+                                <Text style={{ flex: 13 }}>{new Date(order_date).toLocaleDateString()}</Text>
+                            </View>
                         </View>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Text>当前位置:已出库</Text>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
+                            <Text style={{ flex: 13 }}>已出库</Text>
                         </View>
                         <CarCamera
                             images={[]}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
-                        <Button full onPress={this.onPressImport}>
-                            <Text>入库</Text>
+                        <Button full
+                            onPress={() => RouterDirection.selectStorage(this.props.parent)({
+                                routerIndex: 0,
+                                popName: this.props.name,
+                                routerList: [RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
+                                onSelect: this.onPressImport
+                            })}
+                            style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                            <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>
 
                     </View>
@@ -510,52 +501,59 @@ class CarInformation extends Component {
                             <Select
                                 isRequire={false}
                                 title='品牌：'
+                                value={make_name}
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value })}
-                                defaultValue={make_name ? make_name : '请选择'}
+                                onValueChange={(param) => this.onSelect(param)}
+                                defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
+                                value={en_short_name}
                                 title='委托方：'
                                 showList={RouterDirection.selectEntrust(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ entrustId: param.id })}
-                                defaultValue={en_short_name ? en_short_name : ''}
+                                defaultValue={'请选择'}
                             /></View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
                                 title='起始城市：'
+                                value={route_start}
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
-                                defaultValue={route_start ? route_start : ''}
+                                defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
+                                value={addr_name}
                                 title='发货地址：'
                                 showList={RouterDirection.selectBaseAddr(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
-                                defaultValue={addr_name ? addr_name : ''}
+                                defaultValue={'请选择'}
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
+                                value={route_end}
                                 title='目的城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
-                                defaultValue={route_end ? route_end : ''}
+                                defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
+                                value={re_short_name}
                                 title='经销商：'
                                 showList={RouterDirection.selectReceive(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
-                                defaultValue={re_short_name ? re_short_name : ''}
+                                defaultValue={'请选择'}
                             />
                             <DateTimePicker
                                 isRequire={false}
+                                value={new Date(order_date).toLocaleDateString()}
                                 title='指令时间：'
-                                defaultValue={order_date?new Date(order_date).toLocaleDateString():''}
+                                defaultValue={'请选择'}
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
                             />
                         </View>
@@ -566,9 +564,10 @@ class CarInformation extends Component {
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <RichTextBox
                                 isRequire={false}
+                                value={addr_name}
                                 verifications={[]}
                                 title='备注：'
-                                defaultValue={''}
+                                defaultValue={'请选择'}
                                 onValueChange={(param) => this.onSelect({ remark: param })}
                                 showRichText={RouterDirection.richText(this.props.parent)}
                             />
@@ -595,7 +594,7 @@ class CarInformation extends Component {
     }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
                 {!this.props.car.rel_status && this.renderNeverImport()}

@@ -62,8 +62,20 @@ export default class Select extends Component {
         this.setState({ value: this.props.defaultValue })
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value) {
+            this.setState({ value: nextProps.value })
+        }
+        // else {
+        //     this.setState({ value: this.props.defaultValue })
+        // }
+    }
+
     changeValue(param) {
-        let state = { value: param.value }
+        let state = {}
+        if (!this.props.value) {
+            state.value = param.value
+        }
         let warnMessageList = validate(param.value, this.props.verifications)
         if (warnMessageList.length > 0) {
             state.warnMessageList = warnMessageList
@@ -78,6 +90,8 @@ export default class Select extends Component {
         }
         this.props.onRequire(flag)
     }
+
+
 
     showList() {
         this.props.showList({ onSelect: this.changeValue })

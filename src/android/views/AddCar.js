@@ -60,7 +60,8 @@ class AddCar extends Component {
 
             } else if (AddCarReducer.addCar.isResultStatus == 1) {
 
-                console.log('AddCarReducer.addCar执行错误')
+                console.log('AddCarReducer.addCar执行错误', AddCarReducer.addCar.errorMsg)
+
 
             } else if (AddCarReducer.addCar.isResultStatus == 2) {
                 ToastAndroid.showWithGravity(AddCarReducer.addCar.failedMsg, ToastAndroid.LONG, ToastAndroid.CENTER)
@@ -87,6 +88,7 @@ class AddCar extends Component {
 
     render() {
         let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, remark } = this.props.AddCarReducer.addCar.data
+        console.log('this.props.AddCarReducer.addCar.data', this.props.AddCarReducer.addCar.data)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -121,14 +123,8 @@ class AddCar extends Component {
                                 onRequire={(param) => this.setState({ entrustRequire: param })}
                                 defaultValue='请选择'
                             />
-                            <Select
-                                isRequire={false}
-                                title='经销商：'
-                                showList={RouterDirection.selectReceive(this.props.parent)}
-                                onValueChange={(param) => this.props.changeAddCarField({ receiveId: param.id })}
-                                onRequire={(param) => this.setState({ receiveRequire: param })}
-                                defaultValue='请选择'
-                            />
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
                                 title='起始城市：'
@@ -145,12 +141,22 @@ class AddCar extends Component {
                                 onRequire={(param) => this.setState({ baseAddrRequire: param })}
                                 defaultValue='请选择'
                             />
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
                                 title='目的城市：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ routeEndId: param.id, routeEnd: param.value })}
                                 onRequire={(param) => this.setState({ routeEndRequire: param })}
+                                defaultValue='请选择'
+                            />
+                            <Select
+                                isRequire={false}
+                                title='经销商：'
+                                showList={RouterDirection.selectReceive(this.props.parent)}
+                                onValueChange={(param) => this.props.changeAddCarField({ receiveId: param.id })}
+                                onRequire={(param) => this.setState({ receiveRequire: param })}
                                 defaultValue='请选择'
                             />
                             <DateTimePicker

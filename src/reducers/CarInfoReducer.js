@@ -129,15 +129,12 @@ export default handleActions({
 
     [actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
-        console.log('data',data)
+        // console.log('data',data)
         return {
             ...state,
             // data: {
             //     ...state.data,
-            //     car: {
-            //         ...state.data.car,
-            //         ...data
-            //     }
+            //     e
             // },
             updateCarInfo: {
                 ...state.updateCarInfo,

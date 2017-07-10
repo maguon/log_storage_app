@@ -47,7 +47,7 @@ export default class TextBox extends Component {
     }
 
     componentWillMount() {
-        this.setState({ value: this.props.defaultValue })
+        this.changeValue(this.props.defaultValue)
     }
 
     changeValue(value) {
