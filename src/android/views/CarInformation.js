@@ -35,7 +35,8 @@ class CarInformation extends Component {
                     carId: this.props.carId
                 },
                 optionalParam: {
-                    vin: this.props.vin
+                    vin: this.props.vin,
+                    active: 1
                 }
             })
         }
@@ -255,29 +256,9 @@ class CarInformation extends Component {
     }
 
     onPressImport(param) {
-        const { vin, make_id, make_name, route_start_id, route_start, base_addr_id, route_end_id, route_end, receive_id, entrust_id, order_date, remark }
-            = this.props.CarInfoReducer.data.car
-        let postParam = {
-            vin: vin,
-            makeId: make_id,
-            makeName: make_name,
-            routeStartId: route_start_id,
-            routeStart: route_start,
-            baseAddrId: base_addr_id,
-            routeEndId: route_end_id,
-            routeEnd: route_end,
-            receiveId: receive_id,
-            entrustId: entrust_id,
-            orderDate: order_date,
-            remark,
-            ...param
-        }
-        for (item in postParam) {
-            if (!postParam[item]) {
-                delete postParam[item]
-            }
-        }
-        this.props.importCar({ requiredParam: { userId: this.props.user.userId }, postParam })
+        const { vin, id } = this.props.CarInfoReducer.data.car
+        let postParam = param
+        this.props.importCar({ requiredParam: { userId: this.props.user.userId, carId: id }, OptionalParam: { vin }, postParam })
     }
 
     onPressExport() {
@@ -594,7 +575,7 @@ class CarInformation extends Component {
     }
 
     render() {
-        // console.log(this.props)
+        console.log(this.props.CarInfoReducer.data)
         return (
             <View style={{ flex: 1 }}>
                 {!this.props.car.rel_status && this.renderNeverImport()}

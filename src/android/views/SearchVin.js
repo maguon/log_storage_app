@@ -99,7 +99,8 @@ class SearchVin extends Component {
     onPressIcon() {
         let param = {
             optionalParam: {
-                vin: this.state.vin
+                vin: this.state.vin,
+                active: 1
             }
         }
         this.props.search(param)
