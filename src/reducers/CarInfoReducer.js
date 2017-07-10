@@ -7,7 +7,17 @@ const initialState = {
     data: {
         recordList: [],
         imageList: [],
-        car: {},
+        car: {
+            rel_status: 1,
+            vin: '',
+            make_name: '',
+            en_short_name: '',
+            re_short_name: '',
+            addr_name: '',
+            route_start: '',
+            route_end: '',
+            order_date: ''
+        },
         recordId: '',
         carId: 0
     },
@@ -129,13 +139,8 @@ export default handleActions({
 
     [actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
-        // console.log('data',data)
         return {
             ...state,
-            // data: {
-            //     ...state.data,
-            //     e
-            // },
             updateCarInfo: {
                 ...state.updateCarInfo,
                 isExecStatus: 2,

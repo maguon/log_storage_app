@@ -22,9 +22,7 @@ class CarInformation extends Component {
         this.onPressExport = this.onPressExport.bind(this)
         this.onPressExportOk = this.onPressExportOk.bind(this)
         this.onPressExportCancel = this.onPressExportCancel.bind(this)
-        this.state = {
-            car: {}
-        }
+        this.getCarInformation = this.getCarInformation.bind(this)
     }
 
     componentWillMount() {
@@ -51,13 +49,24 @@ class CarInformation extends Component {
         }
     }
 
+    getCarInformation() {
+        this.props.getCarInformation({
+            requiredParam: {
+                userId: this.props.user.userId,
+                carId: this.props.CarInfoReducer.data.car.id
+            },
+            optionalParam: {
+                vin: this.props.CarInfoReducer.data.car.vin,
+                active: 1
+            }
+        })
+    }
+
 
     componentWillReceiveProps(nextProps) {
         let { CarInfoReducer } = nextProps
 
-
         /*getCarInfo 执行状态*/
-
         if (CarInfoReducer.getCarInfo.isExecStatus == 1) {
             console.log('CarInfoReducer.getCarInfo', '开始执行')
         } else if (CarInfoReducer.getCarInfo.isExecStatus == 2) {
@@ -87,22 +96,22 @@ class CarInformation extends Component {
             console.log('CarInfoReducer.updateCarInfo', '执行完毕')
             if (CarInfoReducer.updateCarInfo.isResultStatus == 0) {
                 console.log('CarInfoReducer.updateCarInfo', '执行成功')
-
-                //this.props.resetGetCarInfo()
+                this.props.resetUpdateCarInfo()
+                this.getCarInformation()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 1) {
                 console.log('CarInfoReducer.updateCarInfo执行错误', CarInfoReducer.updateCarInfo.errorMsg)
-                //this.props.resetGetCarInfo()
+                this.props.resetUpdateCarInfo()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 2) {
                 console.log('CarInfoReducer.updateCarInfo', '执行失败')
-                //this.props.resetGetCarInfo()
+                this.props.resetUpdateCarInfo()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 3) {
                 console.log('CarInfoReducer.updateCarInfo', '服务器错误')
-                //this.props.resetGetCarInfo()
+                this.props.resetUpdateCarInfo()
             }
         }
         /************************************************************************************************/
 
-        /*exportCar 执行状态*/
+        /*importCar 执行状态*/
 
         // if (CarInfoReducer.exportCar.isExecStatus == 1) {
         //     console.log('CarInfoReducer.exportCar', '开始执行')
@@ -270,7 +279,7 @@ class CarInformation extends Component {
     }
 
     onSelect(param) {
-        const { vin, make_id, make_name, route_start_id, route_start, base_addr_id, route_end_id, route_end, receive_id, entrust_id, order_date, remark }
+        const { vin, make_id, make_name, route_start_id, route_start, base_addr_id, route_end_id, route_end, receive_id, entrust_id, order_date, remark, id }
             = this.props.CarInfoReducer.data.car
         let putParam = {
             vin: vin,
@@ -304,7 +313,7 @@ class CarInformation extends Component {
         this.props.updateCarInfo({
             requiredParam: {
                 userId: this.props.user.userId,
-                carId: this.props.car.id
+                carId: id
             },
             putParam
         })
@@ -319,7 +328,7 @@ class CarInformation extends Component {
     }
 
     renderImported() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, storage_name, row, col } = this.props.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, storage_name, row, col,remark } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -332,60 +341,77 @@ class CarInformation extends Component {
                             <Select
                                 isRequire={false}
                                 title='品牌：'
+                                value={make_name}
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value }, {})}
-                                defaultValue={make_name ? make_name : '请选择'}
+                                defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='委托方：'
+                                value={en_short_name}
                                 showList={RouterDirection.selectEntrust(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ entrustId: param.id })}
-                                defaultValue={en_short_name ? en_short_name : '请选择'}
+                                defaultValue={'请选择'}
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-
                             <Select
                                 isRequire={false}
                                 title='起始城市：'
+                                value={route_start}
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
-                                defaultValue={route_start ? route_start : '请选择'}
+                                defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='发货地址：'
+                                value={addr_name}
                                 showList={RouterDirection.selectBaseAddr(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
-                                defaultValue={addr_name ? addr_name : '请选择'}
+                                defaultValue={'请选择'}
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
                                 isRequire={false}
                                 title='目的城市：'
+                                value={route_end}
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
-                                defaultValue={route_end ? route_end : '请选择'}
+                                defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
                                 title='经销商：'
+                                value={re_short_name}
                                 showList={RouterDirection.selectReceive(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
-                                defaultValue={re_short_name ? re_short_name : '请选择'}
+                                defaultValue={'请选择'}
                             />
                             <DateTimePicker
                                 isRequire={false}
                                 title='指令时间：'
-                                defaultValue={order_date ? new Date(order_date).toLocaleDateString() : '请选择'}
+                                value={order_date ? new Date(order_date).toLocaleDateString() : ''}
+                                defaultValue={'请选择'}
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
                             <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
                             <Text style={{ flex: 13 }}>{storage_name ? `${storage_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
+                            <RichTextBox
+                                isRequire={false}
+                                value={addr_name}
+                                verifications={[]}
+                                title='备注：'
+                                defaultValue={'请选择'}
+                                onValueChange={(param) => this.onSelect({ remark: param })}
+                                showRichText={RouterDirection.richText(this.props.parent)}
+                            />
                         </View>
                         <CarCamera
                             images={[]}
@@ -404,7 +430,7 @@ class CarInformation extends Component {
     }
 
     renderExported() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -440,7 +466,7 @@ class CarInformation extends Component {
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
                                 <Text style={{ flex: 4, textAlign: 'right' }}>指令时间：</Text>
-                                <Text style={{ flex: 13 }}>{new Date(order_date).toLocaleDateString()}</Text>
+                                <Text style={{ flex: 13 }}>{order_date ? new Date(order_date).toLocaleDateString() : ''}</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
@@ -469,7 +495,7 @@ class CarInformation extends Component {
     }
 
     renderNeverImport() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -532,7 +558,7 @@ class CarInformation extends Component {
                             />
                             <DateTimePicker
                                 isRequire={false}
-                                value={new Date(order_date).toLocaleDateString()}
+                                value={order_date ? new Date(order_date).toLocaleDateString() : ''}
                                 title='指令时间：'
                                 defaultValue={'请选择'}
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
@@ -578,9 +604,9 @@ class CarInformation extends Component {
         console.log(this.props.CarInfoReducer.data)
         return (
             <View style={{ flex: 1 }}>
-                {!this.props.car.rel_status && this.renderNeverImport()}
-                {this.props.car.rel_status == 1 && this.renderImported()}
-                {this.props.car.rel_status == 2 && this.renderExported()}
+                {this.props.CarInfoReducer.data.car && !this.props.CarInfoReducer.data.car.rel_status && this.renderNeverImport()}
+                {this.props.CarInfoReducer.data.car && this.props.CarInfoReducer.data.car.rel_status == 1 && this.renderImported()}
+                {this.props.CarInfoReducer.data.car && this.props.CarInfoReducer.data.car.rel_status == 2 && this.renderExported()}
             </View>
         )
     }
@@ -605,6 +631,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     updateCarInfo: (param) => {
         dispatch(CarInfoAction.updateCarInfo(param))
+    },
+    resetUpdateCarInfo: () => {
+        dispatch(CarInfoAction.resetUpdateCarInfo())
     },
     importCar: (param) => {
         dispatch(CarInfoAction.importCar(param))

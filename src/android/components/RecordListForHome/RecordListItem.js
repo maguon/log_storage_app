@@ -39,7 +39,7 @@ export default class RecordListItem extends Component {
 
         return (
             <TouchableHighlight key={_id} underlayColor='rgba(0,0,0,0.1)' onPress={() => {
-                this._onPressItem({ carId: id })
+                this._onPressItem({ vin, carId: id })
             }}>
                 <View style={{ flexDirection: "row" }}>
                     <View style={{ flex: 2, marginRight: 5, justifyContent: 'center' }}>

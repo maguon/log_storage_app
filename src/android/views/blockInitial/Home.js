@@ -85,7 +85,8 @@ class Home extends Component {
     }
 
     onPressItem(param) {
-        Actions.carInfoAtHomeBlock(param)
+        console.log(param)
+        Actions.carInformationAtHomeBlock(param)
     }
 
     render() {

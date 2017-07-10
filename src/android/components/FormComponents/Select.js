@@ -66,9 +66,6 @@ export default class Select extends Component {
         if (nextProps.value) {
             this.setState({ value: nextProps.value })
         }
-        // else {
-        //     this.setState({ value: this.props.defaultValue })
-        // }
     }
 
     changeValue(param) {

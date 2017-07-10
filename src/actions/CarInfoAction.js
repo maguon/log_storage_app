@@ -6,6 +6,7 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 export const getCarInformation = (param) => (dispatch) => {
     let urls = [`${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`,
     `${base_host}/car?${ObjectToUrl(param.optionalParam)}`]
+    console.log(urls)
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
     httpRequest
         .getAll(urls, (err, res) => {
@@ -13,7 +14,8 @@ export const getCarInformation = (param) => (dispatch) => {
                 dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_ERROR, payload: { data: err } })
             } else {
                 if (res[0].success && res[1].success) {
-                    dispatch({
+                    console.log(res)
+                    dispatch({                 
                         type: actionTypes.carInfoTypes.GET_CARINFO_SUCCESS, payload: {
                             data: {
                                 recordList: res[0].result[0].comment,
@@ -72,7 +74,7 @@ export const resetGetCarInfo = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_GET_CARINFO, payload: {} })
 }
 
-export const updateCarInfo = (param, e) => (dispatch) => {
+export const updateCarInfo = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}`
     dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_WAITING, payload: {} })
     httpRequest
@@ -82,7 +84,7 @@ export const updateCarInfo = (param, e) => (dispatch) => {
                 dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS, payload: { data: param.putParam, e } })
+                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS, payload: { data: param.putParam } })
                 } else {
                     dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_FAILED, payload: { data: res.msg } })
                 }
@@ -90,18 +92,23 @@ export const updateCarInfo = (param, e) => (dispatch) => {
         })
 }
 
+export const resetUpdateCarInfo=()=>(dispatch)=>{
+    dispatch({ type: actionTypes.carInfoTypes.RESET_UPDATE_CARINFO, payload: {} })
+}
+
+
 export const importCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStorageRel?${ObjectToUrl(param.OptionalParam)}`
-    dispatch({ type: actionTypes.imporCarTypes.IMPORT_CAR_WAITING, payload: {} })
+    dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_WAITING, payload: {} })
     httpRequest
         .put(url, param.postParam, (err, res) => {
             if (err) {
-                dispatch({ type: actionTypes.imporCarTypes.IMPORT_CAR_ERROR, payload: { data: err } })
+                dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
-                    dispatch({ type: actionTypes.imporCarTypes.IMPORT_CAR_SUCCESS, payload: {} })
+                    dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_SUCCESS, payload: {} })
                 } else {
-                    dispatch({ type: actionTypes.imporCarTypes.IMPORT_CAR_FAILED, payload: { data: res.msg } })
+                    dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_FAILED, payload: { data: res.msg } })
                 }
             }
         })
@@ -113,7 +120,6 @@ export const resetImportCar = () => (dispatch) => {
 
 export const exportCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/carStorageRel/${param.requiredParam.relId}/relStatus/${param.requiredParam.relStatus}?${ObjectToUrl(param.optionalParam)}`
-    //console.log(url)
     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_WAITING, payload: {} })
     httpRequest
         .put(url, {}, (err, res) => {

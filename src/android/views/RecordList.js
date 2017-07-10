@@ -15,7 +15,7 @@ class RecordList extends Component {
     }
 
     componentDidMount() {
-        let param = { optionalParam: { userid: this.props.user.userId, start: 0, size: 20 } }
+        let param = { optionalParam: { userId: this.props.user.userId, start: 0, size: 20 } }
         this.props.getRecordList(param)
     }
 
@@ -130,7 +130,7 @@ class RecordList extends Component {
                 return { data: item.data, key: item.created_on }
             })
 
-         
+
         return (
             <View style={{ flex: 1 }}>
                 <Segment style={{ backgroundColor: '#00cade' }}>
@@ -149,7 +149,7 @@ class RecordList extends Component {
                 </Segment>
                 <SectionList style={{ paddingVertical: 10, paddingHorizontal: 10 }}
                     renderItem={({ item }) => {
-                        return (<RecordListItem recordItem={item} key={item._id} routerPos={Actions.carInfoForRecordList}/>)
+                        return (<RecordListItem recordItem={item} key={item._id} onPressItem={Actions.carInformationAtSettingBlock} />)
                     }}
                     renderSectionHeader={({ section }) => {
                         return (<View style={{ width: window.width / 2, backgroundColor: '#f1f1f1', borderRadius: 15, alignItems: 'center', marginBottom: 5 }}>
