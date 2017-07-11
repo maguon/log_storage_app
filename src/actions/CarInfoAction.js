@@ -179,13 +179,18 @@ export const resetAppendCarImage = () => (dispatch) => {
 }
 
 export const moveCar = (param) => (dispatch) => {
+    console.log(param)
     let url = `${base_host}/user/${param.requiredParam.userId}/storageParking/${param.requiredParam.parkingId}?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_WAITING, payload: {} })
+    console.log(url)
     httpRequest
         .put(url, {}, (err, res) => {
             if (err) {
+                console.log(err)
                 dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_ERROR, payload: { data: err } })
             } else {
+                console.log(res)
+                
                 if (res.success) {
                     dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_SUCCESS, payload: {} })
                 } else {
