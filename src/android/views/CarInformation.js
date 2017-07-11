@@ -184,21 +184,21 @@ class CarInformation extends Component {
         /************************************************************************************************/
 
         /*appendCarImage执行状态*/
-        // if (CarInfoReducer.appendCarImage.isExecStatus == 1) {
-        //     console.log('CarInfoReducer.appendCarImage', '开始执行')
-        // } else if (CarInfoReducer.appendCarImage.isExecStatus == 2) {
-        //     console.log('CarInfoReducer.appendCarImage', '执行完毕')
-        //     if (CarInfoReducer.appendCarImage.isResultStatus == 0) {
-        //         console.log('CarInfoReducer.appendCarImage', '执行成功')
-        //         resetAppendCarImage()
-        //     } else if (CarInfoReducer.appendCarImage.isResultStatus == 1) {
-        //         console.log('CarInfoReducer.appendCarImage', '执行错误')
-        //         resetAppendCarImage()
-        //     } else if (CarInfoReducer.appendCarImage.isResultStatus == 2) {
-        //         console.log('CarInfoReducer.appendCarImage', '执行失败')
-        //         resetAppendCarImage()
-        //     }
-        // }
+        if (CarInfoReducer.appendCarImage.isExecStatus == 1) {
+            console.log('CarInfoReducer.appendCarImage', '开始执行')
+        } else if (CarInfoReducer.appendCarImage.isExecStatus == 2) {
+            console.log('CarInfoReducer.appendCarImage', '执行完毕')
+            if (CarInfoReducer.appendCarImage.isResultStatus == 0) {
+                console.log('CarInfoReducer.appendCarImage', '执行成功')
+                resetAppendCarImage()
+            } else if (CarInfoReducer.appendCarImage.isResultStatus == 1) {
+                console.log('CarInfoReducer.appendCarImage', '执行错误')
+                resetAppendCarImage()
+            } else if (CarInfoReducer.appendCarImage.isResultStatus == 2) {
+                console.log('CarInfoReducer.appendCarImage', '执行失败')
+                resetAppendCarImage()
+            }
+        }
         /************************************************************************************************/
 
 

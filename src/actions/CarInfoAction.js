@@ -193,7 +193,7 @@ export const appendImage = (param) => (dispatch) => {
         })
 }
 
-export const resetAppendCarImage = () => (dispatch) => {
+export const resetAppendImage = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_APPEND_CAR_IMAGE, payload: {} })
 }
 

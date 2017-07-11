@@ -56,7 +56,7 @@ const initialState = {
         failedMsg: '',
         serviceErrorMsg: ''
     },
-    appendCarImage: {
+    appendImage: {
         isResultStatus: 0,
         isExecStatus: 0,
         errorMsg: '',
@@ -143,7 +143,6 @@ export default handleActions({
         }
     },
 
-
     [actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
         return {
@@ -210,7 +209,6 @@ export default handleActions({
         }
     },
 
-
     [actionTypes.carInfoTypes.IMPORT_CAR_SUCCESS]: (state, action) => {
         return {
             ...state,
@@ -276,7 +274,6 @@ export default handleActions({
         }
     },
 
-
     [actionTypes.carInfoTypes.MOVE_CAR_SUCCESS]: (state, action) => {
         return {
             ...state,
@@ -340,7 +337,6 @@ export default handleActions({
             }
         }
     },
-
 
     [actionTypes.carInfoTypes.EXPORT_CAR_SUCCESS]: (state, action) => {
         return {
@@ -407,68 +403,74 @@ export default handleActions({
         }
     },
 
-
-
-    [actionTypes.carInfoTypes.APPEND_CAR_IMAGE_SUCCESS]: (state, action) => {
+    [actionTypes.carInfoTypes.APPEND_IMAGE_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
-            getCarInfo: {
-                ...state.getCarInfo,
-                data: {
-                    ...state.getCarInfo.data,
-                    imageList: [...state.getCarInfo.data.imageList, data]
-                }
-            },
-            appendCarImage: {
+            appendImage: {
+                ...state.appendImage,
                 isResultStatus: 0,
                 isExecStatus: 2
             }
         }
     },
-    [actionTypes.carInfoTypes.APPEND_CAR_IMAGE_FAILED]: (state, action) => {
+    [actionTypes.carInfoTypes.APPEND_IMAGE_FAILED]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
-            appendCarImage: {
-                ...state.appendCarImage,
+            appendImage: {
+                ...state.appendImage,
                 isResultStatus: 2,
                 isExecStatus: 2,
                 failedMsg: data
             }
         }
     },
-    [actionTypes.carInfoTypes.APPEND_CAR_IMAGE_WAITING]: (state, action) => {
+    [actionTypes.carInfoTypes.APPEND_IMAGE_WAITING]: (state, action) => {
         return {
             ...state,
-            appendCarImage: {
-                ...state.appendCarImage,
+            appendImage: {
+                ...state.appendImage,
                 isExecStatus: 1
             }
         }
     },
-    [actionTypes.carInfoTypes.APPEND_CAR_IMAGE_ERROR]: (state, action) => {
+    [actionTypes.carInfoTypes.APPEND_IMAGE_ERROR]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
-            appendCarImage: {
-                ...state.appendCarImage,
+            appendImage: {
+                ...state.appendImage,
                 isResultStatus: 1,
                 isExecStatus: 2,
                 errorMsg: data
             }
         }
     },
-    [actionTypes.carInfoTypes.RESET_APPEND_CAR_IMAGE]: (state, action) => {
+    [actionTypes.carInfoTypes.APPEND_IMAGE_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
         return {
             ...state,
-            appendCarImage: {
-                ...state.appendCarImage,
-                isExecStatus: 0
+            appendImage: {
+                ...state.appendImage,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
             }
         }
     },
-
+    [actionTypes.carInfoTypes.RESET_APPEND_IMAGE]: (state, action) => {
+        return {
+            ...state,
+            appendImage: {
+                isResultStatus: 0,
+                isExecStatus: 0,
+                errorMsg: '',
+                failedMsg: '',
+                serviceErrorMsg: ''
+            }
+        }
+    },
 
     [actionTypes.carInfoTypes.DELETE_IMAGE_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
@@ -514,6 +516,18 @@ export default handleActions({
             }
         }
     },
+    [actionTypes.carInfoTypes.DELETE_IMAGE_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            delImage: {
+                ...state.delImage,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
+            }
+        }
+    },
     [actionTypes.carInfoTypes.RESET_DELETE_IMAGE]: (state, action) => {
         const { payload: { data } } = action
         return {
@@ -522,10 +536,10 @@ export default handleActions({
                 isResultStatus: 0,
                 isExecStatus: 0,
                 errorMsg: '',
-                failedMsg: ''
+                failedMsg: '',
+                serviceErrorMsg: ''
             }
         }
-    },
-
+    }
 }, initialState)
 
