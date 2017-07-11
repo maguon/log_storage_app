@@ -160,7 +160,6 @@ export const resetExportCar = () => (dispatch) => {
 }
 
 export const appendImage = (param) => (dispatch) => {
-    console.log(param)
     let url = `${file_host}user/${param.requiredParam.userId}/image?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_WAITING, payload: {} })
     httpRequest
@@ -183,13 +182,11 @@ export const appendImage = (param) => (dispatch) => {
                                 })
                             }
                             else {
-                                console.log('carRes.msg', carRes.msg)
                                 dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_FAILED, payload: { data: carRes.msg } })
                             }
                         }
                     })
                 } else {
-                    console.log('res', res)
                     dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_FAILED, payload: { data: res.msg } })
                 }
             }
@@ -197,7 +194,7 @@ export const appendImage = (param) => (dispatch) => {
 }
 
 export const resetAppendImage = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_APPEND_CAR_IMAGE, payload: {} })
+    dispatch({ type: actionTypes.carInfoTypes.RESET_APPEND_IMAGE, payload: {} })
 }
 
 export const delImage = (param) => (dispatch) => {

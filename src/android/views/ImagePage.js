@@ -75,6 +75,7 @@ class ImagePage extends Component {
   }
 
   onPressOk() {
+
     this.setState({ confirmModalVisible: false })
     let { userId } = this.props.user
     let { recordId, imageList } = this.props.CarInfoReducer.getCarInfo.data
@@ -137,23 +138,23 @@ class ImagePage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    CarInfoReducer: state.CarInfoReducer,
-    user: state.LoginReducer.user
-  }
-}
+// const mapStateToProps = (state) => {
+//   return {
+//     CarInfoReducer: state.CarInfoReducer,
+//     user: state.LoginReducer.user
+//   }
+// }
 
-const mapDispatchToProps = (dispatch) => ({
-  delImage: (param) => {
-    dispatch(CarInfoAction.delImage(param))
-  },
-  resetDelImage: () => {
-    dispatch(CarInfoAction.resetDelImage())
-  }
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   delImage: (param) => {
+//     dispatch(CarInfoAction.delImage(param))
+//   },
+//   resetDelImage: () => {
+//     dispatch(CarInfoAction.resetDelImage())
+//   }
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ImagePage)
+// export default connect(mapStateToProps, mapDispatchToProps)(ImagePage)
 
 
 var styles = {

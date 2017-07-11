@@ -191,12 +191,17 @@ class CarInformation extends Component {
             console.log('CarInfoReducer.appendImage执行完毕')
             if (CarInfoReducer.appendImage.isResultStatus == 0) {
                 console.log('CarInfoReducer.appendImage执行成功')
+                this.props.resetAppendImage()
+                this.getCarInformation()
             } else if (CarInfoReducer.appendImage.isResultStatus == 1) {
                 console.log('CarInfoReducer.appendImage执行错误')
+                this.props.resetAppendImage()
             } else if (CarInfoReducer.appendImage.isResultStatus == 2) {
                 console.log('CarInfoReducer.appendImage执行失败')
+                this.props.resetAppendImage()
             } else if (CarInfoReducer.appendImage.isResultStatus == 3) {
                 console.log('CarInfoReducer.appendImage服务器错误')
+                this.props.resetAppendImage()                
             }
         }
         /************************************************************************************************/
@@ -421,7 +426,7 @@ class CarInformation extends Component {
                             />
                         </View>
                         <CarCamera
-                            images={[]}
+                            images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
                         <Button
@@ -496,7 +501,7 @@ class CarInformation extends Component {
                             <Text style={{ flex: 13 }}>已出库</Text>
                         </View>
                         <CarCamera
-                            images={[]}
+                            images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
                         <Button full
@@ -602,7 +607,7 @@ class CarInformation extends Component {
                             />
                         </View>
                         <CarCamera
-                            images={[]}
+                            images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
                             showImagePage={Actions.ImagePageForCarInfo} />
                         <Button
