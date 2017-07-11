@@ -15,7 +15,7 @@ export const getCarInformation = (param) => (dispatch) => {
             } else {
                 if (res[0].success && res[1].success) {
                     console.log(res)
-                    dispatch({                 
+                    dispatch({
                         type: actionTypes.carInfoTypes.GET_CARINFO_SUCCESS, payload: {
                             data: {
                                 recordList: res[0].result[0].comment,
@@ -92,13 +92,12 @@ export const updateCarInfo = (param) => (dispatch) => {
         })
 }
 
-export const resetUpdateCarInfo=()=>(dispatch)=>{
+export const resetUpdateCarInfo = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_UPDATE_CARINFO, payload: {} })
 }
 
-
 export const importCar = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStorageRel?${ObjectToUrl(param.OptionalParam)}`
+    let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStorageRel?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_WAITING, payload: {} })
     httpRequest
         .put(url, param.postParam, (err, res) => {
@@ -118,15 +117,40 @@ export const resetImportCar = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_IMPORT_CAR, payload: {} })
 }
 
+export const moveCar = (param) => (dispatch) => {
+    let url = `${base_host}/user/${param.requiredParam.userId}/storageParking/${param.requiredParam.parkingId}?${ObjectToUrl(param.optionalParam)}`
+    dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_WAITING, payload: {} })
+    httpRequest
+        .put(url, {}, (err, res) => {
+            if (err) {
+                dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_ERROR, payload: { data: err } })
+            } else {
+                if (res.success) {
+                    dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_SUCCESS, payload: {} })
+                } else {
+                    dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_FAILED, payload: { data: res.msg } })
+                }
+            }
+        })
+}
+
+export const resetMoveCar = () => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.RESET_MOVE_CAR, payload: {} })
+}
+
 export const exportCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/carStorageRel/${param.requiredParam.relId}/relStatus/${param.requiredParam.relStatus}?${ObjectToUrl(param.optionalParam)}`
+    console.log(url)
     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_WAITING, payload: {} })
     httpRequest
         .put(url, {}, (err, res) => {
+            console.log('err', err)
+            console.log('res', res)
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
+                    
                     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_SUCCESS, payload: {} })
                 } else {
 
@@ -177,37 +201,6 @@ export const appendImage = (param) => (dispatch) => {
 export const resetAppendCarImage = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_APPEND_CAR_IMAGE, payload: {} })
 }
-
-export const moveCar = (param) => (dispatch) => {
-    console.log(param)
-    let url = `${base_host}/user/${param.requiredParam.userId}/storageParking/${param.requiredParam.parkingId}?${ObjectToUrl(param.optionalParam)}`
-    dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_WAITING, payload: {} })
-    console.log(url)
-    httpRequest
-        .put(url, {}, (err, res) => {
-            if (err) {
-                console.log(err)
-                dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_ERROR, payload: { data: err } })
-            } else {
-                console.log(res)
-                
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_SUCCESS, payload: {} })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
-}
-
-export const resetMoveCar = () => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.RESET_MOVE_CAR, payload: {} })
-}
-
-export const changeEditCarInfoField = (param) => (dispatch) => {
-    dispatch({ type: actionTypes.carInfoTypes.CHANGE_EDITCARINFO_FIELD, payload: { data: param } })
-}
-
 
 export const delImage = (param) => (dispatch) => {
     let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`

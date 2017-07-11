@@ -142,15 +142,16 @@ class CarInformation extends Component {
             if (CarInfoReducer.importCar.isResultStatus == 0) {
                 console.log('CarInfoReducer.importCar', '执行成功')
                 this.props.resetImportCar()
+                this.getCarInformation()
             } else if (CarInfoReducer.importCar.isResultStatus == 1) {
-                console.log('CarInfoReducer.importCar执行错误', CarInfoReducer.importCar.failedMsg)
+                console.log('CarInfoReducer.importCar执行错误')
                 this.props.resetImportCar()
             } else if (CarInfoReducer.importCar.isResultStatus == 2) {
                 console.log('CarInfoReducer.importCar', '执行失败')
-                this.props.resetImportCar()              
+                this.props.resetImportCar()
             } else if (CarInfoReducer.importCar.isResultStatus == 3) {
                 console.log('CarInfoReducer.importCar', '服务器错误')
-                this.props.resetImportCar()                
+                this.props.resetImportCar()
             }
         }
         /************************************************************************************************/
@@ -164,15 +165,16 @@ class CarInformation extends Component {
             if (CarInfoReducer.exportCar.isResultStatus == 0) {
                 console.log('CarInfoReducer.exportCar', '执行成功')
                 this.props.resetExportCar()
+                this.getCarInformation()
             } else if (CarInfoReducer.exportCar.isResultStatus == 1) {
-                console.log('CarInfoReducer.exportCar执行错误', CarInfoReducer.exportCar.failedMsg)
+                console.log('CarInfoReducer.exportCar执行错误')
                 this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 2) {
-                console.log('CarInfoReducer.exportCar', '执行失败')
-                this.props.resetExportCar()              
+                console.log('CarInfoReducer.exportCar执行失败',CarInfoReducer.exportCar.failedMsg)
+                this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 3) {
                 console.log('CarInfoReducer.exportCar', '服务器错误')
-                this.props.resetExportCar()                
+                this.props.resetExportCar()
             }
         }
         /************************************************************************************************/
@@ -239,7 +241,19 @@ class CarInformation extends Component {
     }
 
     onPressExport() {
-
+        let { r_id, p_id, storage_id, id } = this.props.CarInfoReducer.data.car
+        this.props.exportCar({
+            requiredParam: {
+                userId: this.props.user.userId,
+                relId: r_id,
+                relStatus: 2
+            },
+            optionalParam: {
+                parkingId: p_id,
+                storageId: storage_id,
+                carId: id
+            }
+        })
     }
 
     onReceivePhote(param) {
