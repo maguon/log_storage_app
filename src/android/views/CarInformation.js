@@ -170,7 +170,7 @@ class CarInformation extends Component {
                 console.log('CarInfoReducer.exportCar执行错误')
                 this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 2) {
-                console.log('CarInfoReducer.exportCar执行失败',CarInfoReducer.exportCar.failedMsg)
+                console.log('CarInfoReducer.exportCar执行失败', CarInfoReducer.exportCar.failedMsg)
                 this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 3) {
                 console.log('CarInfoReducer.exportCar', '服务器错误')
@@ -417,6 +417,11 @@ class CarInformation extends Component {
                         </Button>
                     </View>
                 </ScrollView>
+                <ConfirmModal
+                    title='确认出库？'
+                    isVisible={confirmModalVisible}
+                    onPressOk={this.props.onPressExportOk}
+                    onPressCancel={this.props.onPressExportCancel} />
             </View>
         )
     }
