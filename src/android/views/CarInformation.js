@@ -24,6 +24,7 @@ class CarInformation extends Component {
         this.onPressExportOk = this.onPressExportOk.bind(this)
         this.onPressExportCancel = this.onPressExportCancel.bind(this)
         this.getCarInformation = this.getCarInformation.bind(this)
+        this.onReceivePhote = this.onReceivePhote.bind(this)
         this.state = {
             confirmModalVisible: false
         }
@@ -177,26 +178,25 @@ class CarInformation extends Component {
                 console.log('CarInfoReducer.exportCar执行失败', CarInfoReducer.exportCar.failedMsg)
                 this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 3) {
-                console.log('CarInfoReducer.exportCar', '服务器错误')
+                console.log('CarInfoReducer.exportCar服务器错误')
                 this.props.resetExportCar()
             }
         }
         /************************************************************************************************/
 
-        /*appendCarImage执行状态*/
-        if (CarInfoReducer.appendCarImage.isExecStatus == 1) {
-            console.log('CarInfoReducer.appendCarImage', '开始执行')
-        } else if (CarInfoReducer.appendCarImage.isExecStatus == 2) {
-            console.log('CarInfoReducer.appendCarImage', '执行完毕')
-            if (CarInfoReducer.appendCarImage.isResultStatus == 0) {
-                console.log('CarInfoReducer.appendCarImage', '执行成功')
-                resetAppendCarImage()
-            } else if (CarInfoReducer.appendCarImage.isResultStatus == 1) {
-                console.log('CarInfoReducer.appendCarImage', '执行错误')
-                resetAppendCarImage()
-            } else if (CarInfoReducer.appendCarImage.isResultStatus == 2) {
-                console.log('CarInfoReducer.appendCarImage', '执行失败')
-                resetAppendCarImage()
+        /*appendImage执行状态*/
+        if (CarInfoReducer.appendImage.isExecStatus == 1) {
+            console.log('CarInfoReducer.appendImage开始执行')
+        } else if (CarInfoReducer.appendImage.isExecStatus == 2) {
+            console.log('CarInfoReducer.appendImage执行完毕')
+            if (CarInfoReducer.appendImage.isResultStatus == 0) {
+                console.log('CarInfoReducer.appendImage执行成功')
+            } else if (CarInfoReducer.appendImage.isResultStatus == 1) {
+                console.log('CarInfoReducer.appendImage执行错误')
+            } else if (CarInfoReducer.appendImage.isResultStatus == 2) {
+                console.log('CarInfoReducer.appendImage执行失败')
+            } else if (CarInfoReducer.appendImage.isResultStatus == 3) {
+                console.log('CarInfoReducer.appendImage服务器错误')
             }
         }
         /************************************************************************************************/
@@ -250,7 +250,26 @@ class CarInformation extends Component {
     }
 
     onReceivePhote(param) {
-        console.log(param)
+        const { vin, id } = this.props.CarInfoReducer.data.car
+        let { postFileParam } = param
+        this.props.appendImage({
+            requiredParam: {
+                carId: id,
+                vin: vin
+            },
+            postParam: {
+                username: this.props.user.mobile,
+                userId: this.props.user.userId,
+                userType: this.props.user.userType
+            },
+            optionalParam: {
+                imageType: 4
+            },
+            postFileParam: {
+                ...postFileParam,
+                key: 'image'
+            }
+        })
     }
 
     onSelect(param) {
@@ -659,8 +678,8 @@ const mapDispatchToProps = (dispatch) => ({
     appendImage: (param) => {
         dispatch(CarInfoAction.appendImage(param))
     },
-    resetAppendCarImage: () => {
-        dispatch(CarInfoAction.resetAppendCarImage())
+    resetAppendImage: () => {
+        dispatch(CarInfoAction.resetAppendImage())
     },
     delImage: (param) => {
         dispatch(CarInfoAction.delImage(param))

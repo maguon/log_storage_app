@@ -145,7 +145,7 @@ export const exportCar = (param) => (dispatch) => {
                 dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
-                    
+
                     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_SUCCESS, payload: {} })
                 } else {
 
@@ -160,34 +160,37 @@ export const resetExportCar = () => (dispatch) => {
 }
 
 export const appendImage = (param) => (dispatch) => {
+    console.log(param)
     let url = `${file_host}user/${param.requiredParam.userId}/image?${ObjectToUrl(param.optionalParam)}`
-    dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_WAITING, payload: {} })
+    dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_WAITING, payload: {} })
     httpRequest
         .postFile(url, param.postFileParam, (err, res) => {
             if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_ERROR, payload: { data: err } })
+                dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
                     url = `${record_host}/car/${param.requiredParam.carId}/vin/${param.requiredParam.vin}/storageImage`
                     param.postParam.url = res.imageId
                     httpRequest.post(url, param.postParam, (carErr, carRes) => {
                         if (carErr) {
-                            dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_ERROR, payload: { data: carErr } })
+                            dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_ERROR, payload: { data: carErr } })
                         } else {
                             if (carRes.success) {
                                 dispatch({
-                                    type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_SUCCESS, payload: {
+                                    type: actionTypes.carInfoTypes.APPEND_IMAGE_SUCCESS, payload: {
                                         data: `${file_host}image/${res.imageId}`
                                     }
                                 })
                             }
                             else {
-                                dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_FAILED, payload: { data: carRes.msg } })
+                                console.log('carRes.msg', carRes.msg)
+                                dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_FAILED, payload: { data: carRes.msg } })
                             }
                         }
                     })
                 } else {
-                    dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_FAILED, payload: { data: res.msg } })
+                    console.log('res', res)
+                    dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_FAILED, payload: { data: res.msg } })
                 }
             }
         })
