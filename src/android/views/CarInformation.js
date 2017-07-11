@@ -10,6 +10,7 @@ import DateTimePicker from '../components/FormComponents/DateTimePicker'
 import * as CarInfoAction from '../../actions/CarInfoAction'
 import * as CarListAction from '../../actions/CarListAction'
 import RichTextBox from '../components/FormComponents/RichTextBox'
+import ConfirmModal from '../components/ConfirmModal'
 
 class CarInformation extends Component {
     constructor(props) {
@@ -23,6 +24,9 @@ class CarInformation extends Component {
         this.onPressExportOk = this.onPressExportOk.bind(this)
         this.onPressExportCancel = this.onPressExportCancel.bind(this)
         this.getCarInformation = this.getCarInformation.bind(this)
+        this.state = {
+            confirmModalVisible: false
+        }
     }
 
     componentWillMount() {
@@ -241,19 +245,8 @@ class CarInformation extends Component {
     }
 
     onPressExport() {
-        let { r_id, p_id, storage_id, id } = this.props.CarInfoReducer.data.car
-        this.props.exportCar({
-            requiredParam: {
-                userId: this.props.user.userId,
-                relId: r_id,
-                relStatus: 2
-            },
-            optionalParam: {
-                parkingId: p_id,
-                storageId: storage_id,
-                carId: id
-            }
-        })
+        this.setState({ confirmModalVisible: true })
+
     }
 
     onReceivePhote(param) {
@@ -302,11 +295,24 @@ class CarInformation extends Component {
     }
 
     onPressExportOk() {
-
+        let { r_id, p_id, storage_id, id } = this.props.CarInfoReducer.data.car
+        this.props.exportCar({
+            requiredParam: {
+                userId: this.props.user.userId,
+                relId: r_id,
+                relStatus: 2
+            },
+            optionalParam: {
+                parkingId: p_id,
+                storageId: storage_id,
+                carId: id
+            }
+        })
+        this.setState({ confirmModalVisible: false })
     }
 
     onPressExportCancel() {
-
+        this.setState({ confirmModalVisible: false })
     }
 
     renderImported() {
@@ -419,9 +425,9 @@ class CarInformation extends Component {
                 </ScrollView>
                 <ConfirmModal
                     title='确认出库？'
-                    isVisible={confirmModalVisible}
-                    onPressOk={this.props.onPressExportOk}
-                    onPressCancel={this.props.onPressExportCancel} />
+                    isVisible={this.state.confirmModalVisible}
+                    onPressOk={this.onPressExportOk}
+                    onPressCancel={this.onPressExportCancel} />
             </View>
         )
     }
