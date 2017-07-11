@@ -19,7 +19,7 @@ import ConfirmModal from '../components/ConfirmModal'
 
 const { width, height } = Dimensions.get('window')
 
-class ImagePage extends Component {
+class ImagePageForCarInfo extends Component {
   constructor(props) {
     super(props)
     this.renderPagination = this.renderPagination.bind(this)
@@ -59,7 +59,7 @@ class ImagePage extends Component {
   }
 
   renderPhoteView() {
-    let { imageList } = this.props.CarInfoReducer.getCarInfo.data
+    let { imageList } = this.props.CarInfoReducer.data
     return imageList.map((item, i) => {
       return <View key={i} style={styles.slide}>
         <PhotoView
@@ -78,7 +78,7 @@ class ImagePage extends Component {
 
     this.setState({ confirmModalVisible: false })
     let { userId } = this.props.user
-    let { recordId, imageList } = this.props.CarInfoReducer.getCarInfo.data
+    let { recordId, imageList } = this.props.CarInfoReducer.data
     let str = file_host + 'image/'
     let url = imageList[this.refs['Swiper'].state.index].replace(str, "")
     let param = {
@@ -102,7 +102,7 @@ class ImagePage extends Component {
 
   render() {
     let { index } = this.props
-    let { recordId, imageList } = this.props.CarInfoReducer.getCarInfo.data
+    let { recordId, imageList } = this.props.CarInfoReducer.data
     return (
       <View style={{ position: 'relative', backgroundColor: '#000' }}>
         <Swiper
@@ -138,23 +138,23 @@ class ImagePage extends Component {
   }
 }
 
-// const mapStateToProps = (state) => {
-//   return {
-//     CarInfoReducer: state.CarInfoReducer,
-//     user: state.LoginReducer.user
-//   }
-// }
+const mapStateToProps = (state) => {
+  return {
+    CarInfoReducer: state.CarInfoReducer,
+    user: state.LoginReducer.user
+  }
+}
 
-// const mapDispatchToProps = (dispatch) => ({
-//   delImage: (param) => {
-//     dispatch(CarInfoAction.delImage(param))
-//   },
-//   resetDelImage: () => {
-//     dispatch(CarInfoAction.resetDelImage())
-//   }
-// })
+const mapDispatchToProps = (dispatch) => ({
+  delImage: (param) => {
+    dispatch(CarInfoAction.delImage(param))
+  },
+  resetDelImage: () => {
+    dispatch(CarInfoAction.resetDelImage())
+  }
+})
 
-// export default connect(mapStateToProps, mapDispatchToProps)(ImagePage)
+export default connect(mapStateToProps, mapDispatchToProps)(ImagePageForCarInfo)
 
 
 var styles = {

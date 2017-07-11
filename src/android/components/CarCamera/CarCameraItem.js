@@ -17,7 +17,6 @@ export default class CarCameraItem extends Component {
 
     render() {
         let { imgIndex, uri, showImagePage } = this.props
-        //console.log(showImagePage)
         return <TouchableOpacity onPress={() => { showImagePage({ index: imgIndex , imgList: this.props.images }) }}>
             <View style={styles.item}>
                 <Image source={{ uri: uri }}

@@ -201,7 +201,7 @@ class CarInformation extends Component {
                 this.props.resetAppendImage()
             } else if (CarInfoReducer.appendImage.isResultStatus == 3) {
                 console.log('CarInfoReducer.appendImage服务器错误')
-                this.props.resetAppendImage()                
+                this.props.resetAppendImage()
             }
         }
         /************************************************************************************************/
@@ -428,7 +428,7 @@ class CarInformation extends Component {
                         <CarCamera
                             images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
-                            showImagePage={Actions.ImagePageForCarInfo} />
+                            showImagePage={RouterDirection.ImagePageForCarInfo(this.props.parent)} />
                         <Button
                             full
                             onPress={() => RouterDirection.selectRow(this.props.parent)({
@@ -503,7 +503,7 @@ class CarInformation extends Component {
                         <CarCamera
                             images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
-                            showImagePage={Actions.ImagePageForCarInfo} />
+                            showImagePage={RouterDirection.ImagePageForCarInfo(this.props.parent)} />
                         <Button full
                             onPress={() => RouterDirection.selectStorage(this.props.parent)({
                                 routerIndex: 0,
@@ -609,7 +609,7 @@ class CarInformation extends Component {
                         <CarCamera
                             images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
-                            showImagePage={Actions.ImagePageForCarInfo} />
+                            showImagePage={RouterDirection.ImagePageForCarInfo(this.props.parent)} />
                         <Button
                             block
                             onPress={() => RouterDirection.selectStorage(this.props.parent)({

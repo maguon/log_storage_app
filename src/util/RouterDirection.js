@@ -98,5 +98,12 @@ export const selectColumn = (parent) => {
     if (parent === 'settingBlock') return Actions.selectColumnAtSettingBlock
 }
 
+export const ImagePageForCarInfo = (parent) => {
+    if (parent === 'homeBlock') return Actions.ImagePageForCarInfoAtHomeBlock
+    if (parent === 'carBlock') return Actions.ImagePageForCarInfoAtCarBlock
+    if (parent === 'storageBlock') return Actions.ImagePageForCarInfoAtStorageBlock
+    if (parent === 'settingBlock') return Actions.ImagePageForCarInfoAtSettingBlock
+}
+
 
 
