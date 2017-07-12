@@ -28,11 +28,25 @@ class ImagePageForCarInfo extends Component {
     this.onPressCancel = this.onPressCancel.bind(this)
     this.delImage = this.delImage.bind(this)
     this.state = {
-      confirmModalVisible: false
+      confirmModalVisible: false,
+      photoViewIndex: 0
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.index) {
+      this.setState({ photoViewIndex: this.props.index })
     }
   }
 
   renderPagination(index, total, context) {
+     console.log('index', index)
+    // console.log('total', total)
+    //context.setState({index})
+    console.log('context', context)
+    console.log('context', context.props.children[index])
+    
+    //context.scrollBy(index)
     return (
       <View style={{
         flex: 1,
@@ -60,16 +74,21 @@ class ImagePageForCarInfo extends Component {
 
   renderPhoteView() {
     let { imageList } = this.props.CarInfoReducer.data
+    console.log(imageList)
     return imageList.map((item, i) => {
-      return <View key={i} style={styles.slide}>
+      // console.log(i, item)
+      return <View key={i} style={{ flex: 1 }} >
         <PhotoView
           source={{ uri: item }}
+          loadingIndicatorSource={{ uri: item }}
           resizeMode='contain'
-          minimumZoomScale={0.5}
-          maximumZoomScale={4}
+          minimumZoomScale={1}
+          maximumZoomScale={3}
           androidScaleType='center'
+          onLoad={() => console.log(item)}
           style={styles.photo}
         />
+        <Text style={{ color: "#fff" }}>{item}</Text>
       </View>
     })
   }
@@ -103,6 +122,7 @@ class ImagePageForCarInfo extends Component {
   render() {
     let { index } = this.props
     let { recordId, imageList } = this.props.CarInfoReducer.data
+
     return (
       <View style={{ position: 'relative', backgroundColor: '#000' }}>
         <Swiper
@@ -111,10 +131,125 @@ class ImagePageForCarInfo extends Component {
           style={styles.wrapper}
           renderPagination={this.renderPagination}
           loop={false}
-
+          loadMinimal={true}
+          loadMinimalSize={20}
+          //removeClippedSubviews={false}
+          automaticallyAdjustContentInsets={true}
+          //autoplay={true}
+          onScrollBeginDrag={(e, state, context) => {
+            console.log('e', e)
+            console.log('state', state)
+            console.log('context', context)
+          }}
+          onMomentumScrollEndg={(e, state, context) => {
+            console.log('e', e)
+            console.log('state', state)
+            console.log('context', context)
+          }}
         >
+          {/*<PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />
+                    <PhotoView
+      
+            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
+            resizeMode='contain'
+            minimumZoomScale={1}
+            maximumZoomScale={3}
+            androidScaleType='center'
+            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
+            style={styles.photo}
+          />*/}
           {this.renderPhoteView()}
         </Swiper>
+        {/*{this.renderPhoteView()}*/}
         <View style={{ position: 'absolute', top: 0, backgroundColor: 'rgba(255,255,255,0.1)', height: 40, width: width, flexDirection: 'row' }}>
           <Button iconLeft transparent style={{ position: 'absolute', left: 0, }}
             onPress={Actions.pop}>
