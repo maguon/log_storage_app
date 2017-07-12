@@ -37,9 +37,12 @@ class CarInformation extends Component {
                     userId: this.props.user.userId,
                     carId: this.props.carId
                 },
-                optionalParam: {
+                carOptionalParam: {
                     vin: this.props.vin,
                     active: 1
+                },
+                carListOptionalParam: {
+                    vin: this.props.vin
                 }
             })
         }
@@ -60,9 +63,12 @@ class CarInformation extends Component {
                 userId: this.props.user.userId,
                 carId: this.props.CarInfoReducer.data.car.id
             },
-            optionalParam: {
+            carOptionalParam: {
                 vin: this.props.CarInfoReducer.data.car.vin,
                 active: 1
+            },
+            carListOptionalParam: {
+                vin: this.props.CarInfoReducer.data.car.vin
             }
         })
     }
@@ -304,10 +310,10 @@ class CarInformation extends Component {
             putParam.orderDate = new Date(putParam.orderDate).toLocaleDateString()
         }
         if (route_end_id != putParam.routeEndId) {
-            delete putParam['entrustId']
+            delete putParam['receiveId']
         }
         if (route_start_id != putParam.routeStartId) {
-            delete putParam['receiveId']
+            delete putParam['baseAddrId']
         }
         this.props.updateCarInfo({
             requiredParam: {
@@ -340,7 +346,7 @@ class CarInformation extends Component {
     }
 
     renderImported() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, storage_name, row, col, remark, storage_id } = this.props.CarInfoReducer.data.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, route_end_id, route_start_id, order_date, storage_name, row, col, remark, storage_id } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -380,7 +386,7 @@ class CarInformation extends Component {
                                 isRequire={false}
                                 title='发货地址：'
                                 value={addr_name}
-                                showList={RouterDirection.selectBaseAddr(this.props.parent)}
+                                showList={(param) => RouterDirection.selectBaseAddr(this.props.parent)({ cityId: route_start_id, ...param })}
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
                                 defaultValue={'请选择'}
                             />
@@ -398,7 +404,7 @@ class CarInformation extends Component {
                                 isRequire={false}
                                 title='经销商：'
                                 value={re_short_name}
-                                showList={RouterDirection.selectReceive(this.props.parent)}
+                                showList={(param) => RouterDirection.selectReceive(this.props.parent)({ cityId: route_end_id, ...param })}
                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
                                 defaultValue={'请选择'}
                             />
@@ -457,7 +463,7 @@ class CarInformation extends Component {
     }
 
     renderExported() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.CarInfoReducer.data.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, remark } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -500,6 +506,10 @@ class CarInformation extends Component {
                             <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
                             <Text style={{ flex: 13 }}>已出库</Text>
                         </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ flex: 4, textAlign: 'right' }}>备注：</Text>
+                            <Text style={{ flex: 13 }}>{remark}</Text>
+                        </View>
                         <CarCamera
                             images={this.props.CarInfoReducer.data.imageList}
                             postImage={this.onReceivePhote}
@@ -522,7 +532,7 @@ class CarInformation extends Component {
     }
 
     renderNeverImport() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date } = this.props.CarInfoReducer.data.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name,route_start_id, route_end_id,route_start, route_end, order_date } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -561,7 +571,7 @@ class CarInformation extends Component {
                                 isRequire={false}
                                 value={addr_name}
                                 title='发货地址：'
-                                showList={RouterDirection.selectBaseAddr(this.props.parent)}
+                                showList={(param) => RouterDirection.selectBaseAddr(this.props.parent)({ cityId: route_start_id, ...param })}
                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
                                 defaultValue={'请选择'}
                             />
@@ -579,7 +589,7 @@ class CarInformation extends Component {
                                 isRequire={false}
                                 value={re_short_name}
                                 title='经销商：'
-                                showList={RouterDirection.selectReceive(this.props.parent)}
+                                showList={(param) => RouterDirection.selectReceive(this.props.parent)({ cityId: route_end_id, ...param })}
                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
                                 defaultValue={'请选择'}
                             />

@@ -5,14 +5,16 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const getCarInformation = (param) => (dispatch) => {
     let urls = [`${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`,
-    `${base_host}/car?${ObjectToUrl(param.optionalParam)}`]
+    //`${base_host}/car?${ObjectToUrl(param.optionalParam)}`,
+    `${base_host}/car?${ObjectToUrl(param.carOptionalParam)}`,
+    `${base_host}/carList?${ObjectToUrl(param.carListOptionalParam)}`]
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
     httpRequest
         .getAll(urls, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_ERROR, payload: { data: err } })
             } else {
-                if (res[0].success && res[1].success) {
+                if (res[0].success && res[1].success && res[2].success) {
                     dispatch({
                         type: actionTypes.carInfoTypes.GET_CARINFO_SUCCESS, payload: {
                             data: {
@@ -21,15 +23,15 @@ export const getCarInformation = (param) => (dispatch) => {
                                     return `${file_host}image/${item.url}`
                                 }),
                                 recordId: res[0].result[0]._id,
-                                car: res[1].result[0]
+                                car: res[1].result.length > 0 ? res[1].result.shift() : res[2].result.shift()
                             }
                         }
                     })
                 } else {
-                    if (res[0].code || res[0].code) {
-                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_SERVICEERROR, payload: { data: `${res[0].message}&&${res[1].message}` } })
+                    if (res[0].code || res[1].code || res[2].code) {
+                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_SERVICEERROR, payload: { data: `${res[0].message}&&${res[1].message}&&${res[2].message}` } })
                     } else {
-                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_FAILED, payload: { data: `${res[0].msg}&&${res[1].msg}` } })
+                        dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_FAILED, payload: { data: `${res[0].msg}&&${res[1].msg}&&${res[2].msg}` } })
                     }
                 }
             }

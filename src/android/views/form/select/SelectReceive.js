@@ -16,7 +16,16 @@ class SelectReceive extends Component {
     }
 
     componentDidMount() {
-        this.props.getReceiveAll()
+        if (this.props.cityId) {
+            this.props.getReceiveAll({
+                optionalParam: {
+                    cityId: this.props.cityId
+                }
+            })
+        }
+        else {
+            this.props.getReceiveAll({ optionalParam: {} })
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -71,8 +80,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getReceiveAll: () => {
-        dispatch(SelectReceiveAction.getReceiveAll())
+    getReceiveAll: (param) => {
+        dispatch(SelectReceiveAction.getReceiveAll(param))
     },
 })
 

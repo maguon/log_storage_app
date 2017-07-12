@@ -20,19 +20,24 @@ export const getVinList = (param, timeStamp, vin, pageSize) => (dispatch) => {
         })
 }
 
-export const search = (param, vin) => (dispatch) => {
+export const search = (param) => (dispatch) => {
     dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_WAITING, payload: {} })
-    let url = `${base_host}/car?${ObjectToUrl(param.optionalParam)}`
+    let url = [`${base_host}/car?${ObjectToUrl(param.carOptionalParam)}`,
+    `${base_host}/carList?${ObjectToUrl(param.carListOptionalParam)}`]
     httpRequest
-        .get(url, (err, res) => {
+        .getAll(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_ERROR, payload: { data: err } })
             } else {
-                if (res.success) {
-                    //let data = (res.result.length > 0) ? res.result.shift() : {}
-                    dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_SUCCESS, payload: { data: res.result.shift() } })
-                } else {
-                    dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_FAILED, payload: { data: res.msg } })
+                if (res[0].success && res[1].success) {
+                    dispatch({
+                        type: actionTypes.searchVinTypes.SEARCH_CAR_SUCCESS, payload: {
+                            data: res[0].result.length > 0 ? res[0].result.shift() : res[1].result.shift()
+                        }
+                    })
+                }
+                else {
+                    dispatch({ type: actionTypes.searchVinTypes.SEARCH_CAR_FAILED, payload: { data: `${res[0].msg}&&${res[1].msg}` } })
                 }
             }
         })

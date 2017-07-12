@@ -29,10 +29,10 @@ class AddCar extends Component {
             carMakeRequire: false,
             entrustRequire: false,
             receiveRequire: true,
-            routeStartRequire: true,
+            routeStartRequire: false,
             routeEndRequire: true,
             vinRequire: false,
-            baseAddrRequire: true,
+            baseAddrRequire: false,
             remarkRequire: true,
         }
         this.addCar = this.addCar.bind(this)
@@ -87,8 +87,9 @@ class AddCar extends Component {
 
 
     render() {
-        let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, remark } = this.props.AddCarReducer.addCar.data
+        let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, routeStartId, routeEndId, baseAddr, remark } = this.props.AddCarReducer.addCar.data
         console.log('this.props.AddCarReducer.addCar.data', this.props.AddCarReducer.addCar.data)
+        console.log('routeStartId', routeStartId)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -110,6 +111,7 @@ class AddCar extends Component {
                             <Select
                                 isRequire={true}
                                 title='品牌：'
+                                value={makeName}
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ makeId: param.id, makeName: param.value })}
                                 onRequire={(param) => this.setState({ carMakeRequire: param })}
@@ -118,26 +120,30 @@ class AddCar extends Component {
                             <Select
                                 isRequire={true}
                                 title='委托方：'
+                                value={entrust}
                                 showList={RouterDirection.selectEntrust(this.props.parent)}
-                                onValueChange={(param) => this.props.changeAddCarField({ entrustId: param.id })}
+                                onValueChange={(param) => this.props.changeAddCarField({ entrustId: param.id, entrust: param.value })}
                                 onRequire={(param) => this.setState({ entrustRequire: param })}
                                 defaultValue='请选择'
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <Select
-                                isRequire={false}
+                                isRequire={true}
                                 title='起始城市：'
+                                value={routeStart}
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ routeStartId: param.id, routeStart: param.value })}
                                 onRequire={(param) => this.setState({ routeStartRequire: param })}
                                 defaultValue='请选择'
                             />
                             <Select
-                                isRequire={false}
+                                isRequire={true}
                                 title='发货地址：'
-                                showList={RouterDirection.selectBaseAddr(this.props.parent)}
-                                onValueChange={(param) => this.props.changeAddCarField({ baseAddrId: param.id })}
+                                value={baseAddr}
+                                isEnable={routeStartId ? true : false}
+                                showList={(param) => RouterDirection.selectBaseAddr(this.props.parent)({ cityId: routeStartId, ...param })}
+                                onValueChange={(param) => this.props.changeAddCarField({ baseAddrId: param.id, baseAddr: param.value })}
                                 onRequire={(param) => this.setState({ baseAddrRequire: param })}
                                 defaultValue='请选择'
                             />
@@ -146,6 +152,7 @@ class AddCar extends Component {
                             <Select
                                 isRequire={false}
                                 title='目的城市：'
+                                value={routeEnd}
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ routeEndId: param.id, routeEnd: param.value })}
                                 onRequire={(param) => this.setState({ routeEndRequire: param })}
@@ -154,14 +161,17 @@ class AddCar extends Component {
                             <Select
                                 isRequire={false}
                                 title='经销商：'
-                                showList={RouterDirection.selectReceive(this.props.parent)}
-                                onValueChange={(param) => this.props.changeAddCarField({ receiveId: param.id })}
+                                value={receive}
+                                isEnable={routeEndId ? true : false}
+                                showList={(param) => RouterDirection.selectReceive(this.props.parent)({ cityId: routeEndId, ...param })}
+                                onValueChange={(param) => this.props.changeAddCarField({ receiveId: param.id, receive: param.value })}
                                 onRequire={(param) => this.setState({ receiveRequire: param })}
                                 defaultValue='请选择'
                             />
                             <DateTimePicker
                                 isRequire={false}
                                 title='指令时间：'
+                                value={orderDate}
                                 defaultValue='请选择'
                                 onValueChange={(param) => this.props.changeAddCarField({ orderDate: param })}
                                 onRequire={(param) => { this.setState({ orderDateRequire: param }) }}
@@ -173,7 +183,8 @@ class AddCar extends Component {
                                 isRequire={false}
                                 title='备注：'
                                 verifications={[]}
-                                defaultValue={remark ? remark : ''}
+                                value={remark}
+                                defaultValue={'请填写'}
                                 onValueChange={(param) => this.props.changeAddCarField({ remark: param })}
                                 onRequire={(flag) => { this.setState({ remarkRequire: flag }) }}
                                 showRichText={RouterDirection.richText(this.props.parent)}

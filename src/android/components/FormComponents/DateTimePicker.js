@@ -54,7 +54,15 @@ export default class DateTimePicker extends Component {
     }
 
     componentWillMount() {
-        this.setState({ dataTime: this.props.defaultValue })
+        this.setState({ dataTime: this.props.value })
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value) {
+            this.setState({ dataTime: nextProps.value })
+        } else {
+            this.setState({ dataTime: nextProps.defaultValue })
+        }
     }
 
     changeDateTime(value) {
@@ -70,7 +78,7 @@ export default class DateTimePicker extends Component {
         let flag = !(warnMessageList.length > 0)
 
         if (this.props.isRequire) {
-            flag = !((value == this.props.defaultValue) || !flag)          
+            flag = !((value == this.props.defaultValue) || !flag)
         }
         this.props.onRequire(flag)
     }
@@ -123,17 +131,17 @@ export default class DateTimePicker extends Component {
             <TouchableHighlight
                 underlayColor='rgba(0,0,0,0.1)'
                 onPress={() => this.showPicker({ date: new Date(), mode: 'spinner' })}>
-                
-                    <View style={this.props.containerSytle}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
-                            <Text style={this.props.textStyle}>{this.state.dataTime}</Text>
-                            <Icon
-                                name='md-arrow-dropdown'
-                                style={this.props.iconSytle} />
-                        </View>
-                        {this.renderValidateMessage()}
-                    
+
+                <View style={this.props.containerSytle}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={this.props.labelStyle}>{this.renderTag()}{this.props.title}</Text>
+                        <Text style={this.props.textStyle}>{this.state.dataTime}</Text>
+                        <Icon
+                            name='md-arrow-dropdown'
+                            style={this.props.iconSytle} />
+                    </View>
+                    {this.renderValidateMessage()}
+
                 </View>
 
             </TouchableHighlight>

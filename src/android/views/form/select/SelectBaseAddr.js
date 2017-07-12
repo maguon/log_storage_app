@@ -10,13 +10,20 @@ import { List, ListItem } from 'native-base'
 class SelectBaseAddr extends Component {
     constructor(props) {
         super(props)
-
-
         this.onSelectBaseAddr = this.onSelectBaseAddr.bind(this)
     }
 
     componentDidMount() {
-        this.props.getBaseAddrAll()
+        if (this.props.cityId) {
+            this.props.getBaseAddrAll({
+                optionalParam: {
+                    cityId: this.props.cityId
+                }
+            })
+        }
+        else {
+            this.props.getBaseAddrAll({ optionalParam: {} })
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -73,8 +80,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getBaseAddrAll: () => {
-        dispatch(SelectBaseAddrAction.getBaseAddrAll())
+    getBaseAddrAll: (param) => {
+        dispatch(SelectBaseAddrAction.getBaseAddrAll(param))
     },
 })
 

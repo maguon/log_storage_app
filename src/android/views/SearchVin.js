@@ -98,9 +98,12 @@ class SearchVin extends Component {
 
     onPressIcon() {
         let param = {
-            optionalParam: {
+            carOptionalParam: {
                 vin: this.state.vin,
                 active: 1
+            },
+            carListOptionalParam: {
+                vin: this.state.vin
             }
         }
         this.props.search(param)
@@ -118,7 +121,7 @@ class SearchVin extends Component {
 
     render() {
         let { vinList } = this.props.SearchVinReducer.getVinList.data
-
+        console.log('vinList', vinList)
         return (
             <SearchCarListLayout
                 vinList={vinList}
