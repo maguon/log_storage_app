@@ -14,7 +14,7 @@ import * as RouterDirection from '../../util/RouterDirection'
 class ImportCar extends Component {
     constructor(props) {
         super(props)
-        this.onGetParkingId = this.onGetParkingId.bind(this)
+        this.onPressImport = this.onPressImport.bind(this)
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -36,11 +36,11 @@ class ImportCar extends Component {
         return true
     }
     static defaultProps = {
-        carId: 514,
-        vin: '11231233453245544'
+        carId: 0,
+        vin: ''
     }
 
-    onGetParkingId(param) {
+    onPressImport(param) {
         this.props.importCar({
             requiredParam: { userId: this.props.user.userId, carId: this.props.carId },
             OptionalParam: { vin: this.props.vin },
@@ -49,26 +49,31 @@ class ImportCar extends Component {
     }
 
     render() {
-        
+        console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
                 {/*<TopBar title='车辆入库' />*/}
                 <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 20 }}>
                     <Button
                         full
-                        onPress={() => { Actions.SelectStorage({ chageParkingId: this.onGetParkingId }) }}
+                        onPress={() => RouterDirection.selectStorage(this.props.parent)({
+                            routerIndex: 0,
+                            popName: this.props.name,
+                            routerList: [RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
+                            onSelect: this.onPressImport
+                        })}
                         style={{ marginBottom: 20, backgroundColor: '#00cade' }}>
                         <Text style={{ color: '#fff' }}>入库</Text>
                     </Button>
                     <Button
                         full
-                        onPress={() => { }}
+                        onPress={RouterDirection.addCar(this.props.parent)}
                         style={{ marginBottom: 20, backgroundColor: '#00cade' }}>
                         <Text style={{ color: '#fff' }}>继续增加车辆</Text>
                     </Button>
                     <Button
                         full
-                        onPress={() => { }}
+                        onPress={RouterDirection.addCar(this.props.parent)}
                         style={{ backgroundColor: '#00cade' }}>
                         <Text style={{ color: '#fff' }}>返回</Text>
                     </Button>
