@@ -52,7 +52,6 @@ class ImportCar extends Component {
         console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
-                {/*<TopBar title='车辆入库' />*/}
                 <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 20 }}>
                     <Button
                         full
@@ -67,13 +66,13 @@ class ImportCar extends Component {
                     </Button>
                     <Button
                         full
-                        onPress={RouterDirection.addCar(this.props.parent)}
+                        onPress={() => Actions.pop({ popNum: 2 })}
                         style={{ marginBottom: 20, backgroundColor: '#00cade' }}>
                         <Text style={{ color: '#fff' }}>继续增加车辆</Text>
                     </Button>
                     <Button
                         full
-                        onPress={RouterDirection.addCar(this.props.parent)}
+                        onPress={() => Actions.pop({ popNum: 4 })}
                         style={{ backgroundColor: '#00cade' }}>
                         <Text style={{ color: '#fff' }}>返回</Text>
                     </Button>

@@ -182,7 +182,11 @@ class AddCar extends Component {
                             <RichTextBox
                                 isRequire={false}
                                 title='备注：'
-                                verifications={[]}
+                                verifications={[{
+                                    type: 'isLength',
+                                    arguments: [0, 300],
+                                    message: '长度0-300位'
+                                }]}
                                 value={remark}
                                 defaultValue={'请填写'}
                                 onValueChange={(param) => this.props.changeAddCarField({ remark: param })}

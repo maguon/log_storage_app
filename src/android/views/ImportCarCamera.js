@@ -86,9 +86,9 @@ class ImportCarCamera extends Component {
 
     render() {
         let { imageList } = this.props.ImportCarCameraReducer.importCarImage.data
+        console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
-                {/*<TopBar title='上传图片' />*/}
                 <View style={{ flex: 1 }}>
                     <ScrollView>
                         <View style={{
@@ -96,7 +96,7 @@ class ImportCarCamera extends Component {
                         }}>
                             <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
                         </View>
-                        <Button block onPress={RouterDirection.importCar(this.props.parent)} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
+                        <Button block onPress={()=>RouterDirection.importCar(this.props.parent)()} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
                             <Text style={{ color: '#ffffff' }}>下一步</Text>
                         </Button>
                     </ScrollView>

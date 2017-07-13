@@ -87,19 +87,6 @@ export default class RichTextBox extends Component {
         onRequire: (param) => { }
     }
 
-    /*renderValidateMessage() {
-        let warnMessage
-        if (this.state.warnMessageList.length > 0) {
-            warnMessage = this.state.warnMessageList.reduce((acc, val) => {
-                return `${acc}${val}  `
-            }, '')
-            warnMessage = (<View style={{ alignSelf: 'flex-start' }}>
-                <Text style={this.props.messageSytle}>{warnMessage}</Text>
-            </View>)
-        }
-        return warnMessage
-    }*/
-
     renderTag() {
         if (this.props.isRequire) {
             return <Text style={{ color: 'red', textAlign: 'left' }}>* </Text>
@@ -123,25 +110,8 @@ export default class RichTextBox extends Component {
                             name='ios-arrow-forward'
                             style={this.props.iconSytle} />
                     </View>
-                    {/*{this.renderValidateMessage()}*/}
                 </View>
-
-
             </TouchableHighlight>
         )
     }
 }
-
-
-                    /*<View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                        <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => Actions.RichText({ onGetValue: this.changeAddCarField, richTextValue: remark })}>
-                            <View style={{ flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10, justifyContent: 'space-between', alignItems: 'center' }}>
-                                <Text style={{ fontSize: 14, flex: 3, textAlign: 'right' }}>备注：</Text>
-                                <Text style={{ fontSize: 14, flex: 10 }}>{remark}</Text>
-                                <Icon name='ios-arrow-forward' style={{ fontSize: 18, flex: 1, textAlign: 'right', color: '#7a7a7a' }} />
-                            </View>
-                        </TouchableHighlight>
-                    </View>*/
-
-
-
