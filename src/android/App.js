@@ -121,7 +121,7 @@ export default class App extends Component {
                             </Scene>
                             <Scene key="carBlock" initial={true} icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="query" initial={true} component={Query} hideNavBar />
-                                <Scene key="carList" component={CarList} hideNavBar />
+                                <Scene key="carList" title="车辆列表"  component={CarList}  hideNavBar={false} navBar={NavBar}  hideTabBar/>
                                 <Scene key="carInformationAtCarBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />

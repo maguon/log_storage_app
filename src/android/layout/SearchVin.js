@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import Car from '../components/CarList/CarListItem'
 import { Actions } from 'react-native-router-flux'
 import SearchBar from '../components/Bar/SearchBar'
-import CarListComponent from '../components/CarList/CarList'
 import SearchVinList from '../components/SearchVinList'
 import NavSearchBar from '../components/Bar/NavSearchBar'
 

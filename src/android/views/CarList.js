@@ -2,7 +2,17 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as CarListAction from '../../actions/CarListAction'
 import { Actions } from 'react-native-router-flux'
-import CarListLayout from '../layout/CarList'
+import CarListItem from '../components/CarList/CarListItem'
+import {
+    Text,
+    View,
+    StyleSheet,
+    Dimensions,
+    RefreshControl,
+    FlatList,
+    Button,
+    TouchableHighlight
+} from 'react-native'
 
 class CarList extends Component {
     constructor(props) {
@@ -10,28 +20,30 @@ class CarList extends Component {
         this.getCarList = this.getCarList.bind(this)
         this.getCarListMore = this.getCarListMore.bind(this)
     }
-
-    componentDidMount() {
-        this.getCarList()
+    componentWillMount() {
+        console.log(this.props)
+        if (this.props.queryCar) {
+            this.getCarList(this.props.queryCar)
+        }
+        else {
+            this.getCarList({})
+        }
     }
 
-    getCarList(storageId = 0) {
-        let { userId } = this.props.user
-        let { selectStorageListForCarList } = this.props.selectStorageForCarListReducer
-        let param = {
-            // requiredParam: {
-            //     userid: userId
-            // },
-            optionalParam: {
-                start: 0,
-                size: 20,
-                active: 1,
-                relStatus: 1
-            }
-        }
-        if (storageId != 0)
-            param.optionalParam.storageId = storageId
-        this.props.getCarList(param)
+    getCarList(param) {
+        // let { userId } = this.props.user
+        // let { selectStorageListForCarList } = this.props.selectStorageForCarListReducer
+        // let param = {
+        //     optionalParam: {
+        //         start: 0,
+        //         size: 20,
+        //         active: 1,
+        //         relStatus: 1
+        //     }
+        // }
+        // if (storageId != 0)
+        //     param.optionalParam.storageId = storageId
+        this.props.getCarList({ optionalParam: { ...param, start: 0, size: 20, active: 1, } })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -111,12 +123,21 @@ class CarList extends Component {
         let { carList } = this.props.carListReducer.getCarList.data
         let { selectStorageListForCarList } = this.props.selectStorageForCarListReducer
         return (
-            <CarListLayout
+            <View style={{ flex: 1 }}>
+                <FlatList
+                    colors={'#00cade'}
+                    onEndReached={this.getCarListMore}
+                    data={carList}
+                    onEndReachedThreshold={1}
+                    renderItem={({ item }) => <CarListItem car={item} key={item.r_id} />}
+                />
+            </View>
+            /*<CarListLayout
                 cars={carList}
                 getCarListWaiting={this.props.carListReducer.getCarList.isExecStatus == 1}
                 getCarListMore={this.getCarListMore}
                 storageName={selectStorageListForCarList.storage_name}
-                changeSearchVin={this.props.changeSearchVin} />
+                changeSearchVin={this.props.changeSearchVin} />*/
         )
     }
 }

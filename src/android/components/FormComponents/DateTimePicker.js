@@ -54,7 +54,7 @@ export default class DateTimePicker extends Component {
     }
 
     componentWillMount() {
-        this.setState({ dataTime: this.props.value })
+        this.setState({ dataTime: this.props.defaultValue })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -89,7 +89,8 @@ export default class DateTimePicker extends Component {
         labelStyle: styles.labelStyle,
         textStyle: styles.textStyle,
         iconSytle: baseStyles.iconSytle,
-        messageSytle: styles.messageSytle
+        messageSytle: styles.messageSytle,
+        onRequire: (param) => { }
     }
 
 

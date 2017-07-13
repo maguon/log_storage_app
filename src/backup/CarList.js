@@ -13,10 +13,6 @@ const CarList = ({ cars, getCarListWaiting, getCarListMore, storageName, getCarL
     let viewStyle = { backgroundColor: '#00cade' }
     return (
         <View style={{ flex: 1, width: window.width }}>
-            <SearchBar
-                viewStyle={viewStyle}
-                changeSearchVin={changeSearchVin}
-                routerPos={() => Actions.searchVinAtCar({ carInfoPos: Actions.carInfo })} />
             <CarListComponent
                 cars={cars}
                 getCarListWaiting={getCarListWaiting}

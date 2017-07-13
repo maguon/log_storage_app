@@ -18,21 +18,10 @@ import { Actions } from 'react-native-router-flux'
 const window = Dimensions.get('window')
 
 const CarList = ({ cars, getCarListWaiting, getCarListMore, storageName }) => {
-    let CarListItems = cars.map((item) => {
-        return <CarListItem car={item} key={item.r_id} />
-    })
     let viewStyle = { backgroundColor: '#00cade' }
-
-    let header = storageName ? (<TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={Actions.selectStorageForCarList}>
-        <View style={{ backgroundColor: '#708e9b', flexDirection: "row", paddingHorizontal: 10, paddingVertical: 10 }}>
-            <Text style={{ flex: 12, color: '#fff', fontWeight: 'bold' }}>{storageName}</Text>
-            <Icon name='md-arrow-dropright' style={{ flex: 1, fontSize: 20, color: '#fff', textAlign: 'right' }} type="ionicons" />
-        </View>
-    </TouchableHighlight>) : (<View></View>)
 
     return (
         <View style={{ flex: 1 }}>
-            {header}
             <FlatList
                 colors={'#00cade'}
                 refreshing={getCarListWaiting}
