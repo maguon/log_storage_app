@@ -16,7 +16,25 @@ class Query extends Component {
         this.onPressIcon = this.onPressIcon.bind(this)
         this.onPressTextInput = this.onPressTextInput.bind(this)
         this.onSelect = this.onSelect.bind(this)
-
+        this.state = {
+            vinCode: '',
+            makeId: 0,
+            markeName: '',
+            storageId: 0,
+            storageName: '',
+            routeStartId: 0,
+            routeStart: '',
+            routeEndId: 0,
+            routeEnd: '',
+            entrustId: 0,
+            entrust: '',
+            orderStart: '',
+            orderEnd: '',
+            enterStart: '',
+            enterEnd: '',
+            realStart: '',
+            realEnd: ''
+        }
     }
 
     onBarcodeReceived(param) {
@@ -30,10 +48,11 @@ class Query extends Component {
     }
 
     onSelect(param) {
-
+        this.setState({ ...param })
     }
 
     render() {
+        console.log(this.state)
         return (
             <View style={{ flex: 1 }}>
                 <SearchBar
@@ -47,10 +66,18 @@ class Query extends Component {
                             <Text style={{ color: '#00cade', flex: 4, textAlign: 'right' }}>vin：</Text>
                             <Text style={{ color: '#00cade', flex: 13 }}></Text>
                         </View>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
+                        <View style={{ marginTop: 10, backgroundColor: '#eff3f5', borderTopWidth: 1, borderTopColor: '#00cade' }}>
                             <Select
                                 isRequire={false}
                                 title='品牌：'
+                                value={this.state.markeName}
+                                showList={RouterDirection.selectCarMake(this.props.parent)}
+                                onValueChange={(param) => this.onSelect({ makeId: param.id, markeName: param.value })}
+                                defaultValue={'请选择'}
+                            />
+                            <Select
+                                isRequire={false}
+                                title='选择仓库：'
                                 value={''}
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.onSelect(param)}
@@ -58,45 +85,26 @@ class Query extends Component {
                             />
                             <Select
                                 isRequire={false}
-                                value={''}
-                                title='委托方：'
-                                showList={RouterDirection.selectEntrust(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ entrustId: param.id })}
-                                defaultValue={'请选择'}
-                            /></View>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Select
-                                isRequire={false}
-                                title='起始城市：'
-                                value={''}
+                                title='发运地：'
+                                value={this.state.routeStart}
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
                                 defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
-                                value={''}
-                                title='发货地址：'
-                                showList={(param) => RouterDirection.selectBaseAddr(this.props.parent)({ cityId: route_start_id, ...param })}
-                                onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
-                                defaultValue={'请选择'}
-                            />
-                        </View>
-                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-                            <Select
-                                isRequire={false}
-                                value={''}
-                                title='目的城市：'
+                                value={this.state.routeEnd}
+                                title='目的地：'
                                 showList={RouterDirection.selectCity(this.props.parent)}
                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
                                 defaultValue={'请选择'}
                             />
                             <Select
                                 isRequire={false}
-                                value={''}
-                                title='经销商：'
-                                showList={(param) => RouterDirection.selectReceive(this.props.parent)({ cityId: route_end_id, ...param })}
-                                onValueChange={(param) => this.onSelect({ receiveId: param.id })}
+                                value={this.state.entrust}
+                                title='委托方：'
+                                showList={RouterDirection.selectEntrust(this.props.parent)}
+                                onValueChange={(param) => this.onSelect({ entrustId: param.id, entrust: param.value })}
                                 defaultValue={'请选择'}
                             />
                             <DateTimePicker
@@ -106,13 +114,35 @@ class Query extends Component {
                                 defaultValue={'请选择'}
                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
                             />
+                            <DateTimePicker
+                                isRequire={false}
+                                value={''}
+                                title='入库时间：'
+                                defaultValue={'请选择'}
+                                onValueChange={(param) => this.onSelect({ orderDate: param })}
+                            />
+                            <DateTimePicker
+                                isRequire={false}
+                                value={''}
+                                title='出库时间：'
+                                defaultValue={'请选择'}
+                                onValueChange={(param) => this.onSelect({ orderDate: param })}
+                            />
                         </View>
-                        <Button
-                            block
-                            onPress={() => { }}
-                            style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
-                            <Text style={{ color: '#fff' }}>查询</Text>
-                        </Button>
+                        <View style={{ marginTop: 10, flexDirection: 'row', justifyContent: 'center' }}>
+                            <Button
+                                full
+                                onPress={() => { this.setState({ car: {} }) }}
+                                style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                                <Text style={{ color: '#fff' }}>重置</Text>
+                            </Button>
+                            <Button
+                                full
+                                onPress={() => { }}
+                                style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                                <Text style={{ color: '#fff' }}>查询</Text>
+                            </Button>
+                        </View>
                     </View>
                 </ScrollView>
             </View>
