@@ -49,9 +49,21 @@ export default class TextBox extends Component {
     componentWillMount() {
         this.changeValue(this.props.defaultValue)
     }
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.value) {
+            
+            this.setState({ value: nextProps.value })
+        } else {
+            this.setState({ value: nextProps.defaultValue })
+        }
+    }
 
     changeValue(value) {
-        let state = { value: value }
+        //let state = { value: value }
+        let state = {}
+        if (!this.props.value) {
+            state.value = value
+        }
         let warnMessageList = validate(value, this.props.verifications)
         if (warnMessageList.length > 0) {
             state.warnMessageList = warnMessageList

@@ -29,3 +29,7 @@ export const resetAddCarStatus = () => (dispatch) => {
     dispatch({ type: actionTypes.addCarTypes.RESET_ADD_CAR_STATUS, payload: {} })
 }
 
+export const resetAddCar = () => (dispatch) => {
+    dispatch({ type: actionTypes.addCarTypes.RESET_ADD_CAR, payload: {} })
+}
+

@@ -54,7 +54,8 @@ class AddCar extends Component {
             if (AddCarReducer.addCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('保存成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 RouterDirection.importCarCamera(this.props.parent)({ carId: AddCarReducer.addCar.data.id, vin: AddCarReducer.addCar.data.vin })
-                this.props.resetAddCarStatus()
+                this.props.resetAddCar()
+                this.setState({ carMakeRequire: false, entrustRequire: false, routeStartRequire: false, vinRequire: false, baseAddrRequire: false })
                 console.log('AddCarReducer.addCar执行成功')
             } else if (AddCarReducer.addCar.isResultStatus == 1) {
                 console.log('AddCarReducer.addCar执行错误', AddCarReducer.addCar.errorMsg)
@@ -89,7 +90,8 @@ class AddCar extends Component {
                         <TextBox
                             isRequire={true}
                             title='VIN:'
-                            defaultValue={this.props.vin ? this.props.vin : ''}
+                            value={vin}
+                            defaultValue={vin}
                             verifications={[{
                                 type: 'isLength',
                                 arguments: [17, 17],
@@ -238,6 +240,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     resetAddCarStatus: () => {
         dispatch(AddCarAction.resetAddCarStatus())
+    },
+    resetAddCar: () => {
+        dispatch(AddCarAction.resetAddCar())
     }
 })
 
