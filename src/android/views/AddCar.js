@@ -264,13 +264,3 @@ const styles = {
         backgroundColor: '#888888'
     }
 }
-
-
-
-
-// verifications={[]}
-// {
-// type: 'isLength',
-// arguments: [8, 23],
-// message: '长度必须在20-23之间'
-// }

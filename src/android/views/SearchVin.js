@@ -121,7 +121,6 @@ class SearchVin extends Component {
 
     render() {
         let { vinList } = this.props.SearchVinReducer.getVinList.data
-        console.log('vinList', vinList)
         return (
             <SearchCarListLayout
                 vinList={vinList}

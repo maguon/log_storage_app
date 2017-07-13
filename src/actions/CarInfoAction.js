@@ -5,7 +5,6 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const getCarInformation = (param) => (dispatch) => {
     let urls = [`${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`,
-    //`${base_host}/car?${ObjectToUrl(param.optionalParam)}`,
     `${base_host}/car?${ObjectToUrl(param.carOptionalParam)}`,
     `${base_host}/carList?${ObjectToUrl(param.carListOptionalParam)}`]
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })

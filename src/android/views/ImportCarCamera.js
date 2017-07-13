@@ -38,8 +38,8 @@ class ImportCarCamera extends Component {
     }
 
     static defaultProps = {
-        carId: 516,
-        vin: '11111111231231231'
+        carId: 0,
+        vin: ''
     }
 
 
@@ -82,11 +82,9 @@ class ImportCarCamera extends Component {
 
         return true
     }
-    //images={imageList}
 
     render() {
         let { imageList } = this.props.ImportCarCameraReducer.importCarImage.data
-        console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1 }}>
@@ -96,7 +94,7 @@ class ImportCarCamera extends Component {
                         }}>
                             <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
                         </View>
-                        <Button block onPress={()=>RouterDirection.importCar(this.props.parent)()} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
+                        <Button block onPress={() => RouterDirection.importCar(this.props.parent)({ vin: this.props.vin, carId: this.props.carId })} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
                             <Text style={{ color: '#ffffff' }}>下一步</Text>
                         </Button>
                     </ScrollView>

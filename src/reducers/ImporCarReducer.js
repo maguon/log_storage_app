@@ -9,17 +9,13 @@ const initialState = {
         isExecStatus: 0,
         errorMsg: '',
         failedMsg: '',
-        // data: {
-        //     parkingId: 0,
-        //     storageId: 0,
-        //     storageName: ''
-        // }
+        serviceErrorMsg: ''
     }
 }
 
 
 export default handleActions({
-    [actionTypes.imporCarTypes.IMPORT_CAR_SUCCESS]: (state, action) => {
+    [actionTypes.imporCarTypes.IMPORTCAR_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -27,14 +23,11 @@ export default handleActions({
                 ...state.importCar,
                 isResultStatus: 0,
                 isExecStatus: 2,
-                // data: {
-                //     ...state.importCar.data,
-                //     carId: data
-                // }
+
             }
         }
     },
-    [actionTypes.imporCarTypes.IMPORT_CAR_ERROR]: (state, action) => {
+    [actionTypes.imporCarTypes.IMPORTCAR_ERROR]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -46,7 +39,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.imporCarTypes.IMPORT_CAR_FAILED]: (state, action) => {
+    [actionTypes.imporCarTypes.IMPORTCAR_FAILED]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -58,7 +51,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.imporCarTypes.IMPORT_CAR_WAITING]: (state, action) => {
+    [actionTypes.imporCarTypes.IMPORTCAR_WAITING]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -68,39 +61,30 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.imporCarTypes.IMPORT_CAR_RESET_EXECUTE_STATUS]: (state, action) => {
+    [actionTypes.imporCarTypes.RESET_IMPORTCAR]: (state, action) => {
+        return {
+            ...state,
+            importCar: {
+                isResultStatus: 0,
+                isExecStatus: 0,
+                errorMsg: '',
+                failedMsg: '',
+                serviceErrorMsg: ''
+            }
+        }
+    },
+    [actionTypes.imporCarTypes.IMPORTCAR_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
         return {
             ...state,
             importCar: {
                 ...state.importCar,
-                isExecStatus: 0
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
             }
         }
-    },
-    // [actionTypes.imporCarTypes.IMPORT_CAR_RESET]: (state, action) => {
-    //     return {
-    //         ...state,
-    //         importCar: {
-    //             isResultStatus: 0,
-    //             isExecStatus: 0,
-    //             errorMsg: '',
-    //             failedMsg: '',
-    //             data: {
-    //                 parkingId: 0,
-    //                 storageId: 0,
-    //                 storageName: ''
-    //             }
-    //         }
-    //     }
-    // },
-    // [actionTypes.imporCarTypes.CHANGE_IMPORTCAR_FIELD]: (state, action) => {
-    //     const { payload: { data } } = action
-    //     let param = { ...state }
-    //     for (key in data) {
-    //         param.importCar.data[key] = data[key]
-    //     }
-    //     return param
-    // }
+    }
 
 }, initialState)
 

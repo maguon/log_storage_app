@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
     Text,
     View,
+    ToastAndroid
 } from 'react-native'
 import { connect } from 'react-redux'
 import TopBar from '../components/Bar/TopBar'
@@ -17,19 +18,27 @@ class ImportCar extends Component {
         this.onPressImport = this.onPressImport.bind(this)
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { ImporCarReducer } = nextProps
-        /*getStorageParkingList 执行状态*/
+        /*importCar 执行状态*/
         if (ImporCarReducer.importCar.isExecStatus == 1) {
             console.log('ImporCarReducer.importCar开始执行')
         } else if (ImporCarReducer.importCar.isExecStatus == 2) {
             console.log('ImporCarReducer.importCar执行完毕')
             if (ImporCarReducer.importCar.isResultStatus == 0) {
-                console.log('ImporCarReducer.importCar执行成功')
+                ToastAndroid.showWithGravity('入库成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
+                this.props.resetImportCar()
             } else if (ImporCarReducer.importCar.isResultStatus == 1) {
-                console.log('ImporCarReducer.importCar执行错误')
+                ToastAndroid.showWithGravity('系统错误', ToastAndroid.SHORT, ToastAndroid.CENTER)
+                this.props.resetImportCar()
             } else if (ImporCarReducer.importCar.isResultStatus == 2) {
-                console.log('ImporCarReducer.importCar执行失败', ImporCarReducer.importCar.failedMsg)
+                ToastAndroid.showWithGravity(`入库失败:${ImporCarReducer.importCar.failedMsg}`, ToastAndroid.SHORT, ToastAndroid.CENTER)
+                this.props.resetImportCar()
+            }
+            else if (ImporCarReducer.importCar.isResultStatus ==3) {
+                console.log('ImporCarReducer.importCar执行失败')
+                ToastAndroid.showWithGravity(`服务器错误`, ToastAndroid.SHORT, ToastAndroid.CENTER)
+                this.props.resetImportCar()
             }
         }
         /************************************************************************************************/
@@ -95,8 +104,8 @@ const mapDispatchToProps = (dispatch) => ({
     importCar: (param) => {
         dispatch(ImporCarAction.importCar(param))
     },
-    resetImportCarExecuteStatus: () => {
-        dispatch(ImporCarAction.resetImportCarExecuteStatus())
+    resetImportCar: () => {
+        dispatch(ImporCarAction.resetImportCar())
     }
 })
 

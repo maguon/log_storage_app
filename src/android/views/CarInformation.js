@@ -423,7 +423,7 @@ class CarInformation extends Component {
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <RichTextBox
                                 isRequire={false}
-                                value={addr_name}
+                                value={remark}
                                 verifications={[]}
                                 title='备注：'
                                 defaultValue={'请选择'}
@@ -532,7 +532,7 @@ class CarInformation extends Component {
     }
 
     renderNeverImport() {
-        let { vin, make_name, en_short_name, re_short_name, addr_name,route_start_id, route_end_id,route_start, route_end, order_date } = this.props.CarInfoReducer.data.car
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start_id, route_end_id, route_start, route_end, order_date, remark } = this.props.CarInfoReducer.data.car
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView showsVerticalScrollIndicator={false}>
@@ -608,7 +608,7 @@ class CarInformation extends Component {
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <RichTextBox
                                 isRequire={false}
-                                value={addr_name}
+                                value={remark}
                                 verifications={[]}
                                 title='备注：'
                                 defaultValue={'请选择'}
