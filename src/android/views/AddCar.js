@@ -44,10 +44,8 @@ class AddCar extends Component {
         }
     }
 
-
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { AddCarReducer } = nextProps
-        console.log(AddCarReducer)
         /*addCar执行状态*/
         if (AddCarReducer.addCar.isExecStatus == 1) {
             console.log('AddCarReducer.addCar', '开始执行')
@@ -56,25 +54,21 @@ class AddCar extends Component {
             if (AddCarReducer.addCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('保存成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 RouterDirection.importCarCamera(this.props.parent)({ carId: AddCarReducer.addCar.data.id, vin: AddCarReducer.addCar.data.vin })
+                this.props.resetAddCarStatus()
                 console.log('AddCarReducer.addCar执行成功')
-
             } else if (AddCarReducer.addCar.isResultStatus == 1) {
-
                 console.log('AddCarReducer.addCar执行错误', AddCarReducer.addCar.errorMsg)
-
-
+                this.props.resetAddCarStatus()
             } else if (AddCarReducer.addCar.isResultStatus == 2) {
                 ToastAndroid.showWithGravity(AddCarReducer.addCar.failedMsg, ToastAndroid.LONG, ToastAndroid.CENTER)
                 this.props.resetAddCarStatus()
                 console.log('AddCarReducer.addCar执行失败')
-
             } else if (AddCarReducer.addCar.isResultStatus == 3) {
                 console.log('AddCarReducer.addCar服务器错误')
-
+                this.props.resetAddCarStatus()
             }
         }
         /************************************************************************************************/
-        return true
     }
 
     addCar() {
@@ -88,8 +82,6 @@ class AddCar extends Component {
 
     render() {
         let { makeName, vin, entrust, receive, routeStart, routeEnd, orderDate, routeStartId, routeEndId, baseAddr, remark } = this.props.AddCarReducer.addCar.data
-        console.log('this.props.AddCarReducer.addCar.data', this.props.AddCarReducer.addCar.data)
-        console.log('routeStartId', routeStartId)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
