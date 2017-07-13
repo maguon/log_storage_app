@@ -638,7 +638,6 @@ class CarInformation extends Component {
     }
 
     render() {
-        console.log(this.props.CarInfoReducer.data)
         return (
             <View style={{ flex: 1 }}>
                 {this.props.CarInfoReducer.data.car && !this.props.CarInfoReducer.data.car.rel_status && this.renderNeverImport()}

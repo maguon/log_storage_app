@@ -21,10 +21,9 @@ class ImportCar extends Component {
     componentWillReceiveProps(nextProps) {
         let { ImporCarReducer } = nextProps
         /*importCar 执行状态*/
-        if (ImporCarReducer.importCar.isExecStatus == 1) {
-            console.log('ImporCarReducer.importCar开始执行')
-        } else if (ImporCarReducer.importCar.isExecStatus == 2) {
-            console.log('ImporCarReducer.importCar执行完毕')
+
+        if (ImporCarReducer.importCar.isExecStatus == 1) {            
+        } else if (ImporCarReducer.importCar.isExecStatus == 2) {        
             if (ImporCarReducer.importCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('入库成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetImportCar()
@@ -36,13 +35,11 @@ class ImportCar extends Component {
                 this.props.resetImportCar()
             }
             else if (ImporCarReducer.importCar.isResultStatus ==3) {
-                console.log('ImporCarReducer.importCar执行失败')
                 ToastAndroid.showWithGravity(`服务器错误`, ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetImportCar()
             }
         }
         /************************************************************************************************/
-        return true
     }
     static defaultProps = {
         carId: 0,
@@ -58,7 +55,6 @@ class ImportCar extends Component {
     }
 
     render() {
-        console.log(this.props)
         return (
             <View style={{ flex: 1 }}>
                 <View style={{ flex: 1, justifyContent: 'center', paddingHorizontal: 20 }}>

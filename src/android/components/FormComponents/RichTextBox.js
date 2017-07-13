@@ -58,7 +58,7 @@ export default class RichTextBox extends Component {
     componentWillMount() {
         this.setState({ value: this.props.defaultValue })
     }
-    
+
     componentWillReceiveProps(nextProps) {
         if (nextProps.value) {
             this.setState({ value: nextProps.value })
@@ -77,7 +77,6 @@ export default class RichTextBox extends Component {
     }
 
     showRichText() {
-        console.log(this.props.defaultValue)
         this.props.showRichText({
             onGetValue: this.changeValue,
             richTextValue: this.props.value ? this.props.value : '',

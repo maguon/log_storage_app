@@ -19,7 +19,6 @@ import StorageList from './views/blockInitial/StorageList'
 import Setting from './views/blockInitial/Setting'
 
 import CarList from './views/CarList'
-import CarInfo from './views/CarInfo'
 import CarInformation from './views/CarInformation'
 
 import Password from './views/Password'
@@ -103,7 +102,6 @@ export default class App extends Component {
                             <Scene key="homeBlock" initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
                                 <Scene key="home" initial={true} component={Home} hideNavBar />
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                                <Scene key="carInfoAtHomeBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
 
@@ -125,7 +123,6 @@ export default class App extends Component {
                                 <Scene key="query" initial={true} component={Query} hideNavBar />
                                 <Scene key="carList" component={CarList} hideNavBar />
                                 <Scene key="carInformationAtCarBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                                <Scene key="carInfoAtcarBlock" title="车辆详细信息" component={CarInfo} navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
 
@@ -166,7 +163,6 @@ export default class App extends Component {
                                 <Scene key="setting" component={Setting} hideNavBar={true} navBar={NavBar} />
                                 <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                                <Scene key="carInfoAtSettingBlock" component={CarInfo} title="车辆详细信息" navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="password" component={Password} title='修改密码' navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />

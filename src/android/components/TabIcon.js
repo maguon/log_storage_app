@@ -13,9 +13,7 @@ const propTypes = {
 const TabIcon = (props) => {
  
   return (
-    // <Button onPress={Actions.home} style={{ flex: 1 }} >
       <Icon name={props.selected ? props.online : props.outline} style={{ color: props.selected ? '#00cade' : '#999' }} />
-    // </Button>
   )
 }
 

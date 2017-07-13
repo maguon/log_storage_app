@@ -3,7 +3,6 @@ import WelcomeReducer from './WelcomeReducer'
 import LoginReducer from './LoginReducer'
 import CarListReducer from './CarListReducer'
 import CarMakeReducer from './CarMakeReducer'
-import CarModelsReducer from './CarModelsReducer'
 import StorageListReducer from './StorageListReducer'
 import SelectRowReducer from './SelectRowReducer'
 import ImporCarReducer from './ImporCarReducer'
@@ -30,7 +29,6 @@ export default combineReducers({
     CarListReducer,
     CarInfoReducer,
     CarMakeReducer,
-    CarModelsReducer,
     ImporCarReducer,
     ImportCarCameraReducer,
     StorageListReducer,

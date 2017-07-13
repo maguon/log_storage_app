@@ -6,7 +6,6 @@ import { Actions } from 'react-native-router-flux'
 import SearchBar from '../components/Bar/SearchBar'
 import CarListComponent from '../components/CarList/CarList'
 import SearchVinList from '../components/SearchVinList'
-import SearchNoResult from '../components/SearchNoResult'
 import NavSearchBar from '../components/Bar/NavSearchBar'
 
 const window = Dimensions.get('window')

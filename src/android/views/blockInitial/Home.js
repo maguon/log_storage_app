@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import LayoutHome from '../../layout/Home'
 import * as HomeAction from '../../../actions/HomeAction'
-import Loading from '../../components/Loading/Loading'
 import { Actions } from 'react-native-router-flux'
 
 class Home extends Component {
@@ -85,7 +84,6 @@ class Home extends Component {
     }
 
     onPressItem(param) {
-        console.log(param)
         Actions.carInformationAtHomeBlock(param)
     }
 

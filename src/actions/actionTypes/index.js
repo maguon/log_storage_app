@@ -3,7 +3,6 @@ import * as welcomeActionTypes from './WelcomeActionTypes'
 import * as storageListTypes from './StorageListTypes'
 import * as carListTypes from './CarListTypes'
 import * as carMakeTypes from './CarMakeTypes'
-import * as carModelTypes from './CarModelTypes'
 import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
@@ -33,7 +32,6 @@ export {
     passwordTypes,
     carListTypes,
     carMakeTypes,
-    carModelTypes,
     imporCarTypes,
     selectStorageForCarListTypes,
     importCarCameraTypes,
