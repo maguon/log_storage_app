@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import { Text, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import SearchBar from '../../components/Bar/SearchBar'
 import { Actions } from 'react-native-router-flux'
@@ -33,7 +33,11 @@ export default class Query extends Component {
                     onPressIcon={this.onPressIcon}
                     onPressTextInput={this.onPressTextInput}
                 />
-                <Text>Query</Text>
+                <ScrollView>
+                    <View style={{ flex: 1 }}>
+                        <Text>Query</Text>
+                    </View>
+                </ScrollView>
             </View>
         )
     }

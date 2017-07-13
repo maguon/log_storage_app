@@ -99,7 +99,7 @@ export default class App extends Component {
                     >
                         <Scene key="login" component={Login} hideNavBar hideTabBar />
                         <Scene key="main" initial={true} tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
-                            <Scene key="homeBlock" initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
+                            <Scene key="homeBlock" icon={TabIcon} online='ios-home' outline='ios-home-outline' >
                                 <Scene key="home" initial={true} component={Home} hideNavBar />
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
@@ -119,7 +119,7 @@ export default class App extends Component {
                                 <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
-                            <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
+                            <Scene key="carBlock" initial={true} icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="query" initial={true} component={Query} hideNavBar />
                                 <Scene key="carList" component={CarList} hideNavBar />
                                 <Scene key="carInformationAtCarBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
@@ -195,22 +195,9 @@ export default class App extends Component {
 
                    /*
 
-                <Scene key="carInfo" component={CarInfo} hideNavBar />
-                <Scene key="ImportCar" component={ImportCar} hideNavBar />
                 <Scene key="VinScanner" component={VinScanner} hideNavBar />
                 <Scene key="ErrorView" component={ErrorView} hideNavBar />
-                <Scene key="SearchCarList" component={SearchCarList} hideNavBar />
-                <Scene key="SelectCarMake" component={SelectCarMake} hideNavBar />
-                <Scene key="SelectStorage" component={SelectStorage} hideNavBar />
-                <Scene key="SelectRow" component={SelectRow} hideNavBar />
-                <Scene key="SelectColumn" component={SelectColumn} hideNavBar />
-                <Scene key="ImportCarCamera" component={ImportCarCamera} hideNavBar />
-                <Scene key="recordList" component={recordList} hideNavBar />
-                <Scene key="parkingView" component={parkingView} hideNavBar />
-                <Scene key="ImagePageForCarInfo" component={ImagePageForCarInfo} hideNavBar />
-                <Scene key="ImagePageForImportCar" component={ImagePageForImportCar} hideNavBar />
-                <Scene key="selectStorageForCarList" component={selectStorageForCarList} hideNavBar />
-                <Scene key="RichText" component={RichText} hideNavBar />
+
                 */
 
 

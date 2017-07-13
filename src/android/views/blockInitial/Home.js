@@ -30,7 +30,7 @@ class Home extends Component {
 
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { homeReducer } = nextProps
         let { resetStoragesForHome, resetRecordsForHome } = this.props
         /** homeReducer.getStoragesHome */
@@ -70,7 +70,7 @@ class Home extends Component {
             }
         }
         /*********************************************************************** */
-        return true
+
     }
 
     onBarcodeReceived(param) {

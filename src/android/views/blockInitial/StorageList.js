@@ -41,7 +41,7 @@ class StorageList extends Component {
     }
 
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { storageListReducer } = nextProps
         /*getStorageList 执行状态*/
         if (storageListReducer.getStorageList.isExecStatus == 1) {
@@ -57,7 +57,6 @@ class StorageList extends Component {
             }
         }
         /************************************************************************************************/
-        return true
     }
 
     render() {

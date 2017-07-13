@@ -34,7 +34,7 @@ class CarList extends Component {
         this.props.getCarList(param)
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { carListReducer } = nextProps
         let { selectStorageForCarListReducer } = nextProps
         /*getCarList 执行状态*/

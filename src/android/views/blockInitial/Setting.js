@@ -27,9 +27,6 @@ class Setting extends Component {
         this.onPressTextInput = this.onPressTextInput.bind(this)
 
     }
-    componentDidMount() {
-
-    }
 
     onBarcodeReceived(param) {
         Actions.searchVinAtSettingBlock({ vin: param })
