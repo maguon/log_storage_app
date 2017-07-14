@@ -11,11 +11,13 @@ const window = Dimensions.get('window')
 
 
 const RecordList = ({ records }) => {
-    let i = 0
-    let recordList = records.map(item => {
-        i++
-        return <RecordListItem record={item} key={i} />
-    })
+    let recordList = records
+        .sort((a, b) => {
+            return a.timez < b.timez
+        })
+        .map((item, i) => {
+            return <RecordListItem record={item} key={i} />
+        })
     return (
 
         <View style={{ marginVertical: 10, marginHorizontal: 20 }}>

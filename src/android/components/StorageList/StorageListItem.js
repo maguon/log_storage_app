@@ -24,9 +24,9 @@ const StorageListItem = ({ storage }) => {
                         <Text style={styles.pCount}>{(col * row - balance).toString()}</Text>
                     </View>
                 </View>
-                <View style={[{ flex: 1 }, styles.content]}>
+                {/*<View style={[{ flex: 1 }, styles.content]}>
                     <Text style={styles.contentAction}>></Text>
-                </View>
+                </View>*/}
             </View>
        //</TouchableHighlight>
     )

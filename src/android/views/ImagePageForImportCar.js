@@ -87,7 +87,6 @@ class ImagePage extends Component {
         url
       }
     }
-
     this.props.delImage(param)
   }
 
@@ -97,7 +96,6 @@ class ImagePage extends Component {
 
   delImage() {
     this.setState({ confirmModalVisible: true })
-
   }
 
   render() {
@@ -111,7 +109,6 @@ class ImagePage extends Component {
           style={styles.wrapper}
           renderPagination={this.renderPagination}
           loop={false}
-
         >
           {this.renderPhoteView()}
         </Swiper>

@@ -35,6 +35,10 @@ export default class RecordListItem extends Component {
             op = '出库'
             opImgUri.uri = 'icon_note_out'
             textStyle = styles.outText
+        } else if (op == '10') {
+            op = '新增'
+            opImgUri.uri = 'icon_note_new'
+            textStyle = styles.newText
         }
 
         return (
@@ -77,5 +81,8 @@ const styles = StyleSheet.create({
     },
     moveText: {
         color: '#ffa700'
+    },
+    newText: {
+        color: '#90cf69'
     }
 })

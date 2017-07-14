@@ -120,6 +120,7 @@ export default class App extends Component {
                                 <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
 
+                                <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="selectCarMakeAtHomeBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtHomeBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -141,6 +142,8 @@ export default class App extends Component {
                                 <Scene key="selectRowAtCarBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtCarBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
 
+                                <Scene key="ImagePageForImportCarAtCarBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
+                                <Scene key="ImagePageForCarInfoAtCarBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="selectCarMakeAtCarBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtCarBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectReceiveAtCarBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -156,6 +159,9 @@ export default class App extends Component {
                                 <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="carInformationAtStorageBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
+
+                                <Scene key="ImagePageForImportCarAtStorageBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
+                                <Scene key="ImagePageForCarInfoAtStorageBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
 
                                 <Scene key="selectStorageAtStorageBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
                                 <Scene key="selectRowAtStorageBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
@@ -178,6 +184,9 @@ export default class App extends Component {
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
 
+                                <Scene key="ImagePageForImportCarAtSettingBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
+                                <Scene key="ImagePageForCarInfoAtSettingBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
+
                                 <Scene key="selectStorageAtSettingBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
                                 <Scene key="selectRowAtSettingBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtSettingBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
@@ -192,8 +201,6 @@ export default class App extends Component {
                                 <Scene key="importCarAtSettingBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
                         </Scene>
-
-
                     </Scene>
                 </Scene>
             </Router>

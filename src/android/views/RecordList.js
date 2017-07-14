@@ -108,9 +108,6 @@ class RecordList extends Component {
         let { changeRecordListTab } = this.props
         let { selectedTab } = this.props.recordListReducer.selectRecordListTab
         let { recordList } = this.props.recordListReducer.getRecordList.data
-        console.log(recordList)
-
-
         let records = recordList
             .reduce((acc, val) => {
                 let obj = acc.find((item) => {
@@ -124,13 +121,12 @@ class RecordList extends Component {
                 return acc
             }, [])
             .sort((a, b) => {
-                return a.created_on < b.created_on
+
+                return new Date(a.created_on) < new Date(b.created_on)
             }).map((item) => {
 
                 return { data: item.data, key: item.created_on }
             })
-
-
         return (
             <View style={{ flex: 1 }}>
                 <Segment style={{ backgroundColor: '#00cade' }}>

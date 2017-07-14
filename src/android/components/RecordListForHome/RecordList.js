@@ -17,7 +17,7 @@ const RecordList = ({ recordList, isHome = true, onPressItem }) => {
             return acc
         }, [])
         .sort((a, b) => {
-            return a.created_on < b.created_on
+            return new Date(a.created_on) < new Date(b.created_on)
         })
         .map((item) => {
             return <Record record={item} key={item.key} onPressItem={onPressItem} />

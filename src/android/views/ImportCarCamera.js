@@ -92,7 +92,7 @@ class ImportCarCamera extends Component {
                         <View style={{
                             minHeight: window.height - StatusBar.currentHeight - 56 - 60,
                         }}>
-                            <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={Actions.ImagePageForImportCar} />
+                            <CarCamera images={imageList} postImage={(param) => this.postImage(param)} showImagePage={RouterDirection.ImagePageForImportCar(this.props.parent)} />
                         </View>
                         <Button block onPress={() => RouterDirection.importCar(this.props.parent)({ vin: this.props.vin, carId: this.props.carId })} style={{ marginHorizontal: 10, marginVertical: 10, backgroundColor: '#00cade', height: 40 }} >
                             <Text style={{ color: '#ffffff' }}>下一步</Text>

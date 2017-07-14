@@ -105,5 +105,11 @@ export const ImagePageForCarInfo = (parent) => {
     if (parent === 'settingBlock') return Actions.ImagePageForCarInfoAtSettingBlock
 }
 
+export const ImagePageForImportCar = (parent) => {
+    if (parent === 'homeBlock') return Actions.ImagePageForImportCarAtHomeBlock
+    if (parent === 'carBlock') return Actions.ImagePageForImportCarAtCarBlock
+    if (parent === 'storageBlock') return Actions.ImagePageForImportCarAtStorageBlock
+    if (parent === 'settingBlock') return Actions.ImagePageForImportCarAtSettingBlock
+}
 
 

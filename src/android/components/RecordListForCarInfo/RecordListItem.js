@@ -30,6 +30,11 @@ const RecordListItem = ({ record }) => {
         op = '出库'
         textStyle = styles.outText
     }
+    else if (record.op == '10') {
+        op = '新增'
+        opImgUri.uri = 'icon_note_new'
+        textStyle = styles.newText
+    }
 
     return (
 
@@ -47,7 +52,7 @@ const RecordListItem = ({ record }) => {
             </View>
             <View style={{ flex: 5, justifyContent: 'center' }}>
                 <Text style={{ fontSize: 12 }}>
-                    <Text style={{fontStyle:'italic'}}>[{record.name}]</Text>
+                    <Text style={{ fontStyle: 'italic' }}>[{record.name}]</Text>
                     {record.content}
                 </Text>
             </View>
@@ -64,6 +69,9 @@ const styles = StyleSheet.create({
     },
     moveText: {
         color: '#ffa700'
+    },
+    newText: {
+        color: '#90cf69'
     }
 })
 

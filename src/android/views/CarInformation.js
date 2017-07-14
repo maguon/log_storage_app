@@ -11,6 +11,7 @@ import * as CarInfoAction from '../../actions/CarInfoAction'
 import * as CarListAction from '../../actions/CarListAction'
 import RichTextBox from '../components/FormComponents/RichTextBox'
 import ConfirmModal from '../components/ConfirmModal'
+import RecordList from '../components/RecordListForCarInfo/RecordList'
 
 class CarInformation extends Component {
     constructor(props) {
@@ -324,6 +325,8 @@ class CarInformation extends Component {
 
     renderImported() {
         let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, route_end_id, route_start_id, order_date, storage_name, row, col, remark, storage_id } = this.props.CarInfoReducer.data.car
+
+        console.log('recordList', this.props.CarInfoReducer.data.recordList)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>
@@ -428,6 +431,7 @@ class CarInformation extends Component {
                         <Button full onPress={this.onPressExport} style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>出库</Text>
                         </Button>
+                        <RecordList records={this.props.CarInfoReducer.data.recordList} />
                     </View>
                 </ScrollView>
                 <ConfirmModal
@@ -501,7 +505,7 @@ class CarInformation extends Component {
                             style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>
-
+                        <RecordList records={this.props.CarInfoReducer.data.recordList} />
                     </View>
                 </ScrollView>
             </View>
@@ -608,6 +612,7 @@ class CarInformation extends Component {
                             style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>
+                        <RecordList records={this.props.CarInfoReducer.data.recordList} />
                     </View>
                 </ScrollView>
             </View>
