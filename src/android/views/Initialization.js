@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as welcomeAction from '../../actions/WelcomeAction'
+import * as InitializationAction from '../../actions/InitializationAction'
 import { Actions } from 'react-native-router-flux'
 import InitializationLayout from '../layout/Initialization'
 import localStorageKey from '../../util/LocalStorageKey'
 import localStorage from '../../util/LocalStorage'
 import { Linking, ToastAndroid } from 'react-native'
 
-class Welcome extends Component {
+class Initialization extends Component {
     constructor(props) {
         super(props)
         this.linkDownload = this.linkDownload.bind(this)
@@ -43,40 +43,40 @@ class Welcome extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let { welcomeReducer } = nextProps
+        let { InitializationReducer } = nextProps
 
-        if (welcomeReducer.valdateToken.isExecStatus == 1) {
+        if (InitializationReducer.valdateToken.isExecStatus == 1) {
             console.log('welcome.valdateToken', '开始执行')
-        } else if (welcomeReducer.valdateToken.isExecStatus == 2) {
-            if (welcomeReducer.valdateToken.isResultStatus == 0) {
+        } else if (InitializationReducer.valdateToken.isExecStatus == 2) {
+            if (InitializationReducer.valdateToken.isResultStatus == 0) {
                 this.props.resetInitialization()
                 Actions.mainRoot()
-                console.log('welcome.valdateToken 执行成功', welcomeReducer.getVersion.data)
-            } else if (welcomeReducer.valdateToken.isResultStatus == 1) {
-                console.log('welcome.valdateToken 执行错误', welcomeReducer.getVersion.errorMsg)
+                console.log('welcome.valdateToken 执行成功', InitializationReducer.getVersion.data)
+            } else if (InitializationReducer.valdateToken.isResultStatus == 1) {
+                console.log('welcome.valdateToken 执行错误', InitializationReducer.getVersion.errorMsg)
             }
-            else if (welcomeReducer.valdateToken.isResultStatus == 2) {
-                console.log('welcome.valdateToken 执行失败', welcomeReducer.getVersion.failedMsg)
+            else if (InitializationReducer.valdateToken.isResultStatus == 2) {
+                console.log('welcome.valdateToken 执行失败', InitializationReducer.getVersion.failedMsg)
             }
         }
 
-        if (welcomeReducer.getVersion.isExecStatus == 1) {
+        if (InitializationReducer.getVersion.isExecStatus == 1) {
             console.log('welcome.getVersion', '开始执行')
-        } else if (welcomeReducer.getVersion.isExecStatus == 2) {
-            if (welcomeReducer.getVersion.isResultStatus == 0) {
-                console.log('welcome.getVersion执行成功', welcomeReducer.getVersion.data)
-                let versionArr = welcomeReducer.getVersion.data.version.split('.')
-                let lastVersionArr = welcomeReducer.getVersion.data.lastVersion.split('.')
-                if (!((versionArr[0] < lastVersionArr[0] || versionArr[1] < lastVersionArr[1] || versionArr[2] < lastVersionArr[2]) && welcomeReducer.getVersion.data.force_update == 1)) {
+        } else if (InitializationReducer.getVersion.isExecStatus == 2) {
+            if (InitializationReducer.getVersion.isResultStatus == 0) {
+                console.log('welcome.getVersion执行成功', InitializationReducer.getVersion.data)
+                let versionArr = InitializationReducer.getVersion.data.version.split('.')
+                let lastVersionArr = InitializationReducer.getVersion.data.lastVersion.split('.')
+                if (!((versionArr[0] < lastVersionArr[0] || versionArr[1] < lastVersionArr[1] || versionArr[2] < lastVersionArr[2]) && InitializationReducer.getVersion.data.force_update == 1)) {
                     this.props.validateToken()
                     this.props.resetGetVersion()
                 }
-            } else if (welcomeReducer.getVersion.isResultStatus == 1) {
-                console.log('welcome.getVersion执行错误', welcomeReducer.getVersion.errorMsg)
+            } else if (InitializationReducer.getVersion.isResultStatus == 1) {
+                console.log('welcome.getVersion执行错误', InitializationReducer.getVersion.errorMsg)
                 ToastAndroid.showWithGravity('获取版本信息失败，请检测网络', ToastAndroid.SHORT, ToastAndroid.CENTER)
             }
-            else if (welcomeReducer.getVersion.isResultStatus == 2) {
-                console.log('welcome.getVersion执行失败', welcomeReducer.getVersion.failedMsg)
+            else if (InitializationReducer.getVersion.isResultStatus == 2) {
+                console.log('welcome.getVersion执行失败', InitializationReducer.getVersion.failedMsg)
                 ToastAndroid.showWithGravity('获取版本信息失败，请检测网络', ToastAndroid.SHORT, ToastAndroid.CENTER)
             }
         }
@@ -85,8 +85,8 @@ class Welcome extends Component {
     }
 
     render() {
-        const { version, lastVersion, force_update, url } = this.props.welcomeReducer.getVersion.data
-        const { isExecStatus, isResultStatus } = this.props.welcomeReducer.getVersion
+        const { version, lastVersion, force_update, url } = this.props.InitializationReducer.getVersion.data
+        const { isExecStatus, isResultStatus } = this.props.InitializationReducer.getVersion
         return (
             <InitializationLayout
                 version={version}
@@ -105,27 +105,27 @@ class Welcome extends Component {
 
 
 const mapStateToProps = (state) => {
-    return {
-        welcomeReducer: state.WelcomeReducer
+    return {        
+        InitializationReducer: state.InitializationReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     getAppLastVersion: (param) => {
-        dispatch(welcomeAction.getAppLastVersion(param))
+        dispatch(InitializationAction.getAppLastVersion(param))
     },
     validateToken: () => {
-        dispatch(welcomeAction.validateToken())
+        dispatch(InitializationAction.validateToken())
     },
     resetInitialization: () => {
-        dispatch(welcomeAction.resetInitialization())
+        dispatch(InitializationAction.resetInitialization())
     },
     resetGetVersion: () => {
-        dispatch(welcomeAction.resetGetVersion())
+        dispatch(InitializationAction.resetGetVersion())
     }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+export default connect(mapStateToProps, mapDispatchToProps)(Initialization)
 
 
 

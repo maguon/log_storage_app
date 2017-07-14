@@ -32,7 +32,7 @@ const initialState = {
 }
 
 export default handleActions({
-    [actionTypes.welcomeActionTypes.GET_VERSION_WAITING]: (state, action) => {
+    [actionTypes.initializationTypes.GET_VERSION_WAITING]: (state, action) => {
         return {
             ...state,
             getVersion: {
@@ -41,7 +41,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.GET_VERSION_ERROR]: (state, action) => {
+    [actionTypes.initializationTypes.GET_VERSION_ERROR]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -53,7 +53,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.GET_VERSION_SUCCESS]: (state, action) => {
+    [actionTypes.initializationTypes.GET_VERSION_SUCCESS]: (state, action) => {
         const { payload: { data } } = action
         data.sort((a, b) => {
             return b.id - a.id
@@ -75,7 +75,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.GET_VERSION_FAILED]: (state, action) => {
+    [actionTypes.initializationTypes.GET_VERSION_FAILED]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -87,7 +87,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.VALIDATE_TOKEN_WAITING]: (state, action) => {
+    [actionTypes.initializationTypes.VALIDATE_TOKEN_WAITING]: (state, action) => {
         return {
             ...state,
             valdateToken: {
@@ -96,7 +96,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.VALIDATE_TOKEN_ERROR]: (state, action) => {
+    [actionTypes.initializationTypes.VALIDATE_TOKEN_ERROR]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -108,7 +108,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.VALIDATE_TOKEN_SUCCESS]: (state, action) => {
+    [actionTypes.initializationTypes.VALIDATE_TOKEN_SUCCESS]: (state, action) => {
         return {
             ...state,
             valdateToken: {
@@ -118,7 +118,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.VALIDATE_TOKEN_FAILED]: (state, action) => {
+    [actionTypes.initializationTypes.VALIDATE_TOKEN_FAILED]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -130,7 +130,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.RESET_INITIALIZATION]: (state, action) => {
+    [actionTypes.initializationTypes.RESET_INITIALIZATION]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,
@@ -144,7 +144,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.welcomeActionTypes.RESET_GETVERSION]: (state, action) => {
+    [actionTypes.initializationTypes.RESET_GETVERSION]: (state, action) => {
         const { payload: { data } } = action
         return {
             ...state,

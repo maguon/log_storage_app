@@ -13,15 +13,15 @@ import requestHeaders from '../util/RequestHeaders'
 
 //获取最新version信息
 export const getAppLastVersion = (param) => (dispatch) => {
-    dispatch({ type: actionTypes.welcomeActionTypes.GET_VERSION_WAITING, payload: {} })
+    dispatch({ type: actionTypes.initializationTypes.GET_VERSION_WAITING, payload: {} })
     return httpRequest.get(`${base_host}/app?${ObjectToUrl(param.optionalParam)}`, (err, res) => {
         if (err) {
-            dispatch({ type: actionTypes.welcomeActionTypes.GET_VERSION_ERROR, payload: { data: err } })
+            dispatch({ type: actionTypes.initializationTypes.GET_VERSION_ERROR, payload: { data: err } })
         } else {
             if (res.success) {
-                dispatch({ type: actionTypes.welcomeActionTypes.GET_VERSION_SUCCESS, payload: { data: res.result } })
+                dispatch({ type: actionTypes.initializationTypes.GET_VERSION_SUCCESS, payload: { data: res.result } })
             } else {
-                dispatch({ type: actionTypes.welcomeActionTypes.GET_VERSION_FAILED, payload: { data: err } })
+                dispatch({ type: actionTypes.initializationTypes.GET_VERSION_FAILED, payload: { data: err } })
             }
         }
     })
@@ -36,12 +36,12 @@ export const validateToken = () => (dispatch) => {
             if (localStorageErr.name == 'NotFoundError') {
                 console.log('NotFoundError')
                 //跳转到登录页面
-                dispatch({ type: actionTypes.welcomeActionTypes.VALIDATE_TOKEN_FAILED, payload: {} })
+                dispatch({ type: actionTypes.initializationTypes.VALIDATE_TOKEN_FAILED, payload: {} })
             }
             else if (localStorageErr.name == 'ExpiredError') {
                 //未知错误处理,删除本地缓存
                 localStorage.removeKey(localStorageKey.USER)
-                dispatch({ type: actionTypes.welcomeActionTypes.VALIDATE_TOKEN_FAILED, payload: {} })
+                dispatch({ type: actionTypes.initializationTypes.VALIDATE_TOKEN_FAILED, payload: {} })
             }
         }
         else {
@@ -90,7 +90,7 @@ export const validateToken = () => (dispatch) => {
                                                         }
                                                     }
                                                 })
-                                                dispatch({ type: actionTypes.welcomeActionTypes.VALIDATE_TOKEN_SUCCESS, payload: {} })
+                                                dispatch({ type: actionTypes.initializationTypes.VALIDATE_TOKEN_SUCCESS, payload: {} })
 
 
                                             }
@@ -104,14 +104,14 @@ export const validateToken = () => (dispatch) => {
                             else {
                                 //判断请求是否成功，如果失败，跳转到登录页
                                 // console.log('changeTokenResfailed', changeTokenRes)
-                                dispatch({ type: actionTypes.welcomeActionTypes.VALIDATE_TOKEN_FAILED, payload: {} })
+                                dispatch({ type: actionTypes.initializationTypes.VALIDATE_TOKEN_FAILED, payload: {} })
                             }
                         }
                     })
             }
             else {
                 //判断userId与token是否为空，如果有一个为空，跳转到登录页面
-                dispatch({ type: actionTypes.welcomeActionTypes.VALIDATE_TOKEN_FAILED, payload: {} })
+                dispatch({ type: actionTypes.initializationTypes.VALIDATE_TOKEN_FAILED, payload: {} })
             }
         }
     })
@@ -119,10 +119,10 @@ export const validateToken = () => (dispatch) => {
 
 
 export const resetInitialization = () => (dispatch) => {
-    dispatch({ type: actionTypes.welcomeActionTypes.RESET_INITIALIZATION, payload: {} })
+    dispatch({ type: actionTypes.initializationTypes.RESET_INITIALIZATION, payload: {} })
 }
 
 export const resetGetVersion = () => (dispatch) => {
-    dispatch({ type: actionTypes.welcomeActionTypes.RESET_GETVERSION, payload: {} })
+    dispatch({ type: actionTypes.initializationTypes.RESET_GETVERSION, payload: {} })
 }
 

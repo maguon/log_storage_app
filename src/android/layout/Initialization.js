@@ -7,7 +7,7 @@ const window = Dimensions.get('window')
 const ImageWidth = window.width
 const ImageHeight = window.width / 9 * 16
 
-const Welcome = ({ version, lastVersion, force_update, url, linkDownload, validateToken, isExecStatus, isResultStatus, getAppLastVersion }) => {
+const Initialization = ({ version, lastVersion, force_update, url, linkDownload, validateToken, isExecStatus, isResultStatus, getAppLastVersion }) => {
     let versionArr = version.split('.')
     let lastVersionArr = lastVersion.split('.')
     return (
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Welcome
+export default Initialization

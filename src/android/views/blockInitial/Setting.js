@@ -55,7 +55,7 @@ class Setting extends Component {
     }
 
     render() {
-        let { getVersion } = this.props.WelcomeReducer
+        let { getVersion } = this.props.InitializationReducer
         let viewStyle = { backgroundColor: '#00cade' }
         return (
             <Container style={{ flex: 1 }}>
@@ -112,7 +112,7 @@ class Setting extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        WelcomeReducer: state.WelcomeReducer,
+        WelcomeReducer: state.InitializationReducer,
         userReducer: state.LoginReducer
     }
 }

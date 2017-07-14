@@ -1,5 +1,5 @@
 import * as loginTypes from './LoginTypes'
-import * as welcomeActionTypes from './WelcomeActionTypes'
+import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
 import * as carListTypes from './CarListTypes'
 import * as carMakeTypes from './CarMakeTypes'
@@ -24,7 +24,7 @@ import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
 export {
     loginTypes,
     carInfoTypes,
-    welcomeActionTypes,
+    initializationTypes,
     homeTypes,
     storageListTypes,
     selectRowTypes,

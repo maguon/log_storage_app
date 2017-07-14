@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import WelcomeReducer from './WelcomeReducer'
+import InitializationReducer from './InitializationReducer'
 import LoginReducer from './LoginReducer'
 import CarListReducer from './CarListReducer'
 import CarMakeReducer from './CarMakeReducer'
@@ -22,7 +22,7 @@ import SelectBaseAddrReducer from './SelectBaseAddrReducer'
 import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
 
 export default combineReducers({
-    WelcomeReducer,
+    InitializationReducer,
     LoginReducer,
     HomeReducer,
     PasswordReducer,
