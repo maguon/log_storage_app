@@ -2,16 +2,18 @@
  * Created by lingxue on 2017/4/19.
  */
 import React, { Component, PropTypes } from 'react'
-import { StatusBar, View, Navigator, Alert } from 'react-native'
+import { StatusBar, View, Navigator, ToastAndroid } from 'react-native'
 import { Provider, connect } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import ReduxThunk from 'redux-thunk'
 import reducers from '../../reducers/index'
 import * as passwordAction from '../../actions/PasswordAction'
 import localStorageKey from '../../util/LocalStorageKey'
+import localStorage from '../../util/LocalStorage'
 import { Actions } from 'react-native-router-flux'
 import NavBar from '../components/Bar/NavBar'
 import { Button, Container, Content, Header, Icon, Form, Item, Text, Label, Input, Left, Body, Right, Title, List, ListItem, Toast } from 'native-base'
+import * as LoginAction from '../../actions/LoginAction'
 
 class Password extends Component {
 
@@ -37,7 +39,7 @@ class Password extends Component {
                 }
             })
         } else {
-            Alert.alert('提示', '两次输入的新密码不同')
+            ToastAndroid.showWithGravity('两次输入的新密码不同', ToastAndroid.SHORT, ToastAndroid.CENTER)
         }
     }
 
@@ -47,16 +49,19 @@ class Password extends Component {
         let { isResult, isSuccess } = nextProps.password
         if (isResult) {
             if (isSuccess) {
+                ToastAndroid.showWithGravity('修改成功，请重新登录', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetPassword()
+                localStorage.saveKey(localStorageKey.USER, { mobile: this.props.user.mobile })
+                this.props.cleanLogin()
+                Actions.login()
             }
             else {
+                ToastAndroid.showWithGravity('修改失败，请检查密码是否正确', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetPassword()
             }
             return false
         }
-
         return true
-
     }
 
     render() {
@@ -102,6 +107,9 @@ const mapDispatchToProps = (dispatch) => ({
     resetPassword: () => {
         dispatch(passwordAction.resetPassword())
     },
+    cleanLogin: () => {
+        dispatch(LoginAction.cleanLogin())
+    }
 })
 
 

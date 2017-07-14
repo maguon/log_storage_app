@@ -7,7 +7,8 @@ const window = Dimensions.get('window')
 const ImageWidth = window.width
 const ImageHeight = window.width / 9 * 16
 
-const Welcome = ({ version, lastVersion, force_update, url, linkDownload, validateToken }) => {
+const Welcome = ({ version, lastVersion, force_update, url, linkDownload, validateToken, execStatus }) => {
+    console.log(execStatus)
     let versionArr = version.split('.')
     let lastVersionArr = lastVersion.split('.')
     let btnOnPress
@@ -26,11 +27,11 @@ const Welcome = ({ version, lastVersion, force_update, url, linkDownload, valida
             <Image source={{ uri: 'welcom_back' }}
                 style={styles.image}
             />
-            <Button block
+            {execStatus != 10 && <Button block
                 onPress={btnOnPress}
                 style={{ position: 'absolute', bottom: 50, width: window.width / 4 * 3, backgroundColor: 'rgba(255,255,255,0.73)', borderRadius: 25 }}>
                 <Text style={styles.buttonTiltle}>{btnText}</Text>
-            </Button>
+            </Button>}
         </View>
     )
 

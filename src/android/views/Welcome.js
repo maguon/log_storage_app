@@ -5,6 +5,7 @@ import { Actions } from 'react-native-router-flux'
 import WelcomeLayout from '../layout/Welcome'
 import localStorageKey from '../../util/LocalStorageKey'
 import localStorage from '../../util/LocalStorage'
+import { Linking } from 'react-native'
 
 class Welcome extends Component {
     constructor(props) {
@@ -36,7 +37,7 @@ class Welcome extends Component {
         }).catch(err => console.error('An error occurred', err))
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         let { welcomeReducer } = nextProps
         if (welcomeReducer.getVersion.isExecStatus == 1) {
             console.log('welcome.getVersion', '开始执行')
@@ -52,7 +53,7 @@ class Welcome extends Component {
         }
 
         if (welcomeReducer.valdateToken.isExecStatus == 1) {
-            console.log('welcome.valdateToken', '开始执行') 
+            console.log('welcome.valdateToken', '开始执行')
         } else if (welcomeReducer.valdateToken.isExecStatus == 2) {
             if (welcomeReducer.valdateToken.isResultStatus == 0) {
                 Actions.mainRoot()
@@ -66,18 +67,19 @@ class Welcome extends Component {
                 console.log('welcome.valdateToken 执行失败', welcomeReducer.getVersion.failedMsg)
             }
         }
-        return true
-
     }
 
     render() {
-        const { version, lastVersion, force_update, url, isJump } = this.props.welcomeReducer.getVersion.data
+        const { version, lastVersion, force_update, url } = this.props.welcomeReducer.getVersion.data
+        const { isExecStatus } = this.props.welcomeReducer.getVersion
+        console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
         return (
             <WelcomeLayout
                 version={version}
                 lastVersion={lastVersion}
                 force_update={force_update}
                 url={url}
+                execStatus={isExecStatus}
                 linkDownload={this.linkDownload}
                 validateToken={this.validateToken}
             />

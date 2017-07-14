@@ -20,7 +20,7 @@ const initialState = {
         mobile: ''
     },
     isResultStatus: 0,
-    isExecStatus: 0,
+    isExecStatus: 10,
     errorMsg: '',
     failedMsg: ''
 }

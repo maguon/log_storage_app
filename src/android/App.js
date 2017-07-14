@@ -90,22 +90,20 @@ export default class App extends Component {
         return (
             <Router getSceneStyle={getSceneStyle}>
                 <Scene key="root">
-                    <Scene key="welcome" component={Welcome} hideNavBar hideTabBar />
+                    <Scene initial={true} key="welcome" component={Welcome} hideNavBar hideTabBar />
                     <Scene
-                        initial={true}
                         key="mainRoot"
                         component={connect(mapStateToProps)(Switch)}
                         tabs={true}
                         type={ActionConst.RESET}
                         selector={(props) => {
-                            console.log('props.LoginReducer', props.LoginReducer)
-                            if (props.LoginReducer.user.mobile && props.LoginReducer.user.token && props.LoginReducer.user.userId && props.LoginReducer.user.userStatus && props.LoginReducer.user.userType) {
-                                console.log('main')
-
+                            if (props.LoginReducer.user.mobile
+                                && props.LoginReducer.user.token
+                                && props.LoginReducer.user.userId
+                                && props.LoginReducer.user.userStatus
+                                && props.LoginReducer.user.userType) {
                                 return 'main'
                             } else {
-                                console.log('login')
-
                                 return 'login'
                             }
                         }}
@@ -203,15 +201,3 @@ export default class App extends Component {
         )
     }
 }
-
-
-
-                   /*
-
-                <Scene key="VinScanner" component={VinScanner} hideNavBar />
-                <Scene key="ErrorView" component={ErrorView} hideNavBar />
-
-                */
-
-
-

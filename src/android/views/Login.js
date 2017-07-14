@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Image, Dimensions, Alert } from 'react-native'
+import { View, Image, Dimensions, ToastAndroid } from 'react-native'
 import { Provider, connect } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import ReduxThunk from 'redux-thunk'
@@ -63,15 +63,12 @@ class Login extends Component {
             console.log('loginInfo执行完毕')
             if (loginInfo.isResultStatus == 0) {
                 this.props.resetLogin()
-                //  Actions.main()
             } else if (loginInfo.isResultStatus == 1) {
                 this.props.resetLogin()
-                console.log(loginInfo)
-                Alert.alert('登录错误', '请输入正确的账号与密码')
+                ToastAndroid.showWithGravity('系统错误，请检查网络并重新进入APP', ToastAndroid.SHORT, ToastAndroid.CENTER)
             } else if (loginInfo.isResultStatus == 2) {
                 this.props.resetLogin()
-                console.log(loginInfo)
-                Alert.alert('登录错误', '请输入正确的账号与密码')
+                ToastAndroid.showWithGravity('账号与密码错误', ToastAndroid.SHORT, ToastAndroid.CENTER)
             }
         }
 
