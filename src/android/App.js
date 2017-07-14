@@ -10,7 +10,7 @@ import SearchBar from './components/Bar/SearchBar'
 import TopBar from './components/Bar/TopBar'
 
 
-import Welcome from './views/Welcome'
+import Initialization from './views/Initialization'
 import Login from './views/Login'
 
 
@@ -38,7 +38,7 @@ import RecordList from './views/RecordList'
 import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
-import selectStorageForCarList from './views/form/select/SelectStorageForCarList'
+//import selectStorageForCarList from './views/form/select/SelectStorageForCarList'
 import AddCar from './views/AddCar'
 import SelectEntrust from './views/form/select/SelectEntrust'
 import SelectReceive from './views/form/select/SelectReceive'
@@ -90,7 +90,7 @@ export default class App extends Component {
         return (
             <Router getSceneStyle={getSceneStyle}>
                 <Scene key="root">
-                    <Scene initial={true} key="welcome" component={Welcome} hideNavBar hideTabBar />
+                    <Scene initial={true} key="initialization" component={Initialization} hideNavBar hideTabBar />
                     <Scene
                         key="mainRoot"
                         component={connect(mapStateToProps)(Switch)}

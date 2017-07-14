@@ -38,7 +38,7 @@ export default class Login extends Component {
                     <View>
                         <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.15)', width: window.width / 4 * 3, borderWidth: 0, marginTop: 50 }}>
                             <Icon active name='md-person' style={{ color: '#00b9cd', marginLeft: 10 }} />
-                            <Input placeholder='USERNAME'
+                            <Input placeholder='请输入用户名'
                                 placeholderTextColor='#00b9cd'
                                 style={{ color: '#00b9cd' }}
                                 onChangeText={(text) => changUserName(text)}
@@ -46,7 +46,7 @@ export default class Login extends Component {
                         </Item>
                         <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.15)', width: window.width / 4 * 3, borderWidth: 0, marginTop: 20 }}>
                             <Icon active name='md-lock' style={{ color: '#00b9cd', marginLeft: 10 }} />
-                            <Input placeholder='PASSWORD'
+                            <Input placeholder='请输入密码'
                                 placeholderTextColor='#00b9cd'
                                 style={{ color: '#00b9cd' }}
                                 secureTextEntry
@@ -55,7 +55,7 @@ export default class Login extends Component {
                         </Item>
                         <Button style={{ marginTop: 50, width: window.width / 4 * 3, borderRadius: 25, backgroundColor: '#26c6da', justifyContent: 'center' }}
                             onPress={login}>
-                            <Text>Login</Text>
+                            <Text>登录</Text>
                         </Button>
                     </View>
                 </View>

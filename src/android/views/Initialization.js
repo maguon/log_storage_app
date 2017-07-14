@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as welcomeAction from '../../actions/WelcomeAction'
 import { Actions } from 'react-native-router-flux'
-import WelcomeLayout from '../layout/Welcome'
+import InitializationLayout from '../layout/Initialization'
 import localStorageKey from '../../util/LocalStorageKey'
 import localStorage from '../../util/LocalStorage'
 import { Linking, ToastAndroid } from 'react-native'
@@ -81,7 +81,7 @@ class Welcome extends Component {
         const { isExecStatus, isResultStatus } = this.props.welcomeReducer.getVersion
        // console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
         return (
-            <WelcomeLayout
+            <InitializationLayout
                 version={version}
                 lastVersion={lastVersion}
                 force_update={force_update}
