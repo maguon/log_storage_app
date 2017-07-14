@@ -47,7 +47,7 @@ class SearchVin extends Component {
         /*getCarList 执行状态*/
         if (SearchVinReducer.search.isExecStatus == 2) {
             if (SearchVinReducer.search.isResultStatus == 0) {
-                console.log('SearchVinReducer.search.isResultStatus == 0')
+                //console.log('SearchVinReducer.search.isResultStatus == 0')
                 let searchResult = SearchVinReducer.search
                 this.props.resetSearch()
                 if (typeof (searchResult.car) == "undefined") {

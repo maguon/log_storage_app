@@ -49,6 +49,13 @@ class Welcome extends Component {
         } else if (welcomeReducer.getVersion.isExecStatus == 2) {
             if (welcomeReducer.getVersion.isResultStatus == 0) {
                 console.log('welcome.getVersion执行成功', welcomeReducer.getVersion.data)
+                
+                let versionArr = welcomeReducer.getVersion.data.version.split('.')
+                let lastVersionArr = welcomeReducer.getVersion.data.lastVersion.split('.')
+                if (!((versionArr[0] < lastVersionArr[0] || versionArr[1] < lastVersionArr[1] || versionArr[2] < lastVersionArr[2]) && welcomeReducer.getVersion.data.force_update == 1)) {
+                    this.props.validateToken()
+                }
+
             } else if (welcomeReducer.getVersion.isResultStatus == 1) {
                 console.log('welcome.getVersion执行错误', welcomeReducer.getVersion.errorMsg)
                 ToastAndroid.showWithGravity('获取版本信息失败，请检测网络', ToastAndroid.SHORT, ToastAndroid.CENTER)
@@ -66,11 +73,9 @@ class Welcome extends Component {
                 Actions.mainRoot()
                 console.log('welcome.valdateToken 执行成功', welcomeReducer.getVersion.data)
             } else if (welcomeReducer.valdateToken.isResultStatus == 1) {
-
                 console.log('welcome.valdateToken 执行错误', welcomeReducer.getVersion.errorMsg)
             }
             else if (welcomeReducer.valdateToken.isResultStatus == 2) {
-                Actions.mainRoot()
                 console.log('welcome.valdateToken 执行失败', welcomeReducer.getVersion.failedMsg)
             }
         }
@@ -79,7 +84,7 @@ class Welcome extends Component {
     render() {
         const { version, lastVersion, force_update, url } = this.props.welcomeReducer.getVersion.data
         const { isExecStatus, isResultStatus } = this.props.welcomeReducer.getVersion
-       // console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
+        // console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
         return (
             <InitializationLayout
                 version={version}

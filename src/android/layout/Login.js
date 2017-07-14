@@ -33,7 +33,7 @@ export default class Login extends Component {
                             style={{ width: 80, height: 80 }} />
                     </View>
                     <View>
-                        <Text style={{ color: '#00b9cd', marginTop: 20, fontSize: 26, fontWeight: '100' }}>HONYA STORAGE</Text>
+                        <Text style={{ color: '#00b9cd', marginTop: 20, fontSize: 26, fontWeight: '100' }}>物联存车</Text>
                     </View>
                     <View>
                         <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.15)', width: window.width / 4 * 3, borderWidth: 0, marginTop: 50 }}>
