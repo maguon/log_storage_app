@@ -103,8 +103,6 @@ class ImagePage extends Component {
   render() {
     let { index } = this.props
     let { recordId, imageList } = this.props.ImportCarCameraReducer.importCarImage.data
-    console.log('recordId', recordId)
-    console.log('imageList', imageList)
     return (
       <View style={{ position: 'relative', backgroundColor: '#000' }}>
         <Swiper

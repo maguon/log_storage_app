@@ -211,29 +211,6 @@ class CarInformation extends Component {
             }
         }
         /************************************************************************************************/
-
-
-        /*delImage执行状态*/
-        // if (CarInfoReducer.delImage.isExecStatus == 1) {
-        //     console.log('CarInfoReducer.delImage', '开始执行')
-        // } else if (CarInfoReducer.delImage.isExecStatus == 2) {
-        //     console.log('CarInfoReducer.delImage', '执行完毕')
-        //     if (CarInfoReducer.delImage.isResultStatus == 0) {
-        //         console.log('CarInfoReducer.delImage执行成功')
-
-        //         this.props.resetDelImage()
-        //         this.getCarInfo()
-        //     } else if (CarInfoReducer.delImage.isResultStatus == 1) {
-        //         console.log('CarInfoReducer.delImage执行错误')
-        //         this.props.resetDelImage()
-
-        //     } else if (CarInfoReducer.delImage.isResultStatus == 2) {
-        //         console.log('CarInfoReducer.delImage执行失败', CarInfoReducer.delImage.failedMsg)
-        //         this.props.resetDelImage()
-        //     }
-        // }
-        /************************************************************************************************/
-
     }
 
     onPressMove(param) {

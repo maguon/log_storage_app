@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Dimensions,
-  StatusBar
+  StatusBar,
+  ToastAndroid
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 import PhotoView from 'react-native-photo-view'
@@ -27,6 +28,7 @@ class ImagePageForCarInfo extends Component {
     this.onPressOk = this.onPressOk.bind(this)
     this.onPressCancel = this.onPressCancel.bind(this)
     this.delImage = this.delImage.bind(this)
+    this.getCarInformation = this.getCarInformation.bind(this)
     this.state = {
       confirmModalVisible: false,
       photoViewIndex: 0
@@ -39,14 +41,51 @@ class ImagePageForCarInfo extends Component {
     }
   }
 
+  getCarInformation() {
+    this.props.getCarInformation({
+      requiredParam: {
+        userId: this.props.user.userId,
+        carId: this.props.CarInfoReducer.data.car.id
+      },
+      carOptionalParam: {
+        vin: this.props.CarInfoReducer.data.car.vin,
+        active: 1
+      },
+      carListOptionalParam: {
+        vin: this.props.CarInfoReducer.data.car.vin
+      }
+    })
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+    let { CarInfoReducer } = nextProps
+
+    /*delImage执行状态*/
+    if (CarInfoReducer.delImage.isExecStatus == 1) {
+      console.log('CarInfoReducer.delImage', '开始执行')
+    } else if (CarInfoReducer.delImage.isExecStatus == 2) {
+      console.log('CarInfoReducer.delImage', '执行完毕')
+      if (CarInfoReducer.delImage.isResultStatus == 0) {
+        console.log('CarInfoReducer.delImage执行成功')
+        ToastAndroid.showWithGravity('删除成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
+        this.props.resetDelImage()
+        this.getCarInformation()
+      } else if (CarInfoReducer.delImage.isResultStatus == 1) {
+        console.log('CarInfoReducer.delImage执行错误')
+        ToastAndroid.showWithGravity('删除失败', ToastAndroid.SHORT, ToastAndroid.CENTER)
+        this.props.resetDelImage()
+
+      } else if (CarInfoReducer.delImage.isResultStatus == 2) {
+        console.log('CarInfoReducer.delImage执行失败')
+        ToastAndroid.showWithGravity('删除失败', ToastAndroid.SHORT, ToastAndroid.CENTER)
+        this.props.resetDelImage()
+      }
+    }
+    /************************************************************************************************/
+  }
+
   renderPagination(index, total, context) {
-     console.log('index', index)
-    // console.log('total', total)
-    //context.setState({index})
-    console.log('context', context)
-    console.log('context', context.props.children[index])
-    
-    //context.scrollBy(index)
     return (
       <View style={{
         flex: 1,
@@ -74,9 +113,7 @@ class ImagePageForCarInfo extends Component {
 
   renderPhoteView() {
     let { imageList } = this.props.CarInfoReducer.data
-    console.log(imageList)
     return imageList.map((item, i) => {
-      // console.log(i, item)
       return <View key={i} style={{ flex: 1 }} >
         <PhotoView
           source={{ uri: item }}
@@ -85,7 +122,6 @@ class ImagePageForCarInfo extends Component {
           minimumZoomScale={1}
           maximumZoomScale={3}
           androidScaleType='center'
-          onLoad={() => console.log(item)}
           style={styles.photo}
         />
         <Text style={{ color: "#fff" }}>{item}</Text>
@@ -94,7 +130,6 @@ class ImagePageForCarInfo extends Component {
   }
 
   onPressOk() {
-
     this.setState({ confirmModalVisible: false })
     let { userId } = this.props.user
     let { recordId, imageList } = this.props.CarInfoReducer.data
@@ -107,6 +142,7 @@ class ImagePageForCarInfo extends Component {
         url
       }
     }
+
     this.props.delImage(param)
   }
 
@@ -131,125 +167,10 @@ class ImagePageForCarInfo extends Component {
           style={styles.wrapper}
           renderPagination={this.renderPagination}
           loop={false}
-          loadMinimal={true}
-          loadMinimalSize={20}
-          //removeClippedSubviews={false}
           automaticallyAdjustContentInsets={true}
-          //autoplay={true}
-          onScrollBeginDrag={(e, state, context) => {
-            console.log('e', e)
-            console.log('state', state)
-            console.log('context', context)
-          }}
-          onMomentumScrollEndg={(e, state, context) => {
-            console.log('e', e)
-            console.log('state', state)
-            console.log('context', context)
-          }}
         >
-          {/*<PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />
-                    <PhotoView
-      
-            source={{ uri: 'http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a' }}
-            resizeMode='contain'
-            minimumZoomScale={1}
-            maximumZoomScale={3}
-            androidScaleType='center'
-            onLoad={() => console.log('http://stg.myxxjs.com:9002/api/image/596462e2100f67405a12296a')}
-            style={styles.photo}
-          />*/}
           {this.renderPhoteView()}
         </Swiper>
-        {/*{this.renderPhoteView()}*/}
         <View style={{ position: 'absolute', top: 0, backgroundColor: 'rgba(255,255,255,0.1)', height: 40, width: width, flexDirection: 'row' }}>
           <Button iconLeft transparent style={{ position: 'absolute', left: 0, }}
             onPress={Actions.pop}>
@@ -286,6 +207,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   resetDelImage: () => {
     dispatch(CarInfoAction.resetDelImage())
+  },
+  getCarInformation: (param) => {
+    dispatch(CarInfoAction.getCarInformation(param))
   }
 })
 
