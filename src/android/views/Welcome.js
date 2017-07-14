@@ -79,7 +79,7 @@ class Welcome extends Component {
     render() {
         const { version, lastVersion, force_update, url } = this.props.welcomeReducer.getVersion.data
         const { isExecStatus, isResultStatus } = this.props.welcomeReducer.getVersion
-        console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
+       // console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
         return (
             <WelcomeLayout
                 version={version}
