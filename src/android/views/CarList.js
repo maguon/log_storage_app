@@ -13,6 +13,7 @@ import {
     Button,
     TouchableHighlight
 } from 'react-native'
+import * as RouterDirection from '../../util/RouterDirection'
 
 class CarList extends Component {
     constructor(props) {
@@ -56,20 +57,20 @@ class CarList extends Component {
 
 
         /*getCarListMore 执行状态*/
-        // if (carListReducer.getCarListMore.isExecStatus == 1) {
-        //     console.log('carListReducer.getCarListMore开始执行')
-        // } else if (carListReducer.getCarListMore.isExecStatus == 2) {
-        //     console.log('carListReducer.getCarListMore执行完毕')
-        //     if (carListReducer.getCarListMore.isResultStatus == 0) {
-        //         console.log('carListReducer.getCarListMore执行成功没有到底')
-        //     } else if (carListReducer.getCarListMore.isResultStatus == 1) {
-        //         console.log('carListReducer.getCarListMore执行错误')
-        //     } else if (carListReducer.getCarListMore.isResultStatus == 2) {
-        //         console.log('carListReducer.getCarListMore执行失败')
-        //     } else if (carListReducer.getCarListMore.isResultStatus == 3) {
-        //         console.log('carListReducer.getCarListMore已经到底')
-        //     }
-        // }
+        if (carListReducer.getCarListMore.isExecStatus == 1) {
+            console.log('carListReducer.getCarListMore开始执行')
+        } else if (carListReducer.getCarListMore.isExecStatus == 2) {
+            console.log('carListReducer.getCarListMore执行完毕')
+            if (carListReducer.getCarListMore.isResultStatus == 0) {
+                console.log('carListReducer.getCarListMore执行成功没有到底')
+            } else if (carListReducer.getCarListMore.isResultStatus == 1) {
+                console.log('carListReducer.getCarListMore执行错误')
+            } else if (carListReducer.getCarListMore.isResultStatus == 2) {
+                console.log('carListReducer.getCarListMore执行失败')
+            } else if (carListReducer.getCarListMore.isResultStatus == 3) {
+                console.log('carListReducer.getCarListMore已经到底')
+            }
+        }
 
         /************************************************************************************************/
 
@@ -89,6 +90,7 @@ class CarList extends Component {
 
     render() {
         let { carList } = this.props.carListReducer.getCarList.data
+        console.log(carList)
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
@@ -96,7 +98,7 @@ class CarList extends Component {
                     onEndReached={this.getCarListMore}
                     data={carList}
                     onEndReachedThreshold={1}
-                    renderItem={({ item }) => <CarListItem car={item} key={item.r_id} />}
+                    renderItem={({ item }) => <CarListItem car={item} key={item.r_id} showCarInfo={RouterDirection.carInformation(this.props.parent)} />}
                 />
             </View>
         )

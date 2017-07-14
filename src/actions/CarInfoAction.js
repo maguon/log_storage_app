@@ -7,6 +7,7 @@ export const getCarInformation = (param) => (dispatch) => {
     let urls = [`${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`,
     `${base_host}/car?${ObjectToUrl(param.carOptionalParam)}`,
     `${base_host}/carList?${ObjectToUrl(param.carListOptionalParam)}`]
+    console.log(urls)
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
     httpRequest
         .getAll(urls, (err, res) => {
