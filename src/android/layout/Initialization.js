@@ -10,16 +10,6 @@ const ImageHeight = window.width / 9 * 16
 const Welcome = ({ version, lastVersion, force_update, url, linkDownload, validateToken, isExecStatus, isResultStatus, getAppLastVersion }) => {
     let versionArr = version.split('.')
     let lastVersionArr = lastVersion.split('.')
-    // let btnOnPress
-    // let btnText
-    // if ((versionArr[0] < lastVersionArr[0] || versionArr[1] < lastVersionArr[1] || versionArr[2] < lastVersionArr[2]) && force_update == 1) {
-    //     btnOnPress = () => linkDownload(url)
-    //     btnText = '下载更新版本'
-    // }
-    // else {
-    //     btnOnPress = validateToken
-    //     btnText = '立即体验'
-    // }
     return (
         <View style={styles.container}>
             <StatusBar hidden={true} />

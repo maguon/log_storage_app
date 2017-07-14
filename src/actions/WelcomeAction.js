@@ -117,3 +117,12 @@ export const validateToken = () => (dispatch) => {
     })
 }
 
+
+export const resetInitialization = () => (dispatch) => {
+    dispatch({ type: actionTypes.welcomeActionTypes.RESET_INITIALIZATION, payload: {} })
+}
+
+export const resetGetVersion = () => (dispatch) => {
+    dispatch({ type: actionTypes.welcomeActionTypes.RESET_GETVERSION, payload: {} })
+}
+

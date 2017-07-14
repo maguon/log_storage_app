@@ -44,18 +44,33 @@ class Welcome extends Component {
 
     componentWillReceiveProps(nextProps) {
         let { welcomeReducer } = nextProps
+
+        if (welcomeReducer.valdateToken.isExecStatus == 1) {
+            console.log('welcome.valdateToken', '开始执行')
+        } else if (welcomeReducer.valdateToken.isExecStatus == 2) {
+            if (welcomeReducer.valdateToken.isResultStatus == 0) {
+                this.props.resetInitialization()
+                Actions.mainRoot()
+                console.log('welcome.valdateToken 执行成功', welcomeReducer.getVersion.data)
+            } else if (welcomeReducer.valdateToken.isResultStatus == 1) {
+                console.log('welcome.valdateToken 执行错误', welcomeReducer.getVersion.errorMsg)
+            }
+            else if (welcomeReducer.valdateToken.isResultStatus == 2) {
+                console.log('welcome.valdateToken 执行失败', welcomeReducer.getVersion.failedMsg)
+            }
+        }
+
         if (welcomeReducer.getVersion.isExecStatus == 1) {
             console.log('welcome.getVersion', '开始执行')
         } else if (welcomeReducer.getVersion.isExecStatus == 2) {
             if (welcomeReducer.getVersion.isResultStatus == 0) {
                 console.log('welcome.getVersion执行成功', welcomeReducer.getVersion.data)
-                
                 let versionArr = welcomeReducer.getVersion.data.version.split('.')
                 let lastVersionArr = welcomeReducer.getVersion.data.lastVersion.split('.')
                 if (!((versionArr[0] < lastVersionArr[0] || versionArr[1] < lastVersionArr[1] || versionArr[2] < lastVersionArr[2]) && welcomeReducer.getVersion.data.force_update == 1)) {
                     this.props.validateToken()
+                    this.props.resetGetVersion()
                 }
-
             } else if (welcomeReducer.getVersion.isResultStatus == 1) {
                 console.log('welcome.getVersion执行错误', welcomeReducer.getVersion.errorMsg)
                 ToastAndroid.showWithGravity('获取版本信息失败，请检测网络', ToastAndroid.SHORT, ToastAndroid.CENTER)
@@ -66,25 +81,12 @@ class Welcome extends Component {
             }
         }
 
-        if (welcomeReducer.valdateToken.isExecStatus == 1) {
-            console.log('welcome.valdateToken', '开始执行')
-        } else if (welcomeReducer.valdateToken.isExecStatus == 2) {
-            if (welcomeReducer.valdateToken.isResultStatus == 0) {
-                Actions.mainRoot()
-                console.log('welcome.valdateToken 执行成功', welcomeReducer.getVersion.data)
-            } else if (welcomeReducer.valdateToken.isResultStatus == 1) {
-                console.log('welcome.valdateToken 执行错误', welcomeReducer.getVersion.errorMsg)
-            }
-            else if (welcomeReducer.valdateToken.isResultStatus == 2) {
-                console.log('welcome.valdateToken 执行失败', welcomeReducer.getVersion.failedMsg)
-            }
-        }
+
     }
 
     render() {
         const { version, lastVersion, force_update, url } = this.props.welcomeReducer.getVersion.data
         const { isExecStatus, isResultStatus } = this.props.welcomeReducer.getVersion
-        // console.log('this.props.welcomeReducer.getVersion.data', this.props.welcomeReducer.getVersion)
         return (
             <InitializationLayout
                 version={version}
@@ -114,6 +116,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     validateToken: () => {
         dispatch(welcomeAction.validateToken())
+    },
+    resetInitialization: () => {
+        dispatch(welcomeAction.resetInitialization())
+    },
+    resetGetVersion: () => {
+        dispatch(welcomeAction.resetGetVersion())
     }
 })
 

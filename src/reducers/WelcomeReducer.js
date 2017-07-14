@@ -129,6 +129,30 @@ export default handleActions({
                 isResultStatus: 2
             }
         }
+    },
+    [actionTypes.welcomeActionTypes.RESET_INITIALIZATION]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            valdateToken: {
+                ...state.valdateToken,
+                isExecStatus: 0
+            },
+            getVersion: {
+                ...state.getVersion,
+                isExecStatus: 0
+            }
+        }
+    },
+    [actionTypes.welcomeActionTypes.RESET_GETVERSION]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            getVersion: {
+                ...state.getVersion,
+                isExecStatus: 0
+            }
+        }
     }
 
 }, initialState)
