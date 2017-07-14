@@ -8,12 +8,13 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import ReduxThunk from 'redux-thunk'
 import reducers from '../../../reducers/index'
 import localStorageKey from '../../../util/LocalStorageKey'
-import { Actions, ActionConst } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux'
 import localStorage from '../../../util/LocalStorage'
 import { Button, Container, Content, Header, Icon, Left, Body, Right, Title, List, ListItem, Thumbnail, Toast } from 'native-base'
 import SearchBar from '../../components/Bar/SearchBar'
 import ConfirmModal from '../../components/ConfirmModal'
 import * as app from '../../../android_app.json'
+import * as LoginAction from '../../../actions/LoginAction'
 
 
 class Setting extends Component {
@@ -45,7 +46,8 @@ class Setting extends Component {
     onPressOk() {
         this.setState({ confirmModalVisible: false })
         localStorage.saveKey(localStorageKey.USER, { mobile: this.props.userReducer.user.mobile })
-        Actions.login({ type: ActionConst.RESET })
+        this.props.cleanLogin()
+        Actions.login()
     }
 
     onPressCancel() {
@@ -116,7 +118,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-
+    cleanLogin: () => {
+        dispatch(LoginAction.cleanLogin())
+    }
 })
 
 

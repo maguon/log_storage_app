@@ -8,21 +8,21 @@ const initialState = {
     // isLoginSuccess: false,
     // isJump: false,
     user: {
-        userId: 38,
-        token: '1ywJhLyNBFFSYT00GR3XQEoGdbY=kqGaXMwwc7b9b2a47d0761a84c7b520e7b4b5a158224ed684020456cea8ae90aa1e48d58202e3a59c0a31647ced14d56192e1e26',
-        userType: 1,
-        userStatus: 1,
-        mobile: '18888'
-        // userId: 0,
-        // token: '',
+        // userId: 38,
+        // token: '1ywJhLyNBFFSYT00GR3XQEoGdbY=kqGaXMwwc7b9b2a47d0761a84c7b520e7b4b5a158224ed684020456cea8ae90aa1e48d58202e3a59c0a31647ced14d56192e1e26',
         // userType: 1,
         // userStatus: 1,
-        // mobile: ''
+        // mobile: '18888'
+        userId: 0,
+        token: '',
+        userType: 1,
+        userStatus: 1,
+        mobile: ''
     },
     isResultStatus: 0,
     isExecStatus: 0,
     errorMsg: '',
-    failedMsg: '',
+    failedMsg: ''
 }
 
 export default handleActions({
@@ -65,4 +65,19 @@ export default handleActions({
             isExecStatus: 0,
         }
     },
+    [actionTypes.loginTypes.CLEAN_LOGIN]: (state, action) => {
+        return {
+            user: {
+                userId: 0,
+                token: '',
+                userType: 1,
+                userStatus: 1,
+                mobile: ''
+            },
+            isResultStatus: 0,
+            isExecStatus: 0,
+            errorMsg: '',
+            failedMsg: ''
+        }
+    }
 }, initialState)

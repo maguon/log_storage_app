@@ -6,7 +6,6 @@ import { base_host } from '../config/Host'
 import requestHeaders from '../util/RequestHeaders'
 
 export const login = (params) => (dispatch) => {
-
     httpRequest.post(`${base_host}/userLogin`, params.postParam, (err, res) => {
         if (err) {
             //登录失败重新登录
@@ -58,8 +57,11 @@ export const login = (params) => (dispatch) => {
     })
 }
 
-
-
 export const resetLogin = () => (dispatch) => {
     dispatch({ type: actionTypes.loginTypes.RESET_LOGIN, payload: {} })
+}
+
+
+export const cleanLogin = () => (dispatch) => {
+    dispatch({ type: actionTypes.loginTypes.CLEAN_LOGIN, payload: {} })
 }

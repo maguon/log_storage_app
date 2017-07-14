@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button, Icon } from 'native-base'
-import { Scene, TabBar, Router, ActionConst, Actions } from 'react-native-router-flux'
+import { Scene, TabBar, Router, ActionConst, Action, Switch } from 'react-native-router-flux'
+import { connect } from 'react-redux'
 
 import NavBar from './components/Bar/NavBar'
 import TabIcon from './components/TabIcon'
@@ -61,18 +62,22 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
     const style = {
         flex: 1,
         backgroundColor: '#fff',
-
         shadowColor: null,
         shadowOffset: null,
         shadowOpacity: null,
         shadowRadius: null,
     }
     if (computedProps.isActive) {
-        // console.log(computedProps)
         style.marginTop = computedProps.hideNavBar ? 0 : 56
         style.marginBottom = computedProps.hideTabBar ? 0 : 50
     }
     return style
+}
+
+const mapStateToProps = (state) => {
+    return {
+        LoginReducer: state.LoginReducer
+    }
 }
 
 export default class App extends Component {
@@ -89,16 +94,24 @@ export default class App extends Component {
                     <Scene
                         initial={true}
                         key="mainRoot"
-                        //component={connect(mapStateToProps)(Switch)}
+                        component={connect(mapStateToProps)(Switch)}
                         tabs={true}
                         type={ActionConst.RESET}
                         selector={(props) => {
-                            console.log(props)
-                            return 'main'//props.appReducer.sceneName
+                            console.log('props.LoginReducer', props.LoginReducer)
+                            if (props.LoginReducer.user.mobile && props.LoginReducer.user.token && props.LoginReducer.user.userId && props.LoginReducer.user.userStatus && props.LoginReducer.user.userType) {
+                                console.log('main')
+
+                                return 'main'
+                            } else {
+                                console.log('login')
+
+                                return 'login'
+                            }
                         }}
                     >
-                        <Scene key="login" component={Login} hideNavBar hideTabBar />
-                        <Scene key="main" initial={true} tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+                        <Scene key="login" initial={true} component={Login} hideNavBar hideTabBar />
+                        <Scene key="main" tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
                             <Scene key="homeBlock" icon={TabIcon} online='ios-home' outline='ios-home-outline' >
                                 <Scene key="home" initial={true} component={Home} hideNavBar />
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
@@ -108,8 +121,8 @@ export default class App extends Component {
                                 <Scene key="selectStorageAtHomeBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
                                 <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
-                                
-                                <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar/>
+
+                                <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="selectCarMakeAtHomeBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectEntrustAtHomeBlock" component={SelectEntrust} title='选择委托方' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="selectReceiveAtHomeBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -119,9 +132,9 @@ export default class App extends Component {
                                 <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
-                            <Scene key="carBlock" initial={true} icon={TabIcon} online='ios-car' outline='ios-car-outline' >
+                            <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="query" initial={true} component={Query} hideNavBar />
-                                <Scene key="carList" title="车辆列表"  component={CarList}  hideNavBar={false} navBar={NavBar}  hideTabBar/>
+                                <Scene key="carList" title="车辆列表" component={CarList} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="carInformationAtCarBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />

@@ -45,15 +45,11 @@ class Password extends Component {
 
     shouldComponentUpdate(nextProps, nextState) {
         let { isResult, isSuccess } = nextProps.password
-        // console.log('nextProps.password', nextProps.password)
-        // console.log('nextState', nextState)
         if (isResult) {
             if (isSuccess) {
-                // console.log('修改成功')
                 this.props.resetPassword()
             }
             else {
-                // console.log('修改失败')
                 this.props.resetPassword()
             }
             return false
@@ -64,11 +60,8 @@ class Password extends Component {
     }
 
     render() {
-        console.log(this.props.user)
         return (
-
             <Container>
-                {/*<NavBar title='修改密码' />*/}
                 <Body style={{ flex: 1, flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start" }}>
                     <Form style={{ flex: 1, flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                         <Item floatingLabel  >

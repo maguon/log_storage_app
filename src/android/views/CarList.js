@@ -90,7 +90,6 @@ class CarList extends Component {
 
     render() {
         let { carList } = this.props.carListReducer.getCarList.data
-        console.log(carList)
         return (
             <View style={{ flex: 1 }}>
                 <FlatList

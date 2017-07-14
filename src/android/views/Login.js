@@ -63,12 +63,14 @@ class Login extends Component {
             console.log('loginInfo执行完毕')
             if (loginInfo.isResultStatus == 0) {
                 this.props.resetLogin()
-                 Actions.main()
+                //  Actions.main()
             } else if (loginInfo.isResultStatus == 1) {
                 this.props.resetLogin()
+                console.log(loginInfo)
                 Alert.alert('登录错误', '请输入正确的账号与密码')
             } else if (loginInfo.isResultStatus == 2) {
                 this.props.resetLogin()
+                console.log(loginInfo)
                 Alert.alert('登录错误', '请输入正确的账号与密码')
             }
         }
