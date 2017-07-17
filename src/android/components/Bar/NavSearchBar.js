@@ -60,6 +60,7 @@ export default class NavSearchBar extends Component {
                             value={this.props.vin}
                             onChangeText={(param) => this._onChangeSearchText(param)}
                             onTouchStart={this._onPressTextInput}
+                            autoFocus={true}
                         />
                         <Icon name="md-search"
                             type="ionicons"

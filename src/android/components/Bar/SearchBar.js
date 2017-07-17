@@ -45,11 +45,12 @@ export default class SearchBar extends Component {
                         <Icon name="md-qr-scanner" type="ionicons" />
                     </Button>
                 </Left>
-                <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }}>
+                <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }} onTouchStart={this._onPressTextInput}>
                     <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
                         <Input
                             style={{ color: '#ffffff', fontSize: 14 }}
-                            onTouchStart={this._onPressTextInput}
+                           // onTouchStart={
+                            editable={false}
                         />
                         <Icon name="md-search"
                             type="ionicons"
