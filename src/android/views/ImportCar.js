@@ -22,8 +22,8 @@ class ImportCar extends Component {
         let { ImporCarReducer } = nextProps
         /*importCar 执行状态*/
 
-        if (ImporCarReducer.importCar.isExecStatus == 1) {            
-        } else if (ImporCarReducer.importCar.isExecStatus == 2) {        
+        if (ImporCarReducer.importCar.isExecStatus == 1) {
+        } else if (ImporCarReducer.importCar.isExecStatus == 2) {
             if (ImporCarReducer.importCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('入库成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetImportCar()
@@ -34,7 +34,7 @@ class ImportCar extends Component {
                 ToastAndroid.showWithGravity(`入库失败:${ImporCarReducer.importCar.failedMsg}`, ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetImportCar()
             }
-            else if (ImporCarReducer.importCar.isResultStatus ==3) {
+            else if (ImporCarReducer.importCar.isResultStatus == 3) {
                 ToastAndroid.showWithGravity(`服务器错误`, ToastAndroid.SHORT, ToastAndroid.CENTER)
                 this.props.resetImportCar()
             }
@@ -62,7 +62,7 @@ class ImportCar extends Component {
                         full
                         onPress={() => RouterDirection.selectStorage(this.props.parent)({
                             routerIndex: 0,
-                            popName: this.props.name,
+                            popName: this.props.parent,
                             routerList: [RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
                             onSelect: this.onPressImport
                         })}
