@@ -57,6 +57,8 @@ class Initialization extends Component {
             }
             else if (InitializationReducer.valdateToken.isResultStatus == 2) {
                 console.log('welcome.valdateToken 执行失败', InitializationReducer.getVersion.failedMsg)
+                this.props.resetInitialization()
+                Actions.mainRoot()
             }
         }
 
@@ -105,7 +107,7 @@ class Initialization extends Component {
 
 
 const mapStateToProps = (state) => {
-    return {        
+    return {
         InitializationReducer: state.InitializationReducer
     }
 }

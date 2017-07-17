@@ -45,6 +45,7 @@ import SelectReceive from './views/form/select/SelectReceive'
 import SelectBaseAddr from './views/form/select/SelectBaseAddr'
 import SelectCity from './views/form/select/SelectCity'
 import RichText from './views/RichText'
+import Orientation from 'react-native-orientation'
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -57,6 +58,8 @@ const styles = StyleSheet.create({
 
     }
 })
+
+
 
 const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
     const style = {
@@ -83,6 +86,10 @@ const mapStateToProps = (state) => {
 export default class App extends Component {
     constructor(props) {
         super(props)
+    }
+
+    componentWillMount() {
+        Orientation.lockToPortrait()
     }
 
     render() {
