@@ -10,7 +10,8 @@ class SearchVin extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            vin: ''
+            vin: '',
+            s: true
         }
         this.getVinList = this.getVinList.bind(this)
         this.onChangeSearchText = this.onChangeSearchText.bind(this)
@@ -22,16 +23,32 @@ class SearchVin extends Component {
         if (this.props.vin) {
             this.setState({ vin: this.props.vin })
         }
+      //  console.log('componentWillMount')
     }
 
     componentDidMount() {
         if (this.props.vin) {
             this.getVinList(this.props.vin)
         }
+        //console.log('componentDidMount')
     }
+
+    // componentWillUpdate(nextProps,nextState){
+    //     console.log('componentWillUpdate')
+
+    // }
+
+
+    // componentWillUnmount(){
+    //     console.log(Actions)
+        
+    // }
 
     componentWillReceiveProps(nextProps) {
         let { SearchVinReducer } = nextProps
+        //if(this.state.s){Actions.refresh()}
+        // console.log('componentWillReceiveProps')
+        //Actions.refresh({})
         /*getVinList 执行状态*/
         if (SearchVinReducer.getVinList.isExecStatus == 2) {
             if (SearchVinReducer.getVinList.isResultStatus == 0) {
@@ -121,6 +138,7 @@ class SearchVin extends Component {
 
     render() {
         let { vinList } = this.props.SearchVinReducer.getVinList.data
+        console.log(vinList)
         return (
             <SearchCarListLayout
                 vinList={vinList}

@@ -124,7 +124,6 @@ class ImagePageForCarInfo extends Component {
           androidScaleType='center'
           style={styles.photo}
         />
-        <Text style={{ color: "#fff" }}>{item}</Text>
       </View>
     })
   }
