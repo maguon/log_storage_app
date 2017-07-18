@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { View, Vibration, Modal, Text, TextInput, StatusBar } from 'react-native'
+import { View, Vibration, Modal, Text, TextInput, StatusBar, Dimensions } from 'react-native'
 import { Item, Header, Input, Button, Left, Right, Icon } from 'native-base'
 import VinScanner from '../../components/VinScanner'
+import { Actions } from 'react-native-router-flux'
 
+const { width, height } = Dimensions.get('window')
 export default class SearchBar extends Component {
     constructor(props) {
         super(props)
@@ -42,7 +44,7 @@ export default class SearchBar extends Component {
             <Header androidStatusBarColor='#00cade' searchBar style={{ backgroundColor: '#00cade' }}>
                 <Left style={{ flex: 1 }}>
                     <Button transparent onPress={() => { this.setState({ barcodeModalVisible: true }) }}>
-                        <Icon name="ios-barcode-outline" style={{fontSize:30}} type="ionicons" />
+                        <Icon name="ios-barcode-outline" style={{ fontSize: 30 }} type="ionicons" />
                     </Button>
                 </Left>
                 <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }} onTouchStart={this._onPressTextInput}>
@@ -65,9 +67,12 @@ export default class SearchBar extends Component {
                     onRequestClose={() => { this.setState({ barcodeModalVisible: false }) }}
                 >
                     <VinScanner barcodeReceived={this._onBarcodeReceived} />
+                    <View style={{ position: 'absolute', top: 0, backgroundColor: 'rgba(255,255,255,0.1)', height: 40, width: width, flexDirection: 'row' }}>
+                        <Icon style={{ color: '#888888', alignSelf: 'center', paddingLeft: 10, fontSize: 25 }} name='arrow-back' onPress={() => { this.setState({ barcodeModalVisible: false }) }} />
+                        <Text style={{ color: '#888888', alignSelf: 'center', paddingLeft: 5 }} onPress={() => { this.setState({ barcodeModalVisible: false }) }} >返回</Text>
+                    </View>
                 </Modal>
             </Header >
-
         )
     }
 }

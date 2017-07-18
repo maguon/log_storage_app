@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry,
   StyleSheet,
   Text,
   Vibration,
+
   View
-} from 'react-native';
-import BarcodeScanner from 'react-native-barcodescanner';
+} from 'react-native'
+import BarcodeScanner from 'react-native-barcodescanner'
 import { connect } from 'react-redux'
+
 
 export default class VinScanner extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       cameraType: 'back',
@@ -28,7 +30,6 @@ export default class VinScanner extends Component {
           torchMode={this.state.torchMode}
           cameraType={this.state.cameraType}
         />
-
       </View>
     );
   }

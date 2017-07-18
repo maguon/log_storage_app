@@ -9,6 +9,7 @@ import SearchVinList from '../components/SearchVinList'
 import NavSearchBar from '../components/Bar/NavSearchBar'
 
 
+
 const window = Dimensions.get('window')
 class SearchVin extends Component {
     constructor(props) {
