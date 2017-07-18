@@ -342,9 +342,7 @@ class CarInformation extends Component {
                 carStatus: 9
             }
         })
-
         this.setState({ confirmModalVisibleSend: false })
-
     }
 
     onPressSendCancel() {
