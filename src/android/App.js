@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Button, Icon } from 'native-base'
-import { Scene, TabBar, Router, ActionConst, Action, Switch } from 'react-native-router-flux'
+import { Scene, TabBar, Router, ActionConst, Action, Switch, Reducer } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
 import NavBar from './components/Bar/NavBar'
@@ -38,7 +38,6 @@ import RecordList from './views/RecordList'
 import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
-//import selectStorageForCarList from './views/form/select/SelectStorageForCarList'
 import AddCar from './views/AddCar'
 import SelectEntrust from './views/form/select/SelectEntrust'
 import SelectReceive from './views/form/select/SelectReceive'
@@ -46,6 +45,7 @@ import SelectBaseAddr from './views/form/select/SelectBaseAddr'
 import SelectCity from './views/form/select/SelectCity'
 import RichText from './views/RichText'
 import Orientation from 'react-native-orientation'
+import * as sceneAction from '../actions/SceneAction'
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -58,8 +58,6 @@ const styles = StyleSheet.create({
 
     }
 })
-
-
 
 const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) => {
     const style = {
@@ -83,19 +81,32 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props)
+        this.reducerCreate = this.reducerCreate.bind(this)
     }
 
     componentWillMount() {
         Orientation.lockToPortrait()
     }
 
+    reducerCreate(params) {
+        const defaultReducer = Reducer(params)
+        return (state, action) => {
+            if (action.type == 'REACT_NATIVE_ROUTER_FLUX_FOCUS') {
+                if (action.scene.name != 'mainRoot') {
+                    this.props.changeScene(action.scene.name)
+                }
+            }
+            return defaultReducer(state, action)
+        }
+    }
+
     render() {
         console.disableYellowBox = true
         return (
-            <Router getSceneStyle={getSceneStyle}>
+            <Router createReducer={this.reducerCreate} getSceneStyle={getSceneStyle} >
                 <Scene key="root">
                     <Scene initial={true} key="initialization" component={Initialization} hideNavBar hideTabBar />
                     <Scene
@@ -121,7 +132,7 @@ export default class App extends Component {
                                 <Scene key="home" initial={true} component={Home} hideNavBar />
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
-                                <Scene key="addCarAtHomeBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+                                <Scene key="addCarAtHomeBlock" isRefresh={true} component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
 
                                 <Scene key="selectStorageAtHomeBlock" component={SelectStorage} hideTabBar navBar={NavBar} title='选择仓库' hideNavBar={false} />
                                 <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
@@ -215,3 +226,11 @@ export default class App extends Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    changeScene: (param) => {
+        dispatch(sceneAction.changeScene(param))
+    }
+})
+
+export default connect((state) => { return {} }, mapDispatchToProps)(App)

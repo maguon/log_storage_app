@@ -88,6 +88,7 @@ class Home extends Component {
     }
 
     render() {
+       // console.log(this.props)
         let { storageList } = this.props.homeReducer.getStoragesHome.data
         let { recordList } = this.props.homeReducer.getRecordsHome.data
         return (

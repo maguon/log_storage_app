@@ -22,6 +22,7 @@ export default class SearchVinList extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <FlatList
+                    showsVerticalScrollIndicator={false}
                     data={this.props.vinList}
                     renderItem={({ item }) => <ListItem onPress={() => this._onPressItem(item.vin)}><Text>{item.vin}</Text></ListItem>}
                     onEndReached={this._onEndReached}

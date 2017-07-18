@@ -49,7 +49,6 @@ export default class SearchBar extends Component {
                     <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
                         <Input
                             style={{ color: '#ffffff', fontSize: 14 }}
-                           // onTouchStart={
                             editable={false}
                         />
                         <Icon name="md-search"

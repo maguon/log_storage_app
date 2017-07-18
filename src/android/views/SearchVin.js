@@ -3,15 +3,18 @@ import { connect } from 'react-redux'
 import * as searchVinAction from '../../actions/SearchVinAction'
 import { Actions } from 'react-native-router-flux'
 import SearchCarListLayout from '../layout/SearchVin'
-import { View } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import * as RouterDirection from '../../util/RouterDirection'
+import SearchVinList from '../components/SearchVinList'
+import NavSearchBar from '../components/Bar/NavSearchBar'
 
+
+const window = Dimensions.get('window')
 class SearchVin extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            vin: '',
-            s: true
+            vin: ''
         }
         this.getVinList = this.getVinList.bind(this)
         this.onChangeSearchText = this.onChangeSearchText.bind(this)
@@ -23,32 +26,24 @@ class SearchVin extends Component {
         if (this.props.vin) {
             this.setState({ vin: this.props.vin })
         }
-      //  console.log('componentWillMount')
     }
 
     componentDidMount() {
         if (this.props.vin) {
             this.getVinList(this.props.vin)
         }
-        //console.log('componentDidMount')
     }
-
-    // componentWillUpdate(nextProps,nextState){
-    //     console.log('componentWillUpdate')
-
-    // }
-
-
-    // componentWillUnmount(){
-    //     console.log(Actions)
-        
-    // }
 
     componentWillReceiveProps(nextProps) {
         let { SearchVinReducer } = nextProps
-        //if(this.state.s){Actions.refresh()}
-        // console.log('componentWillReceiveProps')
-        //Actions.refresh({})
+        //console.log(nextProps)
+        if (nextProps.SceneReducer.selectedScene == 'searchVinAtHomeBlock') {
+            this.refs.navSearchBar._focus()
+        }
+        else {
+            this.refs.navSearchBar._blur()
+        }
+
         /*getVinList 执行状态*/
         if (SearchVinReducer.getVinList.isExecStatus == 2) {
             if (SearchVinReducer.getVinList.isResultStatus == 0) {
@@ -64,13 +59,14 @@ class SearchVin extends Component {
         /*getCarList 执行状态*/
         if (SearchVinReducer.search.isExecStatus == 2) {
             if (SearchVinReducer.search.isResultStatus == 0) {
-                //console.log('SearchVinReducer.search.isResultStatus == 0')
                 let searchResult = SearchVinReducer.search
                 this.props.resetSearch()
                 if (typeof (searchResult.car) == "undefined") {
+                    //this.isRefresh = true
                     RouterDirection.addCar(nextProps.parent)({ vin: this.state.vin })
                 }
                 else {
+                    //this.isRefresh = true
                     RouterDirection.carInformation(nextProps.parent)({ car: SearchVinReducer.search.car })
                 }
                 this.props.resetSearch()
@@ -138,16 +134,28 @@ class SearchVin extends Component {
 
     render() {
         let { vinList } = this.props.SearchVinReducer.getVinList.data
-        console.log(vinList)
         return (
-            <SearchCarListLayout
+            <View style={{ flex: 1, width: window.width }}>
+                <NavSearchBar
+                    ref='navSearchBar'
+                    vin={this.state.vin}
+                    onChangeSearchText={this.onChangeSearchText}
+                    onPressIcon={this.onPressIcon}
+                />
+                <SearchVinList
+                    vinList={vinList}
+                    onEndReached={this.onEndReached}
+                    onPressItem={this.onPressItem}
+                />
+            </View>
+            /*<SearchCarListLayout
                 vinList={vinList}
                 vin={this.state.vin}
                 onPressIcon={this.onPressIcon}
                 onChangeSearchText={this.onChangeSearchText}
                 onEndReached={this.onEndReached}
                 onPressItem={this.onPressItem}
-            />
+            />*/
         )
     }
 }
@@ -155,7 +163,8 @@ class SearchVin extends Component {
 const mapStateToProps = (state) => {
     return {
         SearchVinReducer: state.SearchVinReducer,
-        user: state.LoginReducer.user
+        user: state.LoginReducer.user,
+        SceneReducer: state.SceneReducer
     }
 }
 

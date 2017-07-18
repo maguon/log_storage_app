@@ -44,6 +44,12 @@ class AddCar extends Component {
         }
     }
 
+
+    // componentDidMount(){
+    //     console.log('componentDidMount')
+    //     this.props.nextStepComponentDidMount()
+    // }
+
     componentWillReceiveProps(nextProps) {
         let { AddCarReducer } = nextProps
         /*addCar执行状态*/

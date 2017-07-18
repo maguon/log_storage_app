@@ -19,10 +19,11 @@ import * as selectCityTypes from './SelectCityTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
 import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
-
+import * as sceneTypes from './SceneTypes'
 
 export {
     loginTypes,
+    sceneTypes,
     carInfoTypes,
     initializationTypes,
     homeTypes,

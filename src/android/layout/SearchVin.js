@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import Car from '../components/CarList/CarListItem'
 import { Actions } from 'react-native-router-flux'
-import SearchBar from '../components/Bar/SearchBar'
 import SearchVinList from '../components/SearchVinList'
 import NavSearchBar from '../components/Bar/NavSearchBar'
 
 const window = Dimensions.get('window')
 
-const CarList = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText, onEndReached }) => {
+const SearchVin = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText, onEndReached }) => {
     return (
         <View style={{ flex: 1, width: window.width }}>
             <NavSearchBar
+                ref='navSearchBar'
                 vin={vin}
                 onChangeSearchText={onChangeSearchText}
                 onPressIcon={onPressIcon}
@@ -26,4 +25,4 @@ const CarList = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText, o
     )
 }
 
-export default CarList
+export default SearchVin
