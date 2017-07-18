@@ -42,7 +42,7 @@ export default class SearchBar extends Component {
             <Header androidStatusBarColor='#00cade' searchBar style={{ backgroundColor: '#00cade' }}>
                 <Left style={{ flex: 1 }}>
                     <Button transparent onPress={() => { this.setState({ barcodeModalVisible: true }) }}>
-                        <Icon name="md-qr-scanner" type="ionicons" />
+                        <Icon name="ios-barcode-outline" style={{fontSize:30}} type="ionicons" />
                     </Button>
                 </Left>
                 <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }} onTouchStart={this._onPressTextInput}>
