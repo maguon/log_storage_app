@@ -20,12 +20,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     labelStyle: {
-        fontSize: 14,
+        fontSize: 12,
         flex: 4,
         textAlign: 'right'
     },
     textStyle: {
-        fontSize: 14,
+        fontSize: 12,
         flex: 12
     },
     messageSytle: {

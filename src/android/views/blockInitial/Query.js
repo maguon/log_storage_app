@@ -144,7 +144,7 @@ export default class Query extends Component {
                                     <DateTimePicker
                                         isRequire={false}
                                         labelStyle={{
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             flex: 13,
                                             textAlign: 'right'
                                         }}
@@ -176,7 +176,7 @@ export default class Query extends Component {
                                         isRequire={false}
                                         value={this.state.queryCar.enterStart}
                                         labelStyle={{
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             flex: 13,
                                             textAlign: 'right'
                                         }}
@@ -207,7 +207,7 @@ export default class Query extends Component {
                                         isRequire={false}
                                         value={this.state.queryCar.realStart}
                                         labelStyle={{
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             flex: 13,
                                             textAlign: 'right'
                                         }}
