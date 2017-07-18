@@ -49,9 +49,9 @@ export default class TextBox extends Component {
     componentWillMount() {
         this.changeValue(this.props.defaultValue)
     }
+    
     componentWillReceiveProps(nextProps) {
         if (nextProps.value) {
-
             this.setState({ value: nextProps.value })
         } else {
             this.setState({ value: nextProps.defaultValue })

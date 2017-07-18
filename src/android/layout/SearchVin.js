@@ -7,7 +7,7 @@ import NavSearchBar from '../components/Bar/NavSearchBar'
 
 const window = Dimensions.get('window')
 
-const SearchVin = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText, onEndReached }) => {
+const SearchVin = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText }) => {
     return (
         <View style={{ flex: 1, width: window.width }}>
             <NavSearchBar
@@ -18,7 +18,7 @@ const SearchVin = ({ vinList, vin, onPressItem, onPressIcon, onChangeSearchText,
             />
             <SearchVinList
                 vinList={vinList}
-                onEndReached={onEndReached}
+                //onEndReached={onEndReached}
                 onPressItem={onPressItem}
             />
         </View>

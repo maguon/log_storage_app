@@ -12,7 +12,7 @@ const initialState = {
         failedMsg: '',
         serviceErrorMsg: '',
         data: {
-            // vin: '',
+            vin: ''
             // makeName: '请选择',
             // makeId: 0,
             // receiveId: 0,
@@ -110,7 +110,9 @@ export default handleActions({
                 errorMsg: '',
                 failedMsg: '',
                 serviceErrorMsg: '',
-                data: {}
+                data: {
+                    vin: ''
+                }
             }
         }
     },

@@ -20,7 +20,7 @@ class SearchVin extends Component {
         this.onChangeSearchText = this.onChangeSearchText.bind(this)
         this.onPressIcon = this.onPressIcon.bind(this)
         this.onPressItem = this.onPressItem.bind(this)
-        this.onEndReached = this.onEndReached.bind(this)
+        // this.onEndReached = this.onEndReached.bind(this)
     }
     componentWillMount() {
         if (this.props.vin) {
@@ -33,6 +33,11 @@ class SearchVin extends Component {
             this.getVinList(this.props.vin)
         }
     }
+
+    componentWillUnmount() {
+        this.props.resetGetVinList(new Date().getTime())
+    }
+
 
     componentWillReceiveProps(nextProps) {
         let { SearchVinReducer } = nextProps
@@ -84,14 +89,14 @@ class SearchVin extends Component {
     getVinList(vin) {
         let { user } = this.props
         const timeStamp = new Date().getTime()
-        let pageSize = 15
+        let pageSize = 10
         if (vin.length >= 6 && vin.length <= 17) {
             if (this.props.SearchVinReducer.getVinList.isExecStatus == 0) {
                 if (!this.props.SearchVinReducer.getVinList.isComplete || vin != this.props.SearchVinReducer.getVinList.vin) {
-                    let start = (vin != this.props.SearchVinReducer.getVinList.vin) ? 0 : this.props.SearchVinReducer.getVinList.data.vinList.length
+                    //  let start = (vin != this.props.SearchVinReducer.getVinList.vin) ? 0 : this.props.SearchVinReducer.getVinList.data.vinList.length
                     let param = {
                         optionalParam: {
-                            start,
+                            start: 0,
                             size: pageSize,
                             vinCode: vin
                         }
@@ -110,21 +115,25 @@ class SearchVin extends Component {
     }
 
     onPressIcon() {
-        let param = {
-            carOptionalParam: {
-                vin: this.state.vin,
-                active: 1
-            },
-            carListOptionalParam: {
-                vin: this.state.vin
+        if (this.state.vin) {
+            let param = {
+                carOptionalParam: {
+                    vin: this.state.vin,
+                    active: 1
+                },
+                carListOptionalParam: {
+                    vin: this.state.vin
+                }
             }
+            this.props.search(param)
+        } else {
+            RouterDirection.addCar(this.props.parent)({ vin: '' })
         }
-        this.props.search(param)
     }
 
-    onEndReached() {
-        this.getVinList(this.state.vin)
-    }
+    // onEndReached() {
+    //     this.getVinList(this.state.vin)
+    // }
 
     onPressItem(param) {
         this.setState({ vin: param })
