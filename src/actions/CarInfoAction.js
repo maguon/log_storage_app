@@ -219,3 +219,25 @@ export const resetDelImage = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_DELETE_IMAGE, payload: {} })
 }
 
+
+export const sendCar = (param) => (dispatch) => {
+    let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStatus/${param.requiredParam.carStatus}`
+    dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_WAITING, payload: {} })
+    httpRequest
+        .put(url, {}, (err, res) => {
+            if (err) {
+                dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_ERROR, payload: { data: err } })
+            } else {
+                if (res.success) {
+                    dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_SUCCESS, payload: {} })
+                } else {
+                    dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_FAILED, payload: {} })
+                }
+            }
+        })
+}
+
+export const resetSendCar = () => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.RESET_SEND_CAR, payload: {} })
+}
+

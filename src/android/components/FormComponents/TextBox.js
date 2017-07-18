@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 const baseStyles = {
     inputStyle: {
         color: '#00cade',
-        fontSize: 18,
+        fontSize: 15,
         flex: 5
     }
 }
@@ -104,7 +104,7 @@ export default class TextBox extends Component {
 
     renderTag() {
         if (this.props.isRequire) {
-            return <Text style={{ color: 'red', textAlign: 'left' }}>* </Text>
+            return <Text style={{ color: 'red', textAlign: 'left' }}>*</Text>
         }
         else {
             return

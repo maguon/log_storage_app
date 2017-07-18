@@ -42,8 +42,7 @@ class SearchVin extends Component {
 
     componentWillReceiveProps(nextProps) {
         let { SearchVinReducer } = nextProps
-        //console.log(nextProps)
-        if (nextProps.SceneReducer.selectedScene == 'searchVinAtHomeBlock') {
+        if (nextProps.SceneReducer.selectedScene == nextProps.name) {
             this.refs.navSearchBar._focus()
         }
         else {

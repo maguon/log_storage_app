@@ -122,7 +122,7 @@ export default class Select extends Component {
 
     renderTag() {
         if (this.props.isRequire) {
-            return <Text style={{ color: 'red', textAlign: 'left' }}>* </Text>
+            return <Text style={{ color: 'red', textAlign: 'left' }}>*</Text>
         }
         else {
             return

@@ -26,8 +26,12 @@ class CarInformation extends Component {
         this.onPressExportCancel = this.onPressExportCancel.bind(this)
         this.getCarInformation = this.getCarInformation.bind(this)
         this.onReceivePhote = this.onReceivePhote.bind(this)
+        this.onPressSendOk = this.onPressSendOk.bind(this)
+        this.onPressSendCancel = this.onPressSendCancel.bind(this)
+        this.renderSended = this.renderSended.bind(this)
         this.state = {
-            confirmModalVisible: false
+            confirmModalVisible: false,
+            confirmModalVisibleSend: false
         }
     }
 
@@ -212,6 +216,32 @@ class CarInformation extends Component {
             }
         }
         /************************************************************************************************/
+
+
+        /*appendImage执行状态*/
+        if (CarInfoReducer.sendCarisExecStatus == 1) {
+            console.log('CarInfoReducer.sendCar开始执行')
+        } else if (CarInfoReducer.sendCar.isExecStatus == 2) {
+            console.log('CarInfoReducer.sendCar执行完毕')
+            if (CarInfoReducer.sendCar.isResultStatus == 0) {
+                console.log('CarInfoReducer.sendCar执行成功')
+                this.props.resetSendCar()
+                Actions.pop()
+            } else if (CarInfoReducer.sendCar.isResultStatus == 1) {
+                console.log('CarInfoReducer.sendCar执行错误')
+                this.props.resetSendCar()
+
+            } else if (CarInfoReducer.sendCar.isResultStatus == 2) {
+                console.log('CarInfoReducer.sendCar执行失败')
+                this.props.resetSendCar()
+
+            } else if (CarInfoReducer.sendCar.isResultStatus == 3) {
+                console.log('CarInfoReducer.sendCar服务器错误')
+                this.props.resetSendCar()
+
+            }
+        }
+        /************************************************************************************************/
     }
 
     onPressMove(param) {
@@ -300,6 +330,25 @@ class CarInformation extends Component {
             },
             putParam
         })
+    }
+
+
+    onPressSendOk() {
+        let { id } = this.props.CarInfoReducer.data.car
+        this.props.sendCar({
+            requiredParam: {
+                userId: this.props.user.userId,
+                carId: id,
+                carStatus: 9
+            }
+        })
+
+        this.setState({ confirmModalVisibleSend: false })
+
+    }
+
+    onPressSendCancel() {
+        this.setState({ confirmModalVisibleSend: false })
     }
 
     onPressExportOk() {
@@ -397,8 +446,8 @@ class CarInformation extends Component {
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                            <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
-                            <Text style={{ flex: 13 }}>{storage_name ? `${storage_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
+                            <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>当前位置：</Text>
+                            <Text style={{ flex: 13, fontSize: 12 }}>{storage_name ? `${storage_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <RichTextBox
@@ -455,41 +504,41 @@ class CarInformation extends Component {
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>品牌：</Text>
-                                <Text style={{ flex: 13 }}>{make_name}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>品牌：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{make_name}</Text>
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>委托方：</Text>
-                                <Text style={{ flex: 13 }}>{en_short_name}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>委托方：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{en_short_name}</Text>
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>经销商：</Text>
-                                <Text style={{ flex: 13 }}>{re_short_name}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>经销商：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{re_short_name}</Text>
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>起始城市：</Text>
-                                <Text style={{ flex: 13 }}>{route_start}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>起始城市：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{route_start}</Text>
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>发货地址：</Text>
-                                <Text style={{ flex: 13 }}>{addr_name}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>发货地址：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{addr_name}</Text>
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>目的城市：</Text>
-                                <Text style={{ flex: 13 }}>{route_end}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>目的城市：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{route_end}</Text>
                             </View>
                             <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                                <Text style={{ flex: 4, textAlign: 'right' }}>指令时间：</Text>
-                                <Text style={{ flex: 13 }}>{order_date ? new Date(order_date).toLocaleDateString() : ''}</Text>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>指令时间：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{order_date ? new Date(order_date).toLocaleDateString() : ''}</Text>
                             </View>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                            <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
-                            <Text style={{ flex: 13 }}>已出库</Text>
+                            <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>当前位置：</Text>
+                            <Text style={{ flex: 13, fontSize: 12 }}>已出库</Text>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                            <Text style={{ flex: 4, textAlign: 'right' }}>备注：</Text>
-                            <Text style={{ flex: 13 }}>{remark}</Text>
+                            <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>备注：</Text>
+                            <Text style={{ flex: 13, fontSize: 12 }}>{remark}</Text>
                         </View>
                         <CarCamera
                             images={this.props.CarInfoReducer.data.imageList}
@@ -583,8 +632,8 @@ class CarInformation extends Component {
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-                            <Text style={{ flex: 4, textAlign: 'right' }}>当前位置：</Text>
-                            <Text style={{ flex: 13 }}>未入库</Text>
+                            <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>当前位置：</Text>
+                            <Text style={{ flex: 13, fontSize: 12 }}>未入库</Text>
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
                             <RichTextBox
@@ -612,6 +661,76 @@ class CarInformation extends Component {
                             style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>
+                        <Button
+                            block
+                            onPress={() => { this.setState({ confirmModalVisibleSend: true }) }}
+                            style={{ marginHorizontal: 20, marginBottom: 10, backgroundColor: '#00cade' }}>
+                            <Text style={{ color: '#fff' }}>直接送达</Text>
+                        </Button>
+                        <RecordList records={this.props.CarInfoReducer.data.recordList} />
+                    </View>
+                </ScrollView>
+                <ConfirmModal
+                    title='确认未入库车辆直接送达？'
+                    isVisible={this.state.confirmModalVisibleSend}
+                    onPressOk={this.onPressSendOk}
+                    onPressCancel={this.onPressSendCancel} />
+            </View>
+        )
+    }
+
+    renderSended() {
+        let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, remark } = this.props.CarInfoReducer.data.car
+        return (
+            <View style={{ flex: 1, backgroundColor: '#eee' }}>
+                <ScrollView>
+                    <View style={{ flex: 1 }}>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ color: '#00cade', flex: 4, textAlign: 'right' }}>vin：</Text>
+                            <Text style={{ color: '#00cade', flex: 13 }}>{vin}</Text>
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>品牌：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{make_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>委托方：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{en_short_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>经销商：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{re_short_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>起始城市：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{route_start}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>发货地址：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{addr_name}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>目的城市：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{route_end}</Text>
+                            </View>
+                            <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                                <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>指令时间：</Text>
+                                <Text style={{ flex: 13, fontSize: 12 }}>{order_date ? new Date(order_date).toLocaleDateString() : ''}</Text>
+                            </View>
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>当前位置：</Text>
+                            <Text style={{ flex: 13, fontSize: 12 }}>已送达</Text>
+                        </View>
+                        <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
+                            <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>备注：</Text>
+                            <Text style={{ flex: 13, fontSize: 12 }}>{remark}</Text>
+                        </View>
+                        <CarCamera
+                            images={this.props.CarInfoReducer.data.imageList}
+                            postImage={this.onReceivePhote}
+                            showImagePage={RouterDirection.ImagePageForCarInfo(this.props.parent)} />
                         <RecordList records={this.props.CarInfoReducer.data.recordList} />
                     </View>
                 </ScrollView>
@@ -622,9 +741,10 @@ class CarInformation extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                {this.props.CarInfoReducer.data.car && !this.props.CarInfoReducer.data.car.rel_status && this.renderNeverImport()}
-                {this.props.CarInfoReducer.data.car && this.props.CarInfoReducer.data.car.rel_status == 1 && this.renderImported()}
-                {this.props.CarInfoReducer.data.car && this.props.CarInfoReducer.data.car.rel_status == 2 && this.renderExported()}
+                {this.props.CarInfoReducer.data.car && !this.props.CarInfoReducer.data.car.rel_status && this.props.CarInfoReducer.data.car.car_status != 9 && this.renderNeverImport()}
+                {this.props.CarInfoReducer.data.car && this.props.CarInfoReducer.data.car.rel_status == 1 && this.props.CarInfoReducer.data.car.car_status != 9 && this.renderImported()}
+                {this.props.CarInfoReducer.data.car && this.props.CarInfoReducer.data.car.rel_status == 2 && this.props.CarInfoReducer.data.car.car_status != 9 && this.renderExported()}
+                {this.props.CarInfoReducer.data.car.car_status == 9 && this.renderSended()}
             </View>
         )
     }
@@ -682,8 +802,13 @@ const mapDispatchToProps = (dispatch) => ({
     },
     resetDelImage: () => {
         dispatch(CarInfoAction.resetDelImage())
+    },
+    sendCar: (param) => {
+        dispatch(CarInfoAction.sendCar(param))
+    },
+    resetSendCar: () => {
+        dispatch(CarInfoAction.resetSendCar())
     }
-
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarInformation)

@@ -102,7 +102,7 @@ class AddCar extends Component {
                                 message: '长度必须是17位'
                             }]}
                             onValueChange={(param) => this.props.changeAddCarField({ vin: param })}
-                            onRequire={(param) => {console.log(param); this.setState({ vinRequire: param }) }}
+                            onRequire={(param) => { this.setState({ vinRequire: param }) }}
                             placeholder='请输入vin码'
                         />
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>

@@ -69,6 +69,13 @@ const initialState = {
         errorMsg: '',
         failedMsg: '',
         serviceErrorMsg: ''
+    },
+    sendCar: {
+        isResultStatus: 0,
+        isExecStatus: 0,
+        errorMsg: '',
+        failedMsg: '',
+        serviceErrorMsg: ''
     }
 }
 
@@ -533,6 +540,76 @@ export default handleActions({
         return {
             ...state,
             delImage: {
+                isResultStatus: 0,
+                isExecStatus: 0,
+                errorMsg: '',
+                failedMsg: '',
+                serviceErrorMsg: ''
+            }
+        }
+    },
+
+    [actionTypes.carInfoTypes.SEND_CAR_SUCCESS]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            sendCar: {
+                ...state.sendCar,
+                isResultStatus: 0,
+                isExecStatus: 2
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.SEND_CAR_FAILED]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            sendCar: {
+                ...state.sendCar,
+                isResultStatus: 2,
+                isExecStatus: 2,
+                failedMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.SEND_CAR_WAITING]: (state, action) => {
+        return {
+            ...state,
+            sendCar: {
+                ...state.sendCar,
+                isExecStatus: 1
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.SEND_CAR_ERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            sendCar: {
+                ...state.sendCar,
+                isResultStatus: 1,
+                isExecStatus: 2,
+                errorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.SEND_CAR_SERVICEERROR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            sendCar: {
+                ...state.sendCar,
+                isResultStatus: 3,
+                isExecStatus: 2,
+                serviceErrorMsg: data
+            }
+        }
+    },
+    [actionTypes.carInfoTypes.RESET_SEND_CAR]: (state, action) => {
+        const { payload: { data } } = action
+        return {
+            ...state,
+            sendCar: {
                 isResultStatus: 0,
                 isExecStatus: 0,
                 errorMsg: '',
