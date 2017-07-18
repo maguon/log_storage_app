@@ -44,11 +44,9 @@ class AddCar extends Component {
         }
     }
 
-
-    // componentDidMount(){
-    //     console.log('componentDidMount')
-    //     this.props.nextStepComponentDidMount()
-    // }
+    componentWillUnmount(){
+        this.props.resetAddCar()
+    }
 
     componentWillReceiveProps(nextProps) {
         let { AddCarReducer } = nextProps
@@ -104,7 +102,7 @@ class AddCar extends Component {
                                 message: '长度必须是17位'
                             }]}
                             onValueChange={(param) => this.props.changeAddCarField({ vin: param })}
-                            onRequire={(param) => { this.setState({ vinRequire: param }) }}
+                            onRequire={(param) => {console.log(param); this.setState({ vinRequire: param }) }}
                             placeholder='请输入vin码'
                         />
                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
@@ -114,7 +112,7 @@ class AddCar extends Component {
                                 value={makeName}
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ makeId: param.id, makeName: param.value })}
-                                onRequire={(param) => this.setState({ carMakeRequire: param })}
+                                onRequire={(param) => {console.log(param);this.setState({ carMakeRequire: param })}}
                                 defaultValue='请选择'
                             />
                             <Select

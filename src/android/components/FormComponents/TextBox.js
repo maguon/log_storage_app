@@ -51,7 +51,7 @@ export default class TextBox extends Component {
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.value) {
-            
+
             this.setState({ value: nextProps.value })
         } else {
             this.setState({ value: nextProps.defaultValue })
@@ -73,9 +73,8 @@ export default class TextBox extends Component {
         this.setState({ ...state })
         this.props.onValueChange(value)
         let flag = !(warnMessageList.length > 0)
-
         if (this.props.isRequire) {
-            flag = !((value == this.props.defaultValue) || !flag)
+            flag = value && flag
         }
         this.props.onRequire(flag)
     }
