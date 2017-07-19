@@ -117,11 +117,10 @@ class ImagePageForCarInfo extends Component {
       return <View key={i} style={{ flex: 1 }} >
         <PhotoView
           source={{ uri: item }}
-          loadingIndicatorSource={{ uri: item }}
           resizeMode='contain'
           minimumZoomScale={1}
           maximumZoomScale={3}
-          androidScaleType='center'
+          androidScaleType='fitCenter'
           style={styles.photo}
         />
       </View>
@@ -229,8 +228,8 @@ var styles = {
     alignItems: 'center'
   },
   photo: {
-    width,
-    height,
+    // width:600,
+    // height,
     flex: 1
   },
   text: {
