@@ -104,7 +104,7 @@ class App extends Component {
     }
 
     render() {
-        console.disableYellowBox = true
+      //  console.disableYellowBox = true
         return (
             <Router createReducer={this.reducerCreate} getSceneStyle={getSceneStyle} >
                 <Scene key="root">

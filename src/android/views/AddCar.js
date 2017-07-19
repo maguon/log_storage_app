@@ -52,24 +52,24 @@ class AddCar extends Component {
         let { AddCarReducer } = nextProps
         /*addCar执行状态*/
         if (AddCarReducer.addCar.isExecStatus == 1) {
-            console.log('AddCarReducer.addCar', '开始执行')
+          //  console.log('AddCarReducer.addCar', '开始执行')
         } else if (AddCarReducer.addCar.isExecStatus == 2) {
-            console.log('AddCarReducer.addCar', '执行完毕')
+           // console.log('AddCarReducer.addCar', '执行完毕')
             if (AddCarReducer.addCar.isResultStatus == 0) {
                 ToastAndroid.showWithGravity('保存成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
                 RouterDirection.importCarCamera(this.props.parent)({ carId: AddCarReducer.addCar.data.id, vin: AddCarReducer.addCar.data.vin })
                 this.props.resetAddCar()
                 this.setState({ carMakeRequire: false, entrustRequire: false, routeStartRequire: false, vinRequire: false, baseAddrRequire: false })
-                console.log('AddCarReducer.addCar执行成功')
+             //   console.log('AddCarReducer.addCar执行成功')
             } else if (AddCarReducer.addCar.isResultStatus == 1) {
-                console.log('AddCarReducer.addCar执行错误', AddCarReducer.addCar.errorMsg)
+               // console.log('AddCarReducer.addCar执行错误', AddCarReducer.addCar.errorMsg)
                 this.props.resetAddCarStatus()
             } else if (AddCarReducer.addCar.isResultStatus == 2) {
                 ToastAndroid.showWithGravity(AddCarReducer.addCar.failedMsg, ToastAndroid.LONG, ToastAndroid.CENTER)
                 this.props.resetAddCarStatus()
-                console.log('AddCarReducer.addCar执行失败')
+               // console.log('AddCarReducer.addCar执行失败')
             } else if (AddCarReducer.addCar.isResultStatus == 3) {
-                console.log('AddCarReducer.addCar服务器错误')
+                //console.log('AddCarReducer.addCar服务器错误')
                 this.props.resetAddCarStatus()
             }
         }

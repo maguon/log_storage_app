@@ -63,21 +63,21 @@ class ImagePageForCarInfo extends Component {
 
     /*delImage执行状态*/
     if (CarInfoReducer.delImage.isExecStatus == 1) {
-      console.log('CarInfoReducer.delImage', '开始执行')
+    //  console.log('CarInfoReducer.delImage', '开始执行')
     } else if (CarInfoReducer.delImage.isExecStatus == 2) {
-      console.log('CarInfoReducer.delImage', '执行完毕')
+     // console.log('CarInfoReducer.delImage', '执行完毕')
       if (CarInfoReducer.delImage.isResultStatus == 0) {
-        console.log('CarInfoReducer.delImage执行成功')
+       // console.log('CarInfoReducer.delImage执行成功')
         ToastAndroid.showWithGravity('删除成功', ToastAndroid.SHORT, ToastAndroid.CENTER)
         this.props.resetDelImage()
         this.getCarInformation()
       } else if (CarInfoReducer.delImage.isResultStatus == 1) {
-        console.log('CarInfoReducer.delImage执行错误')
+       // console.log('CarInfoReducer.delImage执行错误')
         ToastAndroid.showWithGravity('删除失败', ToastAndroid.SHORT, ToastAndroid.CENTER)
         this.props.resetDelImage()
 
       } else if (CarInfoReducer.delImage.isResultStatus == 2) {
-        console.log('CarInfoReducer.delImage执行失败')
+       // console.log('CarInfoReducer.delImage执行失败')
         ToastAndroid.showWithGravity('删除失败', ToastAndroid.SHORT, ToastAndroid.CENTER)
         this.props.resetDelImage()
       }

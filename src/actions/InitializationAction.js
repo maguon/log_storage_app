@@ -34,7 +34,7 @@ export const validateToken = () => (dispatch) => {
     localStorage.loadKey(localStorageKey.USER, (localStorageErr, localStorageRes) => {
         if (localStorageErr) {
             if (localStorageErr.name == 'NotFoundError') {
-                console.log('NotFoundError')
+             //   console.log('NotFoundError')
                 //跳转到登录页面
                 dispatch({ type: actionTypes.initializationTypes.VALIDATE_TOKEN_FAILED, payload: {} })
             }
@@ -51,7 +51,7 @@ export const validateToken = () => (dispatch) => {
                     .get(`${base_host}/user/${localStorageRes.userId}/token/${localStorageRes.token}`, (changeTokenErr, changeTokenRes) => {
                         if (changeTokenErr) {
                             //判断网络连接层是否有问题，如果有问题提醒用户
-                            console.log('changeTokenErr', changeTokenErr)
+                            //console.log('changeTokenErr', changeTokenErr)
                         }
                         else {
                             if (changeTokenRes.success) {
@@ -67,7 +67,7 @@ export const validateToken = () => (dispatch) => {
                                 httpRequest
                                     .get(`${base_host}/user/${localStorageRes.userId}`, (getUserInfoErr, getUserInfoRes) => {
                                         if (getUserInfoErr) {
-                                            console.log('getUserInfoErr', getUserInfoErr)
+                                            //console.log('getUserInfoErr', getUserInfoErr)
                                         }
                                         else {
                                             if (getUserInfoRes.success) {
@@ -96,7 +96,7 @@ export const validateToken = () => (dispatch) => {
                                             }
                                             else {
                                                 //取用户名失败，错误处理
-                                                console.log('getUserInfoResfailed', getUserInfoRes)
+                                               // console.log('getUserInfoResfailed', getUserInfoRes)
                                             }
                                         }
                                     })

@@ -48,33 +48,33 @@ class ImportCarCamera extends Component {
 
         /*importCarImage执行状态*/
         if (ImportCarCameraReducer.importCarImage.isExecStatus == 1) {
-            console.log('ImportCarCameraReducer.importCarImage', '开始执行')
+          //  console.log('ImportCarCameraReducer.importCarImage', '开始执行')
         } else if (ImportCarCameraReducer.importCarImage.isExecStatus == 2) {
             if (ImportCarCameraReducer.importCarImage.isResultStatus == 0) {
-                console.log('ImportCarCameraReducer.importCarImage执行成功')
+              //  console.log('ImportCarCameraReducer.importCarImage执行成功')
             } else if (ImportCarCameraReducer.importCarImage.isResultStatus == 1) {
-                console.log('ImportCarCameraReducer.importCarImage执行错误')
+               // console.log('ImportCarCameraReducer.importCarImage执行错误')
             }
             else if (ImportCarCameraReducer.importCarImage.isResultStatus == 2) {
-                console.log('ImportCarCameraReducer.importCarImage执行失败')
+               // console.log('ImportCarCameraReducer.importCarImage执行失败')
             }
         }
         /************************************************************************************************/
 
         /*delImage执行状态*/
         if (ImportCarCameraReducer.delImage.isExecStatus == 1) {
-            console.log('ImportCarCameraReducer.delImage', '开始执行')
+          //  console.log('ImportCarCameraReducer.delImage', '开始执行')
         } else if (ImportCarCameraReducer.delImage.isExecStatus == 2) {
-            console.log('ImportCarCameraReducer.delImage', '执行完毕')
+          //  console.log('ImportCarCameraReducer.delImage', '执行完毕')
             if (ImportCarCameraReducer.delImage.isResultStatus == 0) {
-                console.log('CarInfoReducer.delImage执行成功')
+              //  console.log('CarInfoReducer.delImage执行成功')
                 this.props.resetDelImage()
             } else if (ImportCarCameraReducer.delImage.isResultStatus == 1) {
-                console.log('ImportCarCameraReducer.delImage执行错误')
+              //  console.log('ImportCarCameraReducer.delImage执行错误')
                 this.props.resetDelImage()
 
             } else if (ImportCarCameraReducer.delImage.isResultStatus == 2) {
-                console.log('ImportCarCameraReducer.delImage执行失败')
+              //  console.log('ImportCarCameraReducer.delImage执行失败')
                 this.props.resetDelImage()
             }
         }

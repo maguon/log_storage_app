@@ -46,14 +46,14 @@ class Initialization extends Component {
         let { InitializationReducer } = nextProps
 
         if (InitializationReducer.valdateToken.isExecStatus == 1) {
-            console.log('welcome.valdateToken', '开始执行')
+           // console.log('welcome.valdateToken', '开始执行')
         } else if (InitializationReducer.valdateToken.isExecStatus == 2) {
             if (InitializationReducer.valdateToken.isResultStatus == 0) {
                 this.props.resetInitialization()
                 Actions.mainRoot()
                // console.log('welcome.valdateToken 执行成功', InitializationReducer.getVersion.data)
             } else if (InitializationReducer.valdateToken.isResultStatus == 1) {
-                console.log('welcome.valdateToken 执行错误', InitializationReducer.getVersion.errorMsg)
+               // console.log('welcome.valdateToken 执行错误', InitializationReducer.getVersion.errorMsg)
             }
             else if (InitializationReducer.valdateToken.isResultStatus == 2) {
                 //console.log('welcome.valdateToken 执行失败', InitializationReducer.getVersion.failedMsg)
@@ -63,7 +63,7 @@ class Initialization extends Component {
         }
 
         if (InitializationReducer.getVersion.isExecStatus == 1) {
-            console.log('welcome.getVersion', '开始执行')
+           // console.log('welcome.getVersion', '开始执行')
         } else if (InitializationReducer.getVersion.isExecStatus == 2) {
             if (InitializationReducer.getVersion.isResultStatus == 0) {
                 //console.log('welcome.getVersion执行成功', InitializationReducer.getVersion.data)
@@ -74,11 +74,11 @@ class Initialization extends Component {
                     this.props.resetGetVersion()
                 }
             } else if (InitializationReducer.getVersion.isResultStatus == 1) {
-                console.log('welcome.getVersion执行错误', InitializationReducer.getVersion.errorMsg)
+              //  console.log('welcome.getVersion执行错误', InitializationReducer.getVersion.errorMsg)
                 ToastAndroid.showWithGravity('获取版本信息失败，请检测网络', ToastAndroid.SHORT, ToastAndroid.CENTER)
             }
             else if (InitializationReducer.getVersion.isResultStatus == 2) {
-                console.log('welcome.getVersion执行失败', InitializationReducer.getVersion.failedMsg)
+               // console.log('welcome.getVersion执行失败', InitializationReducer.getVersion.failedMsg)
                 ToastAndroid.showWithGravity('获取版本信息失败，请检测网络', ToastAndroid.SHORT, ToastAndroid.CENTER)
             }
         }

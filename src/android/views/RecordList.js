@@ -24,17 +24,17 @@ class RecordList extends Component {
         let { getRecordList, changeRecordListTab } = this.props
         /** homeReducer.getStoragesHome */
         if (recordListReducer.getRecordList.isExecStatus == 1) {
-            console.log('recordListReducer.getRecordList', '开始执行')
+           // console.log('recordListReducer.getRecordList', '开始执行')
         } else if (recordListReducer.getRecordList.isExecStatus == 2) {
             if (recordListReducer.getRecordList.isResultStatus == 0) {
-                console.log('recordListReducer.getRecordList执行成功')
+              //  console.log('recordListReducer.getRecordList执行成功')
 
             } else if (recordListReducer.getRecordList.isResultStatus == 1) {
-                console.log('recordListReducer.getRecordList执行错误')
+               // console.log('recordListReducer.getRecordList执行错误')
 
             }
             else if (recordListReducer.getRecordList.isResultStatus == 2) {
-                console.log('recordListReducer.getRecordList执行失败', recordListReducer.getRecordList.failedMsg)
+              //  console.log('recordListReducer.getRecordList执行失败', recordListReducer.getRecordList.failedMsg)
 
             }
         }
@@ -42,17 +42,17 @@ class RecordList extends Component {
 
         /** homeReducer.getStoragesHome */
         if (recordListReducer.getRecordListMore.isExecStatus == 1) {
-            console.log('recordListReducer.getRecordListMore', '开始执行')
+          //  console.log('recordListReducer.getRecordListMore', '开始执行')
         } else if (recordListReducer.getRecordListMore.isExecStatus == 2) {
             if (recordListReducer.getRecordListMore.isResultStatus == 0) {
-                console.log('recordListReducer.getRecordListMore执行成功')
+              //  console.log('recordListReducer.getRecordListMore执行成功')
 
             } else if (recordListReducer.getRecordListMore.isResultStatus == 1) {
-                console.log('recordListReducer.getRecordListMore执行错误', recordListReducer.getRecordListMore.errorMsg)
+              //  console.log('recordListReducer.getRecordListMore执行错误', recordListReducer.getRecordListMore.errorMsg)
 
             }
             else if (recordListReducer.getRecordListMore.isResultStatus == 2) {
-                console.log('recordListReducer.getRecordListMore执行失败', recordListReducer.getRecordListMore.failedMsg)
+              //  console.log('recordListReducer.getRecordListMore执行失败', recordListReducer.getRecordListMore.failedMsg)
 
             }
         }
@@ -64,16 +64,16 @@ class RecordList extends Component {
         if (this.props.recordListReducer.selectRecordListTab.selectedTab != recordListReducer.selectRecordListTab.selectedTab) {
             let param = { optionalParam: { userid: this.props.user.userId, start: 0, size: 20 } }
             if (recordListReducer.selectRecordListTab.selectedTab == 'all') {
-                console.log(param)
+               // console.log(param)
             } else if (recordListReducer.selectRecordListTab.selectedTab == 'import') {
                 param.optionalParam.op = 11
-                console.log(param)
+              //  console.log(param)
             } else if (recordListReducer.selectRecordListTab.selectedTab == 'move') {
                 param.optionalParam.op = 12
-                console.log(param)
+              //  console.log(param)
             } else if (recordListReducer.selectRecordListTab.selectedTab == 'export') {
                 param.optionalParam.op = 13
-                console.log(param)
+              //  console.log(param)
             }
             getRecordList(param)
         }
@@ -86,19 +86,19 @@ class RecordList extends Component {
         let { getRecordListMore, recordListReducer } = this.props
         let { userId } = this.props.user
         let { getRecordList, selectRecordListTab } = recordListReducer
-        console.log(this.props.recordListReducer)
+      //  console.log(this.props.recordListReducer)
         let param = { optionalParam: { userid: userId, start: getRecordList.data.recordList.length, size: 20 } }
         if (selectRecordListTab.selectedTab == 'all') {
-            console.log(param)
+          //  console.log(param)
         } else if (selectRecordListTab.selectedTab == 'import') {
             param.optionalParam.op = 11
-            console.log(param)
+         //   console.log(param)
         } else if (selectRecordListTab.selectedTab == 'move') {
             param.optionalParam.op = 12
-            console.log(param)
+         //   console.log(param)
         } else if (selectRecordListTab.selectedTab == 'export') {
             param.optionalParam.op = 13
-            console.log(param)
+         //   console.log(param)
         }
         getRecordListMore(param)
 

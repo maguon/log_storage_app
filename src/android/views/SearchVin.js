@@ -76,10 +76,10 @@ class SearchVin extends Component {
                 }
                 this.props.resetSearch()
             } else if (SearchVinReducer.search.isResultStatus == 1) {
-                console.log('SearchVinReducer.search.isResultStatus == 1')
+              //  console.log('SearchVinReducer.search.isResultStatus == 1')
                 this.props.resetSearch()
             } else if (SearchVinReducer.search.isResultStatus == 2) {
-                console.log('SearchVinReducer.search.isResultStatus == 2')
+               // console.log('SearchVinReducer.search.isResultStatus == 2')
                 this.props.resetSearch()
             }
         }

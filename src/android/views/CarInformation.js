@@ -84,20 +84,20 @@ class CarInformation extends Component {
 
         /*getCarInfo 执行状态*/
         if (CarInfoReducer.getCarInfo.isExecStatus == 1) {
-            console.log('CarInfoReducer.getCarInfo', '开始执行')
+           // console.log('CarInfoReducer.getCarInfo', '开始执行')
         } else if (CarInfoReducer.getCarInfo.isExecStatus == 2) {
-            console.log('CarInfoReducer.getCarInfo', '执行完毕')
+           // console.log('CarInfoReducer.getCarInfo', '执行完毕')
             if (CarInfoReducer.getCarInfo.isResultStatus == 0) {
-                console.log('CarInfoReducer.getCarInfo', '执行成功')
+               // console.log('CarInfoReducer.getCarInfo', '执行成功')
                 this.props.resetGetCarInfo()
             } else if (CarInfoReducer.getCarInfo.isResultStatus == 1) {
-                console.log('CarInfoReducer.getCarInfo执行错误', CarInfoReducer.getCarInfo.errorMsg)
+               // console.log('CarInfoReducer.getCarInfo执行错误', CarInfoReducer.getCarInfo.errorMsg)
                 this.props.resetGetCarInfo()
             } else if (CarInfoReducer.getCarInfo.isResultStatus == 2) {
-                console.log('CarInfoReducer.getCarInfo', '执行失败')
+              //  console.log('CarInfoReducer.getCarInfo', '执行失败')
                 this.props.resetGetCarInfo()
             } else if (CarInfoReducer.getCarInfo.isResultStatus == 3) {
-                console.log('CarInfoReducer.getCarInfo', '服务器错误')
+               // console.log('CarInfoReducer.getCarInfo', '服务器错误')
                 this.props.resetGetCarInfo()
             }
         }
@@ -107,21 +107,21 @@ class CarInformation extends Component {
         /*updateCarInfo 执行状态*/
 
         if (CarInfoReducer.updateCarInfo.isExecStatus == 1) {
-            console.log('CarInfoReducer.updateCarInfo', '开始执行')
+           // console.log('CarInfoReducer.updateCarInfo', '开始执行')
         } else if (CarInfoReducer.updateCarInfo.isExecStatus == 2) {
-            console.log('CarInfoReducer.updateCarInfo', '执行完毕')
+          //  console.log('CarInfoReducer.updateCarInfo', '执行完毕')
             if (CarInfoReducer.updateCarInfo.isResultStatus == 0) {
-                console.log('CarInfoReducer.updateCarInfo', '执行成功')
+               // console.log('CarInfoReducer.updateCarInfo', '执行成功')
                 this.props.resetUpdateCarInfo()
                 this.getCarInformation()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 1) {
-                console.log('CarInfoReducer.updateCarInfo执行错误', CarInfoReducer.updateCarInfo.errorMsg)
+              //  console.log('CarInfoReducer.updateCarInfo执行错误', CarInfoReducer.updateCarInfo.errorMsg)
                 this.props.resetUpdateCarInfo()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 2) {
-                console.log('CarInfoReducer.updateCarInfo', '执行失败')
+              //  console.log('CarInfoReducer.updateCarInfo', '执行失败')
                 this.props.resetUpdateCarInfo()
             } else if (CarInfoReducer.updateCarInfo.isResultStatus == 3) {
-                console.log('CarInfoReducer.updateCarInfo', '服务器错误')
+              //  console.log('CarInfoReducer.updateCarInfo', '服务器错误')
                 this.props.resetUpdateCarInfo()
             }
         }
@@ -129,21 +129,21 @@ class CarInformation extends Component {
 
         /*moveCar执行状态*/
         if (CarInfoReducer.moveCar.isExecStatus == 1) {
-            console.log('CarInfoReducer.moveCar', '开始执行')
+           // console.log('CarInfoReducer.moveCar', '开始执行')
         } else if (CarInfoReducer.moveCar.isExecStatus == 2) {
-            console.log('CarInfoReducer.moveCar', '执行完毕')
+            //console.log('CarInfoReducer.moveCar', '执行完毕')
             if (CarInfoReducer.moveCar.isResultStatus == 0) {
-                console.log('CarInfoReducer.moveCar', '执行成功')
+              //  console.log('CarInfoReducer.moveCar', '执行成功')
                 this.props.resetMoveCar()
                 this.getCarInformation()
             } else if (CarInfoReducer.moveCar.isResultStatus == 1) {
-                console.log('CarInfoReducer.moveCar', '执行错误')
+                //console.log('CarInfoReducer.moveCar', '执行错误')
                 this.props.resetMoveCar()
             } else if (CarInfoReducer.moveCar.isResultStatus == 2) {
-                console.log('CarInfoReducer.moveCar', '执行失败')
+                //console.log('CarInfoReducer.moveCar', '执行失败')
                 this.props.resetMoveCar()
             } else if (CarInfoReducer.moveCar.isResultStatus == 3) {
-                console.log('CarInfoReducer.moveCar', '服务器错误')
+                //console.log('CarInfoReducer.moveCar', '服务器错误')
                 this.props.resetMoveCar()
             }
         }
@@ -152,21 +152,21 @@ class CarInformation extends Component {
         /*importCar 执行状态*/
 
         if (CarInfoReducer.importCar.isExecStatus == 1) {
-            console.log('CarInfoReducer.importCar', '开始执行')
+          //  console.log('CarInfoReducer.importCar', '开始执行')
         } else if (CarInfoReducer.importCar.isExecStatus == 2) {
-            console.log('CarInfoReducer.importCar', '执行完毕')
+           // console.log('CarInfoReducer.importCar', '执行完毕')
             if (CarInfoReducer.importCar.isResultStatus == 0) {
-                console.log('CarInfoReducer.importCar', '执行成功')
+                //console.log('CarInfoReducer.importCar', '执行成功')
                 this.props.resetImportCar()
                 this.getCarInformation()
             } else if (CarInfoReducer.importCar.isResultStatus == 1) {
-                console.log('CarInfoReducer.importCar执行错误')
+                //console.log('CarInfoReducer.importCar执行错误')
                 this.props.resetImportCar()
             } else if (CarInfoReducer.importCar.isResultStatus == 2) {
-                console.log('CarInfoReducer.importCar', '执行失败')
+               // console.log('CarInfoReducer.importCar', '执行失败')
                 this.props.resetImportCar()
             } else if (CarInfoReducer.importCar.isResultStatus == 3) {
-                console.log('CarInfoReducer.importCar', '服务器错误')
+               // console.log('CarInfoReducer.importCar', '服务器错误')
                 this.props.resetImportCar()
             }
         }
@@ -175,21 +175,21 @@ class CarInformation extends Component {
         /*exportCar 执行状态*/
 
         if (CarInfoReducer.exportCar.isExecStatus == 1) {
-            console.log('CarInfoReducer.exportCar', '开始执行')
+           // console.log('CarInfoReducer.exportCar', '开始执行')
         } else if (CarInfoReducer.exportCar.isExecStatus == 2) {
-            console.log('CarInfoReducer.exportCar', '执行完毕')
+           // console.log('CarInfoReducer.exportCar', '执行完毕')
             if (CarInfoReducer.exportCar.isResultStatus == 0) {
-                console.log('CarInfoReducer.exportCar', '执行成功')
+               // console.log('CarInfoReducer.exportCar', '执行成功')
                 this.props.resetExportCar()
                 this.getCarInformation()
             } else if (CarInfoReducer.exportCar.isResultStatus == 1) {
-                console.log('CarInfoReducer.exportCar执行错误')
+               // console.log('CarInfoReducer.exportCar执行错误')
                 this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 2) {
-                console.log('CarInfoReducer.exportCar执行失败', CarInfoReducer.exportCar.failedMsg)
+               // console.log('CarInfoReducer.exportCar执行失败', CarInfoReducer.exportCar.failedMsg)
                 this.props.resetExportCar()
             } else if (CarInfoReducer.exportCar.isResultStatus == 3) {
-                console.log('CarInfoReducer.exportCar服务器错误')
+              //  console.log('CarInfoReducer.exportCar服务器错误')
                 this.props.resetExportCar()
             }
         }
@@ -197,21 +197,21 @@ class CarInformation extends Component {
 
         /*appendImage执行状态*/
         if (CarInfoReducer.appendImage.isExecStatus == 1) {
-            console.log('CarInfoReducer.appendImage开始执行')
+            //console.log('CarInfoReducer.appendImage开始执行')
         } else if (CarInfoReducer.appendImage.isExecStatus == 2) {
-            console.log('CarInfoReducer.appendImage执行完毕')
+           // console.log('CarInfoReducer.appendImage执行完毕')
             if (CarInfoReducer.appendImage.isResultStatus == 0) {
-                console.log('CarInfoReducer.appendImage执行成功')
+              //  console.log('CarInfoReducer.appendImage执行成功')
                 this.props.resetAppendImage()
                 this.getCarInformation()
             } else if (CarInfoReducer.appendImage.isResultStatus == 1) {
-                console.log('CarInfoReducer.appendImage执行错误')
+               // console.log('CarInfoReducer.appendImage执行错误')
                 this.props.resetAppendImage()
             } else if (CarInfoReducer.appendImage.isResultStatus == 2) {
-                console.log('CarInfoReducer.appendImage执行失败')
+               // console.log('CarInfoReducer.appendImage执行失败')
                 this.props.resetAppendImage()
             } else if (CarInfoReducer.appendImage.isResultStatus == 3) {
-                console.log('CarInfoReducer.appendImage服务器错误')
+               // console.log('CarInfoReducer.appendImage服务器错误')
                 this.props.resetAppendImage()
             }
         }
@@ -220,23 +220,23 @@ class CarInformation extends Component {
 
         /*appendImage执行状态*/
         if (CarInfoReducer.sendCarisExecStatus == 1) {
-            console.log('CarInfoReducer.sendCar开始执行')
+            //console.log('CarInfoReducer.sendCar开始执行')
         } else if (CarInfoReducer.sendCar.isExecStatus == 2) {
-            console.log('CarInfoReducer.sendCar执行完毕')
+           // console.log('CarInfoReducer.sendCar执行完毕')
             if (CarInfoReducer.sendCar.isResultStatus == 0) {
-                console.log('CarInfoReducer.sendCar执行成功')
+              //  console.log('CarInfoReducer.sendCar执行成功')
                 this.props.resetSendCar()
                 Actions.pop()
             } else if (CarInfoReducer.sendCar.isResultStatus == 1) {
-                console.log('CarInfoReducer.sendCar执行错误')
+               // console.log('CarInfoReducer.sendCar执行错误')
                 this.props.resetSendCar()
 
             } else if (CarInfoReducer.sendCar.isResultStatus == 2) {
-                console.log('CarInfoReducer.sendCar执行失败')
+               // console.log('CarInfoReducer.sendCar执行失败')
                 this.props.resetSendCar()
 
             } else if (CarInfoReducer.sendCar.isResultStatus == 3) {
-                console.log('CarInfoReducer.sendCar服务器错误')
+               // console.log('CarInfoReducer.sendCar服务器错误')
                 this.props.resetSendCar()
 
             }
@@ -373,7 +373,7 @@ class CarInformation extends Component {
     renderImported() {
         let { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, route_end_id, route_start_id, order_date, storage_name, row, col, remark, storage_id } = this.props.CarInfoReducer.data.car
 
-        console.log('recordList', this.props.CarInfoReducer.data.recordList)
+      //  console.log('recordList', this.props.CarInfoReducer.data.recordList)
         return (
             <View style={{ flex: 1, backgroundColor: '#eee' }}>
                 <ScrollView>

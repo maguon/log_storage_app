@@ -26,11 +26,11 @@ class Login extends Component {
     componentDidMount() {
         localStorage.loadKey(localStorageKey.USER, (err, res) => {
             if (err) {
-                console.log(err)
+               // console.log(err)
             }
             else {
                 this.setState({ textUserName: res.mobile })
-                console.log('localStorage', res)
+               // console.log('localStorage', res)
             }
         })
     }
@@ -58,9 +58,9 @@ class Login extends Component {
         let { loginInfo } = nextProps
         /*loginInfo执行状态*/
         if (loginInfo.isExecStatus == 1) {
-            console.log('loginInfo开始执行')
+           // console.log('loginInfo开始执行')
         } else if (loginInfo.isExecStatus == 2) {
-            console.log('loginInfo执行完毕')
+           // console.log('loginInfo执行完毕')
             if (loginInfo.isResultStatus == 0) {
                 this.props.resetLogin()
             } else if (loginInfo.isResultStatus == 1) {

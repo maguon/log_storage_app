@@ -43,14 +43,14 @@ export const login = (params) => (dispatch) => {
                             }
                             else {
                                 //取用户名失败，错误处理
-                                console.log('getUserInfoResfailed', getUserInfoRes)
+                              //  console.log('getUserInfoResfailed', getUserInfoRes)
                                 dispatch({ type: actionTypes.loginTypes.LOGIN_FAILED, payload: { data: getUserInfoRes.msg } })
                             }
                         }
                     })
             } else {
                 //登录失败重新登录
-                console.log('failed')
+              //  console.log('failed')
                 dispatch({ type: actionTypes.loginTypes.LOGIN_FAILED, payload: { data: res.msg } })
             }
         }

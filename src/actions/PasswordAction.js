@@ -6,18 +6,18 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 export const changePassword = (param) => (dispatch) => {
 
     httpRequest.put(`${base_host}/user/${param.requiredParam.userId}/password`, param.putParam, (err, res) => {
-        console.log(param.putParam)
+       // console.log(param.putParam)
         if (err) {
-            console.log('err', err)
+           // console.log('err', err)
         }
         else {
             if (res.success) {
-                console.log('success', res)
+               // console.log('success', res)
 
                 dispatch({ type: actionTypes.passwordTypes.CHANGE_PASSWORD_SUCCESS, payload: {} })
             } else {
                 dispatch({ type: actionTypes.passwordTypes.CHANGE_PASSWORD_FAILED, payload: {} })
-                console.log('failed', res)
+              //  console.log('failed', res)
             }
         }
 

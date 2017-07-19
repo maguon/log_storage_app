@@ -45,15 +45,15 @@ class StorageList extends Component {
         let { storageListReducer } = nextProps
         /*getStorageList 执行状态*/
         if (storageListReducer.getStorageList.isExecStatus == 1) {
-            console.log('storageListReducer.getStorageList开始执行')
+          //  console.log('storageListReducer.getStorageList开始执行')
         } else if (storageListReducer.getStorageList.isExecStatus == 2) {
-            console.log('storageListReducer.getStorageList执行完毕')
+           // console.log('storageListReducer.getStorageList执行完毕')
             if (storageListReducer.getStorageList.isResultStatus == 0) {
-                console.log('storageListReducer.getStorageList执行成功')
+             //   console.log('storageListReducer.getStorageList执行成功')
             } else if (storageListReducer.getStorageList.isResultStatus == 1) {
-                console.log('storageListReducer.getStorageList执行错误')
+              //  console.log('storageListReducer.getStorageList执行错误')
             } else if (storageListReducer.getStorageList.isResultStatus == 2) {
-                console.log('storageListReducer.getStorageList执行失败')
+               // console.log('storageListReducer.getStorageList执行失败')
             }
         }
         /************************************************************************************************/

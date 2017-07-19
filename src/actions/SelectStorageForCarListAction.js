@@ -7,7 +7,7 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 export const getSelectStorageListForCarList = (param) => (dispatch) => {
     dispatch({ type: actionTypes.selectStorageForCarListTypes.GET_SELECTSTORAGELISTFORCARLIST_WAITING, payload: {} })
     let url = `${base_host}/storage?${ObjectToUrl(param.optionalParam)}`
-    console.log(param)
+   // console.log(param)
     httpRequest
         .get(url, (err, res) => {
             if (err) {

@@ -38,17 +38,17 @@ class CarList extends Component {
         let { carListReducer } = nextProps
         /*getCarList 执行状态*/
         if (carListReducer.getCarList.isExecStatus == 1) {
-            console.log('carListReducer.getCarList开始执行')
+           // console.log('carListReducer.getCarList开始执行')
         } else if (carListReducer.getCarList.isExecStatus == 2) {
-            console.log('carListReducer.getCarList执行完毕')
+            //console.log('carListReducer.getCarList执行完毕')
             if (carListReducer.getCarList.isResultStatus == 0) {
-                console.log('carListReducer.getCarList执行成功')
+               // console.log('carListReducer.getCarList执行成功')
                 this.props.resetGetCarList()
             } else if (carListReducer.getCarList.isResultStatus == 1) {
-                console.log('carListReducer.getCarList执行错误')
+               // console.log('carListReducer.getCarList执行错误')
                 this.props.resetGetCarList()
             } else if (carListReducer.getCarList.isResultStatus == 2) {
-                console.log('carListReducer.getCarList执行失败')
+              //  console.log('carListReducer.getCarList执行失败')
                 this.props.resetGetCarList()
             }
         }
@@ -58,17 +58,17 @@ class CarList extends Component {
 
         /*getCarListMore 执行状态*/
         if (carListReducer.getCarListMore.isExecStatus == 1) {
-            console.log('carListReducer.getCarListMore开始执行')
+          //  console.log('carListReducer.getCarListMore开始执行')
         } else if (carListReducer.getCarListMore.isExecStatus == 2) {
-            console.log('carListReducer.getCarListMore执行完毕')
+          //  console.log('carListReducer.getCarListMore执行完毕')
             if (carListReducer.getCarListMore.isResultStatus == 0) {
-                console.log('carListReducer.getCarListMore执行成功没有到底')
+           //     console.log('carListReducer.getCarListMore执行成功没有到底')
             } else if (carListReducer.getCarListMore.isResultStatus == 1) {
-                console.log('carListReducer.getCarListMore执行错误')
+            //    console.log('carListReducer.getCarListMore执行错误')
             } else if (carListReducer.getCarListMore.isResultStatus == 2) {
-                console.log('carListReducer.getCarListMore执行失败')
+             //   console.log('carListReducer.getCarListMore执行失败')
             } else if (carListReducer.getCarListMore.isResultStatus == 3) {
-                console.log('carListReducer.getCarListMore已经到底')
+             //   console.log('carListReducer.getCarListMore已经到底')
             }
         }
 

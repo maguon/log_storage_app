@@ -73,10 +73,10 @@ export default class CarCamera extends Component {
     launchCamera = () => {
         ImagePicker.showImagePicker(photoOptions, (response) => {
             if (response.didCancel) {
-                console.log('User cancelled video picker')
+              //  console.log('User cancelled video picker')
             }
             else if (response.error) {
-                console.log('ImagePicker Error: ', response.error)
+               // console.log('ImagePicker Error: ', response.error)
             }
             else if (response.customButton) {
                 if (response.customButton == 'choosePhoto') {
@@ -95,7 +95,7 @@ export default class CarCamera extends Component {
 
                         this.props.postImage(param)
                     }).catch((err) => {
-                        return console.log(err)
+                       // return console.log(err)
                     })
             }
         })
@@ -126,12 +126,12 @@ export default class CarCamera extends Component {
                            //console.log(param)
                             this.props.postImage(param)
                         }).catch((err) => {
-                            return console.log(err)
+                           // return console.log(err)
                         })
                 })
             }
         }).catch(err => {
-            console.log('err')
+           // console.log('err')
         })
     }
 
