@@ -35,6 +35,11 @@ const RecordListItem = ({ record }) => {
         opImgUri.uri = 'icon_note_new'
         textStyle = styles.newText
     }
+    else if (record.op == '19') {
+        op = '直送'
+        opImgUri.uri = 'icon_note_send'
+        textStyle = styles.sendText
+    }
 
     return (
 
@@ -72,6 +77,9 @@ const styles = StyleSheet.create({
     },
     newText: {
         color: '#90cf69'
+    },
+    sendText: {
+        color: '#b576f1'
     }
 })
 

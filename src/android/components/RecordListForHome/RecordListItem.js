@@ -40,6 +40,11 @@ export default class RecordListItem extends Component {
             opImgUri.uri = 'icon_note_new'
             textStyle = styles.newText
         }
+        else if (op == '19') {
+            op = '直送'
+            opImgUri.uri = 'icon_note_send'
+            textStyle = styles.sendText
+        }
 
         return (
             <TouchableHighlight key={_id} underlayColor='rgba(0,0,0,0.1)' onPress={() => {
@@ -84,5 +89,8 @@ const styles = StyleSheet.create({
     },
     newText: {
         color: '#90cf69'
+    },
+    sendText:{
+        color:'#b576f1'
     }
 })
