@@ -70,7 +70,7 @@ class Setting extends Component {
         let versionArr = version.split('.')
         let lastVersionArr = lastVersion.split('.')
 
-        console.log(this.props.InitializationReducer)
+       // console.log(this.props.InitializationReducer)
         return (
             <Container style={{ flex: 1 }}>
                 <SearchBar
