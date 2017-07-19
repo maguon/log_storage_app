@@ -89,7 +89,7 @@ export default class CarCamera extends Component {
                             postFileParam: {
                                 imageUrl: resizedImageUri,
                                 imageType: response.type,
-                                imageName: response.fileName
+                                imageName: encodeURI(response.fileName)
                             }
                         }
 
@@ -120,10 +120,10 @@ export default class CarCamera extends Component {
                                 postFileParam: {
                                     imageUrl: resizedImageUri,
                                     imageType: item.mime,
-                                    imageName: item.path.substring(pos + 1)
+                                    imageName: encodeURI(item.path.substring(pos + 1))
                                 }
                             }
-                            console.log(param)
+                           //console.log(param)
                             this.props.postImage(param)
                         }).catch((err) => {
                             return console.log(err)

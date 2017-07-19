@@ -19,7 +19,7 @@ export default class StorageListItem extends Component {
                         <Text style={styles.storageName}>{storage.storage_name}</Text>
                         <Text style={styles.count}>总:{count.toString()}</Text>
                     </View>
-                    <View style={styles.infoViewRow}>
+                    <View style={[styles.infoViewRow,{paddingHorizontal:30}]}>
                         <View style={styles.infoViewCol}>
                             <Text style={styles.exportCount}>{storage.exports.toString()}</Text>
                             <Text style={styles.smallLabel}>今日出库</Text>
@@ -90,8 +90,9 @@ const styles = StyleSheet.create({
     },
     infoViewRow: {
         flexDirection: "row",
-        justifyContent: 'space-around',
-        alignItems: 'center'
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal:10
     },
     infoViewRow_image: {
         width: 40,
