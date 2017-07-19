@@ -27,7 +27,7 @@ export default class Login extends Component {
                     source={{ uri: 'login_back' }}
                     style={{ width: window.width, height: window.width / 9 * 16 }} />
                 <View style={{ position: 'absolute', justifyContent: 'center', alignItems: 'center' }}>
-                    <View style={{ borderRadius: 100, backgroundColor: 'rgba(255,255,255,0.15)', width: 120, height: 120, justifyContent: 'center', alignItems: 'center' }}>
+                    <View style={{ borderRadius: 100, backgroundColor: 'rgba(255,255,255,1)', width: 120, height: 120, justifyContent: 'center', alignItems: 'center' }}>
                         <Image
                             source={{ uri: 'honya_logo_144' }}
                             style={{ width: 80, height: 80 }} />

@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     storageName: {
         color: '#b2b2b2',
         fontWeight: 'bold',
-        fontSize: 17,
+        fontSize: 14,
         marginLeft: 10
     },
     count: {

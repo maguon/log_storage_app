@@ -99,6 +99,7 @@ class CarList extends Component {
                     onEndReachedThreshold={1}
                     renderItem={({ item }) => <CarListItem car={item} key={item.r_id} showCarInfo={RouterDirection.carInformation(this.props.parent)} />}
                 />
+                {carList.length==0&& <Text style={{position:'absolute',top:10,left:10}}>没有查询到任何车辆</Text>}
             </View>
         )
     }
