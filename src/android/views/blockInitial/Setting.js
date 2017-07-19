@@ -2,7 +2,7 @@
  * Created by lingxue on 2017/4/17.
  */
 import React, { Component, PropTypes } from 'react'
-import { View, Picker, Modal, StyleSheet, Text } from 'react-native'
+import { View, Picker, Modal, StyleSheet, Text, Linking } from 'react-native'
 import { Provider, connect } from 'react-redux'
 import { createStore, applyMiddleware, compose } from 'redux'
 import ReduxThunk from 'redux-thunk'
@@ -26,7 +26,7 @@ class Setting extends Component {
         this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
         this.onPressIcon = this.onPressIcon.bind(this)
         this.onPressTextInput = this.onPressTextInput.bind(this)
-
+        this.linkDownload = this.linkDownload.bind(this)
     }
 
     onBarcodeReceived(param) {
@@ -37,6 +37,16 @@ class Setting extends Component {
     }
     onPressTextInput() {
         Actions.searchVinAtSettingBlock()
+    }
+
+    linkDownload(url) {
+        Linking.canOpenURL(url).then(supported => {
+            if (!supported) {
+                console.log('Can\'t handle url: ' + url)
+            } else {
+                return Linking.openURL(url)
+            }
+        }).catch(err => console.error('An error occurred', err))
     }
 
     exitApp() {
@@ -56,6 +66,11 @@ class Setting extends Component {
 
     render() {
         let viewStyle = { backgroundColor: '#00cade' }
+        let { lastVersion, version, url } = this.props.InitializationReducer.getVersion.data
+        let versionArr = version.split('.')
+        let lastVersionArr = lastVersion.split('.')
+
+        console.log(this.props.InitializationReducer)
         return (
             <Container style={{ flex: 1 }}>
                 <SearchBar
@@ -86,8 +101,18 @@ class Setting extends Component {
                                 <Icon name="ios-arrow-forward" />
                             </Right>
                         </ListItem>
-                        <ListItem>
+                        <ListItem style={{ justifyContent: 'space-between' }}>
                             <Text>版本信息：v{app.version} </Text>
+                            {(versionArr[0] < lastVersionArr[0] || versionArr[1] < lastVersionArr[1] || versionArr[2] < lastVersionArr[2])
+                                && <Text
+                                    onPress={() => this.linkDownload(url)}
+                                    style={{
+                                        backgroundColor: 'red',
+                                        color: '#fff',
+                                        borderRadius: 5,
+                                        textAlign: 'center',
+                                        paddingHorizontal: 4
+                                    }}>new </Text>}
                         </ListItem>
                     </List>
                     <Button light full style={{ marginTop: 80, marginHorizontal: 15, backgroundColor: '#00cade' }} onPress={this.exitApp.bind(this)}>
@@ -111,7 +136,8 @@ class Setting extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        userReducer: state.LoginReducer
+        userReducer: state.LoginReducer,
+        InitializationReducer: state.InitializationReducer
     }
 }
 
