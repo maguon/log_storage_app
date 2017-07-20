@@ -20,7 +20,7 @@ export default class Login extends Component {
 
     render() {
         let { login, changPassword, changUserName, textUserName, textPassword } = this.props
-        console.log(window)
+        // console.log(window)
         return (
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <StatusBar hidden={true} />
@@ -36,7 +36,7 @@ export default class Login extends Component {
                     <View>
                         <Image
                             source={{ uri: 'app_name' }}
-                            style={{ width: 171, height: 38,marginTop: 20 }} />
+                            style={{ width: 171, height: 38, marginTop: 20 }} />
                         {/*<Text style={{ color: '#00b9cd', marginTop: 20, fontSize: 26, fontWeight: '100' }}>物联存车</Text>*/}
                     </View>
                     <View>
