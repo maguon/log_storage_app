@@ -63,7 +63,7 @@ class ImportCar extends Component {
                         onPress={() => RouterDirection.selectStorage(this.props.parent)({
                             routerIndex: 0,
                             popName: this.props.parent,
-                            routerList: [RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
+                            routerList: [RouterDirection.selectArea(this.props.parent),RouterDirection.selectRow(this.props.parent), RouterDirection.selectColumn(this.props.parent)],
                             onSelect: this.onPressImport
                         })}
                         style={{ marginBottom: 20, backgroundColor: '#00cade' }}>

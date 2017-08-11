@@ -9,8 +9,8 @@ export default class StorageListItem extends Component {
 
     render() {
         let { storage } = this.props
-        let count = storage.row * storage.col
-        let percent = Math.round(storage.balance / count * 100)
+        let count = storage.total_seats ? storage.total_seats : 0
+        let percent = storage.total_seats ? Math.round(storage.balance / count * 100) : 100
         return (
             <View style={styles.container}>
                 <View style={styles.infoView}>
@@ -19,7 +19,7 @@ export default class StorageListItem extends Component {
                         <Text style={styles.storageName}>{storage.storage_name}</Text>
                         <Text style={styles.count}>总:{count.toString()}</Text>
                     </View>
-                    <View style={[styles.infoViewRow,{paddingHorizontal:30}]}>
+                    <View style={[styles.infoViewRow, { paddingHorizontal: 30 }]}>
                         <View style={styles.infoViewCol}>
                             <Text style={styles.exportCount}>{storage.exports.toString()}</Text>
                             <Text style={styles.smallLabel}>今日出库</Text>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingHorizontal:10
+        paddingHorizontal: 10
     },
     infoViewRow_image: {
         width: 40,

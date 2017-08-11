@@ -112,7 +112,7 @@ class AddCar extends Component {
                                 value={makeName}
                                 showList={RouterDirection.selectCarMake(this.props.parent)}
                                 onValueChange={(param) => this.props.changeAddCarField({ makeId: param.id, makeName: param.value })}
-                                onRequire={(param) => {console.log(param);this.setState({ carMakeRequire: param })}}
+                                onRequire={(param) => {this.setState({ carMakeRequire: param })}}
                                 defaultValue='请选择'
                             />
                             <Select

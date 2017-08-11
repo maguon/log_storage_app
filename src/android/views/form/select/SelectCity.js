@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Button, ScrollView, } from 'react-native'
+import { Text, View, Button, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import NavBar from '../../../components/Bar/NavBar'

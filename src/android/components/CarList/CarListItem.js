@@ -11,7 +11,7 @@ import { Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 
 const CarListItem = ({ car, showCarInfo }) => {
-    let { plan_out_time, make_name, storage_name, vin, colour, enter_time, real_out_time, col, row } = car
+    let { plan_out_time, make_name, storage_name, vin, colour, enter_time, real_out_time, col, row,area_name } = car
     return (
         <TouchableHighlight underlayColor='rgba(0,0,0,0.1)' onPress={() => {
             showCarInfo({ car })
@@ -46,7 +46,7 @@ const CarListItem = ({ car, showCarInfo }) => {
                             <Icon name='ios-pin' style={{ fontSize: 15, color: '#cccccc' }} type="ionicons" />
                         </View>
                         <View style={{ flex: 6 }}>
-                            <Text>{row && col ? `${storage_name}  ${row}-${col}` : '已出库'}</Text>
+                            <Text>{row && col ? `${storage_name}  ${area_name}  ${row}-${col}` : '已出库'}</Text>
                         </View>
                     </View>
                 </View>

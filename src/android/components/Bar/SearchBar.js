@@ -24,10 +24,10 @@ export default class SearchBar extends Component {
 
     _onBarcodeReceived(e) {
         if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate()
-        if (e.data.length == 17)
-            this.setState({
-                barcodeModalVisible: false
-            })
+        // if (e.data.length == 17)
+        this.setState({
+            barcodeModalVisible: false
+        })
         this.props.onBarcodeReceived(e.data)
     }
 

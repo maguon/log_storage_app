@@ -20,6 +20,7 @@ import SelectEntrustReducer from './SelectEntrustReducer'
 import SelectCityReducer from './SelectCityReducer'
 import SelectBaseAddrReducer from './SelectBaseAddrReducer'
 import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
+import SelectAreaReducer from './SelectAreaReducer'
 import SceneReducer from './SceneReducer'
 
 export default combineReducers({
@@ -44,5 +45,6 @@ export default combineReducers({
     SelectEntrustReducer,
     SelectCityReducer,
     SelectBaseAddrReducer,
+    SelectAreaReducer,
     SceneReducer
 })

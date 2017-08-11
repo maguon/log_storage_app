@@ -16,7 +16,8 @@ class SelectRow extends Component {
     componentWillMount() {
         this.props.getStorageParkingList({
             optionalParam: {
-                storageId: this.props.storageId
+                storageId: this.props.storageId,
+                areaId: this.props.areaId
             }
         })
     }
