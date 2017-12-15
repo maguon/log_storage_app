@@ -45,6 +45,7 @@ import SelectReceive from './views/form/select/SelectReceive'
 import SelectBaseAddr from './views/form/select/SelectBaseAddr'
 import SelectCity from './views/form/select/SelectCity'
 import RichText from './views/RichText'
+import RetrievePassword from './views/RetrievePassword'
 import Orientation from 'react-native-orientation'
 import * as sceneAction from '../actions/SceneAction'
 
@@ -123,11 +124,16 @@ class App extends Component {
                                 && props.LoginReducer.user.userType) {
                                 return 'main'
                             } else {
-                                return 'login'
+                                return 'loginBlock'//'loginBlock'
                             }
                         }}
                     >
-                        <Scene key="login" initial={true} component={Login} hideNavBar hideTabBar />
+
+                        <Scene key="loginBlock" >
+                            <Scene key="login" initial={true} component={Login} hideNavBar hideTabBar />
+                            <Scene key="retrievePassword" title='找回密码' component={RetrievePassword} hideTabBar hideNavBar={false} navBar={NavBar} />
+                        </Scene>
+
                         <Scene key="main" tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
                             <Scene key="homeBlock" icon={TabIcon} online='ios-home' outline='ios-home-outline' >
                                 <Scene key="home" initial={true} component={Home} hideNavBar />

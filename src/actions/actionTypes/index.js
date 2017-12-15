@@ -21,6 +21,7 @@ import * as searchVinTypes from './SearchVinTypes'
 import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
 import * as selectAreaTypes from './SelectAreaTypes'
 import * as sceneTypes from './SceneTypes'
+import * as retrievePasswordTypes from './RetrievePasswordTypes'
 
 export {
     loginTypes,
@@ -45,5 +46,6 @@ export {
     selectCityTypes,
     selectReceiveTypes,
     selectBaseAddrTypes,
-    selectAreaTypes
+    selectAreaTypes,
+    retrievePasswordTypes
 }
