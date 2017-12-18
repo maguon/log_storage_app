@@ -3,6 +3,7 @@ import { Text, View, TextInput, ToastAndroid } from 'react-native'
 import { connect } from 'react-redux'
 import { Icon, Button } from 'native-base'
 import * as RetrievePasswordAction from '../../actions/RetrievePasswordAction'
+import { Actions } from 'react-native-router-flux'
 
 class RetrievePassword extends Component {
     constructor(props) {
@@ -38,6 +39,7 @@ class RetrievePassword extends Component {
         if (retrieve.isResultStatus == 2) {
             ToastAndroid.show(`密码重置成功！`, ToastAndroid.SHORT)
             this.props.resetRetrieve()
+            Actions.pop()
         } else if (retrieve.isResultStatus == 3) {
             ToastAndroid.show(`获取验证码失败：${retrieve.errorMsg}`, ToastAndroid.SHORT)
             this.props.resetRetrieve()
