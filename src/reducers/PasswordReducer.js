@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import * as actionTypes from '../actions/actionTypes'
+import * as actionTypes from '../actionTypes'
 
 const initialState = {
     isWaiting: false,

@@ -1,4 +1,4 @@
-import * as actionTypes from './actionTypes'
+import * as actionTypes from '../actionTypes'
 import httpRequest from '../util/HttpRequest.js'
 import { base_host } from '../config/Host'
 import { ObjectToUrl } from '../util/ObjectToUrl'

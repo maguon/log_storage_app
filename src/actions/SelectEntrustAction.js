@@ -1,6 +1,6 @@
 import httpRequest from '../util/HttpRequest.js'
 import { base_host } from '../config/Host'
-import * as actionTypes from './actionTypes'
+import * as actionTypes from '../actionTypes'
 
 export const getEntrustAll = () => (dispatch) => {
     dispatch({ type: actionTypes.selectEntrustTypes.GET_ENTRUSTS_WAITING, payload: {} })

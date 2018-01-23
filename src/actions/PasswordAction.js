@@ -1,6 +1,6 @@
 import httpRequest from '../util/HttpRequest'
 import { base_host } from '../config/Host'
-import * as actionTypes from './actionTypes'
+import * as actionTypes from '../actionTypes'
 import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const changePassword = (param) => (dispatch) => {

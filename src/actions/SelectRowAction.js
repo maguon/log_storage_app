@@ -1,7 +1,7 @@
 /**
  * Created by lingxue on 2017/4/17.
  */
-import * as actionTypes from './actionTypes'
+import * as actionTypes from '../actionTypes'
 import httpRequest from '../util/HttpRequest.js'
 import { base_host } from '../config/Host'
 import { ObjectToUrl } from '../util/ObjectToUrl'
