@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import LayoutHome from '../../layout/Home'
-import * as HomeAction from '../../../actions/HomeAction'
+import {
+    Text,
+    View,
+    StyleSheet,
+    ScrollView,
+    Image,
+    Dimensions
+} from 'react-native'
+import RecordList from '../../components/home/RecordList'
+import StorageList from '../../components/home/StorageList'
+import SearchBar from '../../components/Bar/SearchBar'
 import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
+import * as HomeAction from '../../../actions/views/HomeAction'
 
 class Home extends Component {
     constructor(props) {
@@ -40,13 +50,13 @@ class Home extends Component {
         // console.log(nextProps)
         /** homeReducer.getStoragesHome */
         if (homeReducer.getStoragesHome.isExecStatus == 1) {
-           // console.log('homeReducer.getStoragesHome', '开始执行')
+            // console.log('homeReducer.getStoragesHome', '开始执行')
         } else if (homeReducer.getStoragesHome.isExecStatus == 2) {
             if (homeReducer.getStoragesHome.isResultStatus == 0) {
-             //   console.log('homeReducer.getStoragesHome执行成功', homeReducer.getStoragesHome.data)
+                //   console.log('homeReducer.getStoragesHome执行成功', homeReducer.getStoragesHome.data)
                 resetStoragesForHome()
             } else if (homeReducer.getStoragesHome.isResultStatus == 1) {
-               // console.log('homeReducer.getStoragesHome执行错误', homeReducer.getStoragesHome.errorMsg)
+                // console.log('homeReducer.getStoragesHome执行错误', homeReducer.getStoragesHome.errorMsg)
                 resetStoragesForHome()
             }
             else if (homeReducer.getStoragesHome.isResultStatus == 2) {
@@ -60,13 +70,13 @@ class Home extends Component {
 
         /** homeReducer.getStoragesHome */
         if (homeReducer.getRecordsHome.isExecStatus == 1) {
-           // console.log('homeReducer.getRecordsHome', '开始执行')
+            // console.log('homeReducer.getRecordsHome', '开始执行')
         } else if (homeReducer.getRecordsHome.isExecStatus == 2) {
             if (homeReducer.getRecordsHome.isResultStatus == 0) {
-             //   console.log('homeReducer.getRecordsHome执行成功', homeReducer.getRecordsHome.data)
+                //   console.log('homeReducer.getRecordsHome执行成功', homeReducer.getRecordsHome.data)
                 resetRecordsForHome()
             } else if (homeReducer.getRecordsHome.isResultStatus == 1) {
-               // console.log('homeReducer.getRecordsHome执行错误', homeReducer.getRecordsHome.errorMsg)
+                // console.log('homeReducer.getRecordsHome执行错误', homeReducer.getRecordsHome.errorMsg)
                 resetRecordsForHome()
             }
             else if (homeReducer.getRecordsHome.isResultStatus == 2) {
@@ -78,18 +88,18 @@ class Home extends Component {
 
 
         if (CarInfoReducer.sendCar.isExecStatus == 2) {
-          // console.log('CarInfoReducer.sendCar执行完毕')
+            // console.log('CarInfoReducer.sendCar执行完毕')
             if (CarInfoReducer.sendCar.isResultStatus == 0) {
-            //    console.log('CarInfoReducer.sendCar执行成功')
+                //    console.log('CarInfoReducer.sendCar执行成功')
                 this.getData()
             }
         }
 
 
         if (CarInfoReducer.exportCar.isExecStatus == 2) {
-           // console.log('CarInfoReducer.exportCar', '执行完毕')
+            // console.log('CarInfoReducer.exportCar', '执行完毕')
             if (CarInfoReducer.exportCar.isResultStatus == 0) {
-             //   console.log('CarInfoReducer.exportCar', '执行成功')
+                //   console.log('CarInfoReducer.exportCar', '执行成功')
                 this.getData()
             }
         }
@@ -98,15 +108,15 @@ class Home extends Component {
         if (CarInfoReducer.importCar.isExecStatus == 2) {
             //console.log('CarInfoReducer.importCar', '执行完毕')
             if (CarInfoReducer.importCar.isResultStatus == 0) {
-              //  console.log('CarInfoReducer.importCar', '执行成功')
+                //  console.log('CarInfoReducer.importCar', '执行成功')
                 this.getData()
             }
         }
 
         if (CarInfoReducer.moveCar.isExecStatus == 2) {
-          //  console.log('CarInfoReducer.moveCar', '执行完毕')
+            //  console.log('CarInfoReducer.moveCar', '执行完毕')
             if (CarInfoReducer.moveCar.isResultStatus == 0) {
-            //    console.log('CarInfoReducer.moveCar', '执行成功')
+                //    console.log('CarInfoReducer.moveCar', '执行成功')
                 this.getData()
             }
         }
@@ -114,7 +124,7 @@ class Home extends Component {
         if (AddCarReducer.addCar.isExecStatus == 2) {
             //console.log('AddCarReducer.addCar', '执行完毕')
             if (AddCarReducer.addCar.isResultStatus == 0) {
-              //  console.log('AddCarReducer.addCar执行成功')
+                //  console.log('AddCarReducer.addCar执行成功')
                 this.getData()
             }
         }
@@ -135,18 +145,26 @@ class Home extends Component {
     }
 
     render() {
-        // console.log(this.props)
-        let { storageList } = this.props.homeReducer.getStoragesHome.data
-        let { recordList } = this.props.homeReducer.getRecordsHome.data
+        const { storageList } = this.props.homeReducer.getStoragesHome.data
+        const { recordList } = this.props.homeReducer.getRecordsHome.data
         return (
-            <LayoutHome
-                onBarcodeReceived={this.onBarcodeReceived}
-                onPressIcon={this.onPressIcon}
-                onPressTextInput={this.onPressTextInput}
-                onPressItem={this.onPressItem}
-                storages={storageList}
-                recordList={recordList}
-            />
+
+            <View style={{ flex: 1 }}>
+                <SearchBar
+                    onBarcodeReceived={this.onBarcodeReceived}
+                    onPressIcon={this.onPressIcon}
+                    onPressTextInput={this.onPressTextInput}
+                />
+                <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    overScrollMode='auto'>
+                    <StorageList storages={storageList} />
+                    <RecordList
+                        recordList={recordList}
+                        onPressItem={this.onPressItem}
+                    />
+                </ScrollView>
+            </View>
         )
     }
 }

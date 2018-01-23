@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import NavBar from '../components/Bar/NavBar'
 import { Segment, Button, Text } from 'native-base'
 import * as RecordListAction from '../../actions/RecordListAction'
-import RecordListItem from '../components/RecordListForHome/RecordListItem'
+import RecordListItem from '../components/home/RecordListItem'
 import { Actions } from 'react-native-router-flux'
 
 const window = Dimensions.get('window')
