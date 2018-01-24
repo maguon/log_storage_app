@@ -1,194 +1,101 @@
 import React, { Component } from 'react'
-import {
-    Text,
-    View,
-    StyleSheet,
-    ScrollView,
-    Image,
-    Dimensions
-} from 'react-native'
+import { StyleSheet, InteractionManager } from 'react-native'
 import RecordList from '../../components/home/RecordList'
 import StorageList from '../../components/home/StorageList'
-import SearchBar from '../../components/Bar/SearchBar'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import * as HomeAction from '../../../actions/views/HomeAction'
+import { Container, Content, Spinner } from 'native-base'
+import { styleColor } from '../../GlobalStyles'
+import { getRecordList, getRecordListWaiting } from '../../../actions/components/home/RecordListAtHomeAction'
+import { getStorageList, getStorageListWaiting } from '../../../actions/components/home/StorageListAtHomeAction'
 
 class Home extends Component {
     constructor(props) {
         super(props)
-
-        this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
-        this.onPressIcon = this.onPressIcon.bind(this)
-        this.onPressTextInput = this.onPressTextInput.bind(this)
-        this.onPressItem = this.onPressItem.bind(this)
-        this.getData = this.getData.bind(this)
     }
 
     componentDidMount() {
-        // this.getData()
-    }
-
-    getData() {
-        // let now = new Date()
-        // year = now.getFullYear()
-        // month = now.getMonth() + 1
-        // month = month >= 10 ? month : `0${month}`
-        // day = now.getDate()
-        // day = day >= 10 ? day : `0${day}`
-        // now = `${year}${month}${day}`
-
-        // let { getRecordsForHome, getStoragesForHome } = this.props
-        // let { userId } = this.props.userReducer
-        // getRecordsForHome({ OptionalParam: { start: 0, size: 10, userId: userId } })
-        // getStoragesForHome({ OptionalParam: { dateStart: now, dateEnd: now } })
-    }
-
-    // componentWillReceiveProps(nextProps) {
-    //     let { homeReducer, CarInfoReducer, AddCarReducer } = nextProps
-    //     let { resetStoragesForHome, resetRecordsForHome } = this.props
-    //     // console.log(nextProps)
-    //     /** homeReducer.getStoragesHome */
-    //     if (homeReducer.getStoragesHome.isExecStatus == 1) {
-    //         // console.log('homeReducer.getStoragesHome', '开始执行')
-    //     } else if (homeReducer.getStoragesHome.isExecStatus == 2) {
-    //         if (homeReducer.getStoragesHome.isResultStatus == 0) {
-    //             //   console.log('homeReducer.getStoragesHome执行成功', homeReducer.getStoragesHome.data)
-    //             resetStoragesForHome()
-    //         } else if (homeReducer.getStoragesHome.isResultStatus == 1) {
-    //             // console.log('homeReducer.getStoragesHome执行错误', homeReducer.getStoragesHome.errorMsg)
-    //             resetStoragesForHome()
-    //         }
-    //         else if (homeReducer.getStoragesHome.isResultStatus == 2) {
-    //             //console.log('homeReducer.getStoragesHome执行失败', homeReducer.getStoragesHome.failedMsg)
-    //             resetStoragesForHome()
-    //         }
-    //     }
-    //     /*********************************************************************** */
-
-
-
-    //     /** homeReducer.getStoragesHome */
-    //     if (homeReducer.getRecordsHome.isExecStatus == 1) {
-    //         // console.log('homeReducer.getRecordsHome', '开始执行')
-    //     } else if (homeReducer.getRecordsHome.isExecStatus == 2) {
-    //         if (homeReducer.getRecordsHome.isResultStatus == 0) {
-    //             //   console.log('homeReducer.getRecordsHome执行成功', homeReducer.getRecordsHome.data)
-    //             resetRecordsForHome()
-    //         } else if (homeReducer.getRecordsHome.isResultStatus == 1) {
-    //             // console.log('homeReducer.getRecordsHome执行错误', homeReducer.getRecordsHome.errorMsg)
-    //             resetRecordsForHome()
-    //         }
-    //         else if (homeReducer.getRecordsHome.isResultStatus == 2) {
-    //             //console.log('homeReducer.getRecordsHome执行失败', homeReducer.getRecordsHome.failedMsg)
-    //             resetRecordsForHome()
-    //         }
-    //     }
-    //     /*********************************************************************** */
-
-
-    //     if (CarInfoReducer.sendCar.isExecStatus == 2) {
-    //         // console.log('CarInfoReducer.sendCar执行完毕')
-    //         if (CarInfoReducer.sendCar.isResultStatus == 0) {
-    //             //    console.log('CarInfoReducer.sendCar执行成功')
-    //             this.getData()
-    //         }
-    //     }
-
-
-    //     if (CarInfoReducer.exportCar.isExecStatus == 2) {
-    //         // console.log('CarInfoReducer.exportCar', '执行完毕')
-    //         if (CarInfoReducer.exportCar.isResultStatus == 0) {
-    //             //   console.log('CarInfoReducer.exportCar', '执行成功')
-    //             this.getData()
-    //         }
-    //     }
-
-
-    //     if (CarInfoReducer.importCar.isExecStatus == 2) {
-    //         //console.log('CarInfoReducer.importCar', '执行完毕')
-    //         if (CarInfoReducer.importCar.isResultStatus == 0) {
-    //             //  console.log('CarInfoReducer.importCar', '执行成功')
-    //             this.getData()
-    //         }
-    //     }
-
-    //     if (CarInfoReducer.moveCar.isExecStatus == 2) {
-    //         //  console.log('CarInfoReducer.moveCar', '执行完毕')
-    //         if (CarInfoReducer.moveCar.isResultStatus == 0) {
-    //             //    console.log('CarInfoReducer.moveCar', '执行成功')
-    //             this.getData()
-    //         }
-    //     }
-
-    //     if (AddCarReducer.addCar.isExecStatus == 2) {
-    //         //console.log('AddCarReducer.addCar', '执行完毕')
-    //         if (AddCarReducer.addCar.isResultStatus == 0) {
-    //             //  console.log('AddCarReducer.addCar执行成功')
-    //             this.getData()
-    //         }
-    //     }
-    // }
-
-    onBarcodeReceived(param) {
-        Actions.searchVinAtHomeBlock({ vin: param })
-    }
-    onPressIcon() {
-        Actions.searchVinAtHomeBlock()
-    }
-    onPressTextInput() {
-        Actions.searchVinAtHomeBlock()
-    }
-
-    onPressItem(param) {
-        Actions.carInformationAtHomeBlock(param)
+        const { getRecordListWaiting, getStorageListWaiting, getRecordList, getStorageList } = this.props
+        getRecordListWaiting()
+        getStorageListWaiting()
+        InteractionManager.runAfterInteractions(() => {
+            getRecordList()
+            getStorageList()
+        })
     }
 
     render() {
-        // const { storageList } = this.props.homeReducer.getStoragesHome.data
-        // const { recordList } = this.props.homeReducer.getRecordsHome.data
-        return (
-
-            <View style={{ flex: 1 }}>
-                <SearchBar
-                    onBarcodeReceived={this.onBarcodeReceived}
-                    onPressIcon={this.onPressIcon}
-                    onPressTextInput={this.onPressTextInput}
-                />
-                <ScrollView
-                    showsVerticalScrollIndicator={false}
-                    overScrollMode='auto'>
-                    <StorageList/>
-                    {/* <RecordList/> */}
-                </ScrollView>
-            </View>
-        )
+        const { recordListAtHomeReducer: { getRecordList }, storageListAtHomeReducer: { getStorageList } } = this.props
+        if (getRecordList.isResultStatus != 1 || getStorageList.isResultStatus != 1) {
+            return (
+                <Container >
+                    <Content showsVerticalScrollIndicator={false}>
+                        <StorageList />
+                        <RecordList />
+                    </Content>
+                </Container>
+            )
+        } else {
+            return (
+                <Container >
+                    <Spinner color={styleColor} />
+                </Container>
+            )
+        }
     }
 }
 
+
 const mapStateToProps = (state) => {
     return {
-        CarInfoReducer: state.CarInfoReducer,
-        userReducer: state.LoginReducer.user,
-       // homeReducer: state.HomeReducer,
-        AddCarReducer: state.AddCarReducer
+        recordListAtHomeReducer: state.recordListAtHomeReducer,
+        storageListAtHomeReducer: state.storageListAtHomeReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getRecordsForHome: (param) => {
-        dispatch(HomeAction.getRecordsForHome(param))
+    getRecordList: () => {
+        dispatch(getRecordList())
     },
-    getStoragesForHome: (param) => {
-        dispatch(HomeAction.getStoragesForHome(param))
+    getRecordListWaiting: () => {
+        dispatch(getRecordListWaiting())
     },
-    resetStoragesForHome: () => {
-        dispatch(HomeAction.resetStoragesForHome())
+    getStorageList: () => {
+        dispatch(getStorageList())
     },
-    resetRecordsForHome: () => {
-        dispatch(HomeAction.resetRecordsForHome())
+    getStorageListWaiting: () => {
+        dispatch(getStorageListWaiting())
     }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
+
+
+
+// class Home extends Component {
+//     constructor(props) {
+//         super(props)
+//         // this.state = {
+//         //     active: 'true'
+//         // };
+//         // this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
+//         // this.onPressIcon = this.onPressIcon.bind(this)
+//         // this.onPressTextInput = this.onPressTextInput.bind(this)
+//         // this.onPressItem = this.onPressItem.bind(this)
+//     }
+
+
+//     // onBarcodeReceived(param) {
+//     //     Actions.searchVinAtHomeBlock({ vin: param })
+//     // }
+//     // onPressIcon() {
+//     //     Actions.searchVinAtHomeBlock()
+//     // }
+//     // onPressTextInput() {
+//     //     Actions.searchVinAtHomeBlock()
+//     // }
+
+//     // onPressItem(param) {
+//     //     Actions.carInformationAtHomeBlock(param)
+//     // }
 

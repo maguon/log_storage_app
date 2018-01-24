@@ -3,46 +3,44 @@ import {
     View,
     StyleSheet,
     Image,
-    Text,
+
     InteractionManager
 } from 'react-native'
 import { connect } from 'react-redux'
-import { Container, List,  ListItem } from 'native-base'
+import { Container, List, Text, ListItem } from 'native-base'
 import PercentageCircle from 'react-native-percentage-circle'
 import globalStyles from '../../GlobalStyles'
 import { getStorageList, getStorageListWaiting } from '../../../actions/components/home/StorageListAtHomeAction'
 
 const StorageItem = props => {
-    const { storage: { storage_name }, storage } = props
-    const count = storage.total_seats ? storage.total_seats : 0
-    const percent = storage.total_seats ? Math.round(storage.balance / count * 100) : 100
+    const { storage: { storage_name, total_seats, balance }, storage } = props
     return (
         <View style={[globalStyles.listItem, styles.itemContainer]}>
             <View style={styles.infoView}>
                 <View style={styles.infoViewRow}>
                     <Image source={{ uri: 'icon_house_1' }} style={styles.infoViewRow_image} />
-                    <Text style={[globalStyles.midText,styles.storageName]}>{storage.storage_name}</Text>
-                    <Text style={[globalStyles.midText,globalStyles.styleBackgroundColor,styles.count]}>总:{count.toString()}</Text>
+                    <Text style={[globalStyles.midText, styles.storageName]}>{storage_name ? `${storage_name}` : ''}</Text>
+                    <Text style={[globalStyles.midText, globalStyles.styleBackgroundColor, styles.count]}>总:{total_seats ? `${total_seats}` : '0'}</Text>
                 </View>
                 <View style={[styles.infoViewRow, { paddingHorizontal: 30 }]}>
                     <View style={styles.infoViewCol}>
-                        <Text style={[globalStyles.largeText, globalStyles.styleColor,styles.exportCount]}>{storage.exports.toString()}</Text>
-                        <Text style={[globalStyles.ssText,styles.smallLabel]}>今日出库</Text>
+                        <Text style={[globalStyles.largeText, globalStyles.styleColor, styles.exportCount]}>{storage.exports ? `${storage.exports}` : '0'}</Text>
+                        <Text style={[globalStyles.ssText, styles.smallLabel]}>今日出库</Text>
                     </View>
                     <View style={styles.infoViewCol}>
-                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{(count - storage.balance).toString()}</Text>
-                        <Text style={[globalStyles.ssText,styles.smallLabel]}>剩余车位</Text>
+                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{total_seats&&balance ? `${total_seats - balance}` : '0'}</Text>
+                        <Text style={[globalStyles.ssText, styles.smallLabel]}>剩余车位</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.percentView}>
-                <PercentageCircle radius={35} borderWidth={6} percent={percent} color={"#00cade"} >
+                <PercentageCircle radius={35} borderWidth={6} percent={balance&&total_seats ?  Math.round(balance / total_seats * 100) : 100} color={"#00cade"} >
                     <View>
                         <Text style={globalStyles.ssText}>使用率</Text>
                     </View>
                     <View style={styles.percentCenterView}>
-                        <Text includeFontPadding={false} style={[globalStyles.largeText, globalStyles.styleColor]}>{percent.toString()}</Text>
-                        <Text includeFontPadding={false} style={[globalStyles.ssText,globalStyles.styleColor,styles.percentSign]}>%</Text>
+                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{balance&&total_seats ? `${ Math.round(balance / total_seats * 100)}` : '100'}</Text>
+                        <Text style={[globalStyles.ssText, globalStyles.styleColor, styles.percentSign]}>%</Text>
                     </View>
                 </PercentageCircle>
             </View>
@@ -56,13 +54,12 @@ class StorageList extends Component {
     }
 
     componentDidMount() {
-        this.props.getStorageListWaiting()
-        InteractionManager.runAfterInteractions(() => this.props.getStorageList())
+        // this.props.getStorageListWaiting()
+        // InteractionManager.runAfterInteractions(() => this.props.getStorageList())
     }
 
     render() {
         const { storageListAtHomeReducer: { data: { storageList } } } = this.props
-        console.log('storageList', storageList)
         const storages = storageList.map((item) => {
             return <StorageItem storage={item} key={item.id} />
         })

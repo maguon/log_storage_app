@@ -73,12 +73,12 @@ class Setting extends Component {
        // console.log(this.props.InitializationReducer)
         return (
             <Container style={{ flex: 1 }}>
-                <SearchBar
+                {/* <SearchBar
                     viewStyle={viewStyle}
                     onBarcodeReceived={this.onBarcodeReceived}
                     onPressIcon={this.onPressIcon}
                     onPressTextInput={this.onPressTextInput}
-                />
+                /> */}
                 <View style={{ flex: 1 }}>
                     <List>
                         <ListItem onPress={() => { Actions.recordList() }}>

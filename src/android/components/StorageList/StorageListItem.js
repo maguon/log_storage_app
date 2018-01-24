@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { Actions } from 'react-native-router-flux'
 
 const StorageListItem = ({ storage }) => {
-    console.log(storage)
+
     let { storage_name, balance, total_seats, storage_id } = storage
     let count = storage.total_seats ? (storage.total_seats - storage.balance) : 0
     return (

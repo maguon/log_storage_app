@@ -70,11 +70,11 @@ export default class Query extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
-                <SearchBar
+                {/* <SearchBar
                     onBarcodeReceived={this.onBarcodeReceived}
                     onPressIcon={this.onPressIcon}
                     onPressTextInput={this.onPressTextInput}
-                />
+                /> */}
                 <ScrollView>
                     <View style={{ flex: 1 }}>
                         <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>

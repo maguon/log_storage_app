@@ -9,12 +9,12 @@ const StorageList = ({ storages, onBarcodeReceived, onPressIcon, onPressTextInpu
     let viewStyle = { backgroundColor: '#00cade' }
     return (
         <View style={{ flex: 1 }}>
-            <SearchBar
+            {/* <SearchBar
                 viewStyle={viewStyle}
                 onBarcodeReceived={onBarcodeReceived}
                 onPressIcon={onPressIcon}
                 onPressTextInput={onPressTextInput}
-            />
+            /> */}
             <StorageListComponent
                 storages={storages}
             />

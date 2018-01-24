@@ -1,4 +1,4 @@
-import * as appJson from '../android_app.json'
+
 import requestHeaders from './RequestHeaders'
 
 
@@ -18,6 +18,13 @@ function getcallback(url, callback) {
         .catch((error) => {
             callback(error, null);
         })
+}
+
+const get = (url)=>{
+    return fetch(url, {
+        method: 'GET',
+        headers: requestHeaders.headers
+    }).then((response) => response.json())
 }
 
 function postcallback(url, params, callback) {
@@ -91,7 +98,8 @@ module.exports = {
     putcallback: putcallback,
     delcallback: delcallback,
     postFilecallback: postFilecallback,
-    getAllcallback: getAllcallback
+    getAllcallback: getAllcallback,
+    get: get
 }
 
 
