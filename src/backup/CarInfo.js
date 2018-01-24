@@ -9,7 +9,7 @@ import RecordList from '../components/RecordListForCarInfo/RecordList'
 import ConfirmModal from '../components/ConfirmModal'
 import { Actions } from 'react-native-router-flux'
 
-const window = Dimensions.get('window')
+const window = Dimensions.getcallback('window')
 
 const CarInfo = ({ car,
     exportCar,

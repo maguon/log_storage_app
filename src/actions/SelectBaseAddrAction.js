@@ -7,7 +7,7 @@ export const getBaseAddrAll = (param) => (dispatch) => {
     dispatch({ type: actionTypes.selectBaseAddrTypes.GET_BASEADDRS_WAITING, payload: {} })
     let url = `${base_host}/baseAddr?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectBaseAddrTypes.GET_BASEADDRS_ERROR, payload: { data: err } })
             } else {

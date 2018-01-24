@@ -5,7 +5,7 @@ import { fontSizeCoeff } from '../util/util'
 
 const globalStyles = StyleSheet.create({
     container: {
-        backgroundColor: '#F0EFF5'
+        backgroundColor: '#eee'
     },
     styleColor: {
         color: '#00cade'
@@ -24,6 +24,10 @@ const globalStyles = StyleSheet.create({
         fontSize: 4 * fontSizeCoeff,
         color: '#777'
     },
+    ssText: {
+        fontSize: 3.5 * fontSizeCoeff,
+        color: '#777'
+    },
     largeText:{
         fontSize: 6 * fontSizeCoeff,
         color: '#777'
@@ -37,8 +41,13 @@ const globalStyles = StyleSheet.create({
         fontSize:20,
         color: '#777'
     },
-    listBackgroundColor:{
-        backgroundColor: '#f8fafb'   
+    listContainer: {
+        backgroundColor: '#eee',
+        padding: 5
+    },
+    listItem:{
+        backgroundColor: '#fff',
+        margin: 5
     },
     errorText:{
         fontSize: 4 * fontSizeCoeff,

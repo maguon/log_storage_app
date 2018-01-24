@@ -11,7 +11,7 @@ export const getStorageParkingList = (param) => (dispatch) => {
     dispatch({ type: actionTypes.selectRowTypes.GET_STORAGEPARKINGS_WAITING, payload: {} })
     let url = `${base_host}/storageParking?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectRowTypes.GET_STORAGEPARKINGS_ERROR, payload: { data: err } })
             } else {

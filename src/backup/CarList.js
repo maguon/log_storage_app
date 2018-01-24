@@ -7,7 +7,7 @@ import SearchBar from '../components/Bar/SearchBar'
 import NavBar from '../components/Bar/NavBar'
 import CarListComponent from '../components/CarList/CarList'
 
-const window = Dimensions.get('window')
+const window = Dimensions.getcallback('window')
 
 const CarList = ({ cars, getCarListWaiting, getCarListMore, storageName, getCarList, changeSearchVin }) => {
     let viewStyle = { backgroundColor: '#00cade' }

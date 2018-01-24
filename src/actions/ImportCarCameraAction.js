@@ -8,14 +8,14 @@ export const pushCarImage = (param) => (dispatch) => {
     let url = `${file_host}user/${param.requiredParam.userId}/image?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.importCarCameraTypes.IMPORT_CAR_IMAGE_WAITING, payload: {} })
     httpRequest
-        .postFile(url, param.postFileParam, (err, res) => {
+        .postFilecallback(url, param.postFileParam, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
                     url = `${record_host}/car/${param.requiredParam.carId}/vin/${param.requiredParam.vin}/storageImage`
                     param.postParam.url = res.imageId
-                    httpRequest.post(url, param.postParam, (carErr, carRes) => {
+                    httpRequest.postcallback(url, param.postParam, (carErr, carRes) => {
                         if (carErr) {
                             dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_ERROR, payload: { data: carErr } })
                         } else {
@@ -47,7 +47,7 @@ export const delImage = (param) => (dispatch) => {
     let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`
     dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_WAITING, payload: {} })
     httpRequest
-        .del(url, (err, res) => {
+        .delcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_ERROR, payload: { data: err } })
             } else {

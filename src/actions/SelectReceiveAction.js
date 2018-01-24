@@ -7,7 +7,7 @@ export const getReceiveAll = (param) => (dispatch) => {
     dispatch({ type: actionTypes.selectReceiveTypes.GET_RECEIVES_WAITING, payload: {} })
     let url = `${base_host}/receive?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectReceiveTypes.GET_RECEIVES_ERROR, payload: { data: err } })
             } else {

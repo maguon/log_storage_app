@@ -9,7 +9,7 @@ export const getRecordList = (param) => (dispatch) => {
     dispatch({ type: actionTypes.recordListTypes.GET_RECORD_LIST_VIEW_WAITING, payload: {} })
     let url = `${record_host}/opRecord?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.recordListTypes.GET_RECORD_LIST_VIEW_ERROR, payload: { data: err } })
             }
@@ -28,7 +28,7 @@ export const getRecordListMore = (param) => (dispatch) => {
     dispatch({ type: actionTypes.recordListTypes.GET_RECORDLIST_MORE_WAITING, payload: {} })
     let url = `${record_host}/opRecord?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.recordListTypes.GET_RECORDLIST_MORE_ERROR, payload: { data: err } })
             }

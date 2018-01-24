@@ -6,7 +6,7 @@ import { base_host } from '../config/Host'
 import requestHeaders from '../util/RequestHeaders'
 
 export const login = (params) => (dispatch) => {
-    httpRequest.post(`${base_host}/userLogin`, params.postParam, (err, res) => {
+    httpRequest.postcallback(`${base_host}/userLogin`, params.postParam, (err, res) => {
         if (err) {
             //登录失败重新登录
             dispatch({ type: actionTypes.loginTypes.LOGIN_ERROR, payload: { data: err } })
@@ -23,7 +23,7 @@ export const login = (params) => (dispatch) => {
                 requestHeaders.set('auth-token', res.result.accessToken)
                 requestHeaders.set('user-type', res.result.type)
                 httpRequest
-                    .get(`${base_host}/user/${res.result.userId}`, (getUserInfoErr, getUserInfoRes) => {
+                    .getcallback(`${base_host}/user/${res.result.userId}`, (getUserInfoErr, getUserInfoRes) => {
                         if (getUserInfoErr) {
                             dispatch({ type: actionTypes.loginTypes.LOGIN_ERROR, payload: { data: getUserInfoErr } })
                         }

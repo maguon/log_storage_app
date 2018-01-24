@@ -7,7 +7,7 @@ export const importCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStorageRel?${ObjectToUrl(param.OptionalParam)}`
     dispatch({ type: actionTypes.imporCarTypes.IMPORTCAR_WAITING, payload: {} })
     httpRequest
-        .put(url, param.putParam, (err, res) => {
+        .putcallback(url, param.putParam, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.imporCarTypes.IMPORTCAR_ERROR, payload: { data: err } })
             } else {

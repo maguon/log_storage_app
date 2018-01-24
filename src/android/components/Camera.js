@@ -27,7 +27,7 @@ var photoOptions = {
     }
 }
 
-import { postFile } from '../../util/HttpRequest'
+import { postFilecallback } from '../../util/HttpRequest'
 import { base_host, file_host } from '../../config/Host'
 import ImageResizer from 'react-native-image-resizer'
 
@@ -96,7 +96,7 @@ export default class Camera extends Component {
                     }
                     let url = `${file_host}user/${item.userId}/image?imageType=${item.imageType}`
                     console.log(url)
-                    postFile(item.imageUrl, url, item)
+                    postFilecallback(item.imageUrl, url, item)
                     console.log('testUpload')
                 }).catch((err) => {
                     return console.log(err);
@@ -130,7 +130,7 @@ export default class Camera extends Component {
                 }
                 let url = `${file_host}user/${item.userId}/image?imageType=${item.imageType}`
                 console.log(url)
-                postFile(item.imageUrl, url, item)
+                postFilecallback(item.imageUrl, url, item)
                 console.log('testUpload')
             }).catch((err) => {
                 return console.log(err);

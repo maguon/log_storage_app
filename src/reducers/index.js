@@ -8,7 +8,7 @@ import SelectRowReducer from './SelectRowReducer'
 import ImporCarReducer from './ImporCarReducer'
 import ImportCarCameraReducer from './ImportCarCameraReducer'
 import PasswordReducer from './PasswordReducer'
-import HomeReducer from './HomeReducer'
+//import HomeReducer from './HomeReducer'
 import CarInfoReducer from './CarInfoReducer'
 import SelectStorageReducer from './SelectStorageReducer'
 import RecordListReducer from './RecordListReducer'
@@ -23,11 +23,14 @@ import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
 import SelectAreaReducer from './SelectAreaReducer'
 import RetrievePasswordReducer from './RetrievePasswordReducer'
 import SceneReducer from './SceneReducer'
+import recordListAtHomeReducer from './components/home/RecordListAtHomeReducer'
+import storageListAtHomeReducer from './components/home/StorageListAtHomeReducer'
+
 
 export default combineReducers({
     InitializationReducer,
     LoginReducer,
-    HomeReducer,
+    //HomeReducer,
     PasswordReducer,
     CarListReducer,
     CarInfoReducer,
@@ -48,5 +51,7 @@ export default combineReducers({
     SelectBaseAddrReducer,
     SelectAreaReducer,
     SceneReducer,
-    RetrievePasswordReducer
+    RetrievePasswordReducer,
+    recordListAtHomeReducer,
+    storageListAtHomeReducer
 })

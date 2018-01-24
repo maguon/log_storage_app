@@ -9,7 +9,7 @@ export const getSelectStorageListForCarList = (param) => (dispatch) => {
     let url = `${base_host}/storage?${ObjectToUrl(param.optionalParam)}`
    // console.log(param)
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectStorageForCarListTypes.GET_SELECTSTORAGELISTFORCARLIST_ERROR, payload: { data: err } })
             } else {

@@ -15,7 +15,7 @@ import CarListItem from './CarListItem'
 import { Actions } from 'react-native-router-flux'
 // const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 
-const window = Dimensions.get('window')
+const window = Dimensions.getcallback('window')
 
 const CarList = ({ cars, getCarListWaiting, getCarListMore, storageName }) => {
     let viewStyle = { backgroundColor: '#00cade' }

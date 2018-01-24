@@ -7,7 +7,7 @@ export const getRecordsForHome = (param) => (dispatch) => {
     let url = `${record_host}/opRecord?${ObjectToUrl(param.OptionalParam)}`
     dispatch({ type: actionTypes.homeTypes.GET_RECORDS_HOME_WAITING, payload: {} })
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.homeTypes.GET_RECORDS_HOME_ERROR, payload: { data: err } })
             } else {
@@ -24,7 +24,7 @@ export const getStoragesForHome = (param) => (dispatch) => {
     let url = `${base_host}/storageDate?${ObjectToUrl(param.OptionalParam)}`
     dispatch({ type: actionTypes.homeTypes.GET_STORAGES_HOME_WAITING, payload: {} })
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.homeTypes.GET_STORAGES_HOME_ERROR, payload: { data: err } })
             } else {

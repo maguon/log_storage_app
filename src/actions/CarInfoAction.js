@@ -9,7 +9,7 @@ export const getCarInformation = (param) => (dispatch) => {
     `${base_host}/carList?${ObjectToUrl(param.carListOptionalParam)}`]
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
     httpRequest
-        .getAll(urls, (err, res) => {
+        .getAllcallback(urls, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_ERROR, payload: { data: err } })
             } else {
@@ -41,7 +41,7 @@ export const carInfoInit = (param) => (dispatch) => {
     let url = `${record_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/record`
     dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_WAITING, payload: {} })
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.GET_CARINFO_ERROR, payload: { data: err } })
             } else {
@@ -77,7 +77,7 @@ export const updateCarInfo = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}`
     dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_WAITING, payload: {} })
     httpRequest
-        .put(url, param.putParam, (err, res) => {
+        .putcallback(url, param.putParam, (err, res) => {
             if (err) {
 
                 dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_ERROR, payload: { data: err } })
@@ -99,7 +99,7 @@ export const importCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStorageRel?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_WAITING, payload: {} })
     httpRequest
-        .put(url, param.postParam, (err, res) => {
+        .putcallback(url, param.postParam, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_ERROR, payload: { data: err } })
             } else {
@@ -120,7 +120,7 @@ export const moveCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/storageParking/${param.requiredParam.parkingId}?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_WAITING, payload: {} })
     httpRequest
-        .put(url, {}, (err, res) => {
+        .putcallback(url, {}, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_ERROR, payload: { data: err } })
             } else {
@@ -141,7 +141,7 @@ export const exportCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/carStorageRel/${param.requiredParam.relId}/relStatus/${param.requiredParam.relStatus}?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_WAITING, payload: {} })
     httpRequest
-        .put(url, {}, (err, res) => {
+        .putcallback(url, {}, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.EXPORT_CAR_ERROR, payload: { data: err } })
             } else {
@@ -164,14 +164,14 @@ export const appendImage = (param) => (dispatch) => {
     let url = `${file_host}user/${param.requiredParam.userId}/image?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_WAITING, payload: {} })
     httpRequest
-        .postFile(url, param.postFileParam, (err, res) => {
+        .postFilecallback(url, param.postFileParam, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_ERROR, payload: { data: err } })
             } else {
                 if (res.success) {
                     url = `${record_host}/car/${param.requiredParam.carId}/vin/${param.requiredParam.vin}/storageImage`
                     param.postParam.url = res.imageId
-                    httpRequest.post(url, param.postParam, (carErr, carRes) => {
+                    httpRequest.postcallback(url, param.postParam, (carErr, carRes) => {
                         if (carErr) {
                             dispatch({ type: actionTypes.carInfoTypes.APPEND_IMAGE_ERROR, payload: { data: carErr } })
                         } else {
@@ -202,7 +202,7 @@ export const delImage = (param) => (dispatch) => {
     let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`
     dispatch({ type: actionTypes.carInfoTypes.DELETE_IMAGE_WAITING, payload: {} })
     httpRequest
-        .del(url, (err, res) => {
+        .delcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.DELETE_IMAGE_ERROR, payload: { data: err } })
             } else {
@@ -224,7 +224,7 @@ export const sendCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStatus/${param.requiredParam.carStatus}`
     dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_WAITING, payload: {} })
     httpRequest
-        .put(url, {}, (err, res) => {
+        .putcallback(url, {}, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_ERROR, payload: { data: err } })
             } else {

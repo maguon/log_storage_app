@@ -6,7 +6,7 @@ export const getCarMakesAll = () => (dispatch) => {
     dispatch({ type: actionTypes.carMakeTypes.GET_CARMAKES_WAITING, payload: {} })
     let url = `${base_host}/carMake`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carMakeTypes.GET_CARMAKES_ERROR, payload: { data: err } })
             } else {

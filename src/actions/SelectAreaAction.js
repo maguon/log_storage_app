@@ -7,7 +7,7 @@ export const getAreaList = (param) => (dispatch) => {
     dispatch({ type: actionTypes.selectAreaTypes.GET_AREAS_WAITING, payload: {} })
     let url = `${base_host}/storageArea?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectAreaTypes.GET_AREAS_ERROR, payload: { data: err } })
             } else {

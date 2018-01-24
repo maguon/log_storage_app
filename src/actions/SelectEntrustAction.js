@@ -6,7 +6,7 @@ export const getEntrustAll = () => (dispatch) => {
     dispatch({ type: actionTypes.selectEntrustTypes.GET_ENTRUSTS_WAITING, payload: {} })
     let url = `${base_host}/entrust`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectEntrustTypes.GET_ENTRUSTS_ERROR, payload: { data: err } })
             } else {

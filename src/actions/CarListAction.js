@@ -7,7 +7,7 @@ export const getCarList = (param) => (dispatch) => {
     dispatch({ type: actionTypes.carListTypes.GET_CARLIST_WAITING, payload: {} })
     let url = `${base_host}/car?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carListTypes.GET_CARLIST_ERROR, payload: { data: err } })
             } else {
@@ -25,7 +25,7 @@ export const getCarListMore = (param) => (dispatch) => {
     dispatch({ type: actionTypes.carListTypes.GET_CARLIST_MORE_WAITING, payload: {} })
     let url = `${base_host}/car?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.carListTypes.GET_CARLIST_MORE_ERROR, payload: { data: err } })
             } else {

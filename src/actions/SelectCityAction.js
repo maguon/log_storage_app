@@ -6,7 +6,7 @@ export const getCityAll = () => (dispatch) => {
     dispatch({ type: actionTypes.selectCityTypes.GET_CITYS_WAITING, payload: {} })
     let url = `${base_host}/city`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.selectCityTypes.GET_CITYS_ERROR, payload: { data: err } })
             } else {

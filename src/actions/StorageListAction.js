@@ -8,7 +8,7 @@ export const getStorageList = (param) => (dispatch) => {
     dispatch({ type: actionTypes.storageListTypes.GET_STORAGELIST_WAITING, payload: {} })
     let url = `${base_host}/storageDate?${ObjectToUrl(param.optionalParam)}`
     httpRequest
-        .get(url, (err, res) => {
+        .getcallback(url, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.storageListTypes.GET_STORAGELIST_ERROR, payload: { data: err } })
             } else {

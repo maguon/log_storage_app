@@ -14,7 +14,7 @@ import requestHeaders from '../util/RequestHeaders'
 //获取最新version信息
 export const getAppLastVersion = (param) => (dispatch) => {
     dispatch({ type: actionTypes.initializationTypes.GET_VERSION_WAITING, payload: {} })
-    return httpRequest.get(`${base_host}/app?${ObjectToUrl(param.optionalParam)}`, (err, res) => {
+    return httpRequest.getcallback(`${base_host}/app?${ObjectToUrl(param.optionalParam)}`, (err, res) => {
         if (err) {
             dispatch({ type: actionTypes.initializationTypes.GET_VERSION_ERROR, payload: { data: err } })
         } else {
@@ -48,7 +48,7 @@ export const validateToken = () => (dispatch) => {
             if (localStorageRes.token && localStorageRes.userId) {
                 //判断userId与token是否为空，如果都不为空,请求更换token 
                 httpRequest
-                    .get(`${base_host}/user/${localStorageRes.userId}/token/${localStorageRes.token}`, (changeTokenErr, changeTokenRes) => {
+                    .getcallback(`${base_host}/user/${localStorageRes.userId}/token/${localStorageRes.token}`, (changeTokenErr, changeTokenRes) => {
                         if (changeTokenErr) {
                             //判断网络连接层是否有问题，如果有问题提醒用户
                             //console.log('changeTokenErr', changeTokenErr)
@@ -65,7 +65,7 @@ export const validateToken = () => (dispatch) => {
                                 requestHeaders.set('auth-token', changeTokenRes.result.accessToken)
                                 requestHeaders.set('user-type', changeTokenRes.result.type)
                                 httpRequest
-                                    .get(`${base_host}/user/${localStorageRes.userId}`, (getUserInfoErr, getUserInfoRes) => {
+                                    .getcallback(`${base_host}/user/${localStorageRes.userId}`, (getUserInfoErr, getUserInfoRes) => {
                                         if (getUserInfoErr) {
                                             //console.log('getUserInfoErr', getUserInfoErr)
                                         }

@@ -8,7 +8,7 @@ export const getVCode = (param) => (dispatch) => {
     dispatch({ type: actionTypes.retrievePasswordTypes.GET_VCODE_WAITING, payload: {} })
     const url = `${base_host}/phone/${param.requiredParam.mobile}/passwordSms?`
     httpRequest
-        .post(url, {}, (err, res) => {
+        .postcallback(url, {}, (err, res) => {
            // console.log(res)
             if (err) {
                 dispatch({ type: actionTypes.retrievePasswordTypes.GET_VCODE_ERROR, payload: { errorMsg: err } })
@@ -38,7 +38,7 @@ export const retrieve = (param) => (dispatch) => {
     dispatch({ type: actionTypes.retrievePasswordTypes.Retrieve_WAITING, payload: {} })
     const url = `${base_host}/phone/${param.requiredParam.mobile}/password`
     httpRequest
-        .put(url, param.putParam, (err, res) => {
+        .putcallback(url, param.putParam, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.retrievePasswordTypes.Retrieve_ERROR, payload: { errorMsg: err } })
             }

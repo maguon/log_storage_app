@@ -7,7 +7,7 @@ export const addCar = (param) => (dispatch) => {
     let url = `${base_host}/user/${param.requiredParam.userId}/car`
     dispatch({ type: actionTypes.addCarTypes.ADD_CAR_WAITING, payload: {} })
     httpRequest
-        .post(url, param.postParam, (err, res) => {
+        .postcallback(url, param.postParam, (err, res) => {
             if (err) {
                 dispatch({ type: actionTypes.addCarTypes.ADD_CAR_ERROR, payload: { data: err } })
             } else {

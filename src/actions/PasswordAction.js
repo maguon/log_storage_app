@@ -5,7 +5,7 @@ import { ObjectToUrl } from '../util/ObjectToUrl'
 
 export const changePassword = (param) => (dispatch) => {
 
-    httpRequest.put(`${base_host}/user/${param.requiredParam.userId}/password`, param.putParam, (err, res) => {
+    httpRequest.putcallback(`${base_host}/user/${param.requiredParam.userId}/password`, param.putParam, (err, res) => {
        // console.log(param.putParam)
         if (err) {
            // console.log('err', err)

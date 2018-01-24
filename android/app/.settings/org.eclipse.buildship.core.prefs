@@ -1,3 +1,2 @@
-connection.gradle.distribution=GRADLE_DISTRIBUTION(WRAPPER)
+#Wed Jan 24 09:51:36 CST 2018
 connection.project.dir=..
-eclipse.preferences.version=1
