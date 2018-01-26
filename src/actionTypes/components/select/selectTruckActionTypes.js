@@ -1,0 +1,4 @@
+export const get_truckList_success='get_truckList_success'
+export const get_truckList_waiting='get_truckList_waiting'
+export const get_truckList_failed='get_truckList_failed'
+export const get_truckList_error='get_truckList_error'

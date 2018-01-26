@@ -9,7 +9,8 @@ import TabIcon from './components/TabIcon'
 import SearchBar from './components/Bar/SearchBar'
 import SearchCarBar from './components/Bar/SearchCarBar'
 import TopBar from './components/Bar/TopBar'
-
+import ApplyDamage from './views/ApplyDamage'
+//import ApplyDamageUploadImage from './views/applyDamageUploadImage/ApplyDamageUploadImage'
 
 import Initialization from './views/Initialization'
 import Login from './views/Login'
@@ -28,12 +29,17 @@ import SearchVin from './views/SearchVin'
 
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
-import ErrorView from './views/ErrorView'
+import ErrorView from './views/ErrorView' 
+import NavSearchStaticBar from './components/share/bar/NavSearchStaticBar'
 
 import SelectCarMake from './views/form/select/SelectCarMake'
 import SelectStorage from './views/form/select/SelectStorage'
 import SelectRow from './views/form/select/SelectRow'
 import SelectColumn from './views/form/select/SelectColumn'
+import ListCennect from './views/form/select/ListCennect'
+
+
+
 import SelectArea from './views/form/select/SelectArea'
 import ImportCarCamera from './views/ImportCarCamera'
 import RecordList from './views/RecordList'
@@ -146,7 +152,11 @@ class App extends Component {
                                 <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
                                 <Scene key="selectAreaAtHomeBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} />
-
+                                <Scene key="listCennect" component={ListCennect} hideTabBar navBar={NavSearchStaticBar}  hideNavBar={false} />
+                                
+                                
+                                
+                                
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="selectCarMakeAtHomeBlock" component={SelectCarMake} title='选择品牌' hideNavBar={false} hideTabBar navBar={NavBar} />
@@ -157,6 +167,9 @@ class App extends Component {
                                 <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="applyDamage" component={ApplyDamage}  title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} />
+                                {/* <Scene key="applyDamageUploadImage" component={ApplyDamageUploadImage} 
+                                    title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} /> */}
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="query" initial={true} component={Query} hideNavBar={false}  navBar={SearchBar}/>

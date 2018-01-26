@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 import InitializationReducer from './InitializationReducer'
 import LoginReducer from './LoginReducer'
 import CarListReducer from './CarListReducer'
@@ -25,9 +26,12 @@ import RetrievePasswordReducer from './RetrievePasswordReducer'
 import SceneReducer from './SceneReducer'
 import recordListAtHomeReducer from './components/home/RecordListAtHomeReducer'
 import storageListAtHomeReducer from './components/home/StorageListAtHomeReducer'
+import selectTruckReducer from './components/select/selectTruckReducer' 
+import selectCarReducer from './components/select/selectCarReducer' 
 
 
 export default combineReducers({
+    form: formReducer,
     InitializationReducer,
     LoginReducer,
     //HomeReducer,
@@ -53,5 +57,7 @@ export default combineReducers({
     SceneReducer,
     RetrievePasswordReducer,
     recordListAtHomeReducer,
-    storageListAtHomeReducer
+    storageListAtHomeReducer,
+    selectTruckReducer,
+    selectCarReducer
 })

@@ -3,7 +3,7 @@ import { base_host } from '../config/Host'
 import * as actionTypes from '../actionTypes'
 
 export const getCityAll = () => (dispatch) => {
-    dispatch({ type: actionTypes.selectCityTypes.GET_CITYS_WAITING, payload: {} })
+    
     let url = `${base_host}/city`
     httpRequest
         .getcallback(url, (err, res) => {
@@ -17,4 +17,9 @@ export const getCityAll = () => (dispatch) => {
                 }
             }
         })
+}
+
+
+export const getCityAllWaiting = () => (dispatch) => {
+    dispatch({ type: actionTypes.selectCityTypes.GET_CITYS_WAITING, payload: {} })
 }

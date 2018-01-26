@@ -22,6 +22,8 @@ import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
 import * as selectAreaTypes from './SelectAreaTypes'
 import * as sceneTypes from './SceneTypes'
 import * as retrievePasswordTypes from './RetrievePasswordTypes'
+import * as selectTruckActionTypes from './components/select/selectTruckActionTypes'
+import * as selectCarActionTypes from './components/select/selectCarActionTypes'
 
 export {
     loginTypes,
@@ -47,5 +49,7 @@ export {
     selectReceiveTypes,
     selectBaseAddrTypes,
     selectAreaTypes,
-    retrievePasswordTypes
+    retrievePasswordTypes,
+    selectTruckActionTypes,
+    selectCarActionTypes
 }

@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { Header, Title, Button, Icon, Right, Left, Body, Label, Item, Input, Text } from 'native-base'
 import { View, StatusBar, StyleSheet, TextInput, TouchableOpacity, TouchableHighlight, Modal, InteractionManager, Dimensions, ART} from 'react-native'
 import * as routerDirection from '../../../util/RouterDirection'
+
+import {Actions} from 'react-native-router-flux'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import globalStyles, { styleColor } from '../../GlobalStyles'
 import VinScanner from '../../components/VinScanner'
-// import * as RouterDirection from '../../../../util/RouterDirection'
+ import * as RouterDirection from '../../../util/RouterDirection'
 // import * as searchCarAction from '../../../views/searchCar/SearchCarAction'
 import { connect } from 'react-redux'
 
@@ -68,23 +70,16 @@ class SearchBar extends Component {
                             <TouchableOpacity style={{ padding: 5, flexDirection: 'row', alignItems: 'center' }}
                                 onPress={() => {
                                     this.setState({ menuModalIsVisible: false })
-                                    Actions.qrCodeScreen({ onSelectQRCode: this.onSelectQRCode })
+                                    Actions.applyDamage()
+                                    //RouterDirection.addRequirement(this.props.parent)()
                                 }}>
-                                <Icon name='ios-qr-scanner' style={{ fontSize: 12 }} />
-                                <Text style={{ fontSize: 12, paddingLeft: 5 }}>扫一扫</Text>
+                                <Icon name='ios-construct-outline' style={{ fontSize: 12 }} />
+                                <Text style={{ fontSize: 12, paddingLeft: 5 }}>增加质损</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ padding: 5, flexDirection: 'row', alignItems: 'center' }}
                                 onPress={() => {
                                     this.setState({ menuModalIsVisible: false })
-                                    RouterDirection.addRequirement(this.props.parent)()
-                                }}>
-                                <Icon name='ios-clipboard-outline' style={{ fontSize: 12 }} />
-                                <Text style={{ fontSize: 12, paddingLeft: 5 }}>增加需求</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={{ padding: 5, flexDirection: 'row', alignItems: 'center' }}
-                                onPress={() => {
-                                    this.setState({ menuModalIsVisible: false })
-                                    RouterDirection.addCar(this.props.parent)()
+                                    //RouterDirection.addCar(this.props.parent)()
                                 }}>
                                 <Icon name='ios-car-outline' style={{ fontSize: 12 }} />
                                 <Text style={{ fontSize: 12, paddingLeft: 5 }}>增加商品车</Text>
@@ -110,7 +105,7 @@ class SearchBar extends Component {
                     <Body style={styles.body}>
                         <TouchableHighlight
                             underlayColor={'rgba(255, 255, 255, 0)'}
-                            onPress={() => { }}
+                            onPress={Actions.searchVinAtHomeBlock}
                             style={styles.bodyTouch}>
                             <View style={styles.bodyTouchChild}>
                                 <View style={styles.input} >
