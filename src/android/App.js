@@ -31,6 +31,7 @@ import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 import ErrorView from './views/ErrorView' 
 import NavSearchStaticBar from './components/share/bar/NavSearchStaticBar'
+import NavSearchDynamicBar from './components/share/bar/NavSearchDynamicBar'
 
 import SelectCarMake from './views/form/select/SelectCarMake'
 import SelectStorage from './views/form/select/SelectStorage'
@@ -153,7 +154,7 @@ class App extends Component {
                                 <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
                                 <Scene key="selectAreaAtHomeBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} />
                                 <Scene key="listCennect" component={ListCennect} hideTabBar navBar={NavSearchStaticBar}  hideNavBar={false} />
-                                
+                                <Scene key="listCennectDynamic" component={ListCennect} hideTabBar navBar={NavSearchDynamicBar}  hideNavBar={false} />
                                 
                                 
                                 

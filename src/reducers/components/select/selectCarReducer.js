@@ -73,7 +73,7 @@ export default handleActions({
         return {
             ...state,
             data: {
-                carList,
+                carList: [...state.data.carList, ...carList],
                 isComplete 
             },
             getCarListMore: {

@@ -17,14 +17,20 @@ import Select from '../components/share/form/Select'
 import DisposableList from '../views/form/select/DisposableList'
 import PagingList from '../views/form/select/PagingList'
 import * as routerDirection from '../../util/RouterDirection'
-import * as selectCityAction from '../../actions/SelectCityAction'
 import * as selectTruckAction from '../../actions/components/select/selectTruckAction'
+import * as selectCarAction from '../../actions/components/select/selectCarAction'
 import * as applyDamageSubmitAction from '../components/applyDamage/submit/ApplyDamageSubmitAction'
 
 
-
 const ApplyDamage = props => {
-    const { getSelectDriverList, getSelectDriverListWaiting, parent, SelectCityReducer, getTruckList, getTruckListWaiting } = props
+    const { getSelectDriverList,
+        getSelectDriverListWaiting,
+        parent,
+        SelectCityReducer,
+        getTruckList,
+        getTruckListWaiting,
+        getCarList,
+        getCarListWaiting } = props
     return (
         <Container>
             <Content style={{ margin: 10 }}>
@@ -34,15 +40,13 @@ const ApplyDamage = props => {
                     isRequired={true}
                     name='vin'
                     component={Select}
-                    getList={getTruckList}
-                    getListWaiting={getTruckListWaiting}
+                    getList={getCarList}
+                    getListWaiting={getCarListWaiting}
                     showList={param => {
-                        return Actions.listCennect({
-                            mapStateToProps: truckMapStateToProps,
-                            mapDispatchToProps: truckMapDispatchToProps,
+                        return Actions.listCennectDynamic({
+                            mapStateToProps: vinMapStateToProps,
+                            mapDispatchToProps: vinMapDispatchToProps,
                             List: PagingList,
-                            getListMore,
-                            getListMoreWaiting,
                             ...param
                         })
                     }} />
@@ -131,19 +135,21 @@ const truckMapDispatchToProps = (dispatch) => ({
 const vinMapStateToProps = (state) => {
     return {
         listReducer: {
-            Action: state.selectTruckReducer.getTruckList,
+            Action: state.selectCarReducer.getCarList,
+            MoreAction:state.selectCarReducer.getCarListMore,
             data: {
-                list: state.selectTruckReducer.data.truckList.map(item => {
-                    return { id: item.id, value: item.truck_num }
+                list: state.selectCarReducer.data.carList.map(item => {
+                    return { id: item.id, value: item.vin }
                 })
             }
-        },
-        filter: getFormValues('SearchForm')(state) ? getFormValues('SearchForm')(state).searchField : undefined
+        }
     }
 }
 
 const vinMapDispatchToProps = (dispatch) => ({
-
+    getListMore: () => {
+        dispatch(selectCarAction.getCarListMore())
+    }
 })
 
 const mapStateToProps = (state) => {
@@ -161,6 +167,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     getTruckListWaiting: () => {
         dispatch(selectTruckAction.getTruckListWaiting())
+    },
+    getCarList: () => {
+        dispatch(selectCarAction.getCarList())
+    },
+    getCarListWaiting: () => {
+        dispatch(selectCarAction.getCarListWaiting())
     },
     onSubmit: () => {
 

@@ -10,7 +10,12 @@ const pageSize = 50
 
 export const getCarList = () => async (dispatch, getState) => {
     try {
-        const url = `${base_host}/carList${ObjectToUrl({ vinCode: param, start: 0, size: pageSize })}`
+        const searchFormValues = getFormValues('SearchCarForm')(getState())
+        const url = `${base_host}/carList?${ObjectToUrl({
+            vinCode: searchFormValues ? searchFormValues.vinCode : null,
+            start: 0,
+            size: pageSize
+        })}`
         const res = await httpRequest.get(url)
         if (res.success) {
             if (res.result.length % pageSize != 0) {
@@ -33,7 +38,7 @@ export const getCarListWaiting = () => async (dispatch) => {
 export const getCarListMore = () => async (dispatch, getState) => {
     const state = getState()
     const { selectCarReducer: { data: { carList, isComplete } }, selectCarReducer } = state
-    const { vinCode } = getFormValues('SearchCar')(state)
+    const searchFormValues = getFormValues('SearchCarForm')(state)
     if (selectCarReducer.getCarListMore.isResultStatus == 1) {
         await sleep(1000)
         getCarListMore(dispatch, getState)
@@ -41,7 +46,11 @@ export const getCarListMore = () => async (dispatch, getState) => {
         if (!isComplete) {
             dispatch({ type: actionTypes.selectCarActionTypes.get_carListMore_waiting, payload: {} })
             try {
-                const url = `${base_host}/carList${ObjectToUrl({ vinCode: vinCode, start: carList.length, size: pageSize })}`
+                const url = `${base_host}/carList?${ObjectToUrl({
+                    vinCode: searchFormValues ? searchFormValues.vinCode :null,
+                    start: carList.length,
+                    size: pageSize
+                })}`
                 const res = await httpRequest.get(url)
                 if (res.success) {
                     if (res.result.length % pageSize != 0 || res.result.length == 0) {
