@@ -9,11 +9,12 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, Input, Label, Icon } from 'native-base'
+import { Container, Content, Input, Label, Icon, ListItem } from 'native-base'
 import globalStyles, { textColor } from '../GlobalStyles'
 import { Field, reduxForm, getFormValues } from 'redux-form'
 import TextBox from '../components/share/form/TextBox'
 import Select from '../components/share/form/Select'
+import RichTextBox from '../components/share/form/RichTextBox'
 import DisposableList from '../views/form/select/DisposableList'
 import PagingList from '../views/form/select/PagingList'
 import * as routerDirection from '../../util/RouterDirection'
@@ -30,15 +31,17 @@ const ApplyDamage = props => {
         getTruckList,
         getTruckListWaiting,
         getCarList,
-        getCarListWaiting } = props
+        getCarListWaiting,
+        applyDamageFormValues = {} } = props
+    const { car, truck } = applyDamageFormValues
     return (
         <Container>
-            <Content style={{ margin: 10 }}>
+            <Content showsVerticalScrollIndicator={false}>
                 <Field
                     textStyle={[globalStyles.largeText, globalStyles.styleColor]}
-                    label='vin:'
+                    label='vin：'
                     isRequired={true}
-                    name='vin'
+                    name='car'
                     component={Select}
                     getList={getCarList}
                     getListWaiting={getCarListWaiting}
@@ -50,11 +53,19 @@ const ApplyDamage = props => {
                             ...param
                         })
                     }} />
+                {car && car.make_name && <ListItem >
+                    <Text>品牌：{car.make_name}</Text>
+                </ListItem>}
+                {car && car.re_short_name && <ListItem >
+                    <Text>经销商：{car.re_short_name}</Text>
+                </ListItem>}
+                {car && car.en_short_name && <ListItem >
+                    <Text>委托方：{car.en_short_name}</Text>
+                </ListItem>}
                 <Field
-                    textStyle={[globalStyles.largeText, globalStyles.styleColor]}
-                    label='diver:'
+                    label='货车牌号：'
                     isRequired={true}
-                    name='diver'
+                    name='truck'
                     component={Select}
                     getList={getTruckList}
                     getListWaiting={getTruckListWaiting}
@@ -66,6 +77,10 @@ const ApplyDamage = props => {
                             ...param
                         })
                     }} />
+                {truck && truck.drive_name && <ListItem >
+                    <Text>司机：{truck.drive_name}</Text>
+                </ListItem>}
+                <Field name='remark' label='质损描述：' component={RichTextBox}/>
             </Content>
         </Container >
     )
@@ -118,7 +133,7 @@ const truckMapStateToProps = (state) => {
             Action: state.selectTruckReducer.getTruckList,
             data: {
                 list: state.selectTruckReducer.data.truckList.map(item => {
-                    return { id: item.id, value: item.truck_num }
+                    return { id: item.id, value: item.truck_num, drive_name: item.drive_name }
                 })
             }
         },
@@ -136,10 +151,16 @@ const vinMapStateToProps = (state) => {
     return {
         listReducer: {
             Action: state.selectCarReducer.getCarList,
-            MoreAction:state.selectCarReducer.getCarListMore,
+            MoreAction: state.selectCarReducer.getCarListMore,
             data: {
                 list: state.selectCarReducer.data.carList.map(item => {
-                    return { id: item.id, value: item.vin }
+                    return {
+                        id: item.id,
+                        value: item.vin,
+                        make_name: item.make_name,
+                        en_short_name: item.en_short_name,
+                        re_short_name: item.re_short_name
+                    }
                 })
             }
         }
@@ -154,10 +175,7 @@ const vinMapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        applyDamageReducer: state.applyDamageReducer,
-        SelectCityReducer: state.SelectCityReducer,
-        selectDriverValues: getFormValues('applyDamage')(state),
-        formReducer: state.form
+        applyDamageFormValues: getFormValues('applyDamage')(state)
     }
 }
 

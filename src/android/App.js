@@ -168,7 +168,7 @@ class App extends Component {
                                 <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="applyDamage" component={ApplyDamage}  title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} />
+                                <Scene key="applyDamage" initial={true}  component={ApplyDamage}  title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} />
                                 {/* <Scene key="applyDamageUploadImage" component={ApplyDamageUploadImage} 
                                     title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} /> */}
                             </Scene>
