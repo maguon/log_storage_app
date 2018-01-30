@@ -13,23 +13,21 @@ const TextBox = props => {
         last = false,
         secureTextEntry = false,
         isRequired = false,
-        textStyle={},
+        textStyle = {},
         meta: { error, touched } } = props
-
-    const errorComponent = error ? error.map((item, i) => <Text key={i} style={[globalStyles.smallText, styles.errText]}>{`*${item}`}</Text>) : undefined
     return <Item inlineLabel last={last} style={styles.body}>
         <Item style={styles.item}>
-            <Text style={[globalStyles.midText,textStyle]} >{isRequired && <Text style={styles.errText}>*</Text>}{label}</Text>
+            <Text style={[globalStyles.midText, textStyle]} > <Text style={styles.errText}>*</Text>{label}</Text>
             <Input
                 secureTextEntry={secureTextEntry}
-                style={[globalStyles.midText,textStyle]}
+                style={[globalStyles.midText, textStyle]}
                 onChangeText={onChange}
                 {...restProps}
             />
         </Item>
-        {(touched && error) && <View style={styles.errView}>
-            {errorComponent}
-        </View>}
+        {touched && (error && <View style={styles.errView}>
+            <Text style={[globalStyles.smallText, styles.errText]}>{`*${error}`}</Text>
+        </View>)}
     </Item>
 }
 

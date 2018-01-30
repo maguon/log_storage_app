@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import * as applyDamageUploadImageActionTypes from './ApplyDamageUploadImageActionTypes'
+import * as actionTypes from '../../actionTypes'
 
 const initialState = {
     data: {
@@ -14,7 +14,7 @@ const initialState = {
 
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(错误)，4(执行失败),5(部分成功)]
 export default handleActions({
-    [applyDamageUploadImageActionTypes.upload_DamageImage_success]: (state, action) => {
+    [actionTypes.applyDamageUploadImageTypes.upload_DamageImage_success]: (state, action) => {
         const { payload: { imageList } } = action
         return {
             ...state,
@@ -27,7 +27,7 @@ export default handleActions({
             }
         }
     },
-    [applyDamageUploadImageActionTypes.upload_DamageImage_partSuccess]: (state, action) => {
+    [actionTypes.applyDamageUploadImageTypes.upload_DamageImage_partSuccess]: (state, action) => {
         const { payload: { imageList, failedMsg } } = action
         return {
             ...state,
@@ -41,7 +41,7 @@ export default handleActions({
             }
         }
     },
-    [applyDamageUploadImageActionTypes.upload_DamageImage_waiting]: (state, action) => {
+    [actionTypes.applyDamageUploadImageTypes.upload_DamageImage_waiting]: (state, action) => {
         return {
             ...state,
             uploadDamageImage: {
@@ -50,7 +50,7 @@ export default handleActions({
             }
         }
     },
-    [applyDamageUploadImageActionTypes.upload_DamageImage_failed]: (state, action) => {
+    [actionTypes.applyDamageUploadImageTypes.upload_DamageImage_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -61,7 +61,7 @@ export default handleActions({
             }
         }
     },
-    [applyDamageUploadImageActionTypes.upload_DamageImage_error]: (state, action) => {
+    [actionTypes.applyDamageUploadImageTypes.upload_DamageImage_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,

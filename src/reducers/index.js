@@ -24,10 +24,19 @@ import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
 import SelectAreaReducer from './SelectAreaReducer'
 import RetrievePasswordReducer from './RetrievePasswordReducer'
 import SceneReducer from './SceneReducer'
+
+
+
+
+//新
 import recordListAtHomeReducer from './components/home/RecordListAtHomeReducer'
 import storageListAtHomeReducer from './components/home/StorageListAtHomeReducer'
 import selectTruckReducer from './components/select/selectTruckReducer' 
 import selectCarReducer from './components/select/selectCarReducer' 
+import selectDriverReducer from './components/select/selectDriverReducer' 
+import applyDamageReducer from './views/applyDamageReducer' 
+import applyDamageUploadImageReducer from './views/applyDamageUploadImageReducer' 
+
 
 
 export default combineReducers({
@@ -56,8 +65,15 @@ export default combineReducers({
     SelectAreaReducer,
     SceneReducer,
     RetrievePasswordReducer,
+
+
+
+    //新
     recordListAtHomeReducer,
     storageListAtHomeReducer,
     selectTruckReducer,
-    selectCarReducer
+    selectCarReducer,
+    selectDriverReducer,
+    applyDamageReducer,
+    applyDamageUploadImageReducer
 })

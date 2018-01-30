@@ -10,10 +10,7 @@ import { Button } from 'native-base'
 const ApplyDamageUploadImageSubmit = props => {
     const { parent } = props
     return (
-        <Button transparent onPress={() => {
-            if (parent === 'settingBlock') return Actions.popTo('carInfoAtSettingBlock')
-            if (parent === 'homeBlock') return Actions.popTo('carInfoAtHomeBlock')
-        }}>
+        <Button transparent onPress={() => Actions.popTo('home')}>
             <Text style={styles.text}>完成</Text>
         </Button>
     )

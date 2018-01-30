@@ -28,7 +28,7 @@ const _onPress = ({ showList, getList, onChange, getListWaiting }) => {
 }
 
 const Select = props => {
-    const { input: { onChange, value, ...restProps },
+    let { input: { onChange, value, ...restProps },
         label = '',
         last = false,
         secureTextEntry = false,
@@ -38,16 +38,15 @@ const Select = props => {
         showList,
         getListWaiting,
         meta: { error, touched } } = props
-    const errorComponent = error ? error.map((item, i) => <Text key={i} style={[globalStyles.smallText, styles.errText]}>{`*${item}`}</Text>) : undefined
     return (
         <TouchableOpacity style={styles.body} onPress={() => _onPress({ showList, getList, onChange, getListWaiting })}>
-            <View style={styles.item} onPress={() => _onPress({ showList, getList, onChange, getListWaiting })}>
+            <View style={styles.item}>
                 <Text style={[globalStyles.midText, textStyle, {}]} >{isRequired && <Text style={styles.errText}>*</Text>}{label}{value.value}</Text>
                 <Icon name='ios-arrow-forward-outline' color='#777' fontSize={15} style={{ fontSize: 18, color: '#777' }} />
             </View>
-            {(touched && error) && <View style={styles.errView}>
-                {errorComponent}
-            </View>}
+            {touched && (error && <View style={styles.errView}>
+                <Text style={[globalStyles.smallText, styles.errText]}>{`*${error}`}</Text>
+            </View>)}
         </TouchableOpacity>
     )
 }

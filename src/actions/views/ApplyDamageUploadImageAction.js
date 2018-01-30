@@ -1,15 +1,17 @@
-import * as httpRequest from '../../../util/HttpRequest'
-import { base_host, file_host, record_host } from '../../../config/Host'
-import * as applyDamageUploadImageActionTypes from './ApplyDamageUploadImageActionTypes'
-import { ObjectToUrl } from '../../../util/ObjectToUrl'
+import httpRequest from '../../util/HttpRequest'
+import { base_host, file_host, record_host } from '../../config/Host'
+import * as actionTypes from '../../actionTypes'
+import { ObjectToUrl } from '../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
 
 export const uploadDamageImage = (params) => async (dispatch, getState) => {
+    console.log('params',params)
+    console.log('getState',getState())
     try {
         const cameraSuccessReses = params.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
             const { loginReducer: { data: { user } },
-                applyDamageSubmitReducer: { data: { damageId } } } = getState()
+                 applyDamageReducer: { data: { damageId } } } = getState()
             const imageUploadUrl = `${file_host}/user/${user.uid}/image${ObjectToUrl({ imageType: 4 })}`
             const imageUploadReses = await Promise.all(cameraSuccessReses.map(item => httpRequest.postFile(imageUploadUrl, {
                 key: 'image',
@@ -30,29 +32,30 @@ export const uploadDamageImage = (params) => async (dispatch, getState) => {
                     .map(item => item.imageId)
                 if (params.length === bindDamageSuccessReses.length) {
                     ToastAndroid.showWithGravity('提交成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_success, payload: { imageList: bindDamageSuccessReses } })
+                    dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_success, payload: { imageList: bindDamageSuccessReses } })
                 } else if (bindDamageSuccessReses.length > 0) {
                     ToastAndroid.showWithGravity(`部分提交成功：${bindDamageSuccessReses.length}/${params.length}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_partSuccess, payload: { imageList: bindDamageSuccessReses, failedMsg: '部分失败' } })
+                    dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_partSuccess, payload: { imageList: bindDamageSuccessReses, failedMsg: '部分失败' } })
                 } else {
                     ToastAndroid.showWithGravity('提交全部失败！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_failed, payload: { failedMsg: '全部失败' } })
+                    dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_failed, payload: { failedMsg: '全部失败' } })
                 }
             } else {
                 ToastAndroid.showWithGravity('提交全部失败！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_failed, payload: { failedMsg: '全部失败' } })
+                dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_failed, payload: { failedMsg: '全部失败' } })
             }
         } else {
             ToastAndroid.showWithGravity('拍照全部失败！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-            dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_failed, payload: { failedMsg: '拍照全部失败' } })
+            dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_failed, payload: { failedMsg: '拍照全部失败' } })
         }
     }
     catch (err) {
+        console.log('err',err)
         ToastAndroid.showWithGravity(`提交全部失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-        dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_error, payload: { errorMsg: err } })
+        dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_error, payload: { errorMsg: err } })
     }
 }
 
 export const uploadDamageImageWating = (param) => (dispatch, getState) => {
-    dispatch({ type: applyDamageUploadImageActionTypes.upload_DamageImage_waiting, payload: {} })
+    dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_waiting, payload: {} })
 }

@@ -22,8 +22,16 @@ import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
 import * as selectAreaTypes from './SelectAreaTypes'
 import * as sceneTypes from './SceneTypes'
 import * as retrievePasswordTypes from './RetrievePasswordTypes'
+
+
+
+
+//新
 import * as selectTruckActionTypes from './components/select/selectTruckActionTypes'
 import * as selectCarActionTypes from './components/select/selectCarActionTypes'
+import * as selectDriverActionTypes from './components/select/selectDriverActionTypes'
+import * as applyDamageTypes from './views/ApplyDamageTypes'
+import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageTypes'
 
 export {
     loginTypes,
@@ -50,6 +58,12 @@ export {
     selectBaseAddrTypes,
     selectAreaTypes,
     retrievePasswordTypes,
+
+
+    //新
     selectTruckActionTypes,
-    selectCarActionTypes
+    selectCarActionTypes,
+    selectDriverActionTypes,
+    applyDamageTypes,
+    applyDamageUploadImageTypes
 }

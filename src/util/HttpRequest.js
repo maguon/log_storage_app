@@ -27,6 +27,14 @@ const get = (url)=>{
     }).then((response) => response.json())
 }
 
+const post = (url, params) => {
+   return fetch(url, {
+        method: 'POST',
+        headers: requestHeaders.headers,
+        body: JSON.stringify(params)
+    }).then((response) => response.json())
+}
+
 function postcallback(url, params, callback) {
     fetch(url, {
         method: 'POST',
@@ -99,7 +107,8 @@ module.exports = {
     delcallback: delcallback,
     postFilecallback: postFilecallback,
     getAllcallback: getAllcallback,
-    get: get
+    get: get,
+    post:post
 }
 
 

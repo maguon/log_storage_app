@@ -4,17 +4,16 @@ import { Button, Icon } from 'native-base'
 import { Scene, TabBar, Router, ActionConst, Action, Switch, Reducer } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 
-import NavBar from './components/Bar/NavBar'
+
 import TabIcon from './components/TabIcon' 
 import SearchBar from './components/Bar/SearchBar'
 import SearchCarBar from './components/Bar/SearchCarBar'
 import TopBar from './components/Bar/TopBar'
-import ApplyDamage from './views/ApplyDamage'
+
 //import ApplyDamageUploadImage from './views/applyDamageUploadImage/ApplyDamageUploadImage'
 
 import Initialization from './views/Initialization'
 import Login from './views/Login'
-
 
 import Home from './views/blockInitial/Home'
 import Query from './views/blockInitial/Query'
@@ -26,20 +25,13 @@ import CarInformation from './views/CarInformation'
 
 import Password from './views/Password'
 import SearchVin from './views/SearchVin'
-
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 import ErrorView from './views/ErrorView' 
-import NavSearchStaticBar from './components/share/bar/NavSearchStaticBar'
-import NavSearchDynamicBar from './components/share/bar/NavSearchDynamicBar'
-
 import SelectCarMake from './views/form/select/SelectCarMake'
 import SelectStorage from './views/form/select/SelectStorage'
 import SelectRow from './views/form/select/SelectRow'
 import SelectColumn from './views/form/select/SelectColumn'
-import ListCennect from './views/form/select/ListCennect'
-
-
 
 import SelectArea from './views/form/select/SelectArea'
 import ImportCarCamera from './views/ImportCarCamera'
@@ -56,6 +48,21 @@ import RichText from './views/RichText'
 import RetrievePassword from './views/RetrievePassword'
 import Orientation from 'react-native-orientation'
 import * as sceneAction from '../actions/SceneAction'
+
+
+//新
+import ListCennect from './views/form/select/ListCennect'
+import NavSearchStaticBar from './components/share/bar/NavSearchStaticBar'
+import NavSearchDynamicBar from './components/share/bar/NavSearchDynamicBar'
+import ApplyDamage from './views/ApplyDamage'
+import ApplyDamageUploadImage from './views/ApplyDamageUploadImage'
+import ApplyDamageSubmit from './components/applyDamage/ApplyDamageSubmit'
+import ApplyDamageUploadImageSubmit from './components/applyDamage/ApplyDamageUploadImageSubmit'
+import NavBar from './components/share/bar/NavBar'
+import LeftButton from './components/share/bar/LeftButton'
+
+
+
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -94,29 +101,31 @@ const mapStateToProps = (state) => {
 class App extends Component {
     constructor(props) {
         super(props)
-        this.reducerCreate = this.reducerCreate.bind(this)
+        //this.reducerCreate = this.reducerCreate.bind(this)
     }
 
     componentWillMount() {
         Orientation.lockToPortrait()
     }
 
-    reducerCreate(params) {
-        const defaultReducer = Reducer(params)
-        return (state, action) => {
-            if (action.type == 'REACT_NATIVE_ROUTER_FLUX_FOCUS') {
-                if (action.scene.name != 'mainRoot') {
-                    this.props.changeScene(action.scene.name)
-                }
-            }
-            return defaultReducer(state, action)
-        }
-    }
+    // reducerCreate(params) {
+    //     const defaultReducer = Reducer(params)
+    //     return (state, action) => {
+    //         if (action.type == 'REACT_NATIVE_ROUTER_FLUX_FOCUS') {
+    //             if (action.scene.name != 'mainRoot') {
+    //                 this.props.changeScene(action.scene.name)
+    //             }
+    //         }
+    //         return defaultReducer(state, action)
+    //     }
+    // }
 
     render() {
         //  console.disableYellowBox = true
         return (
-            <Router createReducer={this.reducerCreate} getSceneStyle={getSceneStyle} >
+            <Router 
+            //createReducer={this.reducerCreate} 
+            getSceneStyle={getSceneStyle} >
                 <Scene key="root">
                     <Scene initial={true} key="initialization" component={Initialization} hideNavBar hideTabBar />
                     <Scene
@@ -142,9 +151,9 @@ class App extends Component {
                             <Scene key="retrievePassword" title='找回密码' component={RetrievePassword} hideTabBar hideNavBar={false} navBar={NavBar} />
                         </Scene>
 
-                        <Scene key="main" tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+                        <Scene key="main" tabs={true}   tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
                             <Scene key="homeBlock" icon={TabIcon} online='ios-home' outline='ios-home-outline' >
-                                <Scene key="home" initial={true} component={Home} hideNavBar={false} navBar={SearchBar} />
+                                <Scene key="home" component={Home}  initial={true}  hideNavBar={false} navBar={SearchBar} />
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" isRefresh={true} component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
@@ -153,8 +162,12 @@ class App extends Component {
                                 <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
                                 <Scene key="selectAreaAtHomeBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} />
-                                <Scene key="listCennect" component={ListCennect} hideTabBar navBar={NavSearchStaticBar}  hideNavBar={false} />
-                                <Scene key="listCennectDynamic" component={ListCennect} hideTabBar navBar={NavSearchDynamicBar}  hideNavBar={false} />
+                                <Scene key="listCennect" component={ListCennect} hideTabBar 
+                                navBar={NavSearchStaticBar} 
+                                 hideNavBar={false} />
+                                <Scene key="listCennectDynamic" component={ListCennect} hideTabBar
+                                 navBar={NavSearchDynamicBar} 
+                                  hideNavBar={false} />
                                 
                                 
                                 
@@ -168,9 +181,24 @@ class App extends Component {
                                 <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="applyDamage" initial={true}  component={ApplyDamage}  title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} />
-                                {/* <Scene key="applyDamageUploadImage" component={ApplyDamageUploadImage} 
-                                    title='质损申请' hideTabBar hideNavBar={false} navBar={NavBar} /> */}
+                                <Scene
+                                    key="applyDamage"
+                                    LeftButton={LeftButton}
+                                    RightButton={ApplyDamageSubmit}
+                                    component={ApplyDamage}
+                                    title='质损申请'
+                                    hideTabBar
+                                    hideNavBar={false}
+                                    navBar={NavBar} />
+                                <Scene
+                                    key="applyDamageUploadImage"
+                                    LeftButton={LeftButton}
+                                    RightButton={ApplyDamageUploadImageSubmit}
+                                    component={ApplyDamageUploadImage}
+                                    title='质损照片'
+                                    hideTabBar
+                                    hideNavBar={false}
+                                    navBar={NavBar} />
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="query" initial={true} component={Query} hideNavBar={false}  navBar={SearchBar}/>
@@ -255,8 +283,8 @@ class App extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
     changeScene: (param) => {
-        dispatch(sceneAction.changeScene(param))
+        //dispatch(sceneAction.changeScene(param))
     }
 })
 
-export default connect((state) => { return {} }, mapDispatchToProps)(App)
+export default App // connect((state) => { return {} }, mapDispatchToProps)(App)

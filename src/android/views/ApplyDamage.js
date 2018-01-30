@@ -9,31 +9,33 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { Container, Content, Input, Label, Icon, ListItem } from 'native-base'
+import { Container, Content, Input, Label, Icon, ListItem, Button, Form } from 'native-base'
 import globalStyles, { textColor } from '../GlobalStyles'
 import { Field, reduxForm, getFormValues } from 'redux-form'
+import { required } from '../../util/Validator'
 import TextBox from '../components/share/form/TextBox'
 import Select from '../components/share/form/Select'
 import RichTextBox from '../components/share/form/RichTextBox'
 import DisposableList from '../views/form/select/DisposableList'
 import PagingList from '../views/form/select/PagingList'
 import * as routerDirection from '../../util/RouterDirection'
-import * as selectTruckAction from '../../actions/components/select/selectTruckAction'
+import * as selectDriverAction from '../../actions/components/select/selectDriverAction'
 import * as selectCarAction from '../../actions/components/select/selectCarAction'
-import * as applyDamageSubmitAction from '../components/applyDamage/submit/ApplyDamageSubmitAction'
+import * as applyDamageAction from '../../actions/views/ApplyDamageAction'
 
+const validateRequired = required('必选')
 
 const ApplyDamage = props => {
-    const { getSelectDriverList,
-        getSelectDriverListWaiting,
-        parent,
-        SelectCityReducer,
-        getTruckList,
-        getTruckListWaiting,
+    const { parent,
+        getDriverList,
+        getDriverListWaiting,
         getCarList,
         getCarListWaiting,
-        applyDamageFormValues = {} } = props
-    const { car, truck } = applyDamageFormValues
+        applyDamageFormValues = {},
+        handleSubmit,
+        touch
+    } = props
+    const { car, driver } = applyDamageFormValues
     return (
         <Container>
             <Content showsVerticalScrollIndicator={false}>
@@ -44,6 +46,7 @@ const ApplyDamage = props => {
                     name='car'
                     component={Select}
                     getList={getCarList}
+                    validate={[ validateRequired]}
                     getListWaiting={getCarListWaiting}
                     showList={param => {
                         return Actions.listCennectDynamic({
@@ -53,34 +56,35 @@ const ApplyDamage = props => {
                             ...param
                         })
                     }} />
-                {car && car.make_name && <ListItem >
+                {car && car.make_name && <ListItem>
                     <Text>品牌：{car.make_name}</Text>
                 </ListItem>}
-                {car && car.re_short_name && <ListItem >
+                {car && car.re_short_name && <ListItem>
                     <Text>经销商：{car.re_short_name}</Text>
                 </ListItem>}
-                {car && car.en_short_name && <ListItem >
+                {car && car.en_short_name && <ListItem>
                     <Text>委托方：{car.en_short_name}</Text>
                 </ListItem>}
                 <Field
-                    label='货车牌号：'
+                    label='货车司机：'
                     isRequired={true}
-                    name='truck'
+                    name='driver'
                     component={Select}
-                    getList={getTruckList}
-                    getListWaiting={getTruckListWaiting}
+                    getList={getDriverList}
+                    getListWaiting={getDriverListWaiting}
+                    validate={[ validateRequired]}
                     showList={param => {
                         return Actions.listCennect({
-                            mapStateToProps: truckMapStateToProps,
-                            mapDispatchToProps: truckMapDispatchToProps,
+                            mapStateToProps: driverMapStateToProps,
+                            mapDispatchToProps: driverMapDispatchToProps,
                             List: DisposableList,
                             ...param
                         })
                     }} />
-                {truck && truck.drive_name && <ListItem >
-                    <Text>司机：{truck.drive_name}</Text>
+                {driver && driver.truck_num && <ListItem >
+                    <Text>火车车牌：{driver.truck_num}</Text>
                 </ListItem>}
-                <Field name='remark' label='质损描述：' component={RichTextBox}/>
+                <Field label='质损描述：' name='damageExplain' component={RichTextBox} />
             </Content>
         </Container >
     )
@@ -111,29 +115,14 @@ const styles = StyleSheet.create({
     }
 })
 
-const validate = values => {
-    const errors = { damageRemark: '', selectDriver: '' }
-    if (!values.damageRemark) {
-        errors.damageRemark = '必填'
-    }
 
-    if (!values.selectDriver) {
-        errors.selectDriver = '必选'
-    } else {
-        if (!values.selectDriver.truck_id) {
-            errors.selectDriver = '该司机未绑定车头'
-        }
-    }
-    return errors
-}
-
-const truckMapStateToProps = (state) => {
+const driverMapStateToProps = (state) => {
     return {
         listReducer: {
-            Action: state.selectTruckReducer.getTruckList,
+            Action: state.selectDriverReducer.getDriverList,
             data: {
-                list: state.selectTruckReducer.data.truckList.map(item => {
-                    return { id: item.id, value: item.truck_num, drive_name: item.drive_name }
+                list: state.selectDriverReducer.data.driverList.map(item => {
+                    return { id: item.id, value: item.drive_name, truck_id: item.truck_id, truck_num: item.truck_num }
                 })
             }
         },
@@ -141,7 +130,7 @@ const truckMapStateToProps = (state) => {
     }
 }
 
-const truckMapDispatchToProps = (dispatch) => ({
+const driverMapDispatchToProps = (dispatch) => ({
 
 })
 
@@ -175,31 +164,31 @@ const vinMapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        applyDamageFormValues: getFormValues('applyDamage')(state)
+        applyDamageFormValues: getFormValues('applyDamage')(state),
+        formReducer: state.form
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    getTruckList: () => {
-        dispatch(selectTruckAction.getTruckList())
+    getDriverList: () => {
+        dispatch(selectDriverAction.getDriverList())
     },
-    getTruckListWaiting: () => {
-        dispatch(selectTruckAction.getTruckListWaiting())
+    getDriverListWaiting: () => {
+        dispatch(selectDriverAction.getDriverListWaiting())
     },
     getCarList: () => {
         dispatch(selectCarAction.getCarList())
     },
     getCarListWaiting: () => {
         dispatch(selectCarAction.getCarListWaiting())
-    },
-    onSubmit: () => {
-
     }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
         form: 'applyDamage',
-        // validate
+        onSubmit: (values, dispatch, props) => {
+            dispatch(applyDamageAction.createDamage(props.parent, values))
+        }
     })(ApplyDamage)
 )

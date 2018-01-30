@@ -20,3 +20,13 @@ export const moneyFormat = (s, n) => {
     }
     return t.split("").reverse().join("") + "." + r;
 } 
+
+export const objectExceptNull = (param) => {
+    let obj = { ...param }
+    for (key in obj) {
+        if (!obj[key] && obj[key] != 0 && obj[key] != '') {
+            delete obj[key]
+        }
+    }
+    return obj
+}
