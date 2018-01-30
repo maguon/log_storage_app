@@ -15,8 +15,10 @@ import CameraButton from '../components/share/CameraButton'
 import globalStyles from '../GlobalStyles'
 import * as applyDamageUploadImageAction from '../../actions/views/ApplyDamageUploadImageAction'
 import ImageItem from '../components/share/ImageItem'
-import {  file_host } from '../../config/Host'
+import { file_host } from '../../config/Host'
 import * as routerDirection from '../../util/RouterDirection'
+import { Actions } from 'react-native-router-flux'
+
 
 const window = Dimensions.get('window')
 const containerWidth = window.width / 2
@@ -31,7 +33,7 @@ const renderItem = props => {
             <TouchableOpacity
                 key={index}
                 style={styles.itemContainer}
-                onPress={() =>routerDirection.singlePhotoView(parent)({ initParam: { imageUrlList: imageList.map(url => `${file_host}/image/${url}`), index } })} >
+                onPress={() => Actions.singlePhotoView({ initParam: { imageUrlList: imageList.map(url => `${file_host}/image/${url}`), index } })} >
                 <ImageItem imageUrl={`${file_host}/image/${item}`} />
             </TouchableOpacity>
         )
@@ -71,6 +73,7 @@ const renderListEmpty = props => {
 
 const ApplyDamageUploadImage = props => {
     const { parent, uploadDamageImageWating, uploadDamageImage, applyDamageUploadImageReducer: { data: { imageList }, uploadDamageImage: { isResultStatus } } } = props
+
     return (
         <Container >
             <FlatList
@@ -80,22 +83,22 @@ const ApplyDamageUploadImage = props => {
                 numColumns={2}
                 ListEmptyComponent={() => renderListEmpty({ uploadDamageImageWating, uploadDamageImage })}
                 renderItem={({ item, index }) => renderItem({ parent, item, index, imageList, uploadDamageImageWating, uploadDamageImage })} />
-            <Modal
+            {isResultStatus == 1 && <Modal
                 animationType={"fade"}
                 transparent={true}
-                visible={isResultStatus == 1}
+                visible={true}
                 onRequestClose={() => { }}>
                 <View style={styles.modalContainer} >
                     <View style={styles.modalItem}>
                         <ActivityIndicator
-                            animating={isResultStatus == 1}
+                            animating={true}
                             style={styles.modalActivityIndicator}
                             size="large"
                         />
                         <Text style={styles.modalText}>正在上传图片...</Text>
                     </View>
                 </View>
-            </Modal>
+            </Modal>}
         </Container>
     )
 }

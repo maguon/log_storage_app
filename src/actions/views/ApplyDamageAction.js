@@ -23,7 +23,6 @@ export const createDamage = (parent, values) => async (dispatch, getState) => {
             driveName: driver.value,
             damageExplain
         }))
-        console.log(res)
         if (res.success) {
             ToastAndroid.showWithGravity('提交成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
             dispatch({ type: actionTypes.applyDamageTypes.create_Damage_success, payload: { damageId: res.id } })
@@ -34,7 +33,6 @@ export const createDamage = (parent, values) => async (dispatch, getState) => {
         }
     }
     catch (err) {
-        console.log('err', err)
         ToastAndroid.showWithGravity(`提交失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         dispatch({ type: actionTypes.applyDamageTypes.create_Damage_error, payload: { errorMsg: err } })
     }

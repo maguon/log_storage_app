@@ -35,6 +35,17 @@ const post = (url, params) => {
     }).then((response) => response.json())
 }
 
+const postFile = (url, params) => {
+    let formData = new FormData()
+    let file = { uri: params.imageUrl, type: params.imageType, name: params.imageName }
+    formData.append(params.key, file)
+    return fetch(url, {
+        method: 'POST',
+        headers: requestHeaders.formHeaders,
+        body: formData,
+    }).then((response) => response.json())
+}
+
 function postcallback(url, params, callback) {
     fetch(url, {
         method: 'POST',
@@ -108,7 +119,8 @@ module.exports = {
     postFilecallback: postFilecallback,
     getAllcallback: getAllcallback,
     get: get,
-    post:post
+    post:post,
+    postFile:postFile
 }
 
 

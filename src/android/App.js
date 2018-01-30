@@ -60,7 +60,7 @@ import ApplyDamageSubmit from './components/applyDamage/ApplyDamageSubmit'
 import ApplyDamageUploadImageSubmit from './components/applyDamage/ApplyDamageUploadImageSubmit'
 import NavBar from './components/share/bar/NavBar'
 import LeftButton from './components/share/bar/LeftButton'
-
+import SinglePhotoView from './views/SinglePhotoView'
 
 
 
@@ -121,7 +121,7 @@ class App extends Component {
     // }
 
     render() {
-        //  console.disableYellowBox = true
+        // console.disableYellowBox = true
         return (
             <Router 
             //createReducer={this.reducerCreate} 
@@ -199,6 +199,7 @@ class App extends Component {
                                     hideTabBar
                                     hideNavBar={false}
                                     navBar={NavBar} />
+                                <Scene key="singlePhotoView" component={SinglePhotoView} hideNavBar hideTabBar />
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene key="query" initial={true} component={Query} hideNavBar={false}  navBar={SearchBar}/>
