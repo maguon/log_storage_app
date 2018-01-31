@@ -248,8 +248,8 @@ class App extends Component {
                                 <Scene key="importCarCameraAtStorageBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtStorageBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
-                            <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
-                                <Scene key="setting" component={Setting} hideNavBar={false}  navBar={SearchBar} />
+                            <Scene key="settingBlock" icon={TabIcon}   initial={true}  online='ios-settings' outline='ios-settings-outline' >
+                                <Scene key="setting" component={Setting}   initial={true}  hideNavBar={false}  navBar={SearchBar} />
                                 <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="password" component={Password} title='修改密码' navBar={NavBar} hideTabBar hideNavBar={false} />

@@ -25,9 +25,6 @@ import SelectAreaReducer from './SelectAreaReducer'
 import RetrievePasswordReducer from './RetrievePasswordReducer'
 import SceneReducer from './SceneReducer'
 
-
-
-
 //新
 import recordListAtHomeReducer from './components/home/RecordListAtHomeReducer'
 import storageListAtHomeReducer from './components/home/StorageListAtHomeReducer'
@@ -36,8 +33,13 @@ import selectCarReducer from './components/select/selectCarReducer'
 import selectDriverReducer from './components/select/selectDriverReducer' 
 import applyDamageReducer from './views/applyDamageReducer' 
 import applyDamageUploadImageReducer from './views/applyDamageUploadImageReducer' 
-
-
+import demageListReducer from './views/demageListReducer' 
+import responsibilityListReducer from './views/responsibilityListReducer' 
+import carInfoForDemageReducer from './components/demageInfo/carInfoForDemageReducer' 
+import demageEditorReducer from './components/demageInfo/demageEditorReducer' 
+import demageOpResultReducer from './components/demageInfo/demageOpResultReducer' 
+import imageListForDemageReducer from './components/demageInfo/imageListForDemageReducer' 
+import recordForDemageReducer from './components/demageInfo/recordForDemageReducer' 
 
 export default combineReducers({
     form: formReducer,
@@ -66,8 +68,6 @@ export default combineReducers({
     SceneReducer,
     RetrievePasswordReducer,
 
-
-
     //新
     recordListAtHomeReducer,
     storageListAtHomeReducer,
@@ -75,5 +75,10 @@ export default combineReducers({
     selectCarReducer,
     selectDriverReducer,
     applyDamageReducer,
-    applyDamageUploadImageReducer
+    applyDamageUploadImageReducer,
+    carInfoForDemageReducer,
+    demageEditorReducer,
+    demageOpResultReducer,
+    imageListForDemageReducer,
+    recordForDemageReducer
 })

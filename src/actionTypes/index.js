@@ -24,14 +24,19 @@ import * as sceneTypes from './SceneTypes'
 import * as retrievePasswordTypes from './RetrievePasswordTypes'
 
 
-
-
 //新
 import * as selectTruckActionTypes from './components/select/selectTruckActionTypes'
 import * as selectCarActionTypes from './components/select/selectCarActionTypes'
 import * as selectDriverActionTypes from './components/select/selectDriverActionTypes'
 import * as applyDamageTypes from './views/ApplyDamageTypes'
 import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageTypes'
+import * as responsibilityListTypes from './views/ResponsibilityListTypes'
+import * as demageListTypes from './views/DemageListTypes'
+import * as carInfoForDemageTypes from './components/demageInfo/CarInfoForDemageTypes'
+import * as demageEditorTypes from './components/demageInfo/DemageEditorTypes'
+import * as demageOpResultTypes from './components/demageInfo/DemageOpResultTypes'
+import * as imageListForDemageTypes from './components/demageInfo/ImageListForDemageTypes'
+import * as recordForDemageTypes from './components/demageInfo/RecordForDemageTypes'
 
 export {
     loginTypes,
@@ -65,5 +70,12 @@ export {
     selectCarActionTypes,
     selectDriverActionTypes,
     applyDamageTypes,
-    applyDamageUploadImageTypes
+    applyDamageUploadImageTypes,
+    responsibilityListTypes,
+    demageListTypes,
+    carInfoForDemageTypes,
+    demageEditorTypes,
+    demageOpResultTypes,
+    imageListForDemageTypes,
+    recordForDemageTypes
 }
