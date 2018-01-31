@@ -165,10 +165,14 @@ class App extends Component {
                                 <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} />
                                 <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} />
                                 <Scene key="selectAreaAtHomeBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} />
-                                <Scene key="listCennect" component={ListCennect} hideTabBar
+                                <Scene key="listCennectAtHomeBlock"
+                                    component={ListCennect}
+                                    hideTabBar
                                     navBar={NavSearchStaticBar}
                                     hideNavBar={false} />
-                                <Scene key="listCennectDynamic" component={ListCennect} hideTabBar
+                                <Scene key="listCennectDynamic"
+                                    component={ListCennect}
+                                    hideTabBar
                                     navBar={NavSearchDynamicBar}
                                     hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
@@ -272,6 +276,11 @@ class App extends Component {
                                 <Scene key="selectBaseAddrAtSettingBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarCameraAtSettingBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtSettingBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="listCennectAtSettingBlock"
+                                    component={ListCennect}
+                                    hideTabBar
+                                    navBar={NavSearchStaticBar}
+                                    hideNavBar={false} />
                                 <Scene key="demageList"
                                     LeftButton={LeftButton}
                                     component={DemageList}

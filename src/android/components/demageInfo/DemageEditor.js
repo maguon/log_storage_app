@@ -9,58 +9,32 @@ import {
     ActivityIndicator
 } from 'react-native'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, getFormValues } from 'redux-form'
 import * as routerDirection from '../../../util/RouterDirection'
-import { Container, Content, Input, Label, Icon, Button } from 'native-base'
-import globalStyles, { textColor,styleColor } from '../../GlobalStyles'
+import { Container, Content, Input, Label, Icon, Button, ListItem } from 'native-base'
+import globalStyles, { textColor, styleColor } from '../../GlobalStyles'
 import * as selectDriverAction from '../../../actions/components/select/selectDriverAction'
 import * as demageEditorAction from '../../../actions/components/demageInfo/DemageEditorAction'
 import moment from 'moment'
+import { required } from '../../../util/Validator'
+import Select from '../share/form/Select'
+import RichTextBox from '../share/form/RichTextBox'
+import DisposableList from '../../views/form/select/DisposableList'
+import { Actions } from 'react-native-router-flux'
 
-const DamageRemark = props => {
-    const { input: { onChange, ...restProps }, meta: { error } } = props
-    return (
-        <View style={styles.item}>
-            <Label style={[styles.label, globalStyles.midText, globalStyles.styleColor]}>质损描述</Label>
-            <Input
-                multiline={true}
-                style={[styles.inputArea, globalStyles.midText]}
-                onChangeText={onChange}
-                {...restProps} />
-            {error && <Text style={[globalStyles.errorText, { marginTop: 10 }]}>* {error}</Text>}
-        </View>
-    )
-}
 
-const SelectDriver = props => {
-    const { input: { onChange, value }, meta: { error }, getSelectDriverList, getSelectDriverListWaiting, parent } = props
-    return (
-        <TouchableOpacity
-            style={[styles.item, styles.itemSelectContainer]}
-            onPress={() => {
-                getSelectDriverListWaiting()
-                routerDirection.selectDriver(parent)({ onChange })
-                InteractionManager.runAfterInteractions(getSelectDriverList)
-            }} >
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Label style={globalStyles.midText}>货车司机：</Label>
-                <View style={styles.itemSelect}>
-                    <Label style={globalStyles.midText}>{value.drive_name ? `${value.drive_name}` : ''}</Label>
-                    <Icon name='md-arrow-dropdown' style={globalStyles.formIcon} />
-                </View>
-            </View>
-            {error && <Text style={[globalStyles.errorText, { marginTop: 10 }]}>* {error}</Text>}
-        </TouchableOpacity>
-    )
-}
+const validateRequired = required('必选')
 
 const DemageEditor = props => {
-    const { getSelectDriverList,
-        getSelectDriverListWaiting,
+    const { getDriverList,
+        getDriverListWaiting,
         updateDamage,
         demageEditorReducer: { updateDamage: { isResultStatus } },
         parent,
+        applyDamageFormValues = {},
         initParam: { id, created_on, car_id, vin } } = props
+
+    const { driver } = applyDamageFormValues
     return (
         <Container>
             <Content showsVerticalScrollIndicator={false}>
@@ -74,46 +48,60 @@ const DemageEditor = props => {
                     </View>
                 </View>
                 <Field
-                    name='damageRemark'
-                    component={DamageRemark} />
-                <Field
-                    name='selectDriver'
-                    component={SelectDriver}
-                    getSelectDriverList={getSelectDriverList}
-                    getSelectDriverListWaiting={getSelectDriverListWaiting}
-                    parent={parent} />
+                    label='货车司机：'
+                    isRequired={true}
+                    name='driver'
+                    component={Select}
+                    getList={getDriverList}
+                    getListWaiting={getDriverListWaiting}
+                    validate={[validateRequired]}
+                    showList={param => {
+                        return routerDirection.listCennect(parent)({
+                            mapStateToProps: driverMapStateToProps,
+                            mapDispatchToProps: driverMapDispatchToProps,
+                            List: DisposableList,
+                            ...param
+                        })
+                    }} />
+                {driver && driver.truck_num && <ListItem >
+                    <Text>货车车牌：{driver.truck_num}</Text>
+                </ListItem>}
+                <Field label='质损描述：' name='damageExplain' component={RichTextBox} />
                 <View style={{ margin: 15 }}>
-                {isResultStatus != 1 && <Button full
-                    style={[globalStyles.styleBackgroundColor]}
-                    onPress={() => updateDamage({
-                        damageId: id,
-                        carId: car_id,
-                        vin
-                    })}>
-                    <Text style={[globalStyles.midText, { color: '#fff' }]}>修改</Text>
-                </Button>}
-                {isResultStatus == 1 && <ActivityIndicator color={styleColor} size='large'/>}
-                </View>  
+                    {isResultStatus != 1 && <Button full
+                        style={[globalStyles.styleBackgroundColor]}
+                        onPress={() => updateDamage({
+                            damageId: id,
+                            carId: car_id,
+                            vin
+                        })}>
+                        <Text style={[globalStyles.midText, { color: '#fff' }]}>修改</Text>
+                    </Button>}
+                    {isResultStatus == 1 && <ActivityIndicator color={styleColor} size='large' />}
+                </View>
             </Content>
         </Container>
     )
 }
 
-const validate = values => {
-    const errors = { damageRemark: '', selectDriver: '' }
-    if (!values.damageRemark) {
-        errors.damageRemark = '必填'
-    }
 
-    if (!values.selectDriver) {
-        errors.selectDriver = '必选'
-    } else {
-        if (!values.selectDriver.truck_id) {
-            errors.selectDriver = '该司机未绑定车头'
-        }
+const driverMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectDriverReducer.getDriverList,
+            data: {
+                list: state.selectDriverReducer.data.driverList.map(item => {
+                    return { id: item.id, value: item.drive_name, truck_id: item.truck_id, truck_num: item.truck_num }
+                })
+            }
+        },
+        filter: getFormValues('SearchForm')(state) ? getFormValues('SearchForm')(state).searchField : undefined
     }
-    return errors
 }
+
+const driverMapDispatchToProps = (dispatch) => ({
+
+})
 
 
 const styles = StyleSheet.create({
@@ -160,23 +148,24 @@ const mapStateToProps = (state, ownProps) => {
     return {
         initialValues: {
             damageRemark: damage_explain,
-            selectDriver: {
+            driver: {
                 id: drive_id,
-                drive_name,
+                value: drive_name,
                 truck_id,
                 truck_num
             }
         },
-        demageEditorReducer: state.demageEditorReducer
+        demageEditorReducer: state.demageEditorReducer,
+        applyDamageFormValues: getFormValues('demageEditorForm')(state)
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getSelectDriverList: () => {
-        dispatch(selectDriverAction.getSelectDriverList())
+    getDriverList: () => {
+        dispatch(selectDriverAction.getDriverList())
     },
-    getSelectDriverListWaiting: () => {
-        dispatch(selectDriverAction.getSelectDriverListWaiting())
+    getDriverListWaiting: () => {
+        dispatch(selectDriverAction.getDriverListWaiting())
     },
     updateDamage: (param) => {
         dispatch(demageEditorAction.updateDamage(param))
@@ -184,6 +173,6 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
-    form: 'demageEditorForm',
-    validate
+    form: 'demageEditorForm'
+    // validate
 })(DemageEditor))

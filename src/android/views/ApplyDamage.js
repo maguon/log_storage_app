@@ -82,7 +82,7 @@ const ApplyDamage = props => {
                         })
                     }} />
                 {driver && driver.truck_num && <ListItem >
-                    <Text>火车车牌：{driver.truck_num}</Text>
+                    <Text>货车车牌：{driver.truck_num}</Text>
                 </ListItem>}
                 <Field label='质损描述：' name='damageExplain' component={RichTextBox} />
             </Content>

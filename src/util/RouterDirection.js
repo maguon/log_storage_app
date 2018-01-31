@@ -118,3 +118,10 @@ export const selectArea = (parent) => {
     if (parent === 'storageBlock') return Actions.selectAreaAtStorageBlock
     if (parent === 'settingBlock') return Actions.selectAreaAtSettingBlock
 }
+
+export const listCennect = (parent) => {
+    if (parent === 'homeBlock') return Actions.listCennectAtHomeBlock
+    if (parent === 'carBlock') return Actions.listCennectAtCarBlock
+    if (parent === 'storageBlock') return Actions.listCennectAtStorageBlock
+    if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock
+}
