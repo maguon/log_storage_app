@@ -70,7 +70,7 @@ const DemageEditor = props => {
                         <Text style={globalStyles.smallText}>{created_on ? `${moment(created_on).format('YYYY-MM-DD HH:mm')}` : ''}</Text>
                     </View>
                     <View style={styles.headerStatusItem}>
-                        <Text style={[globalStyles.midText]}>处理中</Text>
+                        <Text style={[globalStyles.midText]}>待处理</Text>
                     </View>
                 </View>
                 <Field
