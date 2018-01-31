@@ -2,7 +2,6 @@ import * as loginTypes from './LoginTypes'
 import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
 import * as carListTypes from './CarListTypes'
-import * as carMakeTypes from './CarMakeTypes'
 import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
@@ -15,7 +14,6 @@ import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
 import * as parkingViewTypes from './ParkingViewTypes'
 import * as addCarTypes from './AddCarTypes'
 import * as selectEntrustTypes from './SelectEntrustTypes'
-import * as selectCityTypes from './SelectCityTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
 import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
@@ -28,6 +26,8 @@ import * as retrievePasswordTypes from './RetrievePasswordTypes'
 import * as selectTruckActionTypes from './components/select/selectTruckActionTypes'
 import * as selectCarActionTypes from './components/select/selectCarActionTypes'
 import * as selectDriverActionTypes from './components/select/selectDriverActionTypes'
+import * as selectMakeActionTypes from './components/select/selectMakeActionTypes'
+import * as selectCityActionTypes from './components/select/selectCityActionTypes'
 import * as applyDamageTypes from './views/ApplyDamageTypes'
 import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageTypes'
 import * as responsibilityListTypes from './views/ResponsibilityListTypes'
@@ -49,7 +49,6 @@ export {
     selectStorageTypes,
     passwordTypes,
     carListTypes,
-    carMakeTypes,
     imporCarTypes,
     selectStorageForCarListTypes,
     importCarCameraTypes,
@@ -58,7 +57,6 @@ export {
     parkingViewTypes,
     addCarTypes,
     selectEntrustTypes,
-    selectCityTypes,
     selectReceiveTypes,
     selectBaseAddrTypes,
     selectAreaTypes,
@@ -77,5 +75,7 @@ export {
     demageEditorTypes,
     demageOpResultTypes,
     imageListForDemageTypes,
-    recordForDemageTypes
+    recordForDemageTypes,
+    selectMakeActionTypes,
+    selectCityActionTypes
 }

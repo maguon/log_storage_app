@@ -91,7 +91,6 @@ const ListFooterComponent = () => {
 }
 
 const DemageList = props => {
-    console.log('props',props)
     const { demageListReducer: { data: { demageList, isComplete }, getDemageList },
         demageListReducer,
         getDemageListMore,

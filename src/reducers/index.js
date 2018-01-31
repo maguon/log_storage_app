@@ -3,7 +3,6 @@ import { reducer as formReducer } from 'redux-form'
 import InitializationReducer from './InitializationReducer'
 import LoginReducer from './LoginReducer'
 import CarListReducer from './CarListReducer'
-import CarMakeReducer from './CarMakeReducer'
 import StorageListReducer from './StorageListReducer'
 import SelectRowReducer from './SelectRowReducer'
 import ImporCarReducer from './ImporCarReducer'
@@ -18,7 +17,6 @@ import ParkingViewReducer from './ParkingViewReducer'
 import AddCarReducer from './AddCarReducer'
 import SelectReceiveReducer from './SelectReceiveReducer'
 import SelectEntrustReducer from './SelectEntrustReducer'
-import SelectCityReducer from './SelectCityReducer'
 import SelectBaseAddrReducer from './SelectBaseAddrReducer'
 import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
 import SelectAreaReducer from './SelectAreaReducer'
@@ -49,7 +47,6 @@ export default combineReducers({
     PasswordReducer,
     CarListReducer,
     CarInfoReducer,
-    CarMakeReducer,
     ImporCarReducer,
     ImportCarCameraReducer,
     StorageListReducer,
@@ -62,7 +59,6 @@ export default combineReducers({
     AddCarReducer,
     SelectReceiveReducer,
     SelectEntrustReducer,
-    SelectCityReducer,
     SelectBaseAddrReducer,
     SelectAreaReducer,
     SceneReducer,
