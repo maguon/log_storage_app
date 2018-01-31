@@ -8,7 +8,6 @@ export const getDamageImageList = (param) => async (dispatch, getState) => {
     const { id } = param
     try {
         const url = `${record_host}/damageRecord?${ObjectToUrl({ damageId: id })}`
-        console.log('getDamageImageListurl',url) 
         const res = await httpRequest.get(url)
         if (res.success) {
             dispatch({ type: actionTypes.imageListForDemageTypes.get_DamageImageList_success, payload: { demageImageList: res.result[0] ? res.result[0].damage_image : [] } })
@@ -73,7 +72,6 @@ export const uploadDamageImage = param => async (dispatch, getState) => {
     }
     catch (err) {
         ToastAndroid.showWithGravity(`提交全部失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-        console.log(err)
         dispatch({ type: actionTypes.imageListForDemageTypes.upload_ImageAtDemage_error, payload: { errorMsg: err } })
     }
 }

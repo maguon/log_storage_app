@@ -48,7 +48,6 @@ export const uploadDamageImage = (params) => async (dispatch, getState) => {
         }
     }
     catch (err) {
-        console.log('err',err)
         ToastAndroid.showWithGravity(`提交全部失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         dispatch({ type: actionTypes.applyDamageUploadImageTypes.upload_DamageImage_error, payload: { errorMsg: err } })
     }

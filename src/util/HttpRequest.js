@@ -46,6 +46,15 @@ const postFile = (url, params) => {
     }).then((response) => response.json())
 }
 
+
+function put(url, params) {
+   return fetch(url, {
+        method: 'PUT',
+        headers: requestHeaders.headers,
+        body: JSON.stringify(params)
+    }).then((response) => response.json())
+}
+
 function postcallback(url, params, callback) {
     fetch(url, {
         method: 'POST',
@@ -120,7 +129,8 @@ module.exports = {
     getAllcallback: getAllcallback,
     get: get,
     post:post,
-    postFile:postFile
+    postFile:postFile,
+    put:put
 }
 
 

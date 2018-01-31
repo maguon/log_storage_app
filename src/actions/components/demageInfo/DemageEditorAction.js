@@ -14,7 +14,6 @@ export const updateDamage = (param) => async (dispatch, getState) => {
     const { damageRemark, selectDriver: { drive_name, id, truck_id, truck_num } } = applyDamageForm
     try {
         const url = `${base_host}/user/${userId}/damage/${damageId}`
-        console.log('updateDamageurl',url) 
         const res = await httpRequest.put(url, {
             carId,
             vin,
@@ -34,7 +33,6 @@ export const updateDamage = (param) => async (dispatch, getState) => {
         }
     } catch (err) {
         dispatch({ type: actionTypes.demageEditorTypes.update_Damage_error, payload: { errorMsg: err } })
-        ToastAndroid.showWithGravity(`修改成功！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-        
+        ToastAndroid.showWithGravity(`修改成功！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)    
     }
 }
