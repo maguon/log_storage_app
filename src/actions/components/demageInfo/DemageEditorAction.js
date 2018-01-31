@@ -9,11 +9,12 @@ export const updateDamage = (param) => async (dispatch, getState) => {
     dispatch({ type: actionTypes.demageEditorTypes.update_Damage_waiting, payload: {} })
     const { damageId, carId, vin } = param
     const state = getState()
-    const { loginReducer: { data: { user } } } = state
+    const { LoginReducer: { user: { userId } }  } = state
     const applyDamageForm = getFormValues('demageEditorForm')(state) ? getFormValues('demageEditorForm')(state) : {}
     const { damageRemark, selectDriver: { drive_name, id, truck_id, truck_num } } = applyDamageForm
     try {
-        const url = `${base_host}/user/${user.uid}/damage/${damageId}`
+        const url = `${base_host}/user/${userId}/damage/${damageId}`
+        console.log('updateDamageurl',url) 
         const res = await httpRequest.put(url, {
             carId,
             vin,

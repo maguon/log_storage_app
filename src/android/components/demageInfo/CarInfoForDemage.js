@@ -5,7 +5,7 @@ import {
     View
 } from 'react-native'
 import { Icon } from 'native-base'
-import globalStyles from '../../../GlobalStyles'
+import globalStyles from '../../GlobalStyles'
 import { connect } from 'react-redux'
 
 const CarInfoForDemageInfo = props => {

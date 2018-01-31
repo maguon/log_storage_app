@@ -102,7 +102,7 @@ export default handleActions({
             }
         }
     },
-    [demageListActionTypes.get_DemageListMore_error]: (state, action) => {
+    [actionTypes.demageListTypes.get_DemageListMore_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,

@@ -11,8 +11,6 @@ import RecordForDemage from '../components/demageInfo/RecordForDemage'
 import ImageListForDemage from '../components/demageInfo/ImageListForDemage'
 import DemageOpResult from '../components/demageInfo/DemageOpResult'
 import DemageDetail from '../components/demageInfo/DemageDetail'
-import ImageEditorForDemage from '../components/demageInfo/ImageEditorForDemage'
-import DemageEditor from '../components/demageInfo/DemageEditor'
 
 const DemageInfo = props => {
     const { initParam: { damage_status },
@@ -46,8 +44,7 @@ const DemageInfo = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="质损">
                     <Container>
-                        {damage_status == 1 && <DemageEditor initParam={initParam} parent={parent} />}
-                        {damage_status != 1 && <DemageDetail initParam={initParam} />}
+                        <DemageDetail initParam={initParam} />
                     </Container>
                 </Tab>
                 <Tab
@@ -57,11 +54,10 @@ const DemageInfo = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="照片">
                     <Container>
-                        {damage_status != 1 && <ImageListForDemage initParam={initParam} parent={parent} />}
-                        {damage_status == 1 && <ImageEditorForDemage initParam={initParam} parent={parent} />}
+                        <ImageListForDemage initParam={initParam} parent={parent} />
                     </Container>
                 </Tab>
-                {damage_status != 1 && <Tab
+                <Tab
                     tabStyle={globalStyles.styleBackgroundColor}
                     activeTabStyle={globalStyles.styleBackgroundColor}
                     activeTextStyle={[globalStyles.midText, { color: '#fff' }]}
@@ -74,7 +70,7 @@ const DemageInfo = props => {
                         : <Container>
                             <DemageOpResult damageStatus={damage_status} />
                         </Container>}
-                </Tab>}
+                </Tab>
             </Tabs>
         </Container>
     )

@@ -7,7 +7,8 @@ import { ToastAndroid } from 'react-native'
 export const getDamageImageList = (param) => async (dispatch, getState) => {
     const { id } = param
     try {
-        const url = `${record_host}/damageRecord${ObjectToUrl({ damageId: id })}`
+        const url = `${record_host}/damageRecord?${ObjectToUrl({ damageId: id })}`
+        console.log('getDamageImageListurl',url) 
         const res = await httpRequest.get(url)
         if (res.success) {
             dispatch({ type: actionTypes.imageListForDemageTypes.get_DamageImageList_success, payload: { demageImageList: res.result[0] ? res.result[0].damage_image : [] } })
@@ -32,15 +33,15 @@ export const uploadDamageImage = param => async (dispatch, getState) => {
         const { cameraReses, damageId } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
-            const { loginReducer: { data: { user } } } = getState()
-            const imageUploadUrl = `${file_host}/user/${user.uid}/image${ObjectToUrl({ imageType: 4 })}`
+            const { LoginReducer: { user } } = getState()
+            const imageUploadUrl = `${file_host}/user/${user.userId}/image?${ObjectToUrl({ imageType: 4 })}`
             const imageUploadReses = await Promise.all(cameraSuccessReses.map(item => httpRequest.postFile(imageUploadUrl, {
                 key: 'image',
                 ...item.res
             })))
             const imageUploadSuccessReses = imageUploadReses.filter(item => item.success)
             if (imageUploadSuccessReses.length > 0) {
-                const bindDamageUrl = `${record_host}/user/${user.uid}/damage/${damageId}/image`
+                const bindDamageUrl = `${record_host}/user/${user.userId}/damage/${damageId}/image`
                 const bindDamageReses = await Promise.all(imageUploadSuccessReses.map(item => httpRequest.post(bindDamageUrl, {
                     username: user.real_name,
                     userId: user.uid,
@@ -72,6 +73,7 @@ export const uploadDamageImage = param => async (dispatch, getState) => {
     }
     catch (err) {
         ToastAndroid.showWithGravity(`提交全部失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        console.log(err)
         dispatch({ type: actionTypes.imageListForDemageTypes.upload_ImageAtDemage_error, payload: { errorMsg: err } })
     }
 }

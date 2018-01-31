@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import * as recordForDemageActionTypes from './RecordForDemageActionTypes'
+import * as actionTypes from '../../../actionTypes'
 
 const initialState = {
     data: {
@@ -15,7 +15,7 @@ const initialState = {
 
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(错误)，4(执行失败),5(服务器未处理错误)]
 export default handleActions({
-    [recordForDemageActionTypes.get_RecordForDemage_success]: (state, action) => {
+    [actionTypes.recordForDemageTypes.get_RecordForDemage_success]: (state, action) => {
         const { payload: { carInfoRecord } } = action
         return {
             ...state,
@@ -28,7 +28,7 @@ export default handleActions({
             }
         }
     },
-    [recordForDemageActionTypes.get_RecordForDemage_waiting]: (state, action) => {
+    [actionTypes.recordForDemageTypes.get_RecordForDemage_waiting]: (state, action) => {
         return {
             ...state,
             getCarInfoRecord: {
@@ -37,7 +37,7 @@ export default handleActions({
             }
         }
     },
-    [recordForDemageActionTypes.get_RecordForDemage_failed]: (state, action) => {
+    [actionTypes.recordForDemageTypes.get_RecordForDemage_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -48,7 +48,7 @@ export default handleActions({
             }
         }
     },
-    [recordForDemageActionTypes.get_RecordForDemage_error]: (state, action) => {
+    [actionTypes.recordForDemageTypes.get_RecordForDemage_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,

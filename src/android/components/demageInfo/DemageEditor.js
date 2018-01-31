@@ -10,11 +10,11 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
-import * as routerDirection from '../../../../util/RouterDirection'
+import * as routerDirection from '../../../util/RouterDirection'
 import { Container, Content, Input, Label, Icon, Button } from 'native-base'
-import globalStyles, { textColor,styleColor } from '../../../GlobalStyles'
-import * as selectDriverAction from '../../../views/select/driver/SelectDriverAction'
-import * as demageEditorAction from './DemageEditorAction'
+import globalStyles, { textColor,styleColor } from '../../GlobalStyles'
+import * as selectDriverAction from '../../../actions/components/select/selectDriverAction'
+import * as demageEditorAction from '../../../actions/components/demageInfo/DemageEditorAction'
 import moment from 'moment'
 
 const DamageRemark = props => {

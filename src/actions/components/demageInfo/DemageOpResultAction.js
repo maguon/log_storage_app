@@ -6,7 +6,9 @@ import { ObjectToUrl } from '../../../util/ObjectToUrl'
 export const getDemageOpResult = (param) => async (dispatch, getState) => {
     const { id } = param
     try {
-        const url = `${base_host}/damageCheck${ObjectToUrl({ damageId: id })}`
+        const url = `${base_host}/damageCheck?${ObjectToUrl({ damageId: id })}`
+        console.log('getDemageOpResulturl',url) 
+        
         const res = await httpRequest.get(url)
         if (res.success) {
             dispatch({ type: actionTypes.demageOpResultTypes.get_DemageOpResult_success, payload: { demageOpResult: res.result[0] } })

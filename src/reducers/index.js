@@ -76,6 +76,8 @@ export default combineReducers({
     selectDriverReducer,
     applyDamageReducer,
     applyDamageUploadImageReducer,
+    demageListReducer,
+    responsibilityListReducer,
     carInfoForDemageReducer,
     demageEditorReducer,
     demageOpResultReducer,

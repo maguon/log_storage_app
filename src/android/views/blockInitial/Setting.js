@@ -52,7 +52,6 @@ class Setting extends Component {
             // loginReducer: { data: { user: { real_name, avatar_image, mobile } } },
            // initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer 
         } = this.props
-        console.log('this.props',this.props)
         return (
             <Container>
                 <Content style={globalStyles.container}>

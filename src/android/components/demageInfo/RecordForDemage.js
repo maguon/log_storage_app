@@ -5,7 +5,7 @@ import {
     View,
     FlatList
 } from 'react-native'
-import globalStyles from '../../../GlobalStyles'
+import globalStyles from '../../GlobalStyles'
 import { Icon } from 'native-base'
 import { connect } from 'react-redux'
 import moment from 'moment'

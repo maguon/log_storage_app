@@ -8,9 +8,9 @@ import { sleep } from '../../util/util'
 const pageSize = 50
 
 export const getDemageList = () => async (dispatch, getState) => {
-    const { loginReducer: { data: { user: { uid } } } } = getState()
+    const { LoginReducer: { user: { userId } } } = getState()
     try {
-        const url = `${base_host}/damage${ObjectToUrl({ declareUserId: uid, start: 0, size: pageSize })}`
+        const url = `${base_host}/damage?${ObjectToUrl({ declareUserId: userId, start: 0, size: pageSize })}`
         const res = await httpRequest.get(url)
         if (res.success) {
             if (res.result.length % pageSize != 0 || res.result.length == 0) {
@@ -31,9 +31,8 @@ export const getDemageListWaiting = () => (dispatch, getState) => {
 }
 
 export const getDemageListMore = () => async (dispatch, getState) => {
-
     const {
-        loginReducer: { data: { user: { uid } } },
+        LoginReducer: { user: { userId } },
         demageListReducer: { data: { demageList, isComplete } },
         demageListReducer } = getState()
     if (demageListReducer.getDemageListMore.isResultStatus == 1) {
@@ -43,7 +42,7 @@ export const getDemageListMore = () => async (dispatch, getState) => {
         if (!isComplete) {
             dispatch({ type: actionTypes.demageListTypes.get_DemageListMore_waiting, payload: {} })
             try {
-                const url = `${base_host}/damage${ObjectToUrl({ declareUserId: uid, start: demageList.length, size: pageSize })}`
+                const url = `${base_host}/damage?${ObjectToUrl({ declareUserId: userId, start: demageList.length, size: pageSize })}`
                 const res = await httpRequest.get(url)
                 if (res.success) {
                     dispatch({

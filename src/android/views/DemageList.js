@@ -10,13 +10,13 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Content, List, Left, ListItem, Thumbnail, Separator, Body, Right, Icon, Spinner } from 'native-base'
-import globalStyles, { styleColor } from '../../GlobalStyles'
+import globalStyles, { styleColor } from '../GlobalStyles'
 import { Actions } from 'react-native-router-flux'
-import * as demageListAction from './DemageListAction'
-import * as carInfoForDemageAction from '../../components/demageInfo/carInfoForDemage/CarInfoForDemageAction'
-import * as recordForDemageAction from '../../components/demageInfo/recordForDemage/RecordForDemageAction'
-import * as demageOpResultAction from '../../components/demageInfo/demageOpResult/DemageOpResultAction'
-import * as imageListForDemageAction from '../../components/demageInfo/imageListForDemage/ImageListForDemageAction'
+import * as demageListAction from '../../actions/views/DemageListAction'
+import * as carInfoForDemageAction from '../../actions/components/demageInfo/CarInfoForDemageAction'
+import * as recordForDemageAction from '../../actions/components/demageInfo/RecordForDemageAction'
+import * as demageOpResultAction from '../../actions/components/demageInfo/DemageOpResultAction'
+import * as imageListForDemageAction from '../../actions/components/demageInfo//ImageListForDemageAction'
 import moment from 'moment'
 
 //damage_status cancel :    ready_process : 1, in_process : 2, completed : 3
@@ -91,6 +91,7 @@ const ListFooterComponent = () => {
 }
 
 const DemageList = props => {
+    console.log('props',props)
     const { demageListReducer: { data: { demageList, isComplete }, getDemageList },
         demageListReducer,
         getDemageListMore,

@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import * as demageOpResultActionTypes from './DemageOpResultActionTypes'
+import * as actionTypes from '../../../actionTypes'
 
 const initialState = {
     data:{
@@ -14,7 +14,7 @@ const initialState = {
 
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(错误)，4(执行失败),5(服务器未处理错误)]
 export default handleActions({
-    [demageOpResultActionTypes.get_DemageOpResult_success]: (state, action) => {
+    [actionTypes.demageOpResultTypes.get_DemageOpResult_success]: (state, action) => {
         const { payload: { demageOpResult } } = action
         return {
             ...state,
@@ -27,7 +27,7 @@ export default handleActions({
             }
         }
     },
-    [demageOpResultActionTypes.get_DemageOpResult_failed]: (state, action) => {
+    [actionTypes.demageOpResultTypes.get_DemageOpResult_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -38,7 +38,7 @@ export default handleActions({
             }
         }
     },
-    [demageOpResultActionTypes.get_DemageOpResult_waiting]: (state, action) => {
+    [actionTypes.demageOpResultTypes.get_DemageOpResult_waiting]: (state, action) => {
         return {
             ...state,
             getDemageOpResult: {
@@ -47,7 +47,7 @@ export default handleActions({
             }
         }
     },
-    [demageOpResultActionTypes.get_DemageOpResult_error]: (state, action) => {
+    [actionTypes.demageOpResultTypes.get_DemageOpResult_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,

@@ -6,10 +6,10 @@ import {
 } from 'react-native'
 import { Content } from 'native-base'
 import { connect } from 'react-redux'
-import globalStyles from '../../../GlobalStyles'
-import { moneyFormat } from '../../../../util/util'
-import damageTypeList from '../../../../util/damage_type.json'
-import damageLinkTypeList from '../../../../util/damage_link_type.json'
+import globalStyles from '../../GlobalStyles'
+import { moneyFormat } from '../../../util/util'
+import damageTypeList from '../../../util/damage_type.json'
+import damageLinkTypeList from '../../../util/damage_link_type.json'
 
 const DemageOpResult = props => {
     const { demageOpResultReducer: { data: { demageOpResult: {
