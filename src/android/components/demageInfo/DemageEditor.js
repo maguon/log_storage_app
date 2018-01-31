@@ -147,7 +147,7 @@ const mapStateToProps = (state, ownProps) => {
     const { initParam: { damage_explain, drive_name, drive_id, truck_id, truck_num } } = ownProps
     return {
         initialValues: {
-            damageRemark: damage_explain,
+            damageExplain: damage_explain,
             driver: {
                 id: drive_id,
                 value: drive_name,
