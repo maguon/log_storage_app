@@ -10,13 +10,11 @@ import ImportCarCameraReducer from './ImportCarCameraReducer'
 import PasswordReducer from './PasswordReducer'
 //import HomeReducer from './HomeReducer'
 import CarInfoReducer from './CarInfoReducer'
-import SelectStorageReducer from './SelectStorageReducer'
 import RecordListReducer from './RecordListReducer'
 import SearchVinReducer from './SearchVinReducer'
 import ParkingViewReducer from './ParkingViewReducer'
 import AddCarReducer from './AddCarReducer'
 import SelectReceiveReducer from './SelectReceiveReducer'
-import SelectEntrustReducer from './SelectEntrustReducer'
 import SelectBaseAddrReducer from './SelectBaseAddrReducer'
 import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
 import SelectAreaReducer from './SelectAreaReducer'
@@ -29,6 +27,10 @@ import storageListAtHomeReducer from './components/home/StorageListAtHomeReducer
 import selectTruckReducer from './components/select/selectTruckReducer' 
 import selectCarReducer from './components/select/selectCarReducer' 
 import selectDriverReducer from './components/select/selectDriverReducer' 
+import selectMakeReducer from './components/select/selectMakeReducer' 
+import selectCityReducer from './components/select/selectCityReducer' 
+import selectStorageReducer from './components/select/selectStorageReducer' 
+import selectEntrustReducer from './components/select/selectEntrustReducer' 
 import applyDamageReducer from './views/applyDamageReducer' 
 import applyDamageUploadImageReducer from './views/applyDamageUploadImageReducer' 
 import demageListReducer from './views/demageListReducer' 
@@ -38,6 +40,7 @@ import demageEditorReducer from './components/demageInfo/demageEditorReducer'
 import demageOpResultReducer from './components/demageInfo/demageOpResultReducer' 
 import imageListForDemageReducer from './components/demageInfo/imageListForDemageReducer' 
 import recordForDemageReducer from './components/demageInfo/recordForDemageReducer' 
+
 
 export default combineReducers({
     form: formReducer,
@@ -51,14 +54,12 @@ export default combineReducers({
     ImportCarCameraReducer,
     StorageListReducer,
     SelectRowReducer,
-    SelectStorageReducer,
     RecordListReducer,
     SearchVinReducer,
     SelectStorageForCarListReducer,
     ParkingViewReducer,
     AddCarReducer,
     SelectReceiveReducer,
-    SelectEntrustReducer,
     SelectBaseAddrReducer,
     SelectAreaReducer,
     SceneReducer,
@@ -78,5 +79,9 @@ export default combineReducers({
     demageEditorReducer,
     demageOpResultReducer,
     imageListForDemageReducer,
-    recordForDemageReducer
+    recordForDemageReducer,
+    selectMakeReducer,
+    selectCityReducer,
+    selectStorageReducer,
+    selectEntrustReducer
 })

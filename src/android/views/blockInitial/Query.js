@@ -1,15 +1,25 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import SearchBar from '../../components/Bar/SearchBar'
 import { Actions } from 'react-native-router-flux'
-import Select from '../../components/FormComponents/Select'
-import DateTimePicker from '../../components/FormComponents/DateTimePicker'
-import * as RouterDirection from '../../../util/RouterDirection'
+import SearchBar from '../../components/Bar/SearchBar'
+import { Field, reduxForm, getFormValues } from 'redux-form'
 import { Button } from 'native-base'
-import TextBox from '../../components/FormComponents/TextBox'
 
-export default class Query extends Component {
+
+import * as selectMakeAction from '../../../actions/components/select/selectMakeAction'
+import * as selectCityAction from '../../../actions/components/select/selectCityAction'
+import * as selectEntrustAction from '../../../actions/components/select/selectEntrustAction'
+import * as selectStorageAction from '../../../actions/components/select/selectStorageAction'
+
+
+import Select from '../../components/share/form/Select'
+import DateTimePicker from '../../components/FormComponents/DateTimePicker'
+import * as routerDirection from '../../../util/RouterDirection'
+import TextBox from '../../components/FormComponents/TextBox'
+import DisposableList from '../form/select/DisposableList'
+
+class QueryCar extends Component {
     constructor(props) {
         super(props)
 
@@ -64,10 +74,12 @@ export default class Query extends Component {
                 delete queryCar[item]
             }
         }
-        Actions.carList({queryCar})
+        Actions.carList({ queryCar })
     }
 
     render() {
+        const { getMakeList, getMakeListWaiting, getCityList, getCityListWaiting, getEntrustList, getEntrustListWaiting,
+            getStorageList, getStorageListWaiting, parent } = this.props
         return (
             <View style={{ flex: 1 }}>
                 {/* <SearchBar
@@ -94,51 +106,84 @@ export default class Query extends Component {
                             />
                         </View>
                         <View style={{ marginTop: 10, backgroundColor: '#eff3f5', borderTopWidth: 1, borderTopColor: '#00cade' }}>
-                            <Select
-                                isRequire={false}
-                                title='品牌：'
-                                value={this.state.queryCar.markeName}
-                                showList={RouterDirection.selectCarMake(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ makeId: param.id, markeName: param.value })}
-                                defaultValue={'请选择'}
-                            />
-                            <Select
-                                isRequire={false}
-                                title='选择仓库：'
-                                value={this.state.queryCar.storageName}
-                                showList={() => RouterDirection.selectStorage(this.props.parent)({
-                                    routerIndex: 0,
-                                    popName: this.props.name,
-                                    routerList: [],
-                                    onSelect: this.onSelect
-                                })}
-                                onValueChange={() => { }}
-                                defaultValue={'请选择'}
-                            />
-                            <Select
-                                isRequire={false}
-                                title='发运地：'
-                                value={this.state.queryCar.routeStart}
-                                showList={RouterDirection.selectCity(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
-                                defaultValue={'请选择'}
-                            />
-                            <Select
-                                isRequire={false}
-                                value={this.state.queryCar.routeEnd}
-                                title='目的地：'
-                                showList={RouterDirection.selectCity(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
-                                defaultValue={'请选择'}
-                            />
-                            <Select
-                                isRequire={false}
-                                value={this.state.queryCar.entrust}
-                                title='委托方：'
-                                showList={RouterDirection.selectEntrust(this.props.parent)}
-                                onValueChange={(param) => this.onSelect({ entrustId: param.id, entrust: param.value })}
-                                defaultValue={'请选择'}
-                            />
+                            <Field
+                                label='品牌：'
+                                name='make'
+                                component={Select}
+                                getList={getMakeList}
+                                getListWaiting={getMakeListWaiting}
+                                showList={param => {
+                                    return routerDirection.listCennect(parent)({
+                                        mapStateToProps: makeMapStateToProps,
+                                        mapDispatchToProps: makeMapDispatchToProps,
+                                        List: DisposableList,
+                                        ...param
+                                    })
+                                }} />
+
+
+
+
+
+
+
+
+                            <Field
+                                label='选择仓库：'
+                                name='storage'
+                                component={Select}
+                                getList={getStorageList}
+                                getListWaiting={getStorageListWaiting}
+                                showList={param => {
+                                    return routerDirection.listCennect(parent)({
+                                        mapStateToProps: storageMapStateToProps,
+                                        mapDispatchToProps: storageMapDispatchToProps,
+                                        List: DisposableList,
+                                        ...param
+                                    })
+                                }} />
+                            <Field
+                                label='发运地：'
+                                name='routeStart'
+                                component={Select}
+                                getList={getCityList}
+                                getListWaiting={getCityListWaiting}
+                                showList={param => {
+                                    return routerDirection.listCennect(parent)({
+                                        mapStateToProps: cityMapStateToProps,
+                                        mapDispatchToProps: cityMapDispatchToProps,
+                                        List: DisposableList,
+                                        ...param
+                                    })
+                                }} />
+                            <Field
+                                label='目的地：'
+                                name='routeEnd'
+                                component={Select}
+                                getList={getCityList}
+                                getListWaiting={getCityListWaiting}
+                                showList={param => {
+                                    return routerDirection.listCennect(parent)({
+                                        mapStateToProps: cityMapStateToProps,
+                                        mapDispatchToProps: cityMapDispatchToProps,
+                                        List: DisposableList,
+                                        ...param
+                                    })
+                                }} />
+                            <Field
+                                label='委托方：'
+                                name='entrust'
+                                component={Select}
+                                getList={getEntrustList}
+                                getListWaiting={getEntrustListWaiting}
+                                showList={param => {
+                                    return routerDirection.listCennect(parent)({
+                                        mapStateToProps: entrustMapStateToProps,
+                                        mapDispatchToProps: entrustMapDispatchToProps,
+                                        List: DisposableList,
+                                        ...param
+                                    })
+                                }} />
                             <View style={{ flexDirection: 'row' }}>
                                 <View style={{ flex: 8 }}>
                                     <DateTimePicker
@@ -260,8 +305,123 @@ export default class Query extends Component {
             </View>
         )
     }
-
 }
+
+
+const makeMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectMakeReducer.getMakeList,
+            data: {
+                list: state.selectMakeReducer.data.makeList.map(item => {
+                    return { id: item.id, value: item.make_name }
+                })
+            }
+        }
+    }
+}
+
+const makeMapDispatchToProps = (dispatch) => ({
+
+})
+
+
+const cityMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectCityReducer.getCityList,
+            data: {
+                list: state.selectCityReducer.data.cityList.map(item => {
+                    return { id: item.id, value: item.city_name }
+                })
+            }
+        }
+    }
+}
+
+const cityMapDispatchToProps = (dispatch) => ({
+
+})
+
+
+const entrustMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectEntrustReducer.getEntrustList,
+            data: {
+                list: state.selectEntrustReducer.data.entrustList.map(item => {
+                    return { id: item.id,value:item.short_name }
+                })
+            }
+        }
+    }
+}
+
+const entrustMapDispatchToProps = (dispatch) => ({
+
+})
+
+
+
+
+const storageMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectStorageReducer.getStorageList,
+            data: {
+                list: state.selectStorageReducer.data.storageList.map(item => {
+                    return { id: item.id ,value:item.storage_name}
+                })
+            }
+        }
+    }
+}
+
+const storageMapDispatchToProps = (dispatch) => ({
+
+})
+
+
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    getMakeList: () => {
+        dispatch(selectMakeAction.getMakeList())
+    },
+    getMakeListWaiting: () => {
+        dispatch(selectMakeAction.getMakeListWaiting())
+    },
+    getCityList: () => {
+        dispatch(selectCityAction.getCityList())
+    },
+    getCityListWaiting: () => {
+        dispatch(selectCityAction.getCityListWaiting())
+    },
+    getEntrustList: () => {
+        dispatch(selectEntrustAction.getEntrustList())
+    },
+    getEntrustListWaiting: () => {
+        dispatch(selectEntrustAction.getEntrustListWaiting())
+    },
+    getStorageList: () => {
+        dispatch(selectStorageAction.getStorageList())
+    },
+    getStorageListWaiting: () => {
+        dispatch(selectStorageAction.getStorageListWaiting())
+    }
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(
+    reduxForm({
+        form: 'queryCarForm'
+    })(QueryCar)
+)
+
 
 
 const styles = {

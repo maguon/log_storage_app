@@ -8,12 +8,10 @@ import * as passwordTypes from './PasswordTypes'
 import * as importCarCameraTypes from './ImportCarCameraTypes'
 import * as carInfoTypes from './CarInfoTypes'
 import * as homeTypes from './views/HomeTypes'
-import * as selectStorageTypes from './SelectStorageTypes'
 import * as recordListTypes from './RecordListTypes'
 import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
 import * as parkingViewTypes from './ParkingViewTypes'
 import * as addCarTypes from './AddCarTypes'
-import * as selectEntrustTypes from './SelectEntrustTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
 import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
@@ -28,6 +26,8 @@ import * as selectCarActionTypes from './components/select/selectCarActionTypes'
 import * as selectDriverActionTypes from './components/select/selectDriverActionTypes'
 import * as selectMakeActionTypes from './components/select/selectMakeActionTypes'
 import * as selectCityActionTypes from './components/select/selectCityActionTypes'
+import * as selectStorageActionTypes from './components/select/selectStorageActionTypes'
+import * as selectEntrustActionTypes from './components/select/selectEntrustActionTypes'
 import * as applyDamageTypes from './views/ApplyDamageTypes'
 import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageTypes'
 import * as responsibilityListTypes from './views/ResponsibilityListTypes'
@@ -46,7 +46,6 @@ export {
     homeTypes,
     storageListTypes,
     selectRowTypes,
-    selectStorageTypes,
     passwordTypes,
     carListTypes,
     imporCarTypes,
@@ -56,7 +55,6 @@ export {
     recordListTypes,
     parkingViewTypes,
     addCarTypes,
-    selectEntrustTypes,
     selectReceiveTypes,
     selectBaseAddrTypes,
     selectAreaTypes,
@@ -77,5 +75,7 @@ export {
     imageListForDemageTypes,
     recordForDemageTypes,
     selectMakeActionTypes,
-    selectCityActionTypes
+    selectCityActionTypes,
+    selectStorageActionTypes,
+    selectEntrustActionTypes
 }

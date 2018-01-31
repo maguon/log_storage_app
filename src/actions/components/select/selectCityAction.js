@@ -2,7 +2,7 @@ import httpRequest from '../../../util/HttpRequest'
 import { base_host } from '../../../config/Host'
 import * as actionTypes from '../../../actionTypes'
 
-export const getCityList = () => (dispatch) => {
+export const getCityList = () =>async (dispatch) => {
     try {
         const url = `${base_host}/city`
         const res = await httpRequest.get(url)
