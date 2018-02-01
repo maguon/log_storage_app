@@ -17,7 +17,7 @@ import AddCarReducer from './AddCarReducer'
 import SelectReceiveReducer from './SelectReceiveReducer'
 import SelectBaseAddrReducer from './SelectBaseAddrReducer'
 import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
-import SelectAreaReducer from './SelectAreaReducer'
+
 import RetrievePasswordReducer from './RetrievePasswordReducer'
 import SceneReducer from './SceneReducer'
 
@@ -41,7 +41,7 @@ import demageOpResultReducer from './components/demageInfo/demageOpResultReducer
 import imageListForDemageReducer from './components/demageInfo/imageListForDemageReducer' 
 import recordForDemageReducer from './components/demageInfo/recordForDemageReducer' 
 import carListReducer from './views/CarListReducer'
-
+import selectAreaReducer from './components/select/selectAreaReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -62,7 +62,7 @@ export default combineReducers({
     AddCarReducer,
     SelectReceiveReducer,
     SelectBaseAddrReducer,
-    SelectAreaReducer,
+    //SelectAreaReducer,
     SceneReducer,
     RetrievePasswordReducer,
 
@@ -85,5 +85,6 @@ export default combineReducers({
     selectCityReducer,
     selectStorageReducer,
     selectEntrustReducer,
-    carListReducer
+    carListReducer,
+    selectAreaReducer
 })

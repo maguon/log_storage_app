@@ -5,6 +5,7 @@ import { styleColor } from '../../../GlobalStyles'
 
 const DisposableList = props => {
     const { listReducer: { data: { list }, Action }, filter, onSelect } = props
+    console.log('list',list)
     if (Action.isResultStatus == 1) {
         return (
             <Container>

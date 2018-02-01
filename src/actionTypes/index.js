@@ -6,7 +6,6 @@ import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
 import * as importCarCameraTypes from './ImportCarCameraTypes'
-import * as carInfoTypes from './CarInfoTypes'
 import * as homeTypes from './views/HomeTypes'
 import * as recordListTypes from './RecordListTypes'
 import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
@@ -15,7 +14,7 @@ import * as addCarTypes from './AddCarTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
 import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
-import * as selectAreaTypes from './SelectAreaTypes'
+
 import * as sceneTypes from './SceneTypes'
 import * as retrievePasswordTypes from './RetrievePasswordTypes'
 
@@ -38,11 +37,13 @@ import * as demageEditorTypes from './components/demageInfo/DemageEditorTypes'
 import * as demageOpResultTypes from './components/demageInfo/DemageOpResultTypes'
 import * as imageListForDemageTypes from './components/demageInfo/ImageListForDemageTypes'
 import * as recordForDemageTypes from './components/demageInfo/RecordForDemageTypes'
+import * as carInfoTypes from './views/CarInfoTypes'
+import * as selectAreaActionTypes from './components/select/selectAreaActionTypes'
+
 
 export {
     loginTypes,
     sceneTypes,
-    carInfoTypes,
     initializationTypes,
     homeTypes,
     storageListTypes,
@@ -57,7 +58,7 @@ export {
     addCarTypes,
     selectReceiveTypes,
     selectBaseAddrTypes,
-    selectAreaTypes,
+   // selectAreaTypes,
     retrievePasswordTypes,
 
 
@@ -78,5 +79,7 @@ export {
     selectCityActionTypes,
     selectStorageActionTypes,
     selectEntrustActionTypes,
-    carListTypes
+    selectAreaActionTypes,
+    carListTypes,
+    carInfoTypes
 }

@@ -23,7 +23,7 @@ const renderListItem = props => {
     const { item: { plan_out_time, make_name, storage_name, vin, colour, enter_time, real_out_time, col, row, area_name },item, index, parent } = props
     return (
         <TouchableOpacity key={index} onPress={() => {
-            RouterDirection.carInformation(parent)({ car: item })
+            RouterDirection.carInformation(parent)({ initParam:{car: item} })
         }}>
             <View style={styles.item}>
                 <View style={styles.itemRow}>
