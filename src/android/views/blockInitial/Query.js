@@ -1,311 +1,190 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, Dimensions, TextInput, StyleSheet,InteractionManager } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import SearchBar from '../../components/Bar/SearchBar'
 import { Field, reduxForm, getFormValues } from 'redux-form'
-import { Button } from 'native-base'
-
+import { Button, Container, Content, Input } from 'native-base'
 
 import * as selectMakeAction from '../../../actions/components/select/selectMakeAction'
 import * as selectCityAction from '../../../actions/components/select/selectCityAction'
 import * as selectEntrustAction from '../../../actions/components/select/selectEntrustAction'
 import * as selectStorageAction from '../../../actions/components/select/selectStorageAction'
+import * as carListAction from '../../../actions/views/CarListAction'
 
-
+import globalStyles ,{ styleColor} from '../../GlobalStyles'
 import Select from '../../components/share/form/Select'
-import DateTimePicker from '../../components/FormComponents/DateTimePicker'
+import DatePicker from '../../components/share/form/DatePicker'
 import * as routerDirection from '../../../util/RouterDirection'
 import TextBox from '../../components/FormComponents/TextBox'
 import DisposableList from '../form/select/DisposableList'
 
-class QueryCar extends Component {
-    constructor(props) {
-        super(props)
+const { width } = Dimensions.get('window')
 
-        this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
-        this.onPressIcon = this.onPressIcon.bind(this)
-        this.onPressTextInput = this.onPressTextInput.bind(this)
-        this.onSelect = this.onSelect.bind(this)
-        this.onPressQuery = this.onPressQuery.bind(this)
-        this.state = {
-            queryCar: {
-                vinCode: '',
-                makeId: 0,
-                markeName: '',
-                storageId: 0,
-                storageName: '',
-                routeStartId: 0,
-                routeStart: '',
-                routeEndId: 0,
-                routeEnd: '',
-                entrustId: 0,
-                entrust: '',
-                orderStart: '',
-                orderEnd: '',
-                enterStart: '',
-                enterEnd: '',
-                realStart: '',
-                realEnd: '',
-            },
-            vinRequire: true,
-        }
-    }
-
-    onBarcodeReceived(param) {
-        Actions.searchVinAtCarBlock({ vin: param })
-    }
-    onPressIcon() {
-        Actions.searchVinAtCarBlock()
-    }
-    onPressTextInput() {
-        Actions.searchVinAtCarBlock()
-    }
-
-    onSelect(param) {
-        this.setState({ queryCar: { ...this.state.queryCar, ...param } })
-    }
-
-    onPressQuery() {
-        let { vinCode, makeId, storageId, routeStartId, routeEndId, entrustId, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd } = this.state.queryCar
-        let queryCar = { vinCode, makeId, storageId, routeStartId, routeEndId, entrustId, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd }
-        for (item in queryCar) {
-            if (!queryCar[item]) {
-                delete queryCar[item]
-            }
-        }
-        Actions.carList({ queryCar })
-    }
-
-    render() {
-        const { getMakeList, getMakeListWaiting, getCityList, getCityListWaiting, getEntrustList, getEntrustListWaiting,
-            getStorageList, getStorageListWaiting, parent } = this.props
-        return (
-            <View style={{ flex: 1 }}>
-                {/* <SearchBar
-                    onBarcodeReceived={this.onBarcodeReceived}
-                    onPressIcon={this.onPressIcon}
-                    onPressTextInput={this.onPressTextInput}
-                /> */}
-                <ScrollView>
-                    <View style={{ flex: 1 }}>
-                        <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>
-                            <TextBox
-                                isRequire={false}
-                                title='VIN:'
-                                value={this.state.queryCar.vinCode}
-                                defaultValue={''}
-                                verifications={[{
-                                    type: 'isLength',
-                                    arguments: [0, 17],
-                                    message: '长度不能超过17位'
-                                }]}
-                                onValueChange={(param) => this.onSelect({ vinCode: param })}
-                                onRequire={(param) => this.setState({ vinRequire: param })}
-                                placeholder='请输入vin码'
-                            />
-                        </View>
-                        <View style={{ marginTop: 10, backgroundColor: '#eff3f5', borderTopWidth: 1, borderTopColor: '#00cade' }}>
-                            <Field
-                                label='品牌：'
-                                name='make'
-                                component={Select}
-                                getList={getMakeList}
-                                getListWaiting={getMakeListWaiting}
-                                showList={param => {
-                                    return routerDirection.listCennect(parent)({
-                                        mapStateToProps: makeMapStateToProps,
-                                        mapDispatchToProps: makeMapDispatchToProps,
-                                        List: DisposableList,
-                                        ...param
-                                    })
-                                }} />
-
-
-
-
-
-
-
-
-                            <Field
-                                label='选择仓库：'
-                                name='storage'
-                                component={Select}
-                                getList={getStorageList}
-                                getListWaiting={getStorageListWaiting}
-                                showList={param => {
-                                    return routerDirection.listCennect(parent)({
-                                        mapStateToProps: storageMapStateToProps,
-                                        mapDispatchToProps: storageMapDispatchToProps,
-                                        List: DisposableList,
-                                        ...param
-                                    })
-                                }} />
-                            <Field
-                                label='发运地：'
-                                name='routeStart'
-                                component={Select}
-                                getList={getCityList}
-                                getListWaiting={getCityListWaiting}
-                                showList={param => {
-                                    return routerDirection.listCennect(parent)({
-                                        mapStateToProps: cityMapStateToProps,
-                                        mapDispatchToProps: cityMapDispatchToProps,
-                                        List: DisposableList,
-                                        ...param
-                                    })
-                                }} />
-                            <Field
-                                label='目的地：'
-                                name='routeEnd'
-                                component={Select}
-                                getList={getCityList}
-                                getListWaiting={getCityListWaiting}
-                                showList={param => {
-                                    return routerDirection.listCennect(parent)({
-                                        mapStateToProps: cityMapStateToProps,
-                                        mapDispatchToProps: cityMapDispatchToProps,
-                                        List: DisposableList,
-                                        ...param
-                                    })
-                                }} />
-                            <Field
-                                label='委托方：'
-                                name='entrust'
-                                component={Select}
-                                getList={getEntrustList}
-                                getListWaiting={getEntrustListWaiting}
-                                showList={param => {
-                                    return routerDirection.listCennect(parent)({
-                                        mapStateToProps: entrustMapStateToProps,
-                                        mapDispatchToProps: entrustMapDispatchToProps,
-                                        List: DisposableList,
-                                        ...param
-                                    })
-                                }} />
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={{ flex: 8 }}>
-                                    <DateTimePicker
-                                        isRequire={false}
-                                        labelStyle={{
-                                            fontSize: 12,
-                                            flex: 13,
-                                            textAlign: 'right'
-                                        }}
-                                        iconSytle={{
-                                            fontSize: 18,
-                                            flex: 2,
-                                            textAlign: 'right',
-                                            color: '#7a7a7a'
-                                        }}
-                                        value={this.state.queryCar.orderStart}
-                                        title='指令时间：'
-                                        defaultValue={'请选择'}
-                                        onValueChange={(param) => this.onSelect({ orderStart: param })}
-                                    />
-                                </View>
-                                <View style={{ flex: 7 }}>
-                                    <DateTimePicker
-                                        isRequire={false}
-                                        value={this.state.queryCar.orderEnd}
-                                        title='至：'
-                                        defaultValue={'请选择'}
-                                        onValueChange={(param) => this.onSelect({ orderEnd: param })}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={{ flex: 8 }}>
-                                    <DateTimePicker
-                                        isRequire={false}
-                                        value={this.state.queryCar.enterStart}
-                                        labelStyle={{
-                                            fontSize: 12,
-                                            flex: 13,
-                                            textAlign: 'right'
-                                        }}
-                                        iconSytle={{
-                                            fontSize: 18,
-                                            flex: 2,
-                                            textAlign: 'right',
-                                            color: '#7a7a7a'
-                                        }}
-                                        title='入库时间：'
-                                        defaultValue={'请选择'}
-                                        onValueChange={(param) => this.onSelect({ enterStart: param })}
-                                    />
-                                </View>
-                                <View style={{ flex: 7 }}>
-                                    <DateTimePicker
-                                        isRequire={false}
-                                        value={this.state.queryCar.enterEnd}
-                                        title='至：'
-                                        defaultValue={'请选择'}
-                                        onValueChange={(param) => this.onSelect({ enterEnd: param })}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <View style={{ flex: 8 }}>
-                                    <DateTimePicker
-                                        isRequire={false}
-                                        value={this.state.queryCar.realStart}
-                                        labelStyle={{
-                                            fontSize: 12,
-                                            flex: 13,
-                                            textAlign: 'right'
-                                        }}
-                                        iconSytle={{
-                                            fontSize: 18,
-                                            flex: 2,
-                                            textAlign: 'right',
-                                            color: '#7a7a7a'
-                                        }}
-                                        title='出库时间：'
-                                        defaultValue={'请选择'}
-                                        onValueChange={(param) => this.onSelect({ realStart: param })}
-                                    />
-                                </View>
-                                <View style={{ flex: 7 }}>
-                                    <DateTimePicker
-                                        isRequire={false}
-                                        value={this.state.queryCar.realEnd}
-                                        title='至：'
-                                        defaultValue={'请选择'}
-                                        onValueChange={(param) => this.onSelect({ realEnd: param })}
-                                    />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={{ marginVertical: 20, flexDirection: 'row', justifyContent: 'center', marginHorizontal: 20 }}>
-                            <Button
-                                full
-                                onPress={() => {
-                                    this.setState({
-                                        queryCar: {
-                                            vinCode: '', makeId: 0, markeName: '', storageId: 0, storageName: '', routeStartId: 0, routeStart: '',
-                                            routeEndId: 0, routeEnd: '', entrustId: 0, entrust: '', orderStart: '', orderEnd: '', enterStart: '', enterEnd: '', realStart: '', realEnd: ''
-                                        }
-                                    })
-                                }}
-                                style={{ flex: 1, backgroundColor: '#00cade' }}>
-                                <Text style={{ color: '#fff' }}>重置</Text>
-                            </Button>
-                            <Button
-                                full
-                                disabled={!this.state.vinRequire}
-                                style={this.state.vinRequire ? styles.btnSytle : styles.btnDisabledSytle}
-                                onPress={this.onPressQuery}>
-                                <Text style={{ color: '#fff' }}>查询</Text>
-                            </Button>
-                        </View>
-                    </View>
-                </ScrollView>
-            </View>
-        )
-    }
+const VinText = props => {
+    const { input: { onChange, ...restProps }, meta: { error, touched } } = props
+    return (
+        <View style={{ backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', marginHorizontal: 15, marginTop: 10 }}>
+            <Text style={[globalStyles.largeText, globalStyles.styleColor]}>vin：</Text>
+            <Input
+                placeholder='请输入vin'
+                placeholderTextColor='#ddd'
+                onChangeText={onChange}
+                style={[globalStyles.largeText, globalStyles.styleColor]}
+                {...restProps} />
+        </View>
+    )
 }
+
+// onPressQuery() {
+//     let { vinCode, makeId, storageId, routeStartId, routeEndId, entrustId, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd } = this.state.queryCar
+//     let queryCar = { vinCode, makeId, storageId, routeStartId, routeEndId, entrustId, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd }
+//     for (item in queryCar) {
+//         if (!queryCar[item]) {
+//             delete queryCar[item]
+//         }
+//     }
+//     Actions.carList({ queryCar })
+// }
+
+
+const QueryCar = props => {
+    const { getMakeList, getMakeListWaiting, getCityList, getCityListWaiting, getEntrustList, getEntrustListWaiting,
+        getStorageList, getStorageListWaiting, parent, reset, handleSubmit } = props
+    return (
+        <Container>
+            <Content showsVerticalScrollIndicator={false}>
+                <Field
+                    name='vinCode'
+                    component={VinText}
+                />
+                <View style={styles.body}>
+                    <Field
+                        label='品牌：'
+                        name='make'
+                        component={Select}
+                        getList={getMakeList}
+                        getListWaiting={getMakeListWaiting}
+                        showList={param => {
+                            return routerDirection.listCennect(parent)({
+                                mapStateToProps: makeMapStateToProps,
+                                mapDispatchToProps: makeMapDispatchToProps,
+                                List: DisposableList,
+                                ...param
+                            })
+                        }} />
+                    <Field
+                        label='选择仓库：'
+                        name='storage'
+                        component={Select}
+                        getList={getStorageList}
+                        getListWaiting={getStorageListWaiting}
+                        showList={param => {
+                            return routerDirection.listCennect(parent)({
+                                mapStateToProps: storageMapStateToProps,
+                                mapDispatchToProps: storageMapDispatchToProps,
+                                List: DisposableList,
+                                ...param
+                            })
+                        }} />
+                    <Field
+                        label='发运地：'
+                        name='routeStart'
+                        component={Select}
+                        getList={getCityList}
+                        getListWaiting={getCityListWaiting}
+                        showList={param => {
+                            return routerDirection.listCennect(parent)({
+                                mapStateToProps: cityMapStateToProps,
+                                mapDispatchToProps: cityMapDispatchToProps,
+                                List: DisposableList,
+                                ...param
+                            })
+                        }} />
+                    <Field
+                        label='目的地：'
+                        name='routeEnd'
+                        component={Select}
+                        getList={getCityList}
+                        getListWaiting={getCityListWaiting}
+                        showList={param => {
+                            return routerDirection.listCennect(parent)({
+                                mapStateToProps: cityMapStateToProps,
+                                mapDispatchToProps: cityMapDispatchToProps,
+                                List: DisposableList,
+                                ...param
+                            })
+                        }} />
+                    <Field
+                        label='委托方：'
+                        name='entrust'
+                        component={Select}
+                        getList={getEntrustList}
+                        getListWaiting={getEntrustListWaiting}
+                        showList={param => {
+                            return routerDirection.listCennect(parent)({
+                                mapStateToProps: entrustMapStateToProps,
+                                mapDispatchToProps: entrustMapDispatchToProps,
+                                List: DisposableList,
+                                ...param
+                            })
+                        }} />
+                    <View style={{ flexDirection: 'row' }}>
+                        <Field
+                            label='指令时间：'
+                            name='orderStart'
+                            component={DatePicker}
+                            itemStyle={{ width: width / 2 - 30 }} />
+                        <Field
+                            label='至：'
+                            name='orderEnd'
+                            component={DatePicker}
+                            itemStyle={{ width: width / 2 - 30 }} />
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Field
+                            label='入库时间：'
+                            name='enterStart'
+                            component={DatePicker}
+                            itemStyle={{ width: width / 2 - 30 }} />
+                        <Field
+                            label='至：'
+                            name='enterEnd'
+                            component={DatePicker}
+                            itemStyle={{ width: width / 2 - 30 }} />
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Field
+                            label='出库时间：'
+                            name='realStart'
+                            component={DatePicker}
+                            itemStyle={{ width: width / 2 - 30 }} />
+                        <Field
+                            label='至：'
+                            name='realEnd'
+                            component={DatePicker}
+                            itemStyle={{ width: width / 2 - 30 }} />
+                    </View>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Button
+                        full
+                        onPress={reset}
+                        style={[globalStyles.styleBackgroundColor, styles.button]}>
+                        <Text style={[globalStyles.midText, styles.buttonTitle]}>重置</Text>
+                    </Button>
+                    <Button
+                        full
+                        style={[globalStyles.styleBackgroundColor, styles.button]}
+                        onPress={handleSubmit}>
+                        <Text style={[globalStyles.midText, styles.buttonTitle]}>查询</Text>
+                    </Button>
+                </View>
+            </Content>
+        </Container>
+    )
+}
+
+
 
 
 const makeMapStateToProps = (state) => {
@@ -325,7 +204,6 @@ const makeMapDispatchToProps = (dispatch) => ({
 
 })
 
-
 const cityMapStateToProps = (state) => {
     return {
         listReducer: {
@@ -343,14 +221,13 @@ const cityMapDispatchToProps = (dispatch) => ({
 
 })
 
-
 const entrustMapStateToProps = (state) => {
     return {
         listReducer: {
             Action: state.selectEntrustReducer.getEntrustList,
             data: {
                 list: state.selectEntrustReducer.data.entrustList.map(item => {
-                    return { id: item.id,value:item.short_name }
+                    return { id: item.id, value: item.short_name }
                 })
             }
         }
@@ -361,16 +238,13 @@ const entrustMapDispatchToProps = (dispatch) => ({
 
 })
 
-
-
-
 const storageMapStateToProps = (state) => {
     return {
         listReducer: {
             Action: state.selectStorageReducer.getStorageList,
             data: {
                 list: state.selectStorageReducer.data.storageList.map(item => {
-                    return { id: item.id ,value:item.storage_name}
+                    return { id: item.id, value: item.storage_name }
                 })
             }
         }
@@ -380,7 +254,6 @@ const storageMapStateToProps = (state) => {
 const storageMapDispatchToProps = (dispatch) => ({
 
 })
-
 
 const mapStateToProps = (state) => {
     return {
@@ -418,24 +291,35 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: 'queryCarForm'
+        form: 'queryCarForm',
+        onSubmit: (values, dispatch) => {
+            dispatch(carListAction.getCarListWaiting())
+            Actions.carList()
+            InteractionManager.runAfterInteractions(()=>{
+                dispatch(carListAction.getCarList(values))
+            })
+        }
     })(QueryCar)
 )
 
 
-
-const styles = {
-    btnSytle: {
+const styles = StyleSheet.create({
+    button: {
         flex: 1,
-        marginLeft: 10,
-        backgroundColor: '#00cade'
+        margin: 10
     },
-    btnDisabledSytle: {
-        flex: 1,
-        marginLeft: 10,
-        backgroundColor: '#888888'
+    buttonTitle: {
+        color: '#fff'
+    },
+    buttonContainer: {
+        margin: 10,
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    body: {
+        marginTop: 10,
+        backgroundColor: '#eff3f5',
+        borderTopWidth: 1,
+        borderColor:styleColor
     }
-}
-
-
-
+})

@@ -1,7 +1,7 @@
 import * as loginTypes from './LoginTypes'
 import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
-import * as carListTypes from './CarListTypes'
+//import * as carListTypes from './CarListTypes'
 import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
@@ -30,6 +30,7 @@ import * as selectStorageActionTypes from './components/select/selectStorageActi
 import * as selectEntrustActionTypes from './components/select/selectEntrustActionTypes'
 import * as applyDamageTypes from './views/ApplyDamageTypes'
 import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageTypes'
+import * as carListTypes from './views/CarListTypes'
 import * as responsibilityListTypes from './views/ResponsibilityListTypes'
 import * as demageListTypes from './views/DemageListTypes'
 import * as carInfoForDemageTypes from './components/demageInfo/CarInfoForDemageTypes'
@@ -47,7 +48,6 @@ export {
     storageListTypes,
     selectRowTypes,
     passwordTypes,
-    carListTypes,
     imporCarTypes,
     selectStorageForCarListTypes,
     importCarCameraTypes,
@@ -77,5 +77,6 @@ export {
     selectMakeActionTypes,
     selectCityActionTypes,
     selectStorageActionTypes,
-    selectEntrustActionTypes
+    selectEntrustActionTypes,
+    carListTypes
 }

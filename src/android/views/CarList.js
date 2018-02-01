@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as CarListAction from '../../actions/CarListAction'
+import * as carListAction from '../../actions/views/CarListAction'
 import { Actions } from 'react-native-router-flux'
-import CarListItem from '../components/CarList/CarListItem'
 import {
     Text,
     View,
@@ -11,118 +10,171 @@ import {
     RefreshControl,
     FlatList,
     Button,
-    TouchableHighlight
+    TouchableOpacity,
+    Image,
+    ActivityIndicator
 } from 'react-native'
+import { Container, Icon, Thumbnail, Spinner } from 'native-base'
 import * as RouterDirection from '../../util/RouterDirection'
+import globalStyles, { styleColor } from '../GlobalStyles'
+import moment from 'moment'
 
-class CarList extends Component {
-    constructor(props) {
-        super(props)
-        this.getCarList = this.getCarList.bind(this)
-        this.getCarListMore = this.getCarListMore.bind(this)
-    }
-    componentWillMount() {
-        if (this.props.queryCar) {
-            this.getCarList(this.props.queryCar)
-        }
-        else {
-            this.getCarList({})
-        }
-    }
-
-    getCarList(param) {
-        this.props.getCarList({ optionalParam: { ...param, start: 0, size: 20, active: 1, } })
-    }
-
-    componentWillReceiveProps(nextProps) {
-        let { carListReducer } = nextProps
-        /*getCarList 执行状态*/
-        if (carListReducer.getCarList.isExecStatus == 1) {
-           // console.log('carListReducer.getCarList开始执行')
-        } else if (carListReducer.getCarList.isExecStatus == 2) {
-            //console.log('carListReducer.getCarList执行完毕')
-            if (carListReducer.getCarList.isResultStatus == 0) {
-               // console.log('carListReducer.getCarList执行成功')
-                this.props.resetGetCarList()
-            } else if (carListReducer.getCarList.isResultStatus == 1) {
-               // console.log('carListReducer.getCarList执行错误')
-                this.props.resetGetCarList()
-            } else if (carListReducer.getCarList.isResultStatus == 2) {
-              //  console.log('carListReducer.getCarList执行失败')
-                this.props.resetGetCarList()
-            }
-        }
-
-        /************************************************************************************************/
-
-
-        /*getCarListMore 执行状态*/
-        if (carListReducer.getCarListMore.isExecStatus == 1) {
-          //  console.log('carListReducer.getCarListMore开始执行')
-        } else if (carListReducer.getCarListMore.isExecStatus == 2) {
-          //  console.log('carListReducer.getCarListMore执行完毕')
-            if (carListReducer.getCarListMore.isResultStatus == 0) {
-           //     console.log('carListReducer.getCarListMore执行成功没有到底')
-            } else if (carListReducer.getCarListMore.isResultStatus == 1) {
-            //    console.log('carListReducer.getCarListMore执行错误')
-            } else if (carListReducer.getCarListMore.isResultStatus == 2) {
-             //   console.log('carListReducer.getCarListMore执行失败')
-            } else if (carListReducer.getCarListMore.isResultStatus == 3) {
-             //   console.log('carListReducer.getCarListMore已经到底')
-            }
-        }
-
-        /************************************************************************************************/
-
-
-    }
-
-    getCarListMore() {
-        let { carList } = this.props.carListReducer.getCarList.data
-        if (this.props.queryCar) {
-            this.props.getCarListMore({ optionalParam: { ...this.props.queryCar, start: carList.length, size: 20, active: 1 } })
-        }
-        else {
-            this.props.getCarListMore({ optionalParam: { start: carList.length, size: 20, active: 1 } })
-        }
-
-    }
-
-    render() {
-        let { carList } = this.props.carListReducer.getCarList.data
-        return (
-            <View style={{ flex: 1 }}>
-                <FlatList
-                    colors={'#00cade'}
-                    onEndReached={this.getCarListMore}
-                    data={carList}
-                    onEndReachedThreshold={1}
-                    renderItem={({ item }) => <CarListItem car={item} key={item.r_id} showCarInfo={RouterDirection.carInformation(this.props.parent)} />}
-                />
-                {carList.length==0&& <Text style={{position:'absolute',top:10,left:10}}>没有查询到任何车辆</Text>}
+const renderListItem = props => {
+    const { item: { plan_out_time, make_name, storage_name, vin, colour, enter_time, real_out_time, col, row, area_name },item, index, parent } = props
+    return (
+        <TouchableOpacity key={index} onPress={() => {
+            RouterDirection.carInformation(parent)({ car: item })
+        }}>
+            <View style={styles.item}>
+                <View style={styles.itemRow}>
+                    <Text style={[globalStyles.largeText, globalStyles.styleColor]}>vin:{vin}</Text>
+                </View>
+                <View style={styles.itemRow}>
+                    <View style={styles.el}>
+                        <Image source={{ uri: 'import_car' }} style={styles.image} />
+                        <Text style={[globalStyles.midText, styles.elText]}>{enter_time ? moment(enter_time).format('YYYY-MM-DD HH:mm:ss') : '未入库'}</Text>
+                    </View>
+                    <View style={styles.el}>
+                        <Image source={{ uri: 'planexport_car' }} style={styles.image} />
+                        <Text style={[globalStyles.midText, styles.elText]}>{real_out_time ? moment(real_out_time).format('YYYY-MM-DD HH:mm:ss') : '未出库'}</Text>
+                    </View>
+                </View>
+                <View style={styles.itemRow}>
+                    <View style={styles.el}>
+                        <Icon name='ios-car' style={styles.elIcon} type="ionicons" />
+                        <Text style={[globalStyles.midText, styles.elText]}>{make_name ? make_name : ''}</Text>
+                    </View>
+                    <View style={styles.el}>
+                        <Icon name='ios-pin' style={styles.elIcon} type="ionicons" />
+                        <Text style={[globalStyles.midText, styles.elText]}>{row && col ? `${storage_name}  ${area_name}  ${row}-${col}` : '已出库'}</Text>
+                    </View>
+                </View>
             </View>
+        </TouchableOpacity>
+    )
+}
+
+const renderEmpty = () => {
+    return (
+        <View style={styles.listEmptyContainer}>
+            <Thumbnail square source={{ uri: 'emptylisticon' }} />
+            <Text style={[globalStyles.largeText, styles.listEmptyText]}>暂无车辆</Text>
+        </View>
+    )
+}
+
+const ListFooterComponent = () => {
+    return (
+        <View style={styles.footerContainer}>
+            <ActivityIndicator color={styleColor} styleAttr='Small' />
+            <Text style={[globalStyles.smallText, styles.footerText]}>正在加载...</Text>
+        </View>
+    )
+}
+
+
+const CarList = props => {
+    const { carListReducer: { data: { carList, isComplete } }, carListReducer, getCarListMore, parent } = props
+    if (carListReducer.getCarList.isResultStatus == 1) {
+        return (
+            <Container>
+                <Spinner color={styleColor} />
+            </Container>
+        )
+    }
+    else {
+        return (
+            <Container>
+                <FlatList
+                    ListEmptyComponent={renderEmpty}
+                    ListFooterComponent={carListReducer.getCarListMore.isResultStatus == 1 ? ListFooterComponent : <View style={{ height: 10 }} />}
+                    showsVerticalScrollIndicator={false}
+                    onEndReached={() => {
+                        if (carListReducer.getCarList.isResultStatus == 2 && !isComplete) {
+                            getCarListMore()
+                        }
+                    }}
+                    data={carList}
+                    onEndReachedThreshold={0.5}
+                    renderItem={(param) => renderListItem({ ...param, parent })}
+                />
+            </Container>
         )
     }
 }
 
+
+const styles = StyleSheet.create({
+    item: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderColor: '#f1f1f1'
+    },
+    itemRow: {
+        flexDirection: 'row',
+        padding: 5,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    image: {
+        width: 12,
+        height: 12
+    },
+    el: {
+        flexDirection: 'row',
+        alignItems: 'center'
+
+    },
+    elText: {
+        paddingLeft: 5
+    },
+    footerContainer: {
+        alignSelf: 'center',
+        flexDirection: 'row',
+        margin: 10,
+        alignItems: 'center'
+    },
+    footerText: {
+        paddingLeft: 10
+    },
+    listEmptyContainer: {
+        alignItems: 'center',
+        marginTop: 60
+    },
+    listEmptyText: {
+        color: '#aaa',
+        marginTop: 30
+    },
+    elIcon: {
+        fontSize: 15,
+        color: '#cccccc'
+    }
+})
+
+
 const mapStateToProps = (state) => {
     return {
-        carListReducer: state.CarListReducer,
+        carListReducer: state.carListReducer,
         user: state.LoginReducer.user,
         selectStorageForCarListReducer: state.SelectStorageForCarListReducer
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCarList: (param) => {
-        dispatch(CarListAction.getCarList(param))
+    getCarList: () => {
+        dispatch(carListAction.getCarList())
     },
-    getCarListMore: (param) => {
-        dispatch(CarListAction.getCarListMore(param))
+    getCarListMore: () => {
+        dispatch(carListAction.getCarListMore())
     },
     resetGetCarList: () => {
-        dispatch(CarListAction.resetGetCarList())
+        dispatch(carListAction.resetGetCarList())
     }
 })
 
+
+
+
 export default connect(mapStateToProps, mapDispatchToProps)(CarList)
+
+
