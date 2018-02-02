@@ -14,8 +14,8 @@ import RecordListReducer from './RecordListReducer'
 import SearchVinReducer from './SearchVinReducer'
 import ParkingViewReducer from './ParkingViewReducer'
 import AddCarReducer from './AddCarReducer'
-import SelectReceiveReducer from './SelectReceiveReducer'
-import SelectBaseAddrReducer from './SelectBaseAddrReducer'
+//import SelectReceiveReducer from './SelectReceiveReducer'
+//import SelectBaseAddrReducer from './SelectBaseAddrReducer'
 import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
 
 import RetrievePasswordReducer from './RetrievePasswordReducer'
@@ -43,6 +43,8 @@ import recordForDemageReducer from './components/demageInfo/recordForDemageReduc
 import carListReducer from './views/CarListReducer'
 import selectAreaReducer from './components/select/selectAreaReducer'
 import selectParkingReducer from './components/select/selectParkingReducer'
+import selectBaseAddrReducer from './components/select/selectBaseAddrReducer'
+import selectReceiveReducer from './components/select/selectReceiveReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -61,8 +63,8 @@ export default combineReducers({
     SelectStorageForCarListReducer,
     ParkingViewReducer,
     AddCarReducer,
-    SelectReceiveReducer,
-    SelectBaseAddrReducer,
+    // SelectReceiveReducer,
+    // SelectBaseAddrReducer,
     //SelectAreaReducer,
     SceneReducer,
     RetrievePasswordReducer,
@@ -88,5 +90,7 @@ export default combineReducers({
     selectEntrustReducer,
     carListReducer,
     selectAreaReducer,
-    selectParkingReducer
+    selectParkingReducer,
+    selectReceiveReducer,
+    selectBaseAddrReducer
 })

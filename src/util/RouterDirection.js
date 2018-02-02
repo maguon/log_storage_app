@@ -125,3 +125,11 @@ export const listCennect = (parent) => {
     if (parent === 'storageBlock') return Actions.listCennectAtStorageBlock
     if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock
 }
+
+
+export const popToCarInfo = parent => {
+    // if (parent === 'homeBlock') return Actions.popTo('carInformationAtCarBlock')
+    if (parent === 'carBlock') Actions.popTo('carInformationAtCarBlock')
+    // if (parent === 'storageBlock') return Actions.listCennectAtStorageBlock
+    // if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock
+}

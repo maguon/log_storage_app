@@ -4,7 +4,6 @@ import {
     View,
     Text
 } from 'react-native'
-
 import { Icon, Container } from 'native-base'
 import globalStyles from '../../GlobalStyles'
 import moment from 'moment'

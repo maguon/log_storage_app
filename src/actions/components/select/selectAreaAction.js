@@ -7,7 +7,7 @@ export const getAreaList = (param) => async (dispatch) => {
     try {
         const url = `${base_host}/storageArea?${ObjectToUrl({
             areaStatus: 1,
-            storageId: param.storage_id
+            storageId: param.id
         })}`
         const res = await httpRequest.get(url)
         if (res.success) {

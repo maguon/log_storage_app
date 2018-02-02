@@ -38,32 +38,40 @@ export const moveCar = (param) => async (dispatch, getState) => {
             dispatch({ type: actionTypes.carInfoTypes.put_exportCar_success, payload: {} })
             ToastAndroid.showWithGravity('移位成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         } else {
-            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: { data: res.msg } })
+            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: { failedMsg: res.msg } })
             ToastAndroid.showWithGravity(`移位失败:${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
 
         }
     } catch (err) {
-        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: { data: err } })
+        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: { errorMsg: err } })
         ToastAndroid.showWithGravity(`移位失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
 
     }
 }
 
-export const importCar = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStorageRel?${ObjectToUrl(param.optionalParam)}`
-    dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_WAITING, payload: {} })
-    httpRequest
-        .putcallback(url, param.postParam, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_SUCCESS, payload: {} })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.IMPORT_CAR_FAILED, payload: { data: res.msg } })
-                }
-            }
+export const importCar = (param) =>async (dispatch, getState) => {
+    const { LoginReducer: { user: { userId } } } = getState()
+    try{
+        dispatch({ type: actionTypes.carInfoTypes.put_importCar_waiting, payload: {} })
+        const url = `${base_host}/user/${userId}/car/${param.car.id}/carStorageRel?${ObjectToUrl({
+            vin:param.car.vin
+        })}`
+        const res =await  httpRequest.put(url,{
+            parkingId: param.col.id,
+            storageId: param.storage.id,
+            storageName: param.storage.value,
         })
+        if(res.success){
+            dispatch({ type: actionTypes.carInfoTypes.put_importCar_success, payload: {} })
+            ToastAndroid.showWithGravity('入库成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        }else{
+            dispatch({ type: actionTypes.carInfoTypes.put_importCar_error, payload: { failedMsg: err } })
+            ToastAndroid.showWithGravity(`入库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        }
+    }catch(err){
+        dispatch({ type: actionTypes.carInfoTypes.put_importCar_error, payload: { errorMsg: err } })
+        ToastAndroid.showWithGravity(`入库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+    }
 }
 
 export const updateCarInfo = (param) => (dispatch) => {

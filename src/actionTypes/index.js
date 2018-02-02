@@ -13,8 +13,6 @@ import * as parkingViewTypes from './ParkingViewTypes'
 import * as addCarTypes from './AddCarTypes'
 import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
-import * as selectBaseAddrTypes from './SelectBaseAddrTypes'
-
 import * as sceneTypes from './SceneTypes'
 import * as retrievePasswordTypes from './RetrievePasswordTypes'
 
@@ -40,7 +38,8 @@ import * as recordForDemageTypes from './components/demageInfo/RecordForDemageTy
 import * as carInfoTypes from './views/CarInfoTypes'
 import * as selectAreaActionTypes from './components/select/selectAreaActionTypes'
 import * as selectParkingActionTypes from './components/select/selectParkingActionTypes'
-
+import * as selectBaseAddrActionTypes from './components/select/selectBaseAddrActionTypes'
+import * as selectReceiveActionTypes from './components/select/selectReceiveActionTypes'
 
 export {
     loginTypes,
@@ -57,8 +56,8 @@ export {
     recordListTypes,
     parkingViewTypes,
     addCarTypes,
-    selectReceiveTypes,
-    selectBaseAddrTypes,
+    // selectReceiveTypes,
+    // selectBaseAddrTypes,
    // selectAreaTypes,
     retrievePasswordTypes,
 
@@ -83,5 +82,7 @@ export {
     selectAreaActionTypes,
     carListTypes,
     carInfoTypes,
-    selectParkingActionTypes
+    selectParkingActionTypes,
+    selectReceiveActionTypes,
+    selectBaseAddrActionTypes
 }

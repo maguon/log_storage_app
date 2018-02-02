@@ -26,7 +26,23 @@ import RecordForCarInfo from '../components/carInfo/RecordForCarInfo'
 import DisposableList from '../views/form/select/DisposableList'
 import * as routerDirection from '../../util/RouterDirection'
 
-const onPressMoveCar = ({ getAreaList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList, param }) => {
+
+const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList }) => {
+    getStorageListWaiting()
+    routerDirection.listCennect(parent)({
+        mapStateToProps: storageMapStateToProps,
+        mapDispatchToProps: storageMapDispatchToProps,
+        List: DisposableList,
+        onSelect: (item) => {
+            InteractionManager.runAfterInteractions(() => {
+                onSelectArea({ param: { storage: item }, getParkingListWaiting, parent, getParkingList, getAreaList, getAreaListWaiting, onSelect })
+            })
+        }
+    })
+    InteractionManager.runAfterInteractions(getStorageList)
+}
+
+const onSelectArea = ({ getAreaList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList, param }) => {
     getAreaListWaiting()
     routerDirection.listCennect(parent)({
         mapStateToProps: areaMapStateToProps,
@@ -59,11 +75,11 @@ const onSelectRow = ({ param, getParkingListWaiting, parent, getParkingList, onS
 
 const onSelectColumn = ({ param, parent, onSelect }) => {
     routerDirection.listCennect(parent)({
-        mapStateToProps: (state,ownProps)=>columnMapStateToProps(state,ownProps,param.row),
+        mapStateToProps: (state, ownProps) => columnMapStateToProps(state, ownProps, param.row),
         mapDispatchToProps: columnMapDispatchToProps,
         List: DisposableList,
         onSelect: (item) => {
-            Actions.pop({popNum:3})
+            routerDirection.popToCarInfo(parent)
             InteractionManager.runAfterInteractions(() => {
                 onSelect({ ...param, col: item })
             })
@@ -76,6 +92,7 @@ const CarInformation = props => {
         initParam,
         exportCar,
         moveCar,
+        importCar,
         getStorageListWaiting,
         getStorageList,
         getAreaList,
@@ -83,9 +100,6 @@ const CarInformation = props => {
         getParkingListWaiting,
         getParkingList,
         selectParkingReducer,
-        // carInfoForDemageReducer: { getCarInfo },
-        // recordForDemageReducer: { getCarInfoRecord },
-        // demageOpResultReducer: { getDemageOpResult },
         parent } = props
     return (
         <Container style={globalStyles.listBackgroundColor}>
@@ -100,13 +114,22 @@ const CarInformation = props => {
                         {car_status != 9 && rel_status != 1 && <CarDetail car={car} />}
                         {car_status != 9 && !rel_status && <CarDetail car={car} />}
                         {car_status == 9 && <CarDetail car={car} />}
-                        {car_status != 9 && rel_status == 1 && <CarInfoEditor car={car} />}
+                        {car_status != 9 && rel_status == 1 && <CarInfoEditor car={car} parent={parent}/>}
                         {car_status != 9 && rel_status == 2 && <Button full
-                            onPress={() => { }}
+                            onPress={() => onSelectStorage({
+                                parent,
+                                getParkingList,
+                                getParkingListWaiting,
+                                getAreaList,
+                                getAreaListWaiting,
+                                getStorageListWaiting,
+                                getStorageList,
+                                onSelect: (item) => importCar({ ...item, car })
+                            })}
                             style={{ margin: 15, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>}
-                        {car_status != 9 && !rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
+                        {/* {car_status != 9 && !rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
                             <Button full
                                 onPress={() => { }}
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
@@ -117,7 +140,7 @@ const CarInformation = props => {
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                 <Text style={{ color: '#fff' }}>送达</Text>
                             </Button>
-                        </View>}
+                        </View>} */}
                         {car_status != 9 && rel_status == 1 &&
                             <View style={{ flexDirection: 'row', margin: 10 }}>
                                 <Button full
@@ -131,11 +154,11 @@ const CarInformation = props => {
                                     <Text style={{ color: '#fff' }}>出库</Text>
                                 </Button>
                                 <Button full
-                                    onPress={() => onPressMoveCar({
+                                    onPress={() => onSelectArea({
                                         parent,
                                         getParkingList,
                                         getParkingListWaiting,
-                                        param: { storage: { storage_id: car.storage_id } },
+                                        param: { storage: { id: car.storage_id } },
                                         getAreaList,
                                         getAreaListWaiting,
                                         onSelect: (item) => moveCar({ parkingId: item.col.id, carId: car.id })
@@ -189,7 +212,6 @@ const storageMapStateToProps = (state) => {
             Action: state.selectStorageReducer.getStorageList,
             data: {
                 list: state.selectStorageReducer.data.storageList.map(item => {
-
                     return { id: item.id, value: item.storage_name }
                 })
             }
@@ -218,7 +240,6 @@ const areaMapDispatchToProps = (dispatch) => ({
 
 })
 
-
 const rowMapStateToProps = (state) => {
     return {
         listReducer: {
@@ -228,16 +249,15 @@ const rowMapStateToProps = (state) => {
                     .filter(item => !item.rel_status)
                     .map(item => item.row))).map(item => {
                         return { id: item, value: item }
-                })
+                    })
             }
         }
     }
 }
 
-
 const rowMapDispatchToProps = (dispatch) => ({
-    
-    })
+
+})
 
 
 const columnMapStateToProps = (state, ownProps, row) => {
@@ -254,11 +274,10 @@ const columnMapStateToProps = (state, ownProps, row) => {
         }
     }
 }
-
 const columnMapDispatchToProps = (dispatch) => ({
-    
-    })
-    
+
+})
+
 
 
 const mapStateToProps = (state) => {
@@ -275,6 +294,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     moveCar: param => {
         dispatch(carInfoAction.moveCar(param))
+    },
+    importCar: param => {
+        dispatch(carInfoAction.importCar(param))
     },
     getStorageList: () => {
         dispatch(selectStorageAction.getStorageList())
