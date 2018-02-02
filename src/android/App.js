@@ -214,6 +214,7 @@ class App extends Component {
                                     LeftButton={LeftButton}
                                     hideTabBar />
                                 <Scene key="listCennectAtCarBlock"
+                                    clone={true}
                                     component={ListCennect}
                                     hideTabBar
                                     navBar={NavSearchStaticBar}

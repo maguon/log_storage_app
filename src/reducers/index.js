@@ -42,6 +42,7 @@ import imageListForDemageReducer from './components/demageInfo/imageListForDemag
 import recordForDemageReducer from './components/demageInfo/recordForDemageReducer' 
 import carListReducer from './views/CarListReducer'
 import selectAreaReducer from './components/select/selectAreaReducer'
+import selectParkingReducer from './components/select/selectParkingReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -86,5 +87,6 @@ export default combineReducers({
     selectStorageReducer,
     selectEntrustReducer,
     carListReducer,
-    selectAreaReducer
+    selectAreaReducer,
+    selectParkingReducer
 })

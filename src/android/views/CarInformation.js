@@ -9,6 +9,7 @@ import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, ListItem, Spinner
 import globalStyles, { styleColor } from '../GlobalStyles'
 import * as selectStorageAction from '../../actions/components/select/selectStorageAction'
 import * as selectAreaAction from '../../actions/components/select/selectAreaAction'
+import * as selectParkingAction from '../../actions/components/select/selectParkingAction'
 // import CarInfoForDemage from '../components/demageInfo/CarInfoForDemage'
 // import RecordForDemage from '../components/demageInfo/RecordForDemage'
 // import ImageListForDemage from '../components/demageInfo/ImageListForDemage'
@@ -25,44 +26,67 @@ import RecordForCarInfo from '../components/carInfo/RecordForCarInfo'
 import DisposableList from '../views/form/select/DisposableList'
 import * as routerDirection from '../../util/RouterDirection'
 
-const onPressMoveCar = ({ getList, onChange, getListWaiting, parent }) => {
-    getListWaiting()
+const onPressMoveCar = ({ getAreaList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList, param }) => {
+    getAreaListWaiting()
     routerDirection.listCennect(parent)({
         mapStateToProps: areaMapStateToProps,
         mapDispatchToProps: areaMapDispatchToProps,
         List: DisposableList,
-        onSelect: (param) => {
-            //Actions.pop()
-
+        onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
-                onSelectRow(param)
+                onSelectRow({ param: { ...param, area: item }, getParkingListWaiting, parent, getParkingList, onSelect })
             })
         }
     })
-    InteractionManager.runAfterInteractions(getList)
+    InteractionManager.runAfterInteractions(() => getAreaList(param.storage))
 }
 
-const onSelectRow = () => {
+const onSelectRow = ({ param, getParkingListWaiting, parent, getParkingList, onSelect }) => {
+    getParkingListWaiting()
+    routerDirection.listCennect(parent)({
+        mapStateToProps: rowMapStateToProps,
+        mapDispatchToProps: rowMapDispatchToProps,
+        List: DisposableList,
+        onSelect: (item) => {
+            InteractionManager.runAfterInteractions(() => {
+                onSelectColumn({ param: { ...param, row: item }, parent, onSelect })
+            })
+        }
+    })
+    InteractionManager.runAfterInteractions(() => getParkingList(param))
 
 }
 
-const onSelectColumn = () => {
-
+const onSelectColumn = ({ param, parent, onSelect }) => {
+    routerDirection.listCennect(parent)({
+        mapStateToProps: (state,ownProps)=>columnMapStateToProps(state,ownProps,param.row),
+        mapDispatchToProps: columnMapDispatchToProps,
+        List: DisposableList,
+        onSelect: (item) => {
+            Actions.pop({popNum:3})
+            InteractionManager.runAfterInteractions(() => {
+                onSelect({ ...param, col: item })
+            })
+        }
+    })
 }
 
 const CarInformation = props => {
     const { initParam: { car, car: { rel_status, car_status } },
         initParam,
         exportCar,
+        moveCar,
         getStorageListWaiting,
         getStorageList,
         getAreaList,
         getAreaListWaiting,
+        getParkingListWaiting,
+        getParkingList,
+        selectParkingReducer,
         // carInfoForDemageReducer: { getCarInfo },
         // recordForDemageReducer: { getCarInfoRecord },
         // demageOpResultReducer: { getDemageOpResult },
         parent } = props
-    console.log('car', car)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>
@@ -109,9 +133,12 @@ const CarInformation = props => {
                                 <Button full
                                     onPress={() => onPressMoveCar({
                                         parent,
-                                        getList: ()=>getAreaList({storage_id:car.storage_id}),
-                                        getListWaiting: getAreaListWaiting,
-                                        onChange: (item) => console.log(item)
+                                        getParkingList,
+                                        getParkingListWaiting,
+                                        param: { storage: { storage_id: car.storage_id } },
+                                        getAreaList,
+                                        getAreaListWaiting,
+                                        onSelect: (item) => moveCar({ parkingId: item.col.id, carId: car.id })
                                     })}
                                     style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                     <Text style={{ color: '#fff' }}>移位</Text>
@@ -162,6 +189,7 @@ const storageMapStateToProps = (state) => {
             Action: state.selectStorageReducer.getStorageList,
             data: {
                 list: state.selectStorageReducer.data.storageList.map(item => {
+
                     return { id: item.id, value: item.storage_name }
                 })
             }
@@ -172,7 +200,6 @@ const storageMapStateToProps = (state) => {
 const storageMapDispatchToProps = (dispatch) => ({
 
 })
-
 
 const areaMapStateToProps = (state) => {
     return {
@@ -191,17 +218,63 @@ const areaMapDispatchToProps = (dispatch) => ({
 
 })
 
+
+const rowMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectParkingReducer.getParkingList,
+            data: {
+                list: Array.from(new Set(state.selectParkingReducer.data.parkingList
+                    .filter(item => !item.rel_status)
+                    .map(item => item.row))).map(item => {
+                        return { id: item, value: item }
+                })
+            }
+        }
+    }
+}
+
+
+const rowMapDispatchToProps = (dispatch) => ({
+    
+    })
+
+
+const columnMapStateToProps = (state, ownProps, row) => {
+    return {
+        listReducer: {
+            Action: state.selectParkingReducer.getParkingList,
+            data: {
+                list: state.selectParkingReducer.data.parkingList
+                    .filter(item => !item.rel_status && item.row == row.value)
+                    .map(item => {
+                        return { id: item.id, value: item.col }
+                    })
+            }
+        }
+    }
+}
+
+const columnMapDispatchToProps = (dispatch) => ({
+    
+    })
+    
+
+
 const mapStateToProps = (state) => {
     return {
         carInfoForDemageReducer: state.carInfoForDemageReducer,
         recordForDemageReducer: state.recordForDemageReducer,
-        demageOpResultReducer: state.demageOpResultReducer
+        demageOpResultReducer: state.demageOpResultReducer,
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     exportCar: param => {
         dispatch(carInfoAction.exportCar(param))
+    },
+    moveCar: param => {
+        dispatch(carInfoAction.moveCar(param))
     },
     getStorageList: () => {
         dispatch(selectStorageAction.getStorageList())
@@ -210,11 +283,16 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(selectStorageAction.getStorageListWaiting())
     },
     getAreaList: (param) => {
-        console.log('getAreaList')
         dispatch(selectAreaAction.getAreaList(param))
     },
     getAreaListWaiting: () => {
         dispatch(selectAreaAction.getAreaListWaiting())
+    },
+    getParkingList: (param) => {
+        dispatch(selectParkingAction.getParkingList(param))
+    },
+    getParkingListWaiting: (param) => {
+        dispatch(selectParkingAction.getParkingListWaiting())
     }
 })
 

@@ -39,6 +39,7 @@ import * as imageListForDemageTypes from './components/demageInfo/ImageListForDe
 import * as recordForDemageTypes from './components/demageInfo/RecordForDemageTypes'
 import * as carInfoTypes from './views/CarInfoTypes'
 import * as selectAreaActionTypes from './components/select/selectAreaActionTypes'
+import * as selectParkingActionTypes from './components/select/selectParkingActionTypes'
 
 
 export {
@@ -81,5 +82,6 @@ export {
     selectEntrustActionTypes,
     selectAreaActionTypes,
     carListTypes,
-    carInfoTypes
+    carInfoTypes,
+    selectParkingActionTypes
 }

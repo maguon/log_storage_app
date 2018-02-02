@@ -7,24 +7,45 @@ import { ToastAndroid } from 'react-native'
 
 export const exportCar = param => async (dispatch, getState) => {
     const { LoginReducer: { user: { userId } } } = getState()
-    try{
+    try {
         dispatch({ type: actionTypes.carInfoTypes.put_exportCar_waiting, payload: {} })
         const url = `${base_host}/user/${userId}/carStorageRel/${param.r_id}/relStatus/2?${ObjectToUrl({
             parkingId: param.p_id,
             storageId: param.storage_id,
             carId: param.id
         })}`
-        const res=await httpRequest.put(url,{})
-        if(res.success){
+        const res = await httpRequest.put(url, {})
+        if (res.success) {
             dispatch({ type: actionTypes.carInfoTypes.put_exportCar_success, payload: {} })
             ToastAndroid.showWithGravity('出库成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-        }else{
-            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: {failedMsg:res.msg} })
+        } else {
+            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: { failedMsg: res.msg } })
             ToastAndroid.showWithGravity(`出库失败:${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         }
-    }catch(err){
-        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: {errorMsg:err} })
-        ToastAndroid.showWithGravity(`已全部加载完毕:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+    } catch (err) {
+        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: { errorMsg: err } })
+        ToastAndroid.showWithGravity(`出库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+    }
+}
+
+export const moveCar = (param) => async (dispatch, getState) => {
+    const { LoginReducer: { user: { userId } } } = getState()
+    try {
+        dispatch({ type: actionTypes.carInfoTypes.put_moveCar_waiting, payload: {} })
+        const url = `${base_host}/user/${userId}/storageParking/${param.parkingId}?${ObjectToUrl({ carId: param.carId })}`
+        const res = await httpRequest.put(url, {})
+        if (res.success) {
+            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_success, payload: {} })
+            ToastAndroid.showWithGravity('移位成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        } else {
+            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: { data: res.msg } })
+            ToastAndroid.showWithGravity(`移位失败:${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+
+        }
+    } catch (err) {
+        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: { data: err } })
+        ToastAndroid.showWithGravity(`移位失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+
     }
 }
 
@@ -62,29 +83,6 @@ export const updateCarInfo = (param) => (dispatch) => {
             }
         })
 }
-
-
-export const moveCar = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/storageParking/${param.requiredParam.parkingId}?${ObjectToUrl(param.optionalParam)}`
-    dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_WAITING, payload: {} })
-    httpRequest
-        .putcallback(url, {}, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.MOVE_CAR_SUCCESS, payload: {} })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.APPEND_CAR_IMAGE_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
-}
-
-
-
-
-
 
 export const delImage = (param) => (dispatch) => {
     let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`
