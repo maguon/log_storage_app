@@ -40,6 +40,7 @@ import * as selectAreaActionTypes from './components/select/selectAreaActionType
 import * as selectParkingActionTypes from './components/select/selectParkingActionTypes'
 import * as selectBaseAddrActionTypes from './components/select/selectBaseAddrActionTypes'
 import * as selectReceiveActionTypes from './components/select/selectReceiveActionTypes'
+import * as carInfoEditorTypes from './components/carInfo/CarInfoEditorTypes'
 
 export {
     loginTypes,
@@ -84,5 +85,6 @@ export {
     carInfoTypes,
     selectParkingActionTypes,
     selectReceiveActionTypes,
-    selectBaseAddrActionTypes
+    selectBaseAddrActionTypes,
+    carInfoEditorTypes
 }

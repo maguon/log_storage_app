@@ -74,23 +74,7 @@ export const importCar = (param) =>async (dispatch, getState) => {
     }
 }
 
-export const updateCarInfo = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}`
-    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_WAITING, payload: {} })
-    httpRequest
-        .putcallback(url, param.putParam, (err, res) => {
-            if (err) {
 
-                dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_SUCCESS, payload: { data: param.putParam } })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.UPDATE_CARINFO_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
-}
 
 export const delImage = (param) => (dispatch) => {
     let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`

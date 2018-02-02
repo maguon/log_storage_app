@@ -25,6 +25,7 @@ import ImageListForCarInfo from '../components/carInfo/ImageListForCarInfo'
 import RecordForCarInfo from '../components/carInfo/RecordForCarInfo'
 import DisposableList from '../views/form/select/DisposableList'
 import * as routerDirection from '../../util/RouterDirection'
+import {submit} from 'redux-form'
 
 
 const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList }) => {
@@ -93,6 +94,7 @@ const CarInformation = props => {
         exportCar,
         moveCar,
         importCar,
+        updateCarInfo,
         getStorageListWaiting,
         getStorageList,
         getAreaList,
@@ -144,7 +146,7 @@ const CarInformation = props => {
                         {car_status != 9 && rel_status == 1 &&
                             <View style={{ flexDirection: 'row', margin: 10 }}>
                                 <Button full
-                                    onPress={() => { }}
+                                    onPress={updateCarInfo}
                                     style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                     <Text style={{ color: '#fff' }}>修改</Text>
                                 </Button>
@@ -315,7 +317,11 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getParkingListWaiting: (param) => {
         dispatch(selectParkingAction.getParkingListWaiting())
+    },
+    updateCarInfo:()=>{
+        dispatch(submit('carInfoEditorForm'))
     }
+    
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarInformation)

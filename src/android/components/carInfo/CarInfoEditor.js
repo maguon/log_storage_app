@@ -13,15 +13,18 @@ import * as selectCityAction from '../../../actions/components/select/selectCity
 import * as selectEntrustAction from '../../../actions/components/select/selectEntrustAction'
 import * as selectBaseAddrAction from '../../../actions/components/select/selectBaseAddrAction'
 import * as selectReceiveAction from '../../../actions/components/select/selectReceiveAction'
+import * as carInfoEditorAction from '../../../actions/components/carInfo/CarInfoEditorAction'
 import Select from '../../components/share/form/Select'
+import DatePicker from '../../components/share/form/DatePicker'
 import DisposableList from '../../views/form/select/DisposableList'
 import * as routerDirection from '../../../util/RouterDirection'
+import RichTextBox from '../../components/share/form/RichTextBox'
 
 const CarInfoEditor = props => {
-    const { car: { vin }, parent, getMakeList, getMakeListWaiting, getCityList, getCityListWaiting,
+    const { car: { vin }, car, parent, getMakeList, getMakeListWaiting, getCityList, getCityListWaiting,
         getEntrustList, getEntrustListWaiting, getReceiveList, getReceiveListWaiting, getBaseAddrList,
-        getBaseAddrListWaiting, carInfoEditorFormValues } = props
-    console.log('carInfoEditorFormValues', carInfoEditorFormValues)
+        getBaseAddrListWaiting,
+        carInfoEditorFormValues = { routeStart: {}, routeEnd: {},make:{},entrust:{},baseAddr:{},receive:{} } } = props
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -69,7 +72,7 @@ const CarInfoEditor = props => {
                         ...param
                     })
                 }} />
-            <Field
+            {carInfoEditorFormValues.routeStart.id&&<Field
                 label='发货地址：'
                 name='baseAddr'
                 component={Select}
@@ -82,8 +85,7 @@ const CarInfoEditor = props => {
                         List: DisposableList,
                         ...param
                     })
-                }} />
-
+                }} />}
             <Field
                 label='目的地：'
                 name='routeEnd'
@@ -98,7 +100,8 @@ const CarInfoEditor = props => {
                         ...param
                     })
                 }} />
-            <Field
+
+            {carInfoEditorFormValues.routeEnd.id&&<Field
                 label='经销商：'
                 name='receive'
                 component={Select}
@@ -111,17 +114,15 @@ const CarInfoEditor = props => {
                         List: DisposableList,
                         ...param
                     })
-                }} />
-            
-            {/* <View style={styles.item}>
-                <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>指令时间：</Text>{order_date ? `${moment(order_date).format('YYYY-MM-DD')}` : ''}</Text>
-            </View>
+                }} />}
+            <Field
+                label='指令时间：'
+                name='orderDate'
+                component={DatePicker} />
             <View style={styles.item}>
-                <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>当前位置：</Text>{addr_name ? `${addr_name}` : ''}</Text>
+                <Text style={globalStyles.midText}><Text>当前位置：</Text>{car.storage_name ? `${car.storage_name}` : ''}{car.area_name ? `-${car.area_name}` : ''}{car.row && car.col ? `(${car.row}-${car.col})` : ''}</Text>
             </View>
-            <View style={styles.item}>
-                <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>备注：</Text>{remark ? `${remark}` : ''}</Text>
-            </View> */}
+            <Field label='备注：' name='remark' component={RichTextBox} />
         </View>
     )
 }
@@ -131,27 +132,25 @@ const styles = StyleSheet.create({
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
+        marginLeft: 15,
+        paddingVertical: 15,
+        paddingRight: 15,
         borderBottomWidth: 0.3,
-        borderColor: '#777',
-    },
-    itemContainer: {
-        paddingVertical: 5
+        borderColor: '#ccc',
     },
     item: {
-        paddingVertical: 5,
-        flexDirection: 'row'
-    },
-    headerIcon: {
-        fontSize: 25
+        flexDirection: 'row',
+        marginLeft: 15,
+        paddingVertical: 15,
+        paddingRight: 15,
+        borderBottomWidth: 0.3,
+        borderColor: '#ccc',
     },
     headerText: {
         paddingLeft: 10
     },
     ItemTilte: {
         fontWeight: 'bold'
-    },
-    container: {
-
     }
 })
 
@@ -246,7 +245,6 @@ const receiveMapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state, ownProps) => {
     const { car } = ownProps
-    console.log('car', car)
     return {
         initialValues: {
             make: { id: car.make_id, value: car.make_name },
@@ -254,7 +252,9 @@ const mapStateToProps = (state, ownProps) => {
             routeEnd: { id: car.route_end_id, value: car.route_end },
             entrust: { id: car.entrust_id, value: car.en_short_name },
             baseAddr: { id: car.base_addr_id, value: car.addr_name },
-            receive: { id: car.receive_id, value: car.receive_name }
+            receive: { id: car.receive_id, value: car.receive_name },
+            orderDate: car.order_date ? moment(car.order_date).format('YYYY-MM-DD') : '',
+            remark: car.remark
         },
         carInfoEditorFormValues: getFormValues('carInfoEditorForm')(state)
     }
@@ -295,83 +295,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: 'carInfoEditorForm'
+        form: 'carInfoEditorForm',
+        onSubmit: (values, dispatch, props) => {
+            dispatch(carInfoEditorAction.updateCarInfo({ ...values, carId: props.car.id, vin: props.car.vin }))
+        }
     })(CarInfoEditor))
-
-
-
-//                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-//                             <Select
-//                                 isRequire={false}
-//                                 title='品牌：'
-//                                 value={make_name}
-//                                 showList={RouterDirection.selectCarMake(this.props.parent)}
-//                                 onValueChange={(param) => this.onSelect({ makeId: param.id, makeName: param.value }, {})}
-//                                 defaultValue={'请选择'}
-//                             />
-//                             <Select
-//                                 isRequire={false}
-//                                 title='委托方：'
-//                                 value={en_short_name}
-//                                 showList={RouterDirection.selectEntrust(this.props.parent)}
-//                                 onValueChange={(param) => this.onSelect({ entrustId: param.id })}
-//                                 defaultValue={'请选择'}
-//                             />
-//                         </View>
-//                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-//                             <Select
-//                                 isRequire={false}
-//                                 title='起始城市：'
-//                                 value={route_start}
-//                                 showList={RouterDirection.selectCity(this.props.parent)}
-//                                 onValueChange={(param) => this.onSelect({ routeStartId: param.id, routeStart: param.value })}
-//                                 defaultValue={'请选择'}
-//                             />
-//                             <Select
-//                                 isRequire={false}
-//                                 title='发货地址：'
-//                                 value={addr_name}
-//                                 showList={(param) => RouterDirection.selectBaseAddr(this.props.parent)({ cityId: route_start_id, ...param })}
-//                                 onValueChange={(param) => this.onSelect({ baseAddrId: param.id })}
-//                                 defaultValue={'请选择'}
-//                             />
-//                         </View>
-//                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-//                             <Select
-//                                 isRequire={false}
-//                                 title='目的城市：'
-//                                 value={route_end}
-//                                 showList={RouterDirection.selectCity(this.props.parent)}
-//                                 onValueChange={(param) => this.onSelect({ routeEndId: param.id, routeEnd: param.value })}
-//                                 defaultValue={'请选择'}
-//                             />
-//                             <Select
-//                                 isRequire={false}
-//                                 title='经销商：'
-//                                 value={re_short_name}
-//                                 showList={(param) => RouterDirection.selectReceive(this.props.parent)({ cityId: route_end_id, ...param })}
-//                                 onValueChange={(param) => this.onSelect({ receiveId: param.id })}
-//                                 defaultValue={'请选择'}
-//                             />
-//                             <DateTimePicker
-//                                 isRequire={false}
-//                                 title='指令时间：'
-//                                 value={order_date ? new Date(order_date).toLocaleDateString() : ''}
-//                                 defaultValue={'请选择'}
-//                                 onValueChange={(param) => this.onSelect({ orderDate: param })}
-//                             />
-//                         </View>
-//                         <View style={{ marginTop: 10, backgroundColor: '#fff', flexDirection: 'row', paddingHorizontal: 10, paddingVertical: 10 }}>
-//                             <Text style={{ flex: 4, textAlign: 'right', fontSize: 12 }}>当前位置：</Text>
-//                             <Text style={{ flex: 13, fontSize: 12 }}>{storage_name ? `${storage_name}${area_name}${row.toString()}-${col.toString()}` : '请选择'}</Text>
-//                         </View>
-//                         <View style={{ marginTop: 10, backgroundColor: '#fff' }}>
-//                             <RichTextBox
-//                                 isRequire={false}
-//                                 value={remark}
-//                                 verifications={[]}
-//                                 title='备注：'
-//                                 defaultValue={'请选择'}
-//                                 onValueChange={(param) => this.onSelect({ remark: param })}
-//                                 showRichText={RouterDirection.richText(this.props.parent)}
-//                             />

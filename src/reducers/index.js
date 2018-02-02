@@ -45,6 +45,7 @@ import selectAreaReducer from './components/select/selectAreaReducer'
 import selectParkingReducer from './components/select/selectParkingReducer'
 import selectBaseAddrReducer from './components/select/selectBaseAddrReducer'
 import selectReceiveReducer from './components/select/selectReceiveReducer'
+import carInfoEditorReducer from './components/carInfo/carInfoEditorReducer'
 
 export default combineReducers({
     form: formReducer,
@@ -92,5 +93,6 @@ export default combineReducers({
     selectAreaReducer,
     selectParkingReducer,
     selectReceiveReducer,
-    selectBaseAddrReducer
+    selectBaseAddrReducer,
+    carInfoEditorReducer
 })

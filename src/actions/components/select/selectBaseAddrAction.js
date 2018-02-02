@@ -8,9 +8,7 @@ export const getBaseAddrList = (param) => async (dispatch, getState) => {
         const url = `${base_host}/baseAddr?${ObjectToUrl({
             cityId: param.cityId
         })}`
-        console.log('url', url)
         const res = await httpRequest.get(url)
-        console.log('res', res)
         if(res.success){
             dispatch({ type: actionTypes.selectBaseAddrActionTypes.get_baseAddrList_success, payload: {baseAddrList:res.result} })
         }else{
