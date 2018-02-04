@@ -29,6 +29,8 @@ import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageType
 import * as carListTypes from './views/CarListTypes'
 import * as responsibilityListTypes from './views/ResponsibilityListTypes'
 import * as demageListTypes from './views/DemageListTypes'
+import * as initializationActionTypes from './views/InitializationActionTypes'
+import * as loginActionTypes from './views/LoginActionTypes'
 import * as carInfoForDemageTypes from './components/demageInfo/CarInfoForDemageTypes'
 import * as demageEditorTypes from './components/demageInfo/DemageEditorTypes'
 import * as demageOpResultTypes from './components/demageInfo/DemageOpResultTypes'
@@ -86,5 +88,7 @@ export {
     selectBaseAddrActionTypes,
     carInfoEditorTypes,
     imageListForCarInfoTypes,
-    recordForCarInfoTypes
+    recordForCarInfoTypes,
+    initializationActionTypes,
+    loginActionTypes
 }
