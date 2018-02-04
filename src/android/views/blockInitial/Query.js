@@ -35,18 +35,6 @@ const VinText = props => {
     )
 }
 
-// onPressQuery() {
-//     let { vinCode, makeId, storageId, routeStartId, routeEndId, entrustId, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd } = this.state.queryCar
-//     let queryCar = { vinCode, makeId, storageId, routeStartId, routeEndId, entrustId, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd }
-//     for (item in queryCar) {
-//         if (!queryCar[item]) {
-//             delete queryCar[item]
-//         }
-//     }
-//     Actions.carList({ queryCar })
-// }
-
-
 const QueryCar = props => {
     const { getMakeList, getMakeListWaiting, getCityList, getCityListWaiting, getEntrustList, getEntrustListWaiting,
         getStorageList, getStorageListWaiting, parent, reset, handleSubmit } = props

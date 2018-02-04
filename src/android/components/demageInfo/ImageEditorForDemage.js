@@ -166,11 +166,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     uploadDamageImageWaiting: () => {
-        console.log(1111)
         dispatch(imageListForDemageAction.uploadDamageImageWaiting())
     },
     uploadDamageImage: (param) => {
-        console.log('param',param)
         dispatch(imageListForDemageAction.uploadDamageImage(param))
     }
 })

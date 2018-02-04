@@ -186,7 +186,7 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="照片">
                     <Container>
-                        <ImageListForCarInfo />
+                        <ImageListForCarInfo car={car}/>
                         {/* {damage_status != 1 && <ImageListForDemage initParam={initParam} parent={parent} />}
                         {damage_status == 1 && <ImageEditorForDemage initParam={initParam} parent={parent} />} */}
                     </Container>
@@ -198,7 +198,7 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="记录">
                     <Container>
-                        <RecordForCarInfo />
+                        <RecordForCarInfo car={car}/>
                         {/* {damage_status == 1 && <DemageEditor initParam={initParam} parent={parent} />}
                         {damage_status != 1 && <DemageDetail initParam={initParam} />} */}
                     </Container>

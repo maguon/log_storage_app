@@ -9,7 +9,7 @@ import globalStyles from '../../GlobalStyles'
 import moment from 'moment'
 
 const CarDetail = props => {
-    const { car: { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, remark } } = props
+    const { car: { vin, make_name, en_short_name, re_short_name, addr_name, route_start, route_end, order_date, remark },car } = props
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -37,7 +37,7 @@ const CarDetail = props => {
                 <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>指令时间：</Text>{order_date ? `${moment(order_date).format('YYYY-MM-DD')}` : ''}</Text>
             </View>
             <View style={styles.item}>
-                <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>当前位置：</Text>{addr_name ? `${addr_name}` : ''}</Text>
+                <Text style={globalStyles.midText}><Text>当前位置：</Text>{car.storage_name ? `${car.storage_name}` : ''}{car.area_name ? `-${car.area_name}` : ''}{car.row && car.col ? `(${car.row}-${car.col})` : ''}</Text>
             </View>
             <View style={styles.item}>
                 <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>备注：</Text>{remark ? `${remark}` : ''}</Text>

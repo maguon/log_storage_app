@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as carListAction from '../../actions/views/CarListAction'
+import * as imageListForCarInfoAction from '../../actions/components/carInfo/ImageListForCarInfoAction'
 import { Actions } from 'react-native-router-flux'
 import {
     Text,
@@ -12,6 +13,7 @@ import {
     Button,
     TouchableOpacity,
     Image,
+    InteractionManager,
     ActivityIndicator
 } from 'react-native'
 import { Container, Icon, Thumbnail, Spinner } from 'native-base'
@@ -20,10 +22,15 @@ import globalStyles, { styleColor } from '../GlobalStyles'
 import moment from 'moment'
 
 const renderListItem = props => {
-    const { item: { plan_out_time, make_name, storage_name, vin, colour, enter_time, real_out_time, col, row, area_name },item, index, parent } = props
+    const { item: { plan_out_time, make_name, storage_name, vin, colour,id, enter_time, real_out_time, col, row, area_name },
+    item, index, parent,getCarImageListWaiting,getCarImageList } = props
     return (
         <TouchableOpacity key={index} onPress={() => {
-            RouterDirection.carInformation(parent)({ initParam:{car: item} })
+            getCarImageListWaiting()
+            RouterDirection.carInformation(parent)({ initParam: { car: item } })
+            InteractionManager.runAfterInteractions(() => {
+                getCarImageList({ carId: id })
+            })
         }}>
             <View style={styles.item}>
                 <View style={styles.itemRow}>
@@ -74,7 +81,8 @@ const ListFooterComponent = () => {
 
 
 const CarList = props => {
-    const { carListReducer: { data: { carList, isComplete } }, carListReducer, getCarListMore, parent } = props
+    const { carListReducer: { data: { carList, isComplete } }, carListReducer, getCarListMore, getCarImageListWaiting, getCarImageList,
+        parent } = props
     if (carListReducer.getCarList.isResultStatus == 1) {
         return (
             <Container>
@@ -96,7 +104,7 @@ const CarList = props => {
                     }}
                     data={carList}
                     onEndReachedThreshold={0.5}
-                    renderItem={(param) => renderListItem({ ...param, parent })}
+                    renderItem={(param) => renderListItem({ ...param, parent,getCarImageListWaiting,getCarImageList })}
                 />
             </Container>
         )
@@ -161,14 +169,14 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCarList: () => {
-        dispatch(carListAction.getCarList())
-    },
     getCarListMore: () => {
         dispatch(carListAction.getCarListMore())
     },
-    resetGetCarList: () => {
-        dispatch(carListAction.resetGetCarList())
+    getCarImageListWaiting: (param) => {
+        dispatch(imageListForCarInfoAction.getCarImageListWaiting())
+    },
+    getCarImageList: (param) => {
+        dispatch(imageListForCarInfoAction.getCarImageList(param))
     }
 })
 

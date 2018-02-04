@@ -1,7 +1,6 @@
 import * as loginTypes from './LoginTypes'
 import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
-//import * as carListTypes from './CarListTypes'
 import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
@@ -41,6 +40,8 @@ import * as selectParkingActionTypes from './components/select/selectParkingActi
 import * as selectBaseAddrActionTypes from './components/select/selectBaseAddrActionTypes'
 import * as selectReceiveActionTypes from './components/select/selectReceiveActionTypes'
 import * as carInfoEditorTypes from './components/carInfo/CarInfoEditorTypes'
+import * as imageListForCarInfoTypes from './components/carInfo/ImageListForCarInfoTypes'
+import * as recordForCarInfoTypes from './components/carInfo/RecordForCarInfoTypes'
 
 export {
     loginTypes,
@@ -57,9 +58,6 @@ export {
     recordListTypes,
     parkingViewTypes,
     addCarTypes,
-    // selectReceiveTypes,
-    // selectBaseAddrTypes,
-   // selectAreaTypes,
     retrievePasswordTypes,
 
 
@@ -86,5 +84,7 @@ export {
     selectParkingActionTypes,
     selectReceiveActionTypes,
     selectBaseAddrActionTypes,
-    carInfoEditorTypes
+    carInfoEditorTypes,
+    imageListForCarInfoTypes,
+    recordForCarInfoTypes
 }

@@ -1,0 +1,10 @@
+export const get_carImageList_success = 'get_carImageList_success'
+export const get_carImageList_failed = 'get_carImageList_failed'
+export const get_carImageList_error = 'get_carImageList_error'
+export const get_carImageList_waiting = 'get_carImageList_waiting'
+
+export const upload_ImageAtCarInfo_success = 'upload_ImageAtCarInfo_success'
+export const upload_ImageAtCarInfo_partSuccess = 'upload_ImageAtCarInfo_partSuccess'
+export const upload_ImageAtCarInfo_waiting = 'upload_ImageAtCarInfo_waiting'
+export const upload_ImageAtCarInfo_failed = 'upload_ImageAtCarInfo_failed'
+export const upload_ImageAtCarInfo_error = 'upload_ImageAtCarInfo_error'
