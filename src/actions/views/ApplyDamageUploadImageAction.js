@@ -8,20 +8,20 @@ export const uploadDamageImage = (params) => async (dispatch, getState) => {
     try {
         const cameraSuccessReses = params.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
-            const { LoginReducer: {  user  },
+            const {  loginReducer: { data: { user }},
                  applyDamageReducer: { data: { damageId } } } = getState()
-            const imageUploadUrl = `${file_host}user/${user.userId}/image?${ObjectToUrl({ imageType: 4 })}`
+            const imageUploadUrl = `${file_host}user/${user.uid}/image?${ObjectToUrl({ imageType: 4 })}`
             const imageUploadReses = await Promise.all(cameraSuccessReses.map(item => httpRequest.postFile(imageUploadUrl, {
                 key: 'image',
                 ...item.res
             })))
             const imageUploadSuccessReses = imageUploadReses.filter(item => item.success)
             if (imageUploadSuccessReses.length > 0) {
-                const bindDamageUrl = `${record_host}/user/${user.userId}/damage/${damageId}/image`
+                const bindDamageUrl = `${record_host}/user/${user.uid}/damage/${damageId}/image`
                 const bindDamageReses = await Promise.all(imageUploadSuccessReses.map(item => httpRequest.post(bindDamageUrl, {
                     username: user.real_name,
-                    userId: user.userId,
-                    userType: user.userType,
+                    userId: user.uid,
+                    userType: user.type,
                     url: item.imageId
                 })))
                 const bindDamageSuccessReses = bindDamageReses

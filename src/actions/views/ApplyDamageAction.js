@@ -10,10 +10,10 @@ import {Actions } from 'react-native-router-flux'
 
 export const createDamage = (parent, values) => async (dispatch, getState) => {
     dispatch({ type: actionTypes.applyDamageTypes.create_Damage_waiting, payload: {} })
-    const { LoginReducer: { user: { userId } } } = getState()
+    const { loginReducer: { data: { user: { uid } } } } =  getState()
     const { car, driver, damageExplain } = values
     try {
-        const url = `${base_host}/user/${userId}/damage`
+        const url = `${base_host}/user/${uid}/damage`
         const res = await httpRequest.post(url, objectExceptNull({
             carId: car.id,
             vin: car.value,

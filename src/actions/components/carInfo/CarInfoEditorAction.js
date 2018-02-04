@@ -5,10 +5,10 @@ import { objectExceptNull } from '../../../util/util'
 import { ToastAndroid } from 'react-native'
 
 export const updateCarInfo = (values) => async (dispatch, getState) => {
-    const { LoginReducer: { user: { userId } } } = getState()
+    const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoEditorTypes.update_carInfo_waiting, payload: {} })
-        const url = `${base_host}/user/${userId}/car/${values.carId}`
+        const url = `${base_host}/user/${uid}/car/${values.carId}`
         const res = await httpRequest.put(url, objectExceptNull({
             vin: values.vin,
             makeId: values.make.id,

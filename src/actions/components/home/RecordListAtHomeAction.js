@@ -6,11 +6,11 @@ import { ObjectToUrl } from '../../../util/ObjectToUrl'
 
 export const getRecordList = () => async (dispatch, getState) => {
     try {
-        const { LoginReducer: { user: { userId } } } = getState()
+        const { loginReducer: { data: { user: { uid } } } } =  getState()
         const url = `${record_host}/opRecord?${ObjectToUrl({
             start: 0,
             size: 10,
-            userId
+            userId: uid
         })}`
         const res = await httpRequest.get(url)
         if (res.success) {

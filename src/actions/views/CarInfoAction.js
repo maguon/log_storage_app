@@ -6,10 +6,10 @@ import { ToastAndroid } from 'react-native'
 
 
 export const exportCar = param => async (dispatch, getState) => {
-    const { LoginReducer: { user: { userId } } } = getState()
+    const { loginReducer: { data: { user: { uid } } } } =  getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_exportCar_waiting, payload: {} })
-        const url = `${base_host}/user/${userId}/carStorageRel/${param.r_id}/relStatus/2?${ObjectToUrl({
+        const url = `${base_host}/user/${uid}/carStorageRel/${param.r_id}/relStatus/2?${ObjectToUrl({
             parkingId: param.p_id,
             storageId: param.storage_id,
             carId: param.id
@@ -29,10 +29,10 @@ export const exportCar = param => async (dispatch, getState) => {
 }
 
 export const moveCar = (param) => async (dispatch, getState) => {
-    const { LoginReducer: { user: { userId } } } = getState()
+    const { loginReducer: { data: { user: { uid } } } } =  getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_moveCar_waiting, payload: {} })
-        const url = `${base_host}/user/${userId}/storageParking/${param.parkingId}?${ObjectToUrl({ carId: param.carId })}`
+        const url = `${base_host}/user/${uid}/storageParking/${param.parkingId}?${ObjectToUrl({ carId: param.carId })}`
         const res = await httpRequest.put(url, {})
         if (res.success) {
             dispatch({ type: actionTypes.carInfoTypes.put_exportCar_success, payload: {} })
@@ -50,10 +50,10 @@ export const moveCar = (param) => async (dispatch, getState) => {
 }
 
 export const importCar = (param) =>async (dispatch, getState) => {
-    const { LoginReducer: { user: { userId } } } = getState()
+    const { loginReducer: { data: { user: { uid } } } } =  getState()
     try{
         dispatch({ type: actionTypes.carInfoTypes.put_importCar_waiting, payload: {} })
-        const url = `${base_host}/user/${userId}/car/${param.car.id}/carStorageRel?${ObjectToUrl({
+        const url = `${base_host}/user/${uid}/car/${param.car.id}/carStorageRel?${ObjectToUrl({
             vin:param.car.vin
         })}`
         const res =await  httpRequest.put(url,{
