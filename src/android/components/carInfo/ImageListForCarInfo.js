@@ -75,7 +75,6 @@ const ImageListForCarInfo = props => {
         uploadCarImage,
         imageListForCarInfoReducer: { data: { carImageList }, uploadCarImage: { isResultStatus } },
         car: { id, vin } } = props
-    console.log('props', props)
     return (
         <Container >
             <FlatList
