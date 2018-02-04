@@ -30,10 +30,11 @@ import {submit} from 'redux-form'
 
 const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList }) => {
     getStorageListWaiting()
-    routerDirection.listCennect(parent)({
+    routerDirection.listCennectNav(parent)({
         mapStateToProps: storageMapStateToProps,
         mapDispatchToProps: storageMapDispatchToProps,
         List: DisposableList,
+        title:'仓库',
         onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
                 onSelectArea({ param: { storage: item }, getParkingListWaiting, parent, getParkingList, getAreaList, getAreaListWaiting, onSelect })
@@ -45,10 +46,11 @@ const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, o
 
 const onSelectArea = ({ getAreaList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList, param }) => {
     getAreaListWaiting()
-    routerDirection.listCennect(parent)({
+    routerDirection.listCennectNav(parent)({
         mapStateToProps: areaMapStateToProps,
         mapDispatchToProps: areaMapDispatchToProps,
         List: DisposableList,
+        title:'区',
         onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
                 onSelectRow({ param: { ...param, area: item }, getParkingListWaiting, parent, getParkingList, onSelect })
@@ -60,10 +62,11 @@ const onSelectArea = ({ getAreaList, onSelect, getAreaListWaiting, parent, getPa
 
 const onSelectRow = ({ param, getParkingListWaiting, parent, getParkingList, onSelect }) => {
     getParkingListWaiting()
-    routerDirection.listCennect(parent)({
+    routerDirection.listCennectNav(parent)({
         mapStateToProps: rowMapStateToProps,
         mapDispatchToProps: rowMapDispatchToProps,
         List: DisposableList,
+        title:'排',
         onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
                 onSelectColumn({ param: { ...param, row: item }, parent, onSelect })
@@ -75,10 +78,11 @@ const onSelectRow = ({ param, getParkingListWaiting, parent, getParkingList, onS
 }
 
 const onSelectColumn = ({ param, parent, onSelect }) => {
-    routerDirection.listCennect(parent)({
+    routerDirection.listCennectNav(parent)({
         mapStateToProps: (state, ownProps) => columnMapStateToProps(state, ownProps, param.row),
         mapDispatchToProps: columnMapDispatchToProps,
         List: DisposableList,
+        title:'列',
         onSelect: (item) => {
             routerDirection.popToCarInfo(parent)
             InteractionManager.runAfterInteractions(() => {
