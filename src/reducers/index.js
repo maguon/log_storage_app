@@ -1,10 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
-// import InitializationReducer from './InitializationReducer'
-// import LoginReducer from './LoginReducer'
-//import CarListReducer from './CarListReducer'
 import StorageListReducer from './StorageListReducer'
-import SelectRowReducer from './SelectRowReducer'
 import ImporCarReducer from './ImporCarReducer'
 import ImportCarCameraReducer from './ImportCarCameraReducer'
 import PasswordReducer from './PasswordReducer'
@@ -14,10 +10,6 @@ import RecordListReducer from './RecordListReducer'
 import SearchVinReducer from './SearchVinReducer'
 import ParkingViewReducer from './ParkingViewReducer'
 import AddCarReducer from './AddCarReducer'
-//import SelectReceiveReducer from './SelectReceiveReducer'
-//import SelectBaseAddrReducer from './SelectBaseAddrReducer'
-import SelectStorageForCarListReducer from './SelectStorageForCarListReducer'
-
 import RetrievePasswordReducer from './RetrievePasswordReducer'
 import SceneReducer from './SceneReducer'
 
@@ -53,24 +45,16 @@ import recordForCarInfoReducer from './components/carInfo/recordForCarInfoReduce
 
 export default combineReducers({
     form: formReducer,
-    // InitializationReducer,
-    //LoginReducer,
     //HomeReducer,
     PasswordReducer,
-   // CarListReducer,
     CarInfoReducer,
     ImporCarReducer,
     ImportCarCameraReducer,
     StorageListReducer,
-    SelectRowReducer,
     RecordListReducer,
     SearchVinReducer,
-    SelectStorageForCarListReducer,
     ParkingViewReducer,
     AddCarReducer,
-    // SelectReceiveReducer,
-    // SelectBaseAddrReducer,
-    //SelectAreaReducer,
     SceneReducer,
     RetrievePasswordReducer,
 

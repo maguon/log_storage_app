@@ -1,16 +1,16 @@
 // import * as loginTypes from './LoginTypes'
 // import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
-import * as selectRowTypes from './SelectRowTypes'
+// import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
 import * as passwordTypes from './PasswordTypes'
 import * as importCarCameraTypes from './ImportCarCameraTypes'
 import * as homeTypes from './views/HomeTypes'
 import * as recordListTypes from './RecordListTypes'
-import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
+// import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
 import * as parkingViewTypes from './ParkingViewTypes'
 import * as addCarTypes from './AddCarTypes'
-import * as selectReceiveTypes from './SelectReceiveTypes'
+// import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
 import * as sceneTypes from './SceneTypes'
 import * as retrievePasswordTypes from './RetrievePasswordTypes'
@@ -51,10 +51,10 @@ export {
     // initializationTypes,
     homeTypes,
     storageListTypes,
-    selectRowTypes,
+    //selectRowTypes,
     passwordTypes,
     imporCarTypes,
-    selectStorageForCarListTypes,
+   // selectStorageForCarListTypes,
     importCarCameraTypes,
     searchVinTypes,
     recordListTypes,
