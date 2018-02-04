@@ -173,6 +173,12 @@ class App extends Component {
                                     hideTabBar
                                     navBar={NavSearchStaticBar}
                                     hideNavBar={false} />
+                                <Scene key="listCennectNavAtHomeBlock"
+                                    component={ListCennect}
+                                    hideTabBar
+                                    navBar={NavBar}
+                                    LeftButton={LeftButton}
+                                    hideNavBar={false} />
                                 <Scene key="listCennectDynamic"
                                     component={ListCennect}
                                     hideTabBar
@@ -218,6 +224,12 @@ class App extends Component {
                                     component={ListCennect}
                                     hideTabBar
                                     navBar={NavSearchStaticBar}
+                                    hideNavBar={false} />
+                                <Scene key="listCennectNavAtCarBlock"
+                                    component={ListCennect}
+                                    hideTabBar
+                                    navBar={NavBar}
+                                    LeftButton={LeftButton}
                                     hideNavBar={false} />
                                 <Scene key="carInformationAtCarBlock"
                                     title="车辆详细信息"

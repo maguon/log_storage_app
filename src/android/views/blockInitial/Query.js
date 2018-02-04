@@ -53,10 +53,11 @@ const QueryCar = props => {
                         getList={getMakeList}
                         getListWaiting={getMakeListWaiting}
                         showList={param => {
-                            return routerDirection.listCennect(parent)({
+                            return routerDirection.listCennectNav(parent)({
                                 mapStateToProps: makeMapStateToProps,
                                 mapDispatchToProps: makeMapDispatchToProps,
                                 List: DisposableList,
+                                title:'品牌',
                                 ...param
                             })
                         }} />
@@ -67,10 +68,11 @@ const QueryCar = props => {
                         getList={getStorageList}
                         getListWaiting={getStorageListWaiting}
                         showList={param => {
-                            return routerDirection.listCennect(parent)({
+                            return routerDirection.listCennectNav(parent)({
                                 mapStateToProps: storageMapStateToProps,
                                 mapDispatchToProps: storageMapDispatchToProps,
                                 List: DisposableList,
+                                title:'仓库',
                                 ...param
                             })
                         }} />
@@ -81,10 +83,11 @@ const QueryCar = props => {
                         getList={getCityList}
                         getListWaiting={getCityListWaiting}
                         showList={param => {
-                            return routerDirection.listCennect(parent)({
+                            return routerDirection.listCennectNav(parent)({
                                 mapStateToProps: cityMapStateToProps,
                                 mapDispatchToProps: cityMapDispatchToProps,
                                 List: DisposableList,
+                                title:'发运地',
                                 ...param
                             })
                         }} />
@@ -95,10 +98,11 @@ const QueryCar = props => {
                         getList={getCityList}
                         getListWaiting={getCityListWaiting}
                         showList={param => {
-                            return routerDirection.listCennect(parent)({
+                            return routerDirection.listCennectNav(parent)({
                                 mapStateToProps: cityMapStateToProps,
                                 mapDispatchToProps: cityMapDispatchToProps,
                                 List: DisposableList,
+                                title:'目的地',
                                 ...param
                             })
                         }} />
@@ -109,10 +113,11 @@ const QueryCar = props => {
                         getList={getEntrustList}
                         getListWaiting={getEntrustListWaiting}
                         showList={param => {
-                            return routerDirection.listCennect(parent)({
+                            return routerDirection.listCennectNav(parent)({
                                 mapStateToProps: entrustMapStateToProps,
                                 mapDispatchToProps: entrustMapDispatchToProps,
                                 List: DisposableList,
+                                title:'委托方',
                                 ...param
                             })
                         }} />

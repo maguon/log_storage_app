@@ -37,10 +37,11 @@ const CarInfoEditor = props => {
                 getList={getMakeList}
                 getListWaiting={getMakeListWaiting}
                 showList={param => {
-                    return routerDirection.listCennect(parent)({
+                    return routerDirection.listCennectNav(parent)({
                         mapStateToProps: makeMapStateToProps,
                         mapDispatchToProps: makeMapDispatchToProps,
                         List: DisposableList,
+                        title:'品牌',
                         ...param
                     })
                 }} />
@@ -51,10 +52,11 @@ const CarInfoEditor = props => {
                 getList={getEntrustList}
                 getListWaiting={getEntrustListWaiting}
                 showList={param => {
-                    return routerDirection.listCennect(parent)({
+                    return routerDirection.listCennectNav(parent)({
                         mapStateToProps: entrustMapStateToProps,
                         mapDispatchToProps: entrustMapDispatchToProps,
                         List: DisposableList,
+                        title:'委托方',
                         ...param
                     })
                 }} />
@@ -65,10 +67,11 @@ const CarInfoEditor = props => {
                 getList={getCityList}
                 getListWaiting={getCityListWaiting}
                 showList={param => {
-                    return routerDirection.listCennect(parent)({
+                    return routerDirection.listCennectNav(parent)({
                         mapStateToProps: cityMapStateToProps,
                         mapDispatchToProps: cityMapDispatchToProps,
                         List: DisposableList,
+                        title:'发运地',
                         ...param
                     })
                 }} />
@@ -79,10 +82,11 @@ const CarInfoEditor = props => {
                 getList={() => getBaseAddrList({ cityId: carInfoEditorFormValues.routeStart.id })}
                 getListWaiting={getBaseAddrListWaiting}
                 showList={param => {
-                    return routerDirection.listCennect(parent)({
+                    return routerDirection.listCennectNav(parent)({
                         mapStateToProps: baseAddrMapStateToProps,
                         mapDispatchToProps: baseAddrMapDispatchToProps,
                         List: DisposableList,
+                        title:'发货地址',
                         ...param
                     })
                 }} />}
@@ -93,10 +97,11 @@ const CarInfoEditor = props => {
                 getList={getCityList}
                 getListWaiting={getCityListWaiting}
                 showList={param => {
-                    return routerDirection.listCennect(parent)({
+                    return routerDirection.listCennectNav(parent)({
                         mapStateToProps: cityMapStateToProps,
                         mapDispatchToProps: cityMapDispatchToProps,
                         List: DisposableList,
+                        title:'目的地',
                         ...param
                     })
                 }} />
@@ -108,10 +113,11 @@ const CarInfoEditor = props => {
                 getList={() => getReceiveList({ cityId: carInfoEditorFormValues.routeEnd.id })}
                 getListWaiting={getReceiveListWaiting}
                 showList={param => {
-                    return routerDirection.listCennect(parent)({
+                    return routerDirection.listCennectNav(parent)({
                         mapStateToProps: receiveMapStateToProps,
                         mapDispatchToProps: receiveMapDispatchToProps,
                         List: DisposableList,
+                        title:'经销商',
                         ...param
                     })
                 }} />}
