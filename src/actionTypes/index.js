@@ -1,5 +1,5 @@
-import * as loginTypes from './LoginTypes'
-import * as initializationTypes from './InitializationTypes'
+// import * as loginTypes from './LoginTypes'
+// import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
 import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
@@ -46,9 +46,9 @@ import * as imageListForCarInfoTypes from './components/carInfo/ImageListForCarI
 import * as recordForCarInfoTypes from './components/carInfo/RecordForCarInfoTypes'
 
 export {
-    loginTypes,
+    // loginTypes,
     sceneTypes,
-    initializationTypes,
+    // initializationTypes,
     homeTypes,
     storageListTypes,
     selectRowTypes,

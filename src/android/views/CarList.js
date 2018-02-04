@@ -163,8 +163,8 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state) => {
     return {
         carListReducer: state.carListReducer,
-        user: state.LoginReducer.user,
-        selectStorageForCarListReducer: state.SelectStorageForCarListReducer
+       // user: state.LoginReducer.user,
+       // selectStorageForCarListReducer: state.SelectStorageForCarListReducer
     }
 }
 

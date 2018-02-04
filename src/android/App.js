@@ -94,7 +94,7 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 
 const mapStateToProps = (state) => {
     return {
-        LoginReducer: state.LoginReducer
+        loginReducer: state.loginReducer
     }
 }
 
@@ -121,7 +121,7 @@ class App extends Component {
     // }
 
     render() {
-        // console.disableYellowBox = true
+         console.disableYellowBox = true
         return (
             <Router
                 //createReducer={this.reducerCreate} 
@@ -134,15 +134,16 @@ class App extends Component {
                         tabs={true}
                         type={ActionConst.RESET}
                         selector={(props) => {
-                            if (props.LoginReducer.user.mobile
-                                && props.LoginReducer.user.token
-                                && props.LoginReducer.user.userId
-                                && props.LoginReducer.user.userStatus
-                                && props.LoginReducer.user.userType) {
-                                return 'main'
-                            } else {
-                                return 'loginBlock'//'loginBlock'
-                            }
+                           const { user } = props.loginReducer.data
+                           if (user.mobile
+                               && user.token
+                               && user.uid
+                               && user.status
+                               && user.type) {
+                               return 'main'
+                           } else {
+                               return 'loginBlock'
+                           }
                         }}
                     >
                         <Scene key="loginBlock" >

@@ -46,7 +46,7 @@ export const initApp = (currentStep = 1, tryCount = 1, param = null) => (dispatc
 export const validateVersion = (tryCount = 1) => async (dispatch) => {
     const currentStep = 1
     try {
-        const url = `${base_host}/app${ObjectToUrl({ app: 4, type: 1 })}`
+        const url = `${base_host}/app?${ObjectToUrl({ app: 1, type: 1 })}`
         const res = await httpRequest.get(url)
         if (res.success) {
             let data = {
@@ -146,7 +146,7 @@ export const validateToken = (tryCount = 1, param) => async (dispatch) => {
         const url = `${base_host}/user/${param.requiredParam.userId}/token/${param.requiredParam.token}`
         const res = await httpRequest.get(url)
         if (res.success) {
-            const getUserInfoUrl = `${base_host}/user${ObjectToUrl({ userId: param.requiredParam.userId })}`
+            const getUserInfoUrl = `${base_host}/user?${ObjectToUrl({ userId: param.requiredParam.userId })}`
             const getUserInfoRes = await httpRequest.get(getUserInfoUrl)
             if (getUserInfoRes.success) {
                 const { uid, mobile, real_name, type, gender, avatar_image, status } = getUserInfoRes.result[0]

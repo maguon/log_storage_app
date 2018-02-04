@@ -6,9 +6,9 @@ import { ToastAndroid } from 'react-native'
 
 export const getCarImageList = (param) => async (dispatch, getState) => {
     const { carId } = param
-    const { LoginReducer: { user: { userId } } } = getState()
+    const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
-        const url = `${record_host}/user/${userId}/car/${carId}/record`
+        const url = `${record_host}/user/${uid}/car/${carId}/record`
         const res = await httpRequest.get(url)
         if (res.success) {
             dispatch({ type: actionTypes.recordForCarInfoTypes.get_recordForCarInfo_success, payload: { recordList: res.result[0] ? res.result[0].comment : [] } })
@@ -37,8 +37,8 @@ export const uploadCarImage = param => async (dispatch, getState) => {
         const { cameraReses, carId, vin } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
-            const { LoginReducer: { user } } = getState()
-            const imageUploadUrl = `${file_host}/user/${user.userId}/image?${ObjectToUrl({ imageType: 4 })}`
+            const { loginReducer: { data: { user } } } = getState()
+            const imageUploadUrl = `${file_host}/user/${user.uid}/image?${ObjectToUrl({ imageType: 4 })}`
             const imageUploadReses = await Promise.all(cameraSuccessReses.map(item => httpRequest.postFile(imageUploadUrl, {
                 key: 'image',
                 ...item.res
@@ -46,23 +46,24 @@ export const uploadCarImage = param => async (dispatch, getState) => {
             const imageUploadSuccessReses = imageUploadReses.filter(item => item.success)
             if (imageUploadSuccessReses.length > 0) {
 
-                const bindDamageUrl = url = `${record_host}/car/${carId}/vin/${vin}/storageImage`
-                const bindDamageReses = await Promise.all(imageUploadSuccessReses.map(item => httpRequest.post(bindDamageUrl, {
+                const bindCarUrl = url = `${record_host}/car/${carId}/vin/${vin}/storageImage`
+
+                const bindCarReses = await Promise.all(imageUploadSuccessReses.map(item => httpRequest.post(bindCarUrl, {
                     username: user.real_name,
                     userId: user.uid,
                     userType: user.type,
                     url: item.imageId
                 })))
-                const bindDamageSuccessReses = bindDamageReses
+                const bindCarSuccessReses = bindCarReses
                     .map((item, index) => { return { imageId: imageUploadSuccessReses[index].imageId, success: item.success } })
                     .filter(item => item.success)
                     .map(item => item.imageId)
-                if (cameraReses.length === bindDamageSuccessReses.length) {
+                if (cameraReses.length === bindCarSuccessReses.length) {
                     ToastAndroid.showWithGravity('提交成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_success, payload: { carImageList: bindDamageSuccessReses } })
-                } else if (bindDamageSuccessReses.length > 0) {
-                    ToastAndroid.showWithGravity(`部分提交成功：${bindDamageSuccessReses.length}/${cameraReses.length}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_partSuccess, payload: { carImageList: bindDamageSuccessReses, failedMsg: '部分失败' } })
+                    dispatch({ type: actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_success, payload: { carImageList: bindCarSuccessReses } })
+                } else if (bindCarSuccessReses.length > 0) {
+                    ToastAndroid.showWithGravity(`部分提交成功：${bindCarSuccessReses.length}/${cameraReses.length}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+                    dispatch({ type: actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_partSuccess, payload: { carImageList: bindCarSuccessReses, failedMsg: '部分失败' } })
                 } else {
                     ToastAndroid.showWithGravity('提交全部失败！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
                     dispatch({ type: actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_failed, payload: { failedMsg: '全部失败' } })

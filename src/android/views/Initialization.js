@@ -13,8 +13,8 @@ import {
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { Button } from 'native-base'
-import SplashScreen from 'react-native-splash-screen'
-import * as initializationAction from './InitializationAction'
+// import SplashScreen from 'react-native-splash-screen'
+import * as initializationAction from '../../actions/views/InitializationAction'
 
 const window = Dimensions.get('window')
 const ImageWidth = window.width
@@ -28,7 +28,7 @@ class Initialization extends Component {
 
     componentDidMount() {
         this.props.initApp()
-        setTimeout(SplashScreen.hide, 2000)
+        // setTimeout(SplashScreen.hide, 2000)
     }
 
     linkDownload(url) {
@@ -47,10 +47,11 @@ class Initialization extends Component {
 
     render() {
         const { data, initAPP, loadLocalStorage, validateToken, validateVersion } = this.props.initializationReducer
+        console.log('this.props.initializationReducer',this.props.initializationReducer)
         return (
             <View style={styles.container}>
                 <StatusBar hidden={true} />
-                <Image source={{ uri: 'init_back' }}
+                <Image source={{ uri: 'welcom_back' }}
                     style={styles.image}
                 />
                 {(validateVersion.isResultStatus == 3 || validateToken.isResultStatus == 3) &&

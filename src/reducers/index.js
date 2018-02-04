@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 // import InitializationReducer from './InitializationReducer'
-import LoginReducer from './LoginReducer'
+// import LoginReducer from './LoginReducer'
 //import CarListReducer from './CarListReducer'
 import StorageListReducer from './StorageListReducer'
 import SelectRowReducer from './SelectRowReducer'
@@ -32,6 +32,7 @@ import selectCityReducer from './components/select/selectCityReducer'
 import selectStorageReducer from './components/select/selectStorageReducer' 
 import selectEntrustReducer from './components/select/selectEntrustReducer' 
 import applyDamageReducer from './views/applyDamageReducer' 
+import loginReducer from './views/loginReducer' 
 import initializationReducer from './views/InitializationReducer' 
 import applyDamageUploadImageReducer from './views/applyDamageUploadImageReducer' 
 import demageListReducer from './views/demageListReducer' 
@@ -53,7 +54,7 @@ import recordForCarInfoReducer from './components/carInfo/recordForCarInfoReduce
 export default combineReducers({
     form: formReducer,
     // InitializationReducer,
-    LoginReducer,
+    //LoginReducer,
     //HomeReducer,
     PasswordReducer,
    // CarListReducer,
@@ -100,5 +101,7 @@ export default combineReducers({
     carInfoEditorReducer,
     imageListForCarInfoReducer,
     recordForCarInfoReducer,
-    initializationReducer
+    initializationReducer,
+    loginReducer
+    
 })
