@@ -29,6 +29,7 @@ import initializationReducer from './views/InitializationReducer'
 import applyDamageUploadImageReducer from './views/applyDamageUploadImageReducer' 
 import demageListReducer from './views/demageListReducer' 
 import responsibilityListReducer from './views/responsibilityListReducer' 
+import personalCenterReducer from './views/personalCenterReducer' 
 import carInfoForDemageReducer from './components/demageInfo/carInfoForDemageReducer' 
 import demageEditorReducer from './components/demageInfo/demageEditorReducer' 
 import demageOpResultReducer from './components/demageInfo/demageOpResultReducer' 
@@ -86,6 +87,6 @@ export default combineReducers({
     imageListForCarInfoReducer,
     recordForCarInfoReducer,
     initializationReducer,
-    loginReducer
-    
+    loginReducer,
+    personalCenterReducer
 })

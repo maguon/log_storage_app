@@ -62,6 +62,7 @@ import ResponsibilityList from './views/ResponsibilityList'
 import DemageList from './views/DemageList'
 import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
+import PersonalCenter from './views/PersonalCenter'
 
 
 const styles = StyleSheet.create({
@@ -322,6 +323,13 @@ class App extends Component {
                                     LeftButton={LeftButton}
                                     component={ResponsibilityInfo}
                                     title='责任详情'
+                                    hideTabBar
+                                    hideNavBar={false}
+                                    navBar={NavBar} />
+                                <Scene key="personalCenter"
+                                    LeftButton={LeftButton}
+                                    component={PersonalCenter}
+                                    title='个人中心'
                                     hideTabBar
                                     hideNavBar={false}
                                     navBar={NavBar} />

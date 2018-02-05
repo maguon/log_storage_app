@@ -28,6 +28,7 @@ import * as applyDamageTypes from './views/ApplyDamageTypes'
 import * as applyDamageUploadImageTypes from './views/ApplyDamageUploadImageTypes'
 import * as carListTypes from './views/CarListTypes'
 import * as responsibilityListTypes from './views/ResponsibilityListTypes'
+import * as personalCenterActionTypes from './views/PersonalCenterActionTypes'
 import * as demageListTypes from './views/DemageListTypes'
 import * as initializationActionTypes from './views/InitializationActionTypes'
 import * as loginActionTypes from './views/LoginActionTypes'
@@ -90,5 +91,6 @@ export {
     imageListForCarInfoTypes,
     recordForCarInfoTypes,
     initializationActionTypes,
-    loginActionTypes
+    loginActionTypes,
+    personalCenterActionTypes
 }

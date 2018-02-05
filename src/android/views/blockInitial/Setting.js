@@ -36,7 +36,7 @@ class Setting extends Component {
 
     onPressOk() {
         this.setState({ confirmModalVisible: false })
-        // this.props.cleanLogin()
+        this.props.cleanLogin()
     }
 
     onPressCancel() {
@@ -48,16 +48,16 @@ class Setting extends Component {
             getDemageList,
             getResponsibilityListWaiting,
             getResponsibilityList,
-            // cleanLogin,
-            // loginReducer: { data: { user: { real_name, avatar_image, mobile } } },
-           // initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer 
+            cleanLogin,
+            loginReducer: { data: { user: { real_name, avatar_image, mobile } } },
+           initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer 
         } = this.props
         return (
             <Container>
                 <Content style={globalStyles.container}>
                     <List style={styles.list}>
                         <Separator bordered />
-                        {/* <ListItem last onPress={Actions.personalCenter}>
+                        <ListItem last onPress={Actions.personalCenter}>
                             <View style={styles.avatarContainer}>
                                 <Thumbnail source={avatar_image ? { uri: `${file_host}/image/${avatar_image}` } : { uri: `personalicon` }} />
                                 <View style={styles.userContainer}>
@@ -65,7 +65,7 @@ class Setting extends Component {
                                     <Text style={globalStyles.midText}>{mobile ? `${mobile}` : ''}</Text>
                                 </View>
                             </View>
-                        </ListItem> */}
+                        </ListItem>
                         <Separator bordered />
                         <ListItem icon onPress={() => {
                             getDemageListWaiting()
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        loginReducer: state.LoginReducer,
+        loginReducer: state.loginReducer,
         settingReducer: state.settingReducer,
         initializationReducer: state.initializationReducer
     }
@@ -197,9 +197,9 @@ const mapDispatchToProps = (dispatch) => ({
     getResponsibilityListWaiting: () => {
         dispatch(responsibilityListAction.getResponsibilityListWaiting())
     },
-    // cleanLogin: () => {
-    //     dispatch(loginAction.cleanLogin())
-    // }
+    cleanLogin: () => {
+        dispatch(loginAction.cleanLogin())
+    }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Setting)
