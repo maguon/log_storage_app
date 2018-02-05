@@ -43,7 +43,7 @@ const Login = props => {
             <View style={styles.connectContainer}>
                 <View style={styles.logoContainer}>
                     <Image
-                        source={{ uri: 'logo' }}
+                        source={{ uri: 'honya_logo_144' }}
                         style={styles.logo} />
                 </View>
                 <View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         height: 80
     },
     appname: {
-        width: 125,
+        width: 171,
         height: 38,
         marginTop: 20
     },

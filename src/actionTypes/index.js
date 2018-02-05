@@ -3,7 +3,6 @@
 import * as storageListTypes from './StorageListTypes'
 // import * as selectRowTypes from './SelectRowTypes'
 import * as imporCarTypes from './ImporCarTypes'
-import * as passwordTypes from './PasswordTypes'
 import * as importCarCameraTypes from './ImportCarCameraTypes'
 import * as homeTypes from './views/HomeTypes'
 import * as recordListTypes from './RecordListTypes'
@@ -32,6 +31,7 @@ import * as personalCenterActionTypes from './views/PersonalCenterActionTypes'
 import * as demageListTypes from './views/DemageListTypes'
 import * as initializationActionTypes from './views/InitializationActionTypes'
 import * as loginActionTypes from './views/LoginActionTypes'
+import * as updatePasswordActionTypes from './views/UpdatePasswordActionTypes'
 import * as carInfoForDemageTypes from './components/demageInfo/CarInfoForDemageTypes'
 import * as demageEditorTypes from './components/demageInfo/DemageEditorTypes'
 import * as demageOpResultTypes from './components/demageInfo/DemageOpResultTypes'
@@ -92,5 +92,6 @@ export {
     recordForCarInfoTypes,
     initializationActionTypes,
     loginActionTypes,
-    personalCenterActionTypes
+    personalCenterActionTypes,
+    updatePasswordActionTypes
 }

@@ -23,7 +23,6 @@ import Setting from './views/blockInitial/Setting'
 import CarList from './views/CarList'
 import CarInformation from './views/CarInformation'
 
-import Password from './views/Password'
 import SearchVin from './views/SearchVin'
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
@@ -63,6 +62,7 @@ import DemageList from './views/DemageList'
 import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
 import PersonalCenter from './views/PersonalCenter'
+import UpdatePassword from './views/UpdatePassword'
 
 
 const styles = StyleSheet.create({
@@ -122,7 +122,7 @@ class App extends Component {
     // }
 
     render() {
-         console.disableYellowBox = true
+        console.disableYellowBox = true
         return (
             <Router
                 //createReducer={this.reducerCreate} 
@@ -135,16 +135,16 @@ class App extends Component {
                         tabs={true}
                         type={ActionConst.RESET}
                         selector={(props) => {
-                           const { user } = props.loginReducer.data
-                           if (user.mobile
-                               && user.token
-                               && user.uid
-                               && user.status
-                               && user.type) {
-                               return 'main'
-                           } else {
-                               return 'loginBlock'
-                           }
+                            const { user } = props.loginReducer.data
+                            if (user.mobile
+                                && user.token
+                                && user.uid
+                                && user.status
+                                && user.type) {
+                                return 'main'
+                            } else {
+                                return 'loginBlock'
+                            }
                         }}
                     >
                         <Scene key="loginBlock" >
@@ -157,16 +157,9 @@ class App extends Component {
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" isRefresh={true} component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
-
-                                {/* <Scene key="selectRowAtHomeBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} /> */}
-                                {/* <Scene key="selectColumnAtHomeBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} /> */}
-                                {/* <Scene key="selectAreaAtHomeBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} /> */}
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
-
-                                {/* <Scene key="selectReceiveAtHomeBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                {/* <Scene key="selectBaseAddrAtHomeBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="listCennectAtHomeBlock"
@@ -241,19 +234,11 @@ class App extends Component {
                                     LeftButton={LeftButton} />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
-
-                                {/* <Scene key="selectRowAtCarBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} /> */}
-                                {/* <Scene key="selectColumnAtCarBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} /> */}
-                                {/* <Scene key="selectAreaAtCarBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} /> */}
                                 <Scene key="ImagePageForImportCarAtCarBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtCarBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
-
-                                {/* <Scene key="selectReceiveAtCarBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="richTextAtCarBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                {/* <Scene key="selectBaseAddrAtCarBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="importCarCameraAtCarBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtCarBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
-
                             </Scene>
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
                                 <Scene key="storageList" component={StorageList} initial={true} hideNavBar={false} navBar={SearchBar} />
@@ -263,14 +248,7 @@ class App extends Component {
                                 <Scene key="carInformationAtStorageBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="ImagePageForImportCarAtStorageBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtStorageBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
-
-                                {/* <Scene key="selectRowAtStorageBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} /> */}
-                                {/* <Scene key="selectColumnAtStorageBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} /> */}
-                                {/* <Scene key="selectAreaAtStorageBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} /> */}
-
-                                {/* <Scene key="selectReceiveAtStorageBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="richTextAtStorageBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                {/* <Scene key="selectBaseAddrAtStorageBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="importCarCameraAtStorageBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtStorageBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
@@ -278,19 +256,11 @@ class App extends Component {
                                 <Scene key="setting" component={Setting} initial={true} hideNavBar={false} navBar={SearchBar} />
                                 <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                                <Scene key="password" component={Password} title='修改密码' navBar={NavBar} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtSettingBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtSettingBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
-
-                                {/* <Scene key="selectRowAtSettingBlock" component={SelectRow} hideTabBar navBar={NavBar} title='选择排' hideNavBar={false} /> */}
-                                {/* <Scene key="selectColumnAtSettingBlock" component={SelectColumn} hideTabBar navBar={NavBar} title='选择道位' hideNavBar={false} /> */}
-                                {/* <Scene key="selectAreaAtSettingBlock" component={SelectArea} hideTabBar navBar={NavBar} title='选择区' hideNavBar={false} /> */}
-
-                                {/* <Scene key="selectReceiveAtSettingBlock" component={SelectReceive} title='选择经销商' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="richTextAtSettingBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                {/* <Scene key="selectBaseAddrAtSettingBlock" component={SelectBaseAddr} title='选择发货地址' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="importCarCameraAtSettingBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtSettingBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="listCennectAtSettingBlock"
@@ -330,6 +300,13 @@ class App extends Component {
                                     LeftButton={LeftButton}
                                     component={PersonalCenter}
                                     title='个人中心'
+                                    hideTabBar
+                                    hideNavBar={false}
+                                    navBar={NavBar} />
+                                <Scene key="updatePassword"
+                                    LeftButton={LeftButton}
+                                    component={UpdatePassword}
+                                    title='修改密码'
                                     hideTabBar
                                     hideNavBar={false}
                                     navBar={NavBar} />
