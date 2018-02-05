@@ -2,14 +2,12 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import StorageListReducer from './StorageListReducer'
 import ImporCarReducer from './ImporCarReducer'
-import ImportCarCameraReducer from './ImportCarCameraReducer'
+// import ImportCarCameraReducer from './ImportCarCameraReducer'
 //import HomeReducer from './HomeReducer'
 import CarInfoReducer from './CarInfoReducer'
 import RecordListReducer from './RecordListReducer'
 import SearchVinReducer from './SearchVinReducer'
 import ParkingViewReducer from './ParkingViewReducer'
-import AddCarReducer from './AddCarReducer'
-
 import SceneReducer from './SceneReducer'
 
 //新
@@ -44,18 +42,21 @@ import carInfoEditorReducer from './components/carInfo/carInfoEditorReducer'
 import imageListForCarInfoReducer from './components/carInfo/imageListForCarInfoReducer'
 import recordForCarInfoReducer from './components/carInfo/recordForCarInfoReducer'
 import sendSMSReducer from './components/retrievePassword/SendSMSReducer'
+import addCarReducer from './views/addCarReducer'
+import importCarImageReducer from './views/ImportCarImageReducer'
+
 
 export default combineReducers({
     form: formReducer,
     //HomeReducer,
     CarInfoReducer,
     ImporCarReducer,
-    ImportCarCameraReducer,
+    // ImportCarCameraReducer,
     StorageListReducer,
     RecordListReducer,
     SearchVinReducer,
     ParkingViewReducer,
-    AddCarReducer,
+    //AddCarReducer,
     SceneReducer,
 
 
@@ -90,5 +91,7 @@ export default combineReducers({
     loginReducer,
     personalCenterReducer,
     retrievePasswordReducer,
-    sendSMSReducer
+    sendSMSReducer,
+    addCarReducer,
+    importCarImageReducer
 })

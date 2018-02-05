@@ -6,7 +6,7 @@ import { objectExceptNull } from '../../util/util'
 import { getFormValues } from 'redux-form'
 import { ToastAndroid, InteractionManager } from 'react-native'
 import * as routerDirection from '../../util/RouterDirection'
-import {Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux'
 
 export const createDamage = (parent, values) => async (dispatch, getState) => {
     dispatch({ type: actionTypes.applyDamageTypes.create_Damage_waiting, payload: {} })

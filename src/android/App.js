@@ -20,7 +20,7 @@ import CarInformation from './views/CarInformation'
 import SearchVin from './views/SearchVin'
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
-import ImportCarCamera from './views/ImportCarCamera'
+
 import RecordList from './views/RecordList'
 import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
@@ -38,6 +38,7 @@ import NavSearchDynamicBar from './components/share/bar/NavSearchDynamicBar'
 import SearchBar from './components/share/bar/SearchBar'
 import SearchCarBar from './components/share/bar/SearchCarBar'
 import ApplyDamage from './views/ApplyDamage'
+import AddCarSubmit from './components/addCar/AddCarSubmit'
 import ApplyDamageUploadImage from './views/ApplyDamageUploadImage'
 import ApplyDamageSubmit from './components/applyDamage/ApplyDamageSubmit'
 import ApplyDamageUploadImageSubmit from './components/applyDamage/ApplyDamageUploadImageSubmit'
@@ -50,8 +51,11 @@ import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
 import PersonalCenter from './views/PersonalCenter'
 import UpdatePassword from './views/UpdatePassword'
-import Setting from './views/blockInitial/Setting'
+import Setting from './views/blockInitial/Setting' 
 import RetrievePassword from './views/RetrievePassword'
+import ImportCarImage from './views/ImportCarImage'
+import ImportCarImageSubmit from './components/importCarImage/ImportCarImageSubmit'
+
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -139,20 +143,41 @@ class App extends Component {
                             <Scene key="login" initial={true} component={Login} hideNavBar hideTabBar />
                             <Scene key="retrievePassword" LeftButton={LeftButton} title='找回密码' component={RetrievePassword} hideTabBar hideNavBar={false} navBar={NavBar} />
                         </Scene>
-                        <Scene key="main" tabs={true}  tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
-                            <Scene key="homeBlock"  initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
-                                <Scene key="home" 
-                                component={Home} 
-                                initial={true} 
-                                hideNavBar={false} 
-                                navBar={SearchBar} />
-                                <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
+                        <Scene key="main" tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+                            <Scene key="homeBlock" initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
+                                <Scene key="home"
+                                    component={Home}
+                                    initial={true}
+                                    hideNavBar={false}
+                                    navBar={SearchBar} />
+                                <Scene key="carInformationAtHomeBlock"
+                                    title="车辆详细信息"
+                                    LeftButton={LeftButton}
+                                    component={CarInformation}
+                                    hideNavBar={false}
+                                    navBar={NavBar}
+                                    hideTabBar />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
-                                <Scene key="addCarAtHomeBlock" isRefresh={true} component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
+                                <Scene key="addCarAtHomeBlock"
+                                    component={AddCar}
+                                    RightButton={AddCarSubmit}
+                                    hideTabBar
+                                    LeftButton={LeftButton}
+                                    navBar={NavBar}
+                                    title='新增车辆'
+                                    hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtHomeBlock"
+                                    component={ImportCarImage}
+                                    LeftButton={LeftButton}
+                                    title='上传图片'
+                                    initial={true}
+                                    hideNavBar={false}
+                                    hideTabBar
+                                    RightButton={ImportCarImageSubmit}
+                                    navBar={NavBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="listCennectAtHomeBlock"
                                     component={ListCennect}
@@ -230,11 +255,11 @@ class App extends Component {
                                 <Scene key="ImagePageForImportCarAtCarBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtCarBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="richTextAtCarBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="importCarCameraAtCarBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtCarBlock" component={ImportCarImage} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtCarBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
-                                <Scene key="storageList" component={StorageList} title='仓库列表'  initial={true} hideNavBar={false} navBar={NavBar} />
+                                <Scene key="storageList" component={StorageList} title='仓库列表' initial={true} hideNavBar={false} navBar={NavBar} />
                                 <Scene key="parkingView" navBar={NavBar} title="车位分布图" component={ParkingView} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
@@ -242,7 +267,7 @@ class App extends Component {
                                 <Scene key="ImagePageForImportCarAtStorageBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtStorageBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="richTextAtStorageBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="importCarCameraAtStorageBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtStorageBlock" component={ImportCarImage} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtStorageBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
                             <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
@@ -254,7 +279,7 @@ class App extends Component {
                                 <Scene key="ImagePageForImportCarAtSettingBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtSettingBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="richTextAtSettingBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="importCarCameraAtSettingBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarCameraAtSettingBlock" component={ImportCarImage} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtSettingBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="listCennectAtSettingBlock"
                                     component={ListCennect}
