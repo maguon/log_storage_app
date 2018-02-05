@@ -9,7 +9,7 @@ import RecordListReducer from './RecordListReducer'
 import SearchVinReducer from './SearchVinReducer'
 import ParkingViewReducer from './ParkingViewReducer'
 import AddCarReducer from './AddCarReducer'
-import RetrievePasswordReducer from './RetrievePasswordReducer'
+
 import SceneReducer from './SceneReducer'
 
 //新
@@ -26,6 +26,7 @@ import applyDamageReducer from './views/applyDamageReducer'
 import loginReducer from './views/loginReducer' 
 import initializationReducer from './views/InitializationReducer' 
 import applyDamageUploadImageReducer from './views/applyDamageUploadImageReducer' 
+import retrievePasswordReducer from './views/RetrievePasswordReducer'
 import demageListReducer from './views/demageListReducer' 
 import responsibilityListReducer from './views/responsibilityListReducer' 
 import personalCenterReducer from './views/personalCenterReducer' 
@@ -42,11 +43,11 @@ import selectReceiveReducer from './components/select/selectReceiveReducer'
 import carInfoEditorReducer from './components/carInfo/carInfoEditorReducer'
 import imageListForCarInfoReducer from './components/carInfo/imageListForCarInfoReducer'
 import recordForCarInfoReducer from './components/carInfo/recordForCarInfoReducer'
+import sendSMSReducer from './components/retrievePassword/SendSMSReducer'
 
 export default combineReducers({
     form: formReducer,
     //HomeReducer,
-    PasswordReducer,
     CarInfoReducer,
     ImporCarReducer,
     ImportCarCameraReducer,
@@ -56,7 +57,7 @@ export default combineReducers({
     ParkingViewReducer,
     AddCarReducer,
     SceneReducer,
-    RetrievePasswordReducer,
+
 
     //新
     recordListAtHomeReducer,
@@ -87,5 +88,7 @@ export default combineReducers({
     recordForCarInfoReducer,
     initializationReducer,
     loginReducer,
-    personalCenterReducer
+    personalCenterReducer,
+    retrievePasswordReducer,
+    sendSMSReducer
 })

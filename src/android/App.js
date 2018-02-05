@@ -149,7 +149,7 @@ class App extends Component {
                     >
                         <Scene key="loginBlock" >
                             <Scene key="login" initial={true} component={Login} hideNavBar hideTabBar />
-                            <Scene key="retrievePassword" title='找回密码' component={RetrievePassword} hideTabBar hideNavBar={false} navBar={NavBar} />
+                            <Scene key="retrievePassword" LeftButton={LeftButton} title='找回密码' component={RetrievePassword} hideTabBar hideNavBar={false} navBar={NavBar} />
                         </Scene>
                         <Scene key="main" tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
                             <Scene key="homeBlock" icon={TabIcon} online='ios-home' outline='ios-home-outline' >
@@ -201,10 +201,11 @@ class App extends Component {
                             <Scene key="carBlock" initial={true} icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene
                                     key="query"
+                                    title='查询车辆'
                                     initial={true}
                                     component={Query}
                                     hideNavBar={false}
-                                    navBar={SearchBar} />
+                                    navBar={NavBar} />
                                 <Scene
                                     key="carList"
                                     title="车辆列表"
@@ -241,7 +242,7 @@ class App extends Component {
                                 <Scene key="importCarAtCarBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
-                                <Scene key="storageList" component={StorageList} initial={true} hideNavBar={false} navBar={SearchBar} />
+                                <Scene key="storageList" component={StorageList} title='仓库列表'  initial={true} hideNavBar={false} navBar={NavBar} />
                                 <Scene key="parkingView" navBar={NavBar} title="车位分布图" component={ParkingView} hideTabBar hideNavBar={false} />
                                 <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
@@ -253,7 +254,7 @@ class App extends Component {
                                 <Scene key="importCarAtStorageBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                             </Scene>
                             <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
-                                <Scene key="setting" component={Setting} initial={true} hideNavBar={false} navBar={SearchBar} />
+                                <Scene key="setting" component={Setting} title='设置' initial={true} hideNavBar={false} navBar={NavBar} />
                                 <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />

@@ -12,7 +12,7 @@ import * as addCarTypes from './AddCarTypes'
 // import * as selectReceiveTypes from './SelectReceiveTypes'
 import * as searchVinTypes from './SearchVinTypes'
 import * as sceneTypes from './SceneTypes'
-import * as retrievePasswordTypes from './RetrievePasswordTypes'
+
 
 
 //新
@@ -45,23 +45,19 @@ import * as selectReceiveActionTypes from './components/select/selectReceiveActi
 import * as carInfoEditorTypes from './components/carInfo/CarInfoEditorTypes'
 import * as imageListForCarInfoTypes from './components/carInfo/ImageListForCarInfoTypes'
 import * as recordForCarInfoTypes from './components/carInfo/RecordForCarInfoTypes'
+import * as sendSMSActionTypes from './components/retrievePassword/SendSMSActionTypes'
+import * as retrievePasswordActionTypes from './views/RetrievePasswordActionTypes'
 
 export {
-    // loginTypes,
     sceneTypes,
-    // initializationTypes,
     homeTypes,
     storageListTypes,
-    //selectRowTypes,
-    passwordTypes,
     imporCarTypes,
-   // selectStorageForCarListTypes,
     importCarCameraTypes,
     searchVinTypes,
     recordListTypes,
     parkingViewTypes,
     addCarTypes,
-    retrievePasswordTypes,
 
 
     //新
@@ -93,5 +89,7 @@ export {
     initializationActionTypes,
     loginActionTypes,
     personalCenterActionTypes,
-    updatePasswordActionTypes
+    updatePasswordActionTypes,
+    retrievePasswordActionTypes,
+    sendSMSActionTypes
 }

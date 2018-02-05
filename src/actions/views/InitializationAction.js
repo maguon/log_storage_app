@@ -2,7 +2,7 @@
  * Created by lingxue on 2017/4/21.
  */
 //import { Actions } from 'react-native-router-flux'
-import * as httpRequest from '../../util/HttpRequest'
+import httpRequest from '../../util/HttpRequest'
 import { base_host } from '../../config/Host'
 import * as actionTypes from '../../actionTypes'
 import { ObjectToUrl } from '../../util/ObjectToUrl'
