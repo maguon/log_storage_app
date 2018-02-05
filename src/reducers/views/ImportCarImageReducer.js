@@ -4,7 +4,7 @@ import * as actionTypes from '../../actionTypes'
 const initialState = {
     data: {
         imageList: [],
-        recordId
+        recordId:0
     },
     pushCarImage: {
         errorMsg: '',
@@ -20,7 +20,8 @@ export default handleActions({
         return {
             ...state,
             data: {
-                imageList: [...state.data.imageList, ...imageList.map(item => { return { url: item } })]
+                imageList: [...state.data.imageList, ...imageList.map(item => { return { url: item } })],
+                recordId
             },
             pushCarImage: {
                 ...initialState.pushCarImage,
@@ -28,12 +29,13 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.importCarImageTypes.upload_ImageAtCarInfo_partSuccess]: (state, action) => {
+    [actionTypes.importCarImageTypes.import_carImage_partSuccess]: (state, action) => {
         const { payload: { imageList, failedMsg,recordId } } = action
         return {
             ...state,
             data: {
-                imageList: [...state.data.imageList, ...imageList]
+                imageList: [...state.data.imageList, ...imageList],
+                recordId
             },
             pushCarImage: {
                 ...initialState.pushCarImage,
@@ -42,7 +44,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.importCarImageTypes.upload_ImageAtCarInfo_waiting]: (state, action) => {
+    [actionTypes.importCarImageTypes.import_carImage_waiting]: (state, action) => {
         return {
             ...state,
             pushCarImage: {
@@ -51,7 +53,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.importCarImageTypes.upload_ImageAtCarInfo_failed]: (state, action) => {
+    [actionTypes.importCarImageTypes.import_carImage_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -62,7 +64,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_error]: (state, action) => {
+    [actionTypes.importCarImageTypes.import_carImage_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,

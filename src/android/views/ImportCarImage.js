@@ -73,7 +73,7 @@ const ImportCarImage = props => {
     const { parent,
         pushCarImageWaiting,
         pushCarImage,
-        importCarImageReducer: { data: { imageList }, importCarImage: { isResultStatus } },
+        importCarImageReducer: { data: { imageList }, pushCarImage: { isResultStatus } },
         addCarReducer: { data: { carId, vin } },
      } = props
     return (
@@ -170,8 +170,8 @@ const mapDispatchToProps = (dispatch) => ({
     pushCarImageWaiting: () => {
         dispatch(importCarImageAction.pushCarImageWaiting())
     },
-    pushCarImage: () => {
-        dispatch(importCarImageAction.pushCarImage())
+    pushCarImage: (param) => {
+        dispatch(importCarImageAction.pushCarImage(param))
     }
 })
 

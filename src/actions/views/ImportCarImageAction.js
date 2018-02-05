@@ -2,6 +2,7 @@ import httpRequest from '../../util/HttpRequest'
 import { record_host, file_host } from '../../config/Host'
 import * as actionTypes from '../../actionTypes'
 import { ObjectToUrl } from '../../util/ObjectToUrl'
+import { ToastAndroid } from 'react-native'
 
 export const pushCarImageWaiting = () => (dispatch) => {
     dispatch({ type: actionTypes.importCarImageTypes.import_carImage_waiting, payload: {} })
@@ -9,6 +10,7 @@ export const pushCarImageWaiting = () => (dispatch) => {
 
 export const pushCarImage = (param) => async (dispatch, getState) => {
     try {
+        console.log('param', param)
         const { cameraReses } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
@@ -28,15 +30,22 @@ export const pushCarImage = (param) => async (dispatch, getState) => {
                     url: item.imageId
                 })))
                 const bindCarSuccessReses = bindCarReses
-                    .map((item, index) => { return { imageId: imageUploadSuccessReses[index].imageId, success: item.success } })
-                    .filter(item => item.success)
-                    .map(item => item.imageId)
+                    .map((item, index) => { return { imageId: imageUploadSuccessReses[index].imageId, res: item, } })
+                    .filter(item => item.res.success)
+                    .map(item => {
+                        return {
+                            imageId: item.imageId,
+                            id: item.res.result._id
+                        }
+                    })
+                const imageList = bindCarSuccessReses.map(item => item.imageId)
+                const recordId = bindCarSuccessReses[0].id
                 if (cameraReses.length === bindCarSuccessReses.length) {
                     ToastAndroid.showWithGravity('提交成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: actionTypes.importCarImageTypes.import_carImage_success, payload: { imageList: bindCarSuccessReses } })
+                    dispatch({ type: actionTypes.importCarImageTypes.import_carImage_success, payload: { imageList: imageList, recordId } })
                 } else if (bindCarSuccessReses.length > 0) {
                     ToastAndroid.showWithGravity(`部分提交成功：${bindCarSuccessReses.length}/${cameraReses.length}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-                    dispatch({ type: actionTypes.importCarImageTypes.import_carImage_partSuccess, payload: { imageList: bindCarSuccessReses, failedMsg: '部分失败' } })
+                    dispatch({ type: actionTypes.importCarImageTypes.import_carImage_partSuccess, payload: { imageList: imageList, recordId, failedMsg: '部分失败' } })
                 } else {
                     ToastAndroid.showWithGravity('提交全部失败！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
                     dispatch({ type: actionTypes.importCarImageTypes.import_carImage_failed, payload: { failedMsg: '全部失败' } })
@@ -54,40 +63,6 @@ export const pushCarImage = (param) => async (dispatch, getState) => {
         ToastAndroid.showWithGravity(`提交全部失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         dispatch({ type: actionTypes.importCarImageTypes.import_carImage_error, payload: { errorMsg: err } })
     }
-    // let url = `${file_host}user/${param.requiredParam.userId}/image?${ObjectToUrl(param.optionalParam)}`
-    // dispatch({ type: actionTypes.importCarCameraTypes.IMPORT_CAR_IMAGE_WAITING, payload: {} })
-    // httpRequest
-    //     .postFilecallback(url, param.postFileParam, (err, res) => {
-    //         if (err) {
-    //             dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_ERROR, payload: { data: err } })
-    //         } else {
-    //             if (res.success) {
-    //                 url = `${record_host}/car/${param.requiredParam.carId}/vin/${param.requiredParam.vin}/storageImage`
-    //                 param.postParam.url = res.imageId
-    //                 httpRequest.postcallback(url, param.postParam, (carErr, carRes) => {
-    //                     if (carErr) {
-    //                         dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_ERROR, payload: { data: carErr } })
-    //                     } else {
-    //                         if (carRes.success) {
-    //                             dispatch({
-    //                                 type: actionTypes.importCarCameraTypes.IMPORT_CAR_IMAGE_SUCCESS, payload: {
-    //                                     data: {
-    //                                         img: `${file_host}image/${res.imageId}`,
-    //                                         recordId: carRes.result._id
-    //                                     }
-    //                                 }
-    //                             })
-    //                         }
-    //                         else {
-    //                             dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_FAILED, payload: { data: carRes.msg } })
-    //                         }
-    //                     }
-    //                 })
-    //             } else {
-    //                 dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_FAILED, payload: { data: res.msg } })
-    //             }
-    //         }
-    //     })
 }
 
 
