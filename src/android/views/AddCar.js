@@ -10,7 +10,7 @@ import {
     ToastAndroid
 } from 'react-native'
 
-import NavBar from '../components/Bar/NavBar'
+// import NavBar from '../components/Bar/NavBar'
 import DateTimePicker from '../components/FormComponents/DateTimePicker'
 import Select from '../components/FormComponents/Select'
 import TextBox from '../components/FormComponents/TextBox'

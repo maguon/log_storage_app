@@ -3,7 +3,7 @@ import { Text, View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import StorageListItem from './StorageListItem'
 import { Actions } from 'react-native-router-flux'
-import SearchBar from '../Bar/SearchBar'
+
 
 const StorageList = ({storages}) => {
 

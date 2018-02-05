@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { Header, Title, Button, Icon, Right, Left, Body, Label, Item, Input, Text } from 'native-base'
 import { View, StatusBar, StyleSheet, TextInput, TouchableOpacity, TouchableHighlight, Modal, InteractionManager, Dimensions, ART} from 'react-native'
-import * as routerDirection from '../../../util/RouterDirection'
+import * as routerDirection from '../../../../util/RouterDirection'
 
 import {Actions} from 'react-native-router-flux'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import globalStyles, { styleColor } from '../../GlobalStyles'
-import VinScanner from '../../components/VinScanner'
- import * as RouterDirection from '../../../util/RouterDirection'
-// import * as searchCarAction from '../../../views/searchCar/SearchCarAction'
+import globalStyles, { styleColor } from '../../../GlobalStyles'
+import VinScanner from '../../VinScanner'
+// import * as RouterDirection from '../../../../util/RouterDirection'
+
 import { connect } from 'react-redux'
 
 const { width, height } = Dimensions.get('window')
@@ -79,7 +79,7 @@ class SearchBar extends Component {
                             <TouchableOpacity style={{ padding: 5, flexDirection: 'row', alignItems: 'center' }}
                                 onPress={() => {
                                     this.setState({ menuModalIsVisible: false })
-                                    //RouterDirection.addCar(this.props.parent)()
+                                    routerDirection.addCar(this.props.parent)()
                                 }}>
                                 <Icon name='ios-car-outline' style={{ fontSize: 12 }} />
                                 <Text style={{ fontSize: 12, paddingLeft: 5 }}>增加商品车</Text>

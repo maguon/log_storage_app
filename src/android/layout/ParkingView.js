@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import ParkingViewComponent from '../components/ParkingView/ParkingView'
-import NavBar from '../components/Bar/NavBar'
 
 export default class ParkingView extends Component {
     constructor(props) {

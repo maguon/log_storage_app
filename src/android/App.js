@@ -3,46 +3,31 @@ import { StyleSheet, Text, View } from 'react-native'
 import { Button, Icon } from 'native-base'
 import { Scene, TabBar, Router, ActionConst, Action, Switch, Reducer } from 'react-native-router-flux'
 import { connect } from 'react-redux'
+import Orientation from 'react-native-orientation'
 
 
 import TabIcon from './components/TabIcon'
-import SearchBar from './components/Bar/SearchBar'
-import SearchCarBar from './components/Bar/SearchCarBar'
-import TopBar from './components/Bar/TopBar'
 
-//import ApplyDamageUploadImage from './views/applyDamageUploadImage/ApplyDamageUploadImage'
 
 import Initialization from './views/Initialization'
 import Login from './views/Login'
-
 import Home from './views/blockInitial/Home'
 import Query from './views/blockInitial/Query'
 import StorageList from './views/blockInitial/StorageList'
-import Setting from './views/blockInitial/Setting'
 
 import CarList from './views/CarList'
 import CarInformation from './views/CarInformation'
-
 import SearchVin from './views/SearchVin'
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
-
-// import SelectRow from './views/form/select/SelectRow'
-// import SelectColumn from './views/form/select/SelectColumn'
-
-// import SelectArea from './views/form/select/SelectArea'
 import ImportCarCamera from './views/ImportCarCamera'
 import RecordList from './views/RecordList'
 import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
 import AddCar from './views/AddCar'
-
-// import SelectReceive from './views/form/select/SelectReceive'
-// import SelectBaseAddr from './views/form/select/SelectBaseAddr'
 import RichText from './views/RichText'
-import RetrievePassword from './views/RetrievePassword'
-import Orientation from 'react-native-orientation'
+
 import * as sceneAction from '../actions/SceneAction'
 
 
@@ -50,6 +35,8 @@ import * as sceneAction from '../actions/SceneAction'
 import ListCennect from './views/form/select/ListCennect'
 import NavSearchStaticBar from './components/share/bar/NavSearchStaticBar'
 import NavSearchDynamicBar from './components/share/bar/NavSearchDynamicBar'
+import SearchBar from './components/share/bar/SearchBar'
+import SearchCarBar from './components/share/bar/SearchCarBar'
 import ApplyDamage from './views/ApplyDamage'
 import ApplyDamageUploadImage from './views/ApplyDamageUploadImage'
 import ApplyDamageSubmit from './components/applyDamage/ApplyDamageSubmit'
@@ -63,7 +50,8 @@ import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
 import PersonalCenter from './views/PersonalCenter'
 import UpdatePassword from './views/UpdatePassword'
-
+import Setting from './views/blockInitial/Setting'
+import RetrievePassword from './views/RetrievePassword'
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -151,16 +139,20 @@ class App extends Component {
                             <Scene key="login" initial={true} component={Login} hideNavBar hideTabBar />
                             <Scene key="retrievePassword" LeftButton={LeftButton} title='找回密码' component={RetrievePassword} hideTabBar hideNavBar={false} navBar={NavBar} />
                         </Scene>
-                        <Scene key="main" tabs={true} tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
-                            <Scene key="homeBlock" icon={TabIcon} online='ios-home' outline='ios-home-outline' >
-                                <Scene key="home" component={Home} initial={true} hideNavBar={false} navBar={SearchBar} />
+                        <Scene key="main" tabs={true}  tabBarStyle={styles.tabBarStyle} tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
+                            <Scene key="homeBlock"  initial={true} icon={TabIcon} online='ios-home' outline='ios-home-outline' >
+                                <Scene key="home" 
+                                component={Home} 
+                                initial={true} 
+                                hideNavBar={false} 
+                                navBar={SearchBar} />
                                 <Scene key="carInformationAtHomeBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtHomeBlock" isRefresh={true} component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
                                 <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
-                                <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={TopBar} />
+                                <Scene key="importCarCameraAtHomeBlock" component={ImportCarCamera} title='上传图片' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
                                 <Scene key="listCennectAtHomeBlock"
                                     component={ListCennect}
@@ -198,7 +190,7 @@ class App extends Component {
                                     navBar={NavBar} />
                                 <Scene key="singlePhotoView" component={SinglePhotoView} hideNavBar hideTabBar />
                             </Scene>
-                            <Scene key="carBlock" initial={true} icon={TabIcon} online='ios-car' outline='ios-car-outline' >
+                            <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene
                                     key="query"
                                     title='查询车辆'

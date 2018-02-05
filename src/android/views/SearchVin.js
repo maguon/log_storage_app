@@ -6,7 +6,6 @@ import SearchCarListLayout from '../layout/SearchVin'
 import { View, Dimensions } from 'react-native'
 import * as RouterDirection from '../../util/RouterDirection'
 import SearchVinList from '../components/SearchVinList'
-import NavSearchBar from '../components/Bar/NavSearchBar'
 
 
 
@@ -145,12 +144,12 @@ class SearchVin extends Component {
         let { vinList } = this.props.SearchVinReducer.getVinList.data
         return (
             <View style={{ flex: 1, width: window.width }}>
-                <NavSearchBar
+                {/* <NavSearchBar
                     ref='navSearchBar'
                     vin={this.state.vin}
                     onChangeSearchText={this.onChangeSearchText}
                     onPressIcon={this.onPressIcon}
-                />
+                /> */}
                 <SearchVinList
                     vinList={vinList}
                     onEndReached={this.onEndReached}

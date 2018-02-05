@@ -5,7 +5,7 @@ import {
     ToastAndroid
 } from 'react-native'
 import { connect } from 'react-redux'
-import TopBar from '../components/Bar/TopBar'
+// import TopBar from '../components/Bar/TopBar'
 import { Button } from 'native-base'
 
 import * as ImporCarAction from '../../actions/ImporCarAction'

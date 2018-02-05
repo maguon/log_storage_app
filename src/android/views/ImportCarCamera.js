@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StatusBar, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import TopBar from '../components/Bar/TopBar'
+// import TopBar from '../components/Bar/TopBar'
 import CarCamera from '../components/CarCamera/CarCamera'
 import { Actions } from 'react-native-router-flux'
 import * as ImportCarCameraAction from '../../actions/ImportCarCameraAction'

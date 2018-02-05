@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Dimensions, ScrollView, SectionList } from 'react-native'
 import { connect } from 'react-redux'
-import NavBar from '../components/Bar/NavBar'
+// import NavBar from '../components/Bar/NavBar'
 import { Segment, Button, Text } from 'native-base'
 import * as RecordListAction from '../../actions/RecordListAction'
 import RecordListItem from '../components/home/RecordListItem'

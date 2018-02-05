@@ -69,33 +69,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
-
-
-
-// class Home extends Component {
-//     constructor(props) {
-//         super(props)
-//         // this.state = {
-//         //     active: 'true'
-//         // };
-//         // this.onBarcodeReceived = this.onBarcodeReceived.bind(this)
-//         // this.onPressIcon = this.onPressIcon.bind(this)
-//         // this.onPressTextInput = this.onPressTextInput.bind(this)
-//         // this.onPressItem = this.onPressItem.bind(this)
-//     }
-
-
-//     // onBarcodeReceived(param) {
-//     //     Actions.searchVinAtHomeBlock({ vin: param })
-//     // }
-//     // onPressIcon() {
-//     //     Actions.searchVinAtHomeBlock()
-//     // }
-//     // onPressTextInput() {
-//     //     Actions.searchVinAtHomeBlock()
-//     // }
-
-//     // onPressItem(param) {
-//     //     Actions.carInformationAtHomeBlock(param)
-//     // }
-

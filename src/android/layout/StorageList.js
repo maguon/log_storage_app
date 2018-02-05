@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { connect } from 'react-redux'
-import SearchBar from '../components/Bar/SearchBar'
-import NavBar from '../components/Bar/NavBar'
 import StorageListComponent from '../components/StorageList/StorageList'
 
 const StorageList = ({ storages, onBarcodeReceived, onPressIcon, onPressTextInput }) => {

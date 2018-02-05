@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, TextInput, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import NavBar from '../components/Bar/NavBar'
+// import NavBar from '../components/Bar/NavBar'
 import { Input, Button } from 'native-base'
 import { validate } from '../../util/Validator'
 

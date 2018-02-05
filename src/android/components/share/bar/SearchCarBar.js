@@ -3,7 +3,7 @@ import { Header, Title, Button, Icon, Right, Left, Body, Label, Item, Input, Tex
 import { View, StatusBar, StyleSheet, TextInput } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import globalStyles, { styleColor } from '../../GlobalStyles'
+import globalStyles, { styleColor } from '../../../GlobalStyles'
 import { Field, reduxForm, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
 // import * as searchCarAction from '../../../views/searchCar/SearchCarAction'
