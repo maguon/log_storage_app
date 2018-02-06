@@ -9,7 +9,6 @@ import { Actions } from 'react-native-router-flux'
 
 export const addCar = (values, parent) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
-    console.log('parent',parent)
     try {
         dispatch({ type: actionTypes.addCarTypes.add_car_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/car`
@@ -36,7 +35,6 @@ export const addCar = (values, parent) => async (dispatch, getState) => {
             dispatch({ type: actionTypes.addCarTypes.add_car_failed, payload: { failedMsg: res.msg } })
         }
     } catch (err) {
-        console.log('err',err)
         ToastAndroid.showWithGravity(`提交失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         dispatch({ type: actionTypes.addCarTypes.add_car_error, payload: { errorMsg: err } })
     }

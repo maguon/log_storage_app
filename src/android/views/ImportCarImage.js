@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
 })
 
 const imageMapStateToProps = (state) => {
-    console.log(state)
     return {
         imageViewReducer: {
             imageList: state.importCarImageReducer.data.imageList.map(item => `${file_host}image/${item.url}`)
