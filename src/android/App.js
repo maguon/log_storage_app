@@ -168,7 +168,7 @@ class App extends Component {
                                     hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
-                                <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                {/* <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="importCarCameraAtHomeBlock"
                                     component={ImportCarImage}
                                     LeftButton={LeftButton}

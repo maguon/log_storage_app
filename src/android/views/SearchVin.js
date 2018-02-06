@@ -144,12 +144,12 @@ class SearchVin extends Component {
         let { vinList } = this.props.SearchVinReducer.getVinList.data
         return (
             <View style={{ flex: 1, width: window.width }}>
-                {/* <NavSearchBar
+                <NavSearchBar
                     ref='navSearchBar'
                     vin={this.state.vin}
                     onChangeSearchText={this.onChangeSearchText}
                     onPressIcon={this.onPressIcon}
-                /> */}
+                />
                 <SearchVinList
                     vinList={vinList}
                     onEndReached={this.onEndReached}
@@ -171,7 +171,7 @@ class SearchVin extends Component {
 const mapStateToProps = (state) => {
     return {
         SearchVinReducer: state.SearchVinReducer,
-        user: state.LoginReducer.user,
+        user: state.loginReducer.data.user,
         SceneReducer: state.SceneReducer
     }
 }

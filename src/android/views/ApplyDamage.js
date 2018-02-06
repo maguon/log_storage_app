@@ -46,13 +46,13 @@ const ApplyDamage = props => {
                     name='car'
                     component={Select}
                     getList={getCarList}
-                    validate={[ validateRequired]}
+                    validate={[validateRequired]}
                     getListWaiting={getCarListWaiting}
                     showList={param => {
                         return Actions.listCennectDynamic({
                             mapStateToProps: vinMapStateToProps,
                             mapDispatchToProps: vinMapDispatchToProps,
-                            List: PagingList,
+                            List: DisposableList,
                             ...param
                         })
                     }} />
@@ -72,9 +72,9 @@ const ApplyDamage = props => {
                     component={Select}
                     getList={getDriverList}
                     getListWaiting={getDriverListWaiting}
-                    validate={[ validateRequired]}
+                    validate={[validateRequired]}
                     showList={param => {
-                        return Actions.listCennect({
+                        return routerDirection.listCennect(parent)({
                             mapStateToProps: driverMapStateToProps,
                             mapDispatchToProps: driverMapDispatchToProps,
                             List: DisposableList,
@@ -140,7 +140,7 @@ const vinMapStateToProps = (state) => {
     return {
         listReducer: {
             Action: state.selectCarReducer.getCarList,
-            MoreAction: state.selectCarReducer.getCarListMore,
+            //MoreAction: state.selectCarReducer.getCarListMore,
             data: {
                 list: state.selectCarReducer.data.carList.map(item => {
                     return {
@@ -157,9 +157,9 @@ const vinMapStateToProps = (state) => {
 }
 
 const vinMapDispatchToProps = (dispatch) => ({
-    getListMore: () => {
-        dispatch(selectCarAction.getCarListMore())
-    }
+    // getListMore: () => {
+    //     dispatch(selectCarAction.getCarListMore())
+    // }
 })
 
 const mapStateToProps = (state) => {
