@@ -8,3 +8,8 @@ export const upload_ImageAtCarInfo_partSuccess = 'upload_ImageAtCarInfo_partSucc
 export const upload_ImageAtCarInfo_waiting = 'upload_ImageAtCarInfo_waiting'
 export const upload_ImageAtCarInfo_failed = 'upload_ImageAtCarInfo_failed'
 export const upload_ImageAtCarInfo_error = 'upload_ImageAtCarInfo_error'
+
+export const del_ImageAtCarInfo_success='del_ImageAtCarInfo_success'
+export const del_ImageAtCarInfo_failed='del_ImageAtCarInfo_failed'
+export const del_ImageAtCarInfo_error='del_ImageAtCarInfo_error'
+export const del_ImageAtCarInfo_waiting='del_ImageAtCarInfo_waiting'

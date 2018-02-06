@@ -15,7 +15,7 @@ class RecordList extends Component {
     }
 
     componentDidMount() {
-        let param = { optionalParam: { userId: this.props.user.userId, start: 0, size: 20 } }
+        let param = { optionalParam: { userId: this.props.loginReducer.data.user.uid, start: 0, size: 20 } }
         this.props.getRecordList(param)
     }
 
@@ -84,10 +84,10 @@ class RecordList extends Component {
     }
     getRecordListMore() {
         let { getRecordListMore, recordListReducer } = this.props
-        let { userId } = this.props.user
+        let { uid } = this.props.loginReducer.data.user
         let { getRecordList, selectRecordListTab } = recordListReducer
       //  console.log(this.props.recordListReducer)
-        let param = { optionalParam: { userid: userId, start: getRecordList.data.recordList.length, size: 20 } }
+        let param = { optionalParam: { userid: uid, start: getRecordList.data.recordList.length, size: 20 } }
         if (selectRecordListTab.selectedTab == 'all') {
           //  console.log(param)
         } else if (selectRecordListTab.selectedTab == 'import') {
@@ -164,7 +164,7 @@ class RecordList extends Component {
 const mapStateToProps = (state) => {
     return {
         recordListReducer: state.RecordListReducer,
-        user: state.LoginReducer.user
+        loginReducer: state.loginReducer
     }
 }
 

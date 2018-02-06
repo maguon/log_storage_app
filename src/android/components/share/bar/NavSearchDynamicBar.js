@@ -18,8 +18,8 @@ const TextBox = props => {
                 style={[globalStyles.midText, styles.input]}
                 onChangeText={(text) => {
                     onChange(text)
-                    getCarListWaiting()
-                    getCarList()
+                    text.length > 5 && getCarListWaiting()
+                    text.length > 5 && getCarList()
 
                 }}
                 {...restProps} />
@@ -40,7 +40,7 @@ const NavSearchDynamicBar = props => {
                     </Button>
                 </Left>
                 <Body style={styles.body}>
-                    <Field name='vinCode' component={TextBox} getCarList={getCarList} getCarListWaiting={getCarListWaiting} />
+                    <Field name='vin' component={TextBox} getCarList={getCarList} getCarListWaiting={getCarListWaiting} />
                 </Body>
             </Header>
         </View>
@@ -62,7 +62,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({
-    form: 'SearchCarForm'
+    form: 'searchCarForm'
 })(NavSearchDynamicBar))
 
 const styles = StyleSheet.create({

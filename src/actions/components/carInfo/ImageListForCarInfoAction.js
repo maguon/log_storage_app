@@ -11,7 +11,7 @@ export const getCarImageList = (param) => async (dispatch, getState) => {
         const url = `${record_host}/user/${uid}/car/${carId}/record`
         const res = await httpRequest.get(url)
         if (res.success) {
-            dispatch({ type: actionTypes.recordForCarInfoTypes.get_recordForCarInfo_success, payload: { recordList: res.result[0] ? res.result[0].comment : [] } })
+            dispatch({ type: actionTypes.recordForCarInfoTypes.get_recordForCarInfo_success, payload: { recordId: res.result[0]._id, recordList: res.result[0] ? res.result[0].comment : [] } })
             dispatch({ type: actionTypes.imageListForCarInfoTypes.get_carImageList_success, payload: { carImageList: res.result[0] ? res.result[0].storage_image : [] } })
         } else {
             dispatch({ type: actionTypes.imageListForCarInfoTypes.get_carImageList_failed, payload: { failedMsg: res.msg } })
@@ -80,5 +80,26 @@ export const uploadCarImage = param => async (dispatch, getState) => {
     catch (err) {
         ToastAndroid.showWithGravity(`提交全部失败！${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         dispatch({ type: actionTypes.imageListForCarInfoTypes.upload_ImageAtCarInfo_error, payload: { errorMsg: err } })
+    }
+}
+
+export const delImage = param => async (dispatch, getState) => {
+    const { loginReducer: { data: { user: { uid } } },
+        recordForCarInfoReducer: { data: { recordId } } } = getState()
+    dispatch({ type: actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_waiting, payload: {} })
+    try {
+        const url = `${record_host}/user/${uid}/record/${recordId}/image/${param}`
+        const res = await httpRequest.del(url)
+        if (res.success) {
+            ToastAndroid.showWithGravity('图片删除成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+            dispatch({ type: actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_success, payload: { imageurl: param } })
+        } else {
+            ToastAndroid.showWithGravity(`图片删除失败：${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+            dispatch({ type: actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_failed, payload: { failedMsg: res.msg } })
+        }
+
+    } catch (err) {
+        ToastAndroid.showWithGravity(`图片删除失败：${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        dispatch({ type: actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_error, payload: { errorMsg: err } })
     }
 }

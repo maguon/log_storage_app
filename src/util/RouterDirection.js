@@ -87,3 +87,8 @@ export const popToCarInfo = parent => {
     // if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock
 }
 
+export const imageViewConnect =parent =>{
+      if (parent === 'homeBlock') return Actions.imageViewConnectAtHomeBlock
+      if (parent === 'carBlock') return Actions.imageViewConnectAtCarBlock
+}
+

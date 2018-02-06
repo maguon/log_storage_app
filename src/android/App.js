@@ -51,11 +51,11 @@ import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
 import PersonalCenter from './views/PersonalCenter'
 import UpdatePassword from './views/UpdatePassword'
-import Setting from './views/blockInitial/Setting' 
+import Setting from './views/blockInitial/Setting'
 import RetrievePassword from './views/RetrievePassword'
 import ImportCarImage from './views/ImportCarImage'
 import ImportCarImageSubmit from './components/importCarImage/ImportCarImageSubmit'
-
+import ImageViewConnect from './views/ImageViewConnect'
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -157,7 +157,11 @@ class App extends Component {
                                     hideNavBar={false}
                                     navBar={NavBar}
                                     hideTabBar />
-                                <Scene key="searchVinAtHomeBlock" component={SearchVin} hideTabBar hideNavBar={true} />
+                                <Scene key="searchVinAtHomeBlock"
+                                    component={ListCennect}
+                                    hideTabBar
+                                    navBar={SearchCarBar}
+                                    hideNavBar={false} />
                                 <Scene key="addCarAtHomeBlock"
                                     component={AddCar}
                                     RightButton={AddCarSubmit}
@@ -173,7 +177,6 @@ class App extends Component {
                                     component={ImportCarImage}
                                     LeftButton={LeftButton}
                                     title='上传图片'
-                                    
                                     hideNavBar={false}
                                     hideTabBar
                                     RightButton={ImportCarImageSubmit}
@@ -223,6 +226,11 @@ class App extends Component {
                                     component={SinglePhotoView}
                                     hideNavBar
                                     hideTabBar />
+                                <Scene key="imageViewConnectAtHomeBlock"
+                                    clone={true}
+                                    component={ImageViewConnect}
+                                    hideTabBar
+                                    hideNavBar />   
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene
@@ -232,6 +240,11 @@ class App extends Component {
                                     component={Query}
                                     hideNavBar={false}
                                     navBar={NavBar} />
+                                <Scene key="imageViewConnectAtCarBlock"
+                                    clone={true}
+                                    component={ImageViewConnect}
+                                    hideTabBar
+                                    hideNavBar />
                                 <Scene
                                     key="carList"
                                     title="车辆列表"
@@ -285,7 +298,7 @@ class App extends Component {
                             </Scene>
                             <Scene key="settingBlock" icon={TabIcon} online='ios-settings' outline='ios-settings-outline' >
                                 <Scene key="setting" component={Setting} title='设置' initial={true} hideNavBar={false} navBar={NavBar} />
-                                <Scene key="recordList" component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
+                                <Scene key="recordList" LeftButton={LeftButton} component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />

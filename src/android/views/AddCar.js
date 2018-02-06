@@ -242,7 +242,8 @@ const receiveMapDispatchToProps = (dispatch) => ({
 })
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,ownProps) => {
+    //console.log('ownProps',ownProps)
     return {
         loginReducer: state.loginReducer,
         addCarFormValues: getFormValues('addCarForm')(state),
@@ -252,7 +253,8 @@ const mapStateToProps = (state) => {
             routeEnd: {},
             entrust: {},
             baseAddr: {},
-            receive: {}
+            receive: {},
+            vin: ownProps.vin
         },
     }
 }

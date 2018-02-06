@@ -10,7 +10,6 @@ export const pushCarImageWaiting = () => (dispatch) => {
 
 export const pushCarImage = (param) => async (dispatch, getState) => {
     try {
-        console.log('param', param)
         const { cameraReses } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
@@ -65,25 +64,23 @@ export const pushCarImage = (param) => async (dispatch, getState) => {
     }
 }
 
+export const delImage = param => async (dispatch, getState) => {
+    const { loginReducer: { data: { user: { uid } } },
+    importCarImageReducer: { data: { recordId } } } = getState()
+    dispatch({ type: actionTypes.importCarImageTypes.del_importCarImage_waiting, payload: {} })
+    try {
+        const url = `${record_host}/user/${uid}/record/${recordId}/image/${param}`
+        const res = await httpRequest.del(url)
+        if (res.success) {
+            ToastAndroid.showWithGravity('图片删除成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+            dispatch({ type: actionTypes.importCarImageTypes.del_importCarImage_success, payload: { imageurl: param } })
+        } else {
+            ToastAndroid.showWithGravity(`图片删除失败：${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+            dispatch({ type: actionTypes.importCarImageTypes.del_importCarImage_failed, payload: { failedMsg: res.msg } })
+        }
 
-
-export const delImage = (param) => (dispatch) => {
-    let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`
-    dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_WAITING, payload: {} })
-    httpRequest
-        .delcallback(url, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_SUCCESS, payload: { data: `${file_host}image/${param.requiredParam.url}` } })
-                } else {
-                    dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_FAILED, payload: { data: res.msg } })
-                }
-            }
-        })
-}
-
-export const resetDelImage = () => (dispatch) => {
-    dispatch({ type: actionTypes.importCarCameraTypes.RESET_IMPORTCARIMAGE, payload: {} })
+    } catch (err) {
+        ToastAndroid.showWithGravity(`图片删除失败：${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        dispatch({ type: actionTypes.importCarImageTypes.del_importCarImage_error, payload: { errorMsg: err } })
+    }
 }

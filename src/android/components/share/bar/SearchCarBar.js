@@ -6,10 +6,12 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import globalStyles, { styleColor } from '../../../GlobalStyles'
 import { Field, reduxForm, getFormValues } from 'redux-form'
 import { connect } from 'react-redux'
-// import * as searchCarAction from '../../../views/searchCar/SearchCarAction'
+ import * as selectCarAction from '../../../../actions/components/select/selectCarAction'
+ import * as routerDirection from '../../../../util/RouterDirection'
+
 
 const TextBox = props => {
-    const { input: { onChange, ...restProps }, getCarList } = props
+    const { input: { onChange, ...restProps }, getCarList, getCarListWaiting } = props
     return (
         <View style={styles.inputContainer}>
             <TextInput
@@ -19,7 +21,8 @@ const TextBox = props => {
                 style={[globalStyles.midText, styles.input]}
                 onChangeText={text => {
                     onChange(text)
-                    text.length > 5 && getCarList(text)
+                    text.length > 5 && getCarListWaiting()
+                    text.length > 5 && getCarList()
                 }}
                 {...restProps} />
             <Icon name="ios-search" style={[globalStyles.textColor, styles.inputIcon]} />
@@ -28,22 +31,25 @@ const TextBox = props => {
 }
 
 const SearchCarBar = props => {
-    const { title, layout, getCarList } = props
+    const { title, layout, getCarList, getCarListWaiting, parent,
+        searchCarFormValues = {} } = props
+        // console.log('searchCarFormValues',searchCarFormValues)
+        // console.log('props',props)
     return (
         <View style={[styles.container, { width: layout.initWidth }]}>
             <StatusBar hidden={false} />
             <Header style={globalStyles.styleBackgroundColor}>
                 <Left style={styles.left}>
                     <Button transparent onPress={Actions.pop}>
-                        <Icon name="ios-qr-scanner" style={styles.leftIcon} />
+                        <Icon name='arrow-back'  style={styles.leftIcon} />
                     </Button>
                 </Left>
                 <Body style={styles.body}>
-                    <Field name='vinCode' component={TextBox} getCarList={getCarList} />
+                    <Field name='vin' component={TextBox} getCarList={getCarList} getCarListWaiting={getCarListWaiting}/>
                 </Body>
                 <Right>
-                    <Button transparent onPress={Actions.pop}>
-                        <Icon name="ios-menu" style={styles.leftIcon} />
+                    <Button transparent onPress={() => routerDirection.addCar(parent)({ vin: searchCarFormValues.vin })}>
+                        <Icon name="md-add" style={styles.leftIcon} />
                     </Button>
                 </Right>
             </Header>
@@ -91,17 +97,20 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        // initialValues: ownProps.initParam
+        searchCarFormValues: getFormValues('searchCarForm')(state)
     }
 }
 
 const mapDispatchToProps = (dispatch) => ({
     getCarList: () => {
-        //     dispatch(searchCarAction.getCarList(param))
-    }
+        dispatch(selectCarAction.getCarList())
+    },
+    getCarListWaiting: () => {
+        dispatch(selectCarAction.getCarListWaiting())
+}
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(
     reduxForm({
-        form: 'SearchCar'
+        form: 'searchCarForm'
     })(SearchCarBar)) 

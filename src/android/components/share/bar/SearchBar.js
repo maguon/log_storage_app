@@ -1,21 +1,38 @@
 import React, { Component } from 'react'
 import { Header, Title, Button, Icon, Right, Left, Body, Label, Item, Input, Text } from 'native-base'
-import { View, StatusBar, StyleSheet, TextInput, TouchableOpacity, TouchableHighlight, Modal, InteractionManager, Dimensions, ART} from 'react-native'
+import { View, StatusBar, StyleSheet, TextInput, TouchableOpacity, TouchableHighlight, Modal, InteractionManager, Dimensions, ART } from 'react-native'
 import * as routerDirection from '../../../../util/RouterDirection'
-
-import {Actions} from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import globalStyles, { styleColor } from '../../../GlobalStyles'
 import VinScanner from '../../VinScanner'
 // import * as RouterDirection from '../../../../util/RouterDirection'
-
 import { connect } from 'react-redux'
+import * as selectCarAction from '../../../../actions/components/select/selectCarAction'
+import DisposableList from '../../../views/form/select/DisposableList'
+import * as imageListForCarInfoAction from '../../../../actions/components/carInfo/ImageListForCarInfoAction'
 
 const { width, height } = Dimensions.get('window')
 let mwidth = 70
 let mheight = 100
 const top = 46
 
+
+const onSelectCar = ({ param, getCarList, parent, getCarListWaiting, onSelect }) => {
+   // getCarListWaiting()
+    Actions.searchVinAtHomeBlock({
+        mapStateToProps: vinMapStateToProps,
+        mapDispatchToProps: vinMapDispatchToProps,
+        List: DisposableList,
+        onSelect: (item) => {
+            InteractionManager.runAfterInteractions(() => {
+                onSelect(item)
+            })
+        }
+    })
+  //  InteractionManager.runAfterInteractions(() => getCarList(param))
+
+}
 
 class SearchBar extends Component {
     constructor(props) {
@@ -28,7 +45,7 @@ class SearchBar extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
 
@@ -92,7 +109,7 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { title, parent } = this.props
+        const { title, parent,getCarList,getCarListWaiting,getCarImageListWaiting,getCarImageList } = this.props
         return (
             <View style={[styles.container, { width: width }]}>
                 <StatusBar hidden={false} />
@@ -105,7 +122,18 @@ class SearchBar extends Component {
                     <Body style={styles.body}>
                         <TouchableHighlight
                             underlayColor={'rgba(255, 255, 255, 0)'}
-                            onPress={Actions.searchVinAtHomeBlock}
+                            onPress={() => onSelectCar({
+                                parent,
+                                getCarList,
+                                getCarListWaiting,
+                                onSelect: (item) => {
+                                    getCarImageListWaiting()
+                                    routerDirection.carInformation(parent)({ initParam: { car: item.car } })
+                                    InteractionManager.runAfterInteractions(() => {
+                                        getCarImageList({ carId: item.id })
+                                    })
+                                }
+                            })}
                             style={styles.bodyTouch}>
                             <View style={styles.bodyTouchChild}>
                                 <View style={styles.input} >
@@ -116,7 +144,7 @@ class SearchBar extends Component {
                         </TouchableHighlight>
                     </Body>
                     <Right>
-                        <Button transparent onPress={() => this.setState({menuModalIsVisible:!this.state.menuModalIsVisible})}>
+                        <Button transparent onPress={() => this.setState({ menuModalIsVisible: !this.state.menuModalIsVisible })}>
                             <Icon name="ios-menu" style={styles.leftIcon} />
                         </Button>
                     </Right>
@@ -134,6 +162,28 @@ class SearchBar extends Component {
         )
     }
 }
+
+
+const vinMapStateToProps = (state) => {
+    return {
+        listReducer: {
+            Action: state.selectCarReducer.getCarList,
+            data: {
+                list: state.selectCarReducer.data.carList.map(item => {
+                    return {
+                        id: item.id,
+                        value: item.vin,
+                        car: item
+                    }
+                })
+            }
+        }
+    }
+}
+
+const vinMapDispatchToProps = (dispatch) => ({
+
+})
 
 
 const styles = StyleSheet.create({
@@ -186,93 +236,18 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    getCarList: (param) => {
-        //dispatch(searchCarAction.getCarList(param))
+    getCarList: () => {
+        dispatch(selectCarAction.getCarList())
+    },
+    getCarListWaiting: () => {
+        dispatch(selectCarAction.getCarListWaiting())
+    },
+    getCarImageListWaiting: () => {
+        dispatch(imageListForCarInfoAction.getCarImageListWaiting())
+    },
+    getCarImageList: (param) => {
+        dispatch(imageListForCarInfoAction.getCarImageList(param))
     }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar)
-
-
-
-// import React, { Component } from 'react'
-// import { View, Vibration, Modal, Text, TextInput, StatusBar, Dimensions } from 'react-native'
-// import { Item, Header, Input, Button, Left, Right, Icon } from 'native-base'
-// import VinScanner from '../../components/VinScanner'
-// import { Actions } from 'react-native-router-flux'
-
-// const { width, height } = Dimensions.get('window')
-// export default class SearchBar extends Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             barcodeModalVisible: false,
-//         }
-//         this._onPressIcon = this._onPressIcon.bind(this)
-//         this._onPressTextInput = this._onPressTextInput.bind(this)
-//         this._onBarcodeReceived = this._onBarcodeReceived.bind(this)
-//     }
-
-//     static defaultProps = {
-//         onBarcodeReceived: (param) => { console.log('this.props.onBarcodeReceived', param) },
-//         onPressIcon: () => { console.log('this.props.onPressIcon') },
-//         onPressTextInput: () => { console.log('this.props.onPressTextInput') }
-//     }
-
-//     _onBarcodeReceived(e) {
-//         if (e.data !== this.state.barcode || e.type !== this.state.type) Vibration.vibrate()
-//         // if (e.data.length == 17)
-//         this.setState({
-//             barcodeModalVisible: false
-//         })
-//         this.props.onBarcodeReceived(e.data)
-//     }
-
-//     _onPressIcon() {
-//         this.props.onPressIcon()
-//     }
-
-//     _onPressTextInput() {
-//         this.props.onPressTextInput()
-//     }
-
-//     render() {
-//         return (
-//             <Header androidStatusBarColor='#00cade' searchBar style={{ backgroundColor: '#00cade' }}>
-//                 <Left style={{ flex: 1 }}>
-//                     <Button transparent onPress={() => { this.setState({ barcodeModalVisible: true }) }}>
-//                         <Icon name="ios-barcode-outline" style={{ fontSize: 30 }} type="ionicons" />
-//                     </Button>
-//                 </Left>
-//                 <View style={{ flex: 6, marginTop: 10, marginBottom: 10 }} onTouchStart={this._onPressTextInput}>
-//                     <Item rounded style={{ backgroundColor: 'rgba(255,255,255,0.4)', borderWidth: 0 }}>
-//                         <Input
-//                             style={{ color: '#ffffff', fontSize: 14 }}
-//                             editable={false}
-//                         />
-//                         <Icon name="md-search"
-//                             type="ionicons"
-//                             style={{ color: '#ffffff' }}
-//                             onPress={this._onPressIcon} />
-//                     </Item>
-//                 </View>
-//                 <Right style={{ flex: 1 }}>
-//                 </Right>
-//                 <Modal
-//                     animationType={"none"}
-//                     visible={this.state.barcodeModalVisible}
-//                     onRequestClose={() => { this.setState({ barcodeModalVisible: false }) }}
-//                 >
-//                     <VinScanner barcodeReceived={this._onBarcodeReceived} />
-//                     <View style={{ position: 'absolute', top: 0, backgroundColor: 'rgba(255,255,255,0.1)', height: 40, width: width, flexDirection: 'row' }}>
-//                         <Icon style={{ color: '#888888', alignSelf: 'center', paddingLeft: 10, fontSize: 25 }} name='arrow-back' onPress={() => { this.setState({ barcodeModalVisible: false }) }} />
-//                         <Text style={{ color: '#888888', alignSelf: 'center', paddingLeft: 5 }} onPress={() => { this.setState({ barcodeModalVisible: false }) }} >返回</Text>
-//                     </View>
-//                 </Modal>
-//             </Header >
-//         )
-//     }
-// }
-
-
-

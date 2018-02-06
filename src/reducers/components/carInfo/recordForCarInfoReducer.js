@@ -3,6 +3,7 @@ import * as actionTypes from '../../../actionTypes'
 
 const initialState = {
     data: {
+        recordId:0,
         recordList: []
     },
     getRecordList: {
@@ -15,10 +16,11 @@ const initialState = {
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(错误)，4(执行失败),5(服务器未处理错误)]
 export default handleActions({
     [actionTypes.recordForCarInfoTypes.get_recordForCarInfo_success]: (state, action) => {
-        const { payload: { recordList } } = action
+        const { payload: { recordList,recordId } } = action
         return {
             ...state,
             data: {
+                recordId,
                 recordList
             },
             getRecordList: {

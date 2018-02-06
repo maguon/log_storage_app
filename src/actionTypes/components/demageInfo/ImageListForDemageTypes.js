@@ -8,3 +8,4 @@ export const upload_ImageAtDemage_partSuccess = 'upload_ImageAtDemage_partSucces
 export const upload_ImageAtDemage_waiting = 'upload_ImageAtDemage_waiting'
 export const upload_ImageAtDemage_failed = 'upload_ImageAtDemage_failed'
 export const upload_ImageAtDemage_error = 'upload_ImageAtDemage_error'
+

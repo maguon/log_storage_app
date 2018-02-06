@@ -20,7 +20,7 @@ function getcallback(url, callback) {
         })
 }
 
-const get = (url)=>{
+const get = (url) => {
     return fetch(url, {
         method: 'GET',
         headers: requestHeaders.headers
@@ -28,7 +28,7 @@ const get = (url)=>{
 }
 
 const post = (url, params) => {
-   return fetch(url, {
+    return fetch(url, {
         method: 'POST',
         headers: requestHeaders.headers,
         body: JSON.stringify(params)
@@ -46,9 +46,16 @@ const postFile = (url, params) => {
     }).then((response) => response.json())
 }
 
+const del = (url) => {
+    return fetch(url, {
+        method: 'DELETE',
+        headers: requestHeaders.headers,
+    }).then((response) => response.json())
+}
+
 
 function put(url, params) {
-   return fetch(url, {
+    return fetch(url, {
         method: 'PUT',
         headers: requestHeaders.headers,
         body: JSON.stringify(params)
@@ -83,7 +90,7 @@ function putcallback(url, params, callback) {
         });
 }
 
-function delcallback(url,callback) {
+function delcallback(url, callback) {
     fetch(url, {
         method: 'DELETE',
         headers: requestHeaders.headers,
@@ -128,9 +135,10 @@ module.exports = {
     postFilecallback: postFilecallback,
     getAllcallback: getAllcallback,
     get: get,
-    post:post,
-    postFile:postFile,
-    put:put
+    post: post,
+    postFile: postFile,
+    put: put,
+    del: del
 }
 
 

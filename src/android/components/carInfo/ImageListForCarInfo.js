@@ -12,6 +12,7 @@ import {
 import ImageItem from '../share/ImageItem'
 import globalStyles from '../../GlobalStyles'
 import { connect } from 'react-redux'
+import { Actions } from 'react-native-router-flux'
 import CameraButton from '../../components/share/CameraButton'
 import { file_host } from '../../../config/Host'
 import { Container, Content, Input, Label, Icon } from 'native-base'
@@ -31,7 +32,11 @@ const renderItem = props => {
             <TouchableOpacity
                 key={index}
                 style={styles.itemContainer}
-                onPress={() => routerDirection.singlePhotoView(parent)({ initParam: { imageUrlList: carImageList.map(url => `${file_host}/image/${url.url}`), index } })} >
+                onPress={() => routerDirection.imageViewConnect(parent)({
+                    mapStateToProps: imageMapStateToProps,
+                    mapDispatchToProps: imageMapDispatchToProps,
+                    imageIndex: index
+                })} >
                 <ImageItem imageUrl={`${file_host}/image/${item.url}`} />
             </TouchableOpacity>
         )
@@ -157,6 +162,22 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     }
 })
+
+const imageMapStateToProps = (state) => {
+    return {
+        imageViewReducer: {
+            imageList: state.imageListForCarInfoReducer.data.carImageList.map(item => `${file_host}image/${item.url}`)
+        }
+    }
+}
+
+const imageMapDispatchToProps = (dispatch) => ({
+    delImage: (param) => {
+        dispatch(imageListForCarInfoAction.delImage(param))
+
+    }
+})
+
 
 const mapStateToProps = (state) => {
     return {

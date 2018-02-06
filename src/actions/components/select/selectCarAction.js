@@ -10,10 +10,11 @@ const pageSize = 10
 
 export const getCarList = () => async (dispatch, getState) => {
     try {
-        const searchFormValues = getFormValues('SearchCarForm')(getState())
-        const url = `${base_host}/carList?${ObjectToUrl({
-            vinCode: searchFormValues ? searchFormValues.vinCode : null,
+        const searchFormValues = getFormValues('searchCarForm')(getState())
+        const url = `${base_host}/car?${ObjectToUrl({
+            vinCode: searchFormValues ? searchFormValues.vin : null,
             start: 0,
+            active: 1,
             size: pageSize
         })}`
         const res = await httpRequest.get(url)

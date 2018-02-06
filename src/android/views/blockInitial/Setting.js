@@ -43,14 +43,14 @@ class Setting extends Component {
         this.setState({ confirmModalVisible: false })
     }
 
-    render(){
+    render() {
         const { getDemageListWaiting,
             getDemageList,
             getResponsibilityListWaiting,
             getResponsibilityList,
             cleanLogin,
             loginReducer: { data: { user: { real_name, avatar_image, mobile } } },
-           initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer 
+            initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer
         } = this.props
         return (
             <Container>
@@ -84,7 +84,7 @@ class Setting extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
-                        <ListItem icon last onPress={() => {
+                        <ListItem icon onPress={() => {
                             getResponsibilityListWaiting()
                             Actions.responsibilityList()
                             InteractionManager.runAfterInteractions(() => {
@@ -101,13 +101,24 @@ class Setting extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
+                        <ListItem icon last onPress={() => { Actions.recordList() }}>
+                            <Left>
+                                <Icon name="ios-paper" style={globalStyles.styleColor} />
+                            </Left>
+                            <Body>
+                                <Text style={globalStyles.midText}>工作记录</Text>
+                            </Body>
+                            <Right>
+                                <Icon name="arrow-forward" />
+                            </Right>
+                        </ListItem>
                         <Separator bordered />
-                        {/* <ListItem icon>
+                        <ListItem icon>
                             <Left>
                                 <Icon name="ios-cube-outline" style={globalStyles.styleColor} />
                             </Left>
                             <Body>
-                                <Text style={globalStyles.midText}>版本信息：v{currentVersion}</Text>
+                                <Text style={globalStyles.midText}>版本信息：{currentVersion}</Text>
                             </Body>
                             <Right >
                                 {force_update != 0 && <TouchableOpacity onPress={() => {
@@ -126,7 +137,7 @@ class Setting extends Component {
                                     <FoundationIcon name="burst-new" size={30} color={'#ff0000'} />
                                 </TouchableOpacity>}
                             </Right>
-                        </ListItem> */}
+                        </ListItem>
                         <ListItem icon onPress={Actions.updatePassword}>
                             <Left>
                                 <Icon name="ios-key-outline" style={globalStyles.styleColor} />
@@ -153,7 +164,7 @@ class Setting extends Component {
             </Container>
         )
     }
-    
+
 }
 
 const styles = StyleSheet.create({

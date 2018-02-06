@@ -45,9 +45,9 @@ const ApplyDamage = props => {
                     isRequired={true}
                     name='car'
                     component={Select}
-                    getList={getCarList}
+                    getList={()=>{}}
                     validate={[validateRequired]}
-                    getListWaiting={getCarListWaiting}
+                    getListWaiting={()=>{}}
                     showList={param => {
                         return Actions.listCennectDynamic({
                             mapStateToProps: vinMapStateToProps,

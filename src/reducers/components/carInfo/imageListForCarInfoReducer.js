@@ -14,6 +14,11 @@ const initialState = {
         errorMsg: '',
         failedMsg: '',
         isResultStatus: 0
+    },
+    delImage:{
+        errorMsg: '',
+        failedMsg: '',
+        isResultStatus: 0
     }
 }
 
@@ -119,6 +124,56 @@ export default handleActions({
             ...state,
             uploadCarImage: {
                 ...initialState.uploadCarImage,
+                isResultStatus: 3,
+                errorMsg
+            }
+        }
+    },
+
+
+
+
+    [actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_success]: (state, action) => {
+        const { payload: { imageurl } } = action
+        return {
+            ...state,
+            data: {
+                carImageList: state.data.carImageList.filter(item => {
+                    return item.url != imageurl
+                })
+            },
+            delImage: {
+                ...initialState.delImage,
+                isResultStatus: 2
+            }
+        }
+    },
+    [actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
+        return {
+            ...state,
+            delImage: {
+                ...initialState.delImage,
+                isResultStatus: 4,
+                failedMsg
+            }
+        }
+    },
+    [actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_waiting]: (state, action) => {
+        return {
+            ...state,
+            delImage: {
+                ...initialState.delImage,
+                isResultStatus: 1
+            }
+        }
+    },
+    [actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_error]: (state, action) => {
+        const { payload: { errorMsg } } = action
+        return {
+            ...state,
+            delImage: {
+                ...initialState.delImage,
                 isResultStatus: 3,
                 errorMsg
             }
