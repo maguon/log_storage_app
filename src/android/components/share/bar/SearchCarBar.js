@@ -33,8 +33,9 @@ const TextBox = props => {
 const SearchCarBar = props => {
     const { title, layout, getCarList, getCarListWaiting, parent,
         searchCarFormValues = {} } = props
+
         // console.log('searchCarFormValues',searchCarFormValues)
-        // console.log('props',props)
+         console.log('props',props)
     return (
         <View style={[styles.container, { width: layout.initWidth }]}>
             <StatusBar hidden={false} />
@@ -97,7 +98,10 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        searchCarFormValues: getFormValues('searchCarForm')(state)
+        searchCarFormValues: getFormValues('searchCarForm')(state),
+        initialValues: {
+            vin: ownProps.vinCode ? ownProps.vinCode : ''
+        }
     }
 }
 

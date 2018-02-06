@@ -50,13 +50,32 @@ class SearchBar extends Component {
 
 
     barcodeReceived(e) {
+        const { title, parent, getCarList, getCarListWaiting, getCarImageListWaiting, getCarImageList, getCarInfo, getCarInfoWaiting } = this.props
         this.setState({ modalVisible: false })
-        // InteractionManager.runAfterInteractions(() => {
-        //     RouterDirection.searchCar(this.props.parent)({ initParam: { vinCode: e.data } })
-        //     InteractionManager.runAfterInteractions(() => {
-        //         e.data.length > 5 && this.props.getCarList(e.data)
-        //     })
-        // })
+        InteractionManager.runAfterInteractions(() => {
+            Actions.searchVinAtHomeBlock({
+                mapStateToProps: vinMapStateToProps,
+                mapDispatchToProps: vinMapDispatchToProps,
+                List: DisposableList,
+                onSelect: (item) => {
+                    getCarImageListWaiting()
+                    getCarInfoWaiting()
+                    routerDirection.carInfoConnect(parent)({
+                        mapStateToProps: carInfoMapStateToProps,
+                        mapDispatchToProps: carInfoMapDispatchToProps,
+                        parent:parent
+                    })
+                    InteractionManager.runAfterInteractions(() => {
+                        getCarImageList({ carId: item.id })
+                        getCarInfo({ car: item.car })
+                    })
+                },
+                vinCode: e.data
+            })
+            InteractionManager.runAfterInteractions(() => {
+                e.data.length > 5 && this.props.getCarList(e.data)
+            })
+        })
     }
 
     renderMenu() {
