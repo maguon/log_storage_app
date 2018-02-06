@@ -111,6 +111,28 @@ export default handleActions({
                 errorMsg
             }
         }
+    },
+
+
+    [actionTypes.carListTypes.change_carInfo]: (state, action) => {
+        const { payload: { changeField } } = action
+        console.log('changeField',changeField)
+        return {
+            ...state,
+            data: {
+                carList: state.data.carList.map(item => {
+                    if (item.id == changeField.id) {
+                        console.log('item',item)
+                        return {
+                            ...item,
+                            ...changeField
+                        }
+                    } else {
+                        return item
+                    }
+                })
+            }
+        }
     }
 
 }, initialState)

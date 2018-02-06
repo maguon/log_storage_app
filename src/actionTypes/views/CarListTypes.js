@@ -8,5 +8,4 @@ export const get_carListMore_failed = 'get_carListMore_failed'
 export const get_carListMore_waiting = 'get_carListMore_waiting'
 export const get_carListMore_error = 'get_carListMore_error'
 
-
-export const remove_car = 'remove_car'
+export const change_carInfo = 'change_carInfo'

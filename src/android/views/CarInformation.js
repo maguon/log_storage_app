@@ -29,6 +29,7 @@ const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, o
         List: DisposableList,
         title:'仓库',
         onSelect: (item) => {
+            console.log('item',item)
             InteractionManager.runAfterInteractions(() => {
                 onSelectArea({ param: { storage: item }, getParkingListWaiting, parent, getParkingList, getAreaList, getAreaListWaiting, onSelect })
             })
@@ -86,7 +87,7 @@ const onSelectColumn = ({ param, parent, onSelect }) => {
 }
 
 const CarInformation = props => {
-    const { initParam: { car, car: { rel_status, car_status } },
+    const { carInfoReducer: { car, car: { rel_status, car_status } },
         initParam,
         exportCar,
         moveCar,
@@ -100,6 +101,7 @@ const CarInformation = props => {
         getParkingList,
         selectParkingReducer,
         parent } = props
+        console.log('carInfoReducer',props.carInfoReducer)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>
@@ -160,7 +162,7 @@ const CarInformation = props => {
                                         param: { storage: { id: car.storage_id } },
                                         getAreaList,
                                         getAreaListWaiting,
-                                        onSelect: (item) => moveCar({ parkingId: item.col.id, carId: car.id })
+                                        onSelect: (item) => moveCar({ ...item, carId: car.id })
                                     })}
                                     style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                     <Text style={{ color: '#fff' }}>移位</Text>
@@ -279,11 +281,11 @@ const columnMapDispatchToProps = (dispatch) => ({
 
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state,ownProps) => {
     return {
-        carInfoForDemageReducer: state.carInfoForDemageReducer,
-        recordForDemageReducer: state.recordForDemageReducer,
-        demageOpResultReducer: state.demageOpResultReducer,
+        carInfoReducer: {
+            car:state.carListReducer.data.carList.find(item => item.id == ownProps.initParam.car.id)
+        }
     }
 }
 

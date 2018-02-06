@@ -24,6 +24,7 @@ import moment from 'moment'
 const renderListItem = props => {
     const { item: { plan_out_time, make_name, storage_name, vin, colour,id, enter_time, real_out_time, col, row, area_name },
     item, index, parent,getCarImageListWaiting,getCarImageList } = props
+    console.log('real_out_time',real_out_time)
     return (
         <TouchableOpacity key={index} onPress={() => {
             getCarImageListWaiting()
