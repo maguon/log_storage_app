@@ -20,6 +20,10 @@ import { Container, Icon, Thumbnail, Spinner } from 'native-base'
 import * as RouterDirection from '../../util/RouterDirection'
 import globalStyles, { styleColor } from '../GlobalStyles'
 import moment from 'moment'
+import * as selectStorageAction from '../../actions/components/select/selectStorageAction'
+import * as selectAreaAction from '../../actions/components/select/selectAreaAction'
+import * as selectParkingAction from '../../actions/components/select/selectParkingAction'
+import * as carInfoAction from '../../actions/views/CarInfoAction'
 
 const renderListItem = props => {
     const { item: { plan_out_time, make_name, storage_name, vin, colour,id, enter_time, real_out_time, col, row, area_name },
@@ -27,7 +31,12 @@ const renderListItem = props => {
     return (
         <TouchableOpacity key={index} onPress={() => {
             getCarImageListWaiting()
-            RouterDirection.carInformation(parent)({ initParam: { car: item } })
+            RouterDirection.carInfoConnect(parent)({
+                 mapStateToProps:carInfoMapStateToProps, 
+                 mapDispatchToProps:carInfoMapDispatchToProps,
+                 parent,
+                 carId: id 
+            })
             InteractionManager.runAfterInteractions(() => {
                 getCarImageList({ carId: id })
             })
@@ -178,6 +187,50 @@ const mapDispatchToProps = (dispatch) => ({
     getCarImageList: (param) => {
         dispatch(imageListForCarInfoAction.getCarImageList(param))
     }
+})
+
+
+
+const carInfoMapStateToProps = (state,ownProps) => {
+    return {
+        carInfoReducer: {
+            car:state.carListReducer.data.carList.find(item => item.id == ownProps.carId)
+        }
+    }
+}
+
+const carInfoMapDispatchToProps = (dispatch) => ({
+    exportCar: param => {
+        dispatch(carInfoAction.exportCar(param))
+    },
+    moveCar: param => {
+        dispatch(carInfoAction.moveCar(param))
+    },
+    importCar: param => {
+        dispatch(carInfoAction.importCar(param))
+    },
+    getStorageList: () => {
+        dispatch(selectStorageAction.getStorageList())
+    },
+    getStorageListWaiting: () => {
+        dispatch(selectStorageAction.getStorageListWaiting())
+    },
+    getAreaList: (param) => {
+        dispatch(selectAreaAction.getAreaList(param))
+    },
+    getAreaListWaiting: () => {
+        dispatch(selectAreaAction.getAreaListWaiting())
+    },
+    getParkingList: (param) => {
+        dispatch(selectParkingAction.getParkingList(param))
+    },
+    getParkingListWaiting: (param) => {
+        dispatch(selectParkingAction.getParkingListWaiting())
+    },
+    updateCarInfo:()=>{
+        dispatch(submit('carInfoEditorForm'))
+    }
+    
 })
 
 

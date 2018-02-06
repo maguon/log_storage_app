@@ -56,6 +56,7 @@ import RetrievePassword from './views/RetrievePassword'
 import ImportCarImage from './views/ImportCarImage'
 import ImportCarImageSubmit from './components/importCarImage/ImportCarImageSubmit'
 import ImageViewConnect from './views/ImageViewConnect'
+import CarInfoConnect from './views/CarInfoConnect'
 
 const styles = StyleSheet.create({
     tabBarStyle: {
@@ -157,6 +158,13 @@ class App extends Component {
                                     hideNavBar={false}
                                     navBar={NavBar}
                                     hideTabBar />
+                                <Scene key="carInfoConnectAtHomeBlock"
+                                    title="车辆详细信息"
+                                    LeftButton={LeftButton}
+                                    component={CarInfoConnect}
+                                    hideNavBar={false}
+                                    navBar={NavBar}
+                                    hideTabBar />
                                 <Scene key="searchVinAtHomeBlock"
                                     component={ListCennect}
                                     hideTabBar
@@ -245,6 +253,13 @@ class App extends Component {
                                     component={ImageViewConnect}
                                     hideTabBar
                                     hideNavBar />
+                                <Scene key="carInfoConnectAtCarBlock"
+                                    title="车辆详细信息"
+                                    LeftButton={LeftButton}
+                                    component={CarInfoConnect}
+                                    hideNavBar={false}
+                                    navBar={NavBar}
+                                    hideTabBar />
                                 <Scene
                                     key="carList"
                                     title="车辆列表"

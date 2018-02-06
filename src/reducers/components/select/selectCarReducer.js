@@ -19,7 +19,7 @@ const initialState = {
 }
 //isResultStatus(执行结果状态):[0(未执行),1(等待)，2(成功)，3(错误)，4(执行失败),5(服务器未处理错误)]
 export default handleActions({
-    [actionTypes.selectCarActionTypes.get_carList_success]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarList_success]: (state, action) => {
         const { payload: { carList,isComplete } } = action
         return {
             ...state,
@@ -33,7 +33,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.selectCarActionTypes.get_carList_failed]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarList_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -44,7 +44,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.selectCarActionTypes.get_carList_waiting]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarList_waiting]: (state, action) => {
         return {
             ...state,
             getCarList: {
@@ -53,7 +53,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.selectCarActionTypes.get_carList_error]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarList_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,
@@ -68,7 +68,7 @@ export default handleActions({
 
 
 
-    [actionTypes.selectCarActionTypes.get_carListMore_success]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarListMore_success]: (state, action) => {
         const { payload: { carList,isComplete } } = action
         return {
             ...state,
@@ -82,7 +82,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.selectCarActionTypes.get_carListMore_failed]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarListMore_failed]: (state, action) => {
         const { payload: { failedMsg } } = action
         return {
             ...state,
@@ -93,7 +93,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.selectCarActionTypes.get_carListMore_waiting]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarListMore_waiting]: (state, action) => {
         return {
             ...state,
             getCarListMore: {
@@ -102,7 +102,7 @@ export default handleActions({
             }
         }
     },
-    [actionTypes.selectCarActionTypes.get_carListMore_error]: (state, action) => {
+    [actionTypes.selectCarActionTypes.get_selectCarListMore_error]: (state, action) => {
         const { payload: { errorMsg } } = action
         return {
             ...state,

@@ -92,3 +92,17 @@ export const imageViewConnect =parent =>{
       if (parent === 'carBlock') return Actions.imageViewConnectAtCarBlock
 }
 
+
+export const carInfoConnect = (parent) => {
+    if (parent === 'homeBlock') return Actions.carInfoConnectAtHomeBlock
+    if (parent === 'carBlock') return Actions.carInfoConnectAtCarBlock
+}
+
+
+export const popToCarInfoConnect = parent => {
+    // if (parent === 'homeBlock') return Actions.popTo('carInformationAtCarBlock')
+    if (parent === 'carBlock') Actions.popTo('carInfoConnectAtCarBlock')
+    // if (parent === 'storageBlock') return Actions.listCennectAtStorageBlock
+    // if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock
+}
+

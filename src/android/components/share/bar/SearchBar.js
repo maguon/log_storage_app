@@ -11,6 +11,10 @@ import { connect } from 'react-redux'
 import * as selectCarAction from '../../../../actions/components/select/selectCarAction'
 import DisposableList from '../../../views/form/select/DisposableList'
 import * as imageListForCarInfoAction from '../../../../actions/components/carInfo/ImageListForCarInfoAction'
+import * as carInfoAction from '../../../../actions/views/CarInfoAction'
+import * as selectStorageAction from '../../../../actions/components/select/selectStorageAction'
+import * as selectAreaAction from '../../../../actions/components/select/selectAreaAction'
+import * as selectParkingAction from '../../../../actions/components/select/selectParkingAction'
 
 const { width, height } = Dimensions.get('window')
 let mwidth = 70
@@ -19,18 +23,14 @@ const top = 46
 
 
 const onSelectCar = ({ param, getCarList, parent, getCarListWaiting, onSelect }) => {
-   // getCarListWaiting()
+    // getCarListWaiting()
     Actions.searchVinAtHomeBlock({
         mapStateToProps: vinMapStateToProps,
         mapDispatchToProps: vinMapDispatchToProps,
         List: DisposableList,
-        onSelect: (item) => {
-            InteractionManager.runAfterInteractions(() => {
-                onSelect(item)
-            })
-        }
+        onSelect
     })
-  //  InteractionManager.runAfterInteractions(() => getCarList(param))
+    //  InteractionManager.runAfterInteractions(() => getCarList(param))
 
 }
 
@@ -109,7 +109,7 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { title, parent,getCarList,getCarListWaiting,getCarImageListWaiting,getCarImageList } = this.props
+        const { title, parent, getCarList, getCarListWaiting, getCarImageListWaiting, getCarImageList, getCarInfo, getCarInfoWaiting } = this.props
         return (
             <View style={[styles.container, { width: width }]}>
                 <StatusBar hidden={false} />
@@ -128,9 +128,16 @@ class SearchBar extends Component {
                                 getCarListWaiting,
                                 onSelect: (item) => {
                                     getCarImageListWaiting()
-                                    routerDirection.carInformation(parent)({ initParam: { car: item.car } })
+                                    getCarInfoWaiting()
+                                    routerDirection.carInfoConnect(parent)({
+                                        mapStateToProps: carInfoMapStateToProps,
+                                        mapDispatchToProps: carInfoMapDispatchToProps,
+                                        parent,
+                                        carId: item.id
+                                    })
                                     InteractionManager.runAfterInteractions(() => {
                                         getCarImageList({ carId: item.id })
+                                        getCarInfo({ carId: item.id })
                                     })
                                 }
                             })}
@@ -229,6 +236,50 @@ const styles = StyleSheet.create({
 })
 
 
+const carInfoMapStateToProps = (state, ownProps) => {
+    console.log('state',state)
+    return {
+        carInfoReducer: {
+            car: state.carListReducer.data.carList.find(item => item.id == ownProps.carId)
+        }
+    }
+}
+
+const carInfoMapDispatchToProps = (dispatch) => ({
+    exportCar: param => {
+        dispatch(carInfoAction.exportCar(param))
+    },
+    moveCar: param => {
+        dispatch(carInfoAction.moveCar(param))
+    },
+    importCar: param => {
+        dispatch(carInfoAction.importCar(param))
+    },
+    getStorageList: () => {
+        dispatch(selectStorageAction.getStorageList())
+    },
+    getStorageListWaiting: () => {
+        dispatch(selectStorageAction.getStorageListWaiting())
+    },
+    getAreaList: (param) => {
+        dispatch(selectAreaAction.getAreaList(param))
+    },
+    getAreaListWaiting: () => {
+        dispatch(selectAreaAction.getAreaListWaiting())
+    },
+    getParkingList: (param) => {
+        dispatch(selectParkingAction.getParkingList(param))
+    },
+    getParkingListWaiting: (param) => {
+        dispatch(selectParkingAction.getParkingListWaiting())
+    },
+    updateCarInfo: () => {
+        dispatch(submit('carInfoEditorForm'))
+    }
+
+})
+
+
 const mapStateToProps = (state, ownProps) => {
     return {
 
@@ -247,6 +298,12 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getCarImageList: (param) => {
         dispatch(imageListForCarInfoAction.getCarImageList(param))
+    },
+    getCarInfo: (param) => {
+        dispatch(carInfoAction.getCarInfo(param))
+    },
+    getCarInfoWaiting: () => {
+        dispatch(carInfoAction.getCarInfoWaiting())
     }
 })
 

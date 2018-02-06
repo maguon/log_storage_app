@@ -20,20 +20,20 @@ export const getCarList = () => async (dispatch, getState) => {
         const res = await httpRequest.get(url)
         if (res.success) {
             if (res.result.length % pageSize != 0) {
-                dispatch({ type: actionTypes.selectCarActionTypes.get_carList_success, payload: { carList: res.result, isComplete: true } })
+                dispatch({ type: actionTypes.selectCarActionTypes.get_selectCarList_success, payload: { carList: res.result, isComplete: true } })
             } else {
-                dispatch({ type: actionTypes.selectCarActionTypes.get_carList_success, payload: { carList: res.result, isComplete: false } })
+                dispatch({ type: actionTypes.selectCarActionTypes.get_selectCarList_success, payload: { carList: res.result, isComplete: false } })
             }
         } else {
-            dispatch({ type: actionTypes.selectCarActionTypes.get_carList_failed, payload: { failedMsg: res.msg } })
+            dispatch({ type: actionTypes.selectCarActionTypes.get_selectCarList_failed, payload: { failedMsg: res.msg } })
         }
     } catch (err) {
-        dispatch({ type: actionTypes.selectCarActionTypes.get_carList_error, payload: { errorMsg: err } })
+        dispatch({ type: actionTypes.selectCarActionTypes.get_selectCarList_error, payload: { errorMsg: err } })
     }
 }
 
 export const getCarListWaiting = () => async (dispatch) => {
-    dispatch({ type: actionTypes.selectCarActionTypes.get_carList_waiting, payload: {} })
+    dispatch({ type: actionTypes.selectCarActionTypes.get_selectCarList_waiting, payload: {} })
 }
 
 // export const getCarListMore = () => async (dispatch, getState) => {

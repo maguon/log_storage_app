@@ -29,7 +29,6 @@ const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, o
         List: DisposableList,
         title:'仓库',
         onSelect: (item) => {
-            console.log('item',item)
             InteractionManager.runAfterInteractions(() => {
                 onSelectArea({ param: { storage: item }, getParkingListWaiting, parent, getParkingList, getAreaList, getAreaListWaiting, onSelect })
             })
@@ -78,7 +77,7 @@ const onSelectColumn = ({ param, parent, onSelect }) => {
         List: DisposableList,
         title:'列',
         onSelect: (item) => {
-            routerDirection.popToCarInfo(parent)
+            routerDirection.popToCarInfoConnect(parent)
             InteractionManager.runAfterInteractions(() => {
                 onSelect({ ...param, col: item })
             })
@@ -280,50 +279,7 @@ const columnMapDispatchToProps = (dispatch) => ({
 })
 
 
-
-const mapStateToProps = (state,ownProps) => {
-    return {
-        carInfoReducer: {
-            car:state.carListReducer.data.carList.find(item => item.id == ownProps.initParam.car.id)
-        }
-    }
-}
-
-const mapDispatchToProps = (dispatch) => ({
-    exportCar: param => {
-        dispatch(carInfoAction.exportCar(param))
-    },
-    moveCar: param => {
-        dispatch(carInfoAction.moveCar(param))
-    },
-    importCar: param => {
-        dispatch(carInfoAction.importCar(param))
-    },
-    getStorageList: () => {
-        dispatch(selectStorageAction.getStorageList())
-    },
-    getStorageListWaiting: () => {
-        dispatch(selectStorageAction.getStorageListWaiting())
-    },
-    getAreaList: (param) => {
-        dispatch(selectAreaAction.getAreaList(param))
-    },
-    getAreaListWaiting: () => {
-        dispatch(selectAreaAction.getAreaListWaiting())
-    },
-    getParkingList: (param) => {
-        dispatch(selectParkingAction.getParkingList(param))
-    },
-    getParkingListWaiting: (param) => {
-        dispatch(selectParkingAction.getParkingListWaiting())
-    },
-    updateCarInfo:()=>{
-        dispatch(submit('carInfoEditorForm'))
-    }
-    
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CarInformation)
+export default CarInformation
 
 
 
