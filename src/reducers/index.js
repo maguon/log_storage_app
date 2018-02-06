@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import StorageListReducer from './StorageListReducer'
-import ImporCarReducer from './ImporCarReducer'
+
 // import ImportCarCameraReducer from './ImportCarCameraReducer'
 //import HomeReducer from './HomeReducer'
 import CarInfoReducer from './CarInfoReducer'
@@ -44,13 +44,14 @@ import recordForCarInfoReducer from './components/carInfo/recordForCarInfoReduce
 import sendSMSReducer from './components/retrievePassword/SendSMSReducer'
 import addCarReducer from './views/addCarReducer'
 import importCarImageReducer from './views/ImportCarImageReducer'
+import imporCarReducer from './views/ImporCarReducer'
 
 
 export default combineReducers({
     form: formReducer,
     //HomeReducer,
     CarInfoReducer,
-    ImporCarReducer,
+   // ImporCarReducer,
     // ImportCarCameraReducer,
     StorageListReducer,
     RecordListReducer,
@@ -93,5 +94,6 @@ export default combineReducers({
     retrievePasswordReducer,
     sendSMSReducer,
     addCarReducer,
-    importCarImageReducer
+    importCarImageReducer,
+    imporCarReducer
 })

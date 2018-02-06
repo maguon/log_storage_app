@@ -173,12 +173,18 @@ class App extends Component {
                                     component={ImportCarImage}
                                     LeftButton={LeftButton}
                                     title='上传图片'
-                                    initial={true}
+                                    
                                     hideNavBar={false}
                                     hideTabBar
                                     RightButton={ImportCarImageSubmit}
                                     navBar={NavBar} />
-                                <Scene key="importCarAtHomeBlock" component={ImportCar} title='车辆入库' hideNavBar={false} hideTabBar navBar={NavBar} />
+                                <Scene key="importCarAtHomeBlock"
+                                    component={ImportCar}
+                                    title='车辆入库'
+                                    hideNavBar={false}
+                                    hideTabBar
+                                    navBar={NavBar}
+                                    LeftButton={LeftButton} />
                                 <Scene key="listCennectAtHomeBlock"
                                     component={ListCennect}
                                     hideTabBar
@@ -213,7 +219,10 @@ class App extends Component {
                                     hideTabBar
                                     hideNavBar={false}
                                     navBar={NavBar} />
-                                <Scene key="singlePhotoView" component={SinglePhotoView} hideNavBar hideTabBar />
+                                <Scene key="singlePhotoViewAtHomeBlock"
+                                    component={SinglePhotoView}
+                                    hideNavBar
+                                    hideTabBar />
                             </Scene>
                             <Scene key="carBlock" icon={TabIcon} online='ios-car' outline='ios-car-outline' >
                                 <Scene
@@ -250,6 +259,10 @@ class App extends Component {
                                     navBar={NavBar}
                                     hideTabBar
                                     LeftButton={LeftButton} />
+                                <Scene key="singlePhotoViewAtCarBlock"
+                                    component={SinglePhotoView}
+                                    hideNavBar
+                                    hideTabBar />
                                 <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtCarBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
@@ -328,6 +341,10 @@ class App extends Component {
                                     hideTabBar
                                     hideNavBar={false}
                                     navBar={NavBar} />
+                                <Scene key="singlePhotoViewAtSettingBlock"
+                                    component={SinglePhotoView}
+                                    hideNavBar
+                                    hideTabBar />
                             </Scene>
                         </Scene>
                     </Scene>

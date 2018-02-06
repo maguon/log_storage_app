@@ -2,7 +2,7 @@
 // import * as initializationTypes from './InitializationTypes'
 import * as storageListTypes from './StorageListTypes'
 // import * as selectRowTypes from './SelectRowTypes'
-import * as imporCarTypes from './ImporCarTypes'
+// import * as imporCarTypes from './ImporCarTypes'
 import * as homeTypes from './views/HomeTypes'
 import * as recordListTypes from './RecordListTypes'
 // import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
@@ -47,13 +47,14 @@ import * as sendSMSActionTypes from './components/retrievePassword/SendSMSAction
 import * as retrievePasswordActionTypes from './views/RetrievePasswordActionTypes'
 import * as addCarTypes from './views/AddCarTypes'
 import * as importCarImageTypes from './views/ImportCarImageTypes'
+import * as importCarTypes from './views/ImportCarTypes'
 
 
 export {
     sceneTypes,
     homeTypes,
     storageListTypes,
-    imporCarTypes,
+    // imporCarTypes,
     //importCarCameraTypes,
     searchVinTypes,
     recordListTypes,
@@ -94,5 +95,6 @@ export {
     retrievePasswordActionTypes,
     sendSMSActionTypes,
     addCarTypes,
-    importCarImageTypes
+    importCarImageTypes,
+    importCarTypes
 }

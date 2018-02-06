@@ -10,13 +10,6 @@ import globalStyles, { styleColor } from '../GlobalStyles'
 import * as selectStorageAction from '../../actions/components/select/selectStorageAction'
 import * as selectAreaAction from '../../actions/components/select/selectAreaAction'
 import * as selectParkingAction from '../../actions/components/select/selectParkingAction'
-// import CarInfoForDemage from '../components/demageInfo/CarInfoForDemage'
-// import RecordForDemage from '../components/demageInfo/RecordForDemage'
-// import ImageListForDemage from '../components/demageInfo/ImageListForDemage'
-// import DemageOpResult from '../components/demageInfo/DemageOpResult'
-// import DemageDetail from '../components/demageInfo/DemageDetail'
-// import ImageEditorForDemage from '../components/demageInfo/ImageEditorForDemage'
-// import DemageEditor from '../components/demageInfo/DemageEditor'
 import { Actions } from 'react-native-router-flux'
 import * as carInfoAction from '../../actions/views/CarInfoAction'
 import CarDetail from '../components/carInfo/CarDetail'
@@ -190,7 +183,7 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="照片">
                     <Container>
-                        <ImageListForCarInfo car={car}/>
+                        <ImageListForCarInfo car={car} parent={parent}/>
                         {/* {damage_status != 1 && <ImageListForDemage initParam={initParam} parent={parent} />}
                         {damage_status == 1 && <ImageEditorForDemage initParam={initParam} parent={parent} />} */}
                     </Container>

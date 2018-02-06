@@ -58,6 +58,12 @@ export const ImagePageForImportCar = (parent) => {
     if (parent === 'settingBlock') return Actions.ImagePageForImportCarAtSettingBlock
 }
 
+export const singlePhotoView =parent =>{
+    console.log('parent',parent)
+    if (parent === 'homeBlock') return Actions.singlePhotoViewAtHomeBlock
+    if (parent === 'carBlock') return Actions.singlePhotoViewAtCarBlock
+    if (parent === 'settingBlock') return Actions.singlePhotoViewAtSettingBlock
+}
 
 export const listCennect = (parent) => {
     if (parent === 'homeBlock') return Actions.listCennectAtHomeBlock
@@ -81,75 +87,3 @@ export const popToCarInfo = parent => {
     // if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock
 }
 
-
-
-
-
-// export const selectStorage = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectStorageAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectStorageAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectStorageAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectStorageAtSettingBlock
-// }
-
-// export const selectRow = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectRowAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectRowAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectRowAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectRowAtSettingBlock
-// }
-
-// export const selectColumn = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectColumnAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectColumnAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectColumnAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectColumnAtSettingBlock
-// }
-
-
-
-// export const selectEntrust = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectEntrustAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectEntrustAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectEntrustAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectEntrustAtSettingBlock
-// }
-
-// export const selectCarMake = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectCarMakeAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectCarMakeAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectCarMakeAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectCarMakeAtSettingBlock
-// }
-
-// export const selectReceive = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectReceiveAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectReceiveAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectReceiveAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectReceiveAtSettingBlock
-// }
-
-// export const selectCity = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectCityAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectCityAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectCityAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectCityAtSettingBlock
-// }
-
-
-
-// export const selectBaseAddr = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectBaseAddrAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectBaseAddrAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectBaseAddrAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectBaseAddrAtSettingBlock
-// }
-
-
-
-// export const selectArea = (parent) => {
-//     if (parent === 'homeBlock') return Actions.selectAreaAtHomeBlock
-//     if (parent === 'carBlock') return Actions.selectAreaAtCarBlock
-//     if (parent === 'storageBlock') return Actions.selectAreaAtStorageBlock
-//     if (parent === 'settingBlock') return Actions.selectAreaAtSettingBlock
-// }

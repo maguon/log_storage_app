@@ -89,7 +89,7 @@ export default class SinglePhotoView extends Component {
     }
 }
 
-var styles = {
+const styles = {
     wrapper: {
         backgroundColor: '#000',
         top: 0,
@@ -103,8 +103,6 @@ var styles = {
         alignItems: 'center'
     },
     photo: {
-        // width:600,
-        // height,
         flex: 1
     },
     text: {
