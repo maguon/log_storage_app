@@ -132,12 +132,11 @@ class SearchBar extends Component {
                                     routerDirection.carInfoConnect(parent)({
                                         mapStateToProps: carInfoMapStateToProps,
                                         mapDispatchToProps: carInfoMapDispatchToProps,
-                                        parent,
-                                        carId: item.id
+                                        parent
                                     })
                                     InteractionManager.runAfterInteractions(() => {
                                         getCarImageList({ carId: item.id })
-                                        getCarInfo({ carId: item.id })
+                                        getCarInfo({ car: item.car })
                                     })
                                 }
                             })}
@@ -237,10 +236,9 @@ const styles = StyleSheet.create({
 
 
 const carInfoMapStateToProps = (state, ownProps) => {
-    console.log('state',state)
     return {
         carInfoReducer: {
-            car: state.carListReducer.data.carList.find(item => item.id == ownProps.carId)
+            car: state.carInfoReducer.data.carInfo
         }
     }
 }

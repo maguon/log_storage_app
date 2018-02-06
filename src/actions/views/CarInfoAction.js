@@ -7,7 +7,22 @@ import moment from 'moment'
 
 
 export const getCarInfo = param => async (dispatch, getState) => {
-    console.log(param)
+    try {
+        const url = `${base_host}/car?${ObjectToUrl({ carId: param.car.id, active: 1 })}`
+        const res = await httpRequest.get(url)
+        if (res.success) {
+            if (res.result.length > 0) {
+                dispatch({ type: actionTypes.carInfoTypes.get_carInformation_success, payload: {carInfo:res.result[0]} })
+            }else{
+                dispatch({ type: actionTypes.carInfoTypes.get_carInformation_success, payload: {carInfo:param.car} })
+            }
+        } else {
+            dispatch({ type: actionTypes.carInfoTypes.get_carInformation_failed, payload: {failedMsg:res.msg} })
+        }
+    } catch (err) {
+        dispatch({ type: actionTypes.carInfoTypes.get_carInformation_error, payload: {errorMsg:err} })
+    }
+
 }
 
 
