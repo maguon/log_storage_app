@@ -5,6 +5,17 @@ import { ObjectToUrl } from '../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
 import moment from 'moment'
 
+
+export const getCarInfo = param => async (dispatch, getState) => {
+    console.log(param)
+}
+
+
+export const getCarInfoWaiting = param => (dispatch) => {
+    dispatch({ type: actionTypes.carInfoTypes.get_carInformation_waiting, payload: {} })
+}
+
+
 export const exportCar = param => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
@@ -16,7 +27,6 @@ export const exportCar = param => async (dispatch, getState) => {
         })}`
         const res = await httpRequest.put(url, {})
         if (res.success) {
-
             dispatch({ type: actionTypes.carInfoTypes.put_exportCar_success, payload: {} })
             dispatch({
                 type: actionTypes.carListTypes.change_carInfo, payload: {
@@ -82,7 +92,6 @@ export const moveCar = (param) => async (dispatch, getState) => {
 
 export const importCar = (param) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
-    console.log('param', param)
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_importCar_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/car/${param.car.id}/carStorageRel?${ObjectToUrl({
@@ -93,10 +102,29 @@ export const importCar = (param) => async (dispatch, getState) => {
             storageId: param.storage.id,
             storageName: param.storage.value,
         })
-        console.log('res',res)
         if (res.success) {
             dispatch({ type: actionTypes.carInfoTypes.put_importCar_success, payload: {} })
             ToastAndroid.showWithGravity('入库成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+            dispatch({
+                type: actionTypes.carListTypes.change_carInfo, payload: {
+                    changeField: {
+                        id: param.car.id,
+                        area_name: param.area.value,
+                        storage_area_id: param.area.id,
+                        col: param.col.value,
+                        p_id: param.col.id,
+                        row: param.row.value,
+                        storage_id: param.storage.id,
+                        storage_name: param.storage.value,
+                        car_status: 1,
+                        rel_status: 1,
+                        parking_status: 1,
+                        enter_time: moment().format(),
+                        r_id: res.result.relId,
+                        real_out_time: null
+                    }
+                }
+            })
         } else {
             dispatch({ type: actionTypes.carInfoTypes.put_importCar_error, payload: { failedMsg: err } })
             ToastAndroid.showWithGravity(`入库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)

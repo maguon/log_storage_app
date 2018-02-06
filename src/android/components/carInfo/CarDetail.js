@@ -36,9 +36,9 @@ const CarDetail = props => {
             <View style={styles.item}>
                 <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>指令时间：</Text>{order_date ? `${moment(order_date).format('YYYY-MM-DD')}` : ''}</Text>
             </View>
-            <View style={styles.item}>
+            {/* <View style={styles.item}>
                 <Text style={globalStyles.midText}><Text>当前位置：</Text>{car.storage_name ? `${car.storage_name}` : ''}{car.area_name ? `-${car.area_name}` : ''}{car.row && car.col ? `(${car.row}-${car.col})` : ''}</Text>
-            </View>
+            </View> */}
             <View style={styles.item}>
                 <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>备注：</Text>{remark ? `${remark}` : ''}</Text>
             </View>

@@ -116,7 +116,7 @@ const CarInformation = props => {
                         {car_status != 9 && !rel_status && <CarDetail car={car} />}
                         {car_status == 9 && <CarDetail car={car} />}
                         {car_status != 9 && rel_status == 1 && <CarInfoEditor car={car} parent={parent}/>}
-                        {car_status != 9 && rel_status == 2 && <Button full
+                        {car_status == 9 && rel_status == 2 && <Button full
                             onPress={() => onSelectStorage({
                                 parent,
                                 getParkingList,
@@ -130,7 +130,7 @@ const CarInformation = props => {
                             style={{ margin: 15, backgroundColor: '#00cade' }}>
                             <Text style={{ color: '#fff' }}>入库</Text>
                         </Button>}
-                        {/* {car_status != 9 && !rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
+                        {car_status != 9 && !rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
                             <Button full
                                 onPress={() => { }}
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
@@ -141,7 +141,7 @@ const CarInformation = props => {
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                 <Text style={{ color: '#fff' }}>送达</Text>
                             </Button>
-                        </View>} */}
+                        </View>}
                         {car_status != 9 && rel_status == 1 &&
                             <View style={{ flexDirection: 'row', margin: 10 }}>
                                 <Button full

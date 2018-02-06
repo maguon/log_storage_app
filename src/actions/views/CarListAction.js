@@ -29,6 +29,7 @@ export const getCarList = (values) => async (dispatch) => {
             start: 0,
             size: pageSize
         })}`
+        console.log('url',url)
         const res = await httpRequest.get(url)
         if (res.success) {
             dispatch({

@@ -4,7 +4,7 @@ import StorageListReducer from './StorageListReducer'
 
 // import ImportCarCameraReducer from './ImportCarCameraReducer'
 //import HomeReducer from './HomeReducer'
-import CarInfoReducer from './CarInfoReducer'
+
 import RecordListReducer from './RecordListReducer'
 import SearchVinReducer from './SearchVinReducer'
 import ParkingViewReducer from './ParkingViewReducer'
@@ -45,12 +45,13 @@ import sendSMSReducer from './components/retrievePassword/SendSMSReducer'
 import addCarReducer from './views/addCarReducer'
 import importCarImageReducer from './views/ImportCarImageReducer'
 import imporCarReducer from './views/ImporCarReducer'
+import carInfoReducer from './views/CarInfoReducer'
 
 
 export default combineReducers({
     form: formReducer,
     //HomeReducer,
-    CarInfoReducer,
+    
    // ImporCarReducer,
     // ImportCarCameraReducer,
     StorageListReducer,
@@ -95,5 +96,6 @@ export default combineReducers({
     sendSMSReducer,
     addCarReducer,
     importCarImageReducer,
+    carInfoReducer,
     imporCarReducer
 })
