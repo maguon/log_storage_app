@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import * as  selectCarAction from '../../../../actions/components/select/selectCarAction'
 
 const TextBox = props => {
-    const { input: { onChange, ...restProps }, getCarList, getCarListWaiting } = props
+    const { input: { onChange, ...restProps }, getCarList, getCarListWaiting, cleanCarList} = props
     return (
         <View style={styles.inputContainer}>
             <TextInput
@@ -18,9 +18,12 @@ const TextBox = props => {
                 style={[globalStyles.midText, styles.input]}
                 onChangeText={(text) => {
                     onChange(text)
-                    text.length > 5 && getCarListWaiting()
-                    text.length > 5 && getCarList()
-
+                    if(text.length <= 5){
+                        cleanCarList()
+                    }else{
+                        getCarListWaiting()
+                        getCarList()
+                    }
                 }}
                 {...restProps} />
             <Icon name="ios-search" style={[globalStyles.textColor, styles.inputIcon]} />
@@ -29,7 +32,7 @@ const TextBox = props => {
 }
 
 const NavSearchDynamicBar = props => {
-    const { title, layout, getCarListWaiting, getCarList } = props
+    const { title, layout, getCarListWaiting, getCarList ,cleanCarList} = props
     return (
         <View style={[styles.container, { width: layout.initWidth }]}>
             <StatusBar hidden={false} />
@@ -40,7 +43,7 @@ const NavSearchDynamicBar = props => {
                     </Button>
                 </Left>
                 <Body style={styles.body}>
-                    <Field name='vin' component={TextBox} getCarList={getCarList} getCarListWaiting={getCarListWaiting} />
+                    <Field name='vin' component={TextBox} cleanCarList={cleanCarList} getCarList={getCarList} getCarListWaiting={getCarListWaiting} />
                 </Body>
             </Header>
         </View>
@@ -58,6 +61,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getCarListWaiting: () => {
         dispatch(selectCarAction.getCarListWaiting())
+    },
+    cleanCarList:()=>{
+        dispatch(selectCarAction.cleanCarList())
     }
 })
 

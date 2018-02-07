@@ -28,8 +28,9 @@ export const uploadDamageImageWaiting = () => (dispatch, getState) => {
 }
 
 export const uploadDamageImage = param => async (dispatch, getState) => {
+    console.log('param',param)
     try {
-        const { cameraReses, damageId } = param
+        const { cameraReses, damageId,vin  } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
             const { loginReducer: { data: { user } } } =  getState()
@@ -45,7 +46,8 @@ export const uploadDamageImage = param => async (dispatch, getState) => {
                     username: user.real_name,
                     userId: user.uid,
                     userType: user.type,
-                    url: item.imageId
+                    url: item.imageId,
+                    vin
                 })))
                 const bindDamageSuccessReses = bindDamageReses
                     .map((item, index) => { return { imageId: imageUploadSuccessReses[index].imageId, success: item.success } })

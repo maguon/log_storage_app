@@ -33,7 +33,7 @@ const renderItem = props => {
             <TouchableOpacity
                 key={index}
                 style={styles.itemContainer}
-                onPress={() => Actions.singlePhotoView({ initParam: { imageUrlList: imageList.map(url => `${file_host}/image/${url}`), index } })} >
+                onPress={() => routerDirection.singlePhotoView(parent)({ initParam: { imageUrlList: imageList.map(url => `${file_host}/image/${url}`), index } })} >
                 <ImageItem imageUrl={`${file_host}/image/${item}`} />
             </TouchableOpacity>
         )

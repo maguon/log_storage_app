@@ -23,9 +23,9 @@ const containerWidth = window.width / 2
 const containerHeight = containerWidth / 16 * 9
 
 const renderItem = props => {
-    const { item, index, uploadDamageImageWaiting, uploadDamageImage, demageImageList, parent, damageId } = props
+    const { item, index, uploadDamageImageWaiting, uploadDamageImage, demageImageList, parent, damageId, vin } = props
     if (item == 'isCameraButton') {
-        return renderItemCameraButton({ index, uploadDamageImageWaiting, uploadDamageImage, damageId })
+        return renderItemCameraButton({ index, uploadDamageImageWaiting, uploadDamageImage, damageId, vin })
     } else {
         return (
             <TouchableOpacity
@@ -39,11 +39,11 @@ const renderItem = props => {
 }
 
 const renderItemCameraButton = props => {
-    const { index, uploadDamageImageWaiting, uploadDamageImage, damageId } = props
+    const { index, uploadDamageImageWaiting, uploadDamageImage, damageId, vin } = props
     return (
         <View key={index} style={styles.itemCameraButton}>
             <CameraButton
-                getImage={(cameraReses) => uploadDamageImage({ cameraReses, damageId })}
+                getImage={(cameraReses) => uploadDamageImage({ cameraReses, damageId, vin })}
                 _cameraStart={uploadDamageImageWaiting}
             />
         </View>
@@ -51,12 +51,12 @@ const renderItemCameraButton = props => {
 }
 
 const renderListEmpty = props => {
-    const { uploadDamageImageWaiting, uploadDamageImage, damageId } = props
+    const { uploadDamageImageWaiting, uploadDamageImage, damageId, vin } = props
     return (
         <View>
             <View style={styles.cameraButtonContainer}>
                 <CameraButton
-                    getImage={(cameraReses) => uploadDamageImage({ cameraReses, damageId })}
+                    getImage={(cameraReses) => uploadDamageImage({ cameraReses, damageId, vin })}
                     _cameraStart={uploadDamageImageWaiting} />
             </View>
             <View style={styles.titleContainer}>
@@ -74,7 +74,8 @@ const ImageEditorForDemage = props => {
         uploadDamageImageWaiting,
         uploadDamageImage,
         imageListForDemageReducer: { data: { demageImageList }, uploadDamageImage: { isResultStatus } },
-        initParam: { id } } = props
+        initParam: { id, vin } } = props
+    console.log(props)
     return (
         <Container >
             <FlatList
@@ -82,8 +83,8 @@ const ImageEditorForDemage = props => {
                 showsVerticalScrollIndicator={false}
                 data={demageImageList.length > 0 ? [...demageImageList, 'isCameraButton'] : demageImageList}
                 numColumns={2}
-                ListEmptyComponent={() => renderListEmpty({ uploadDamageImageWaiting, uploadDamageImage, damageId: id })}
-                renderItem={({ item, index }) => renderItem({ parent, item, index, demageImageList, uploadDamageImageWaiting, uploadDamageImage, damageId: id })} />
+                ListEmptyComponent={() => renderListEmpty({ uploadDamageImageWaiting, uploadDamageImage, damageId: id, vin })}
+                renderItem={({ item, index }) => renderItem({ parent, item, index, demageImageList, uploadDamageImageWaiting, uploadDamageImage, damageId: id, vin })} />
             <Modal
                 animationType={"fade"}
                 transparent={true}

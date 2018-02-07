@@ -99,8 +99,8 @@ const CarInformation = props => {
         getParkingListWaiting,
         getParkingList,
         selectParkingReducer,
+        sendCar,
         parent } = props
-    console.log('carInfoReducer', props.carInfoReducer)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>
@@ -145,7 +145,7 @@ const CarInformation = props => {
                                 <Text style={{ color: '#fff' }}>入库</Text>
                             </Button>
                             <Button full
-                                onPress={() => { }}
+                                onPress={() => sendCar({ carId: car.id })}
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                 <Text style={{ color: '#fff' }}>送达</Text>
                             </Button>

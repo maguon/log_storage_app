@@ -59,7 +59,6 @@ export const ImagePageForImportCar = (parent) => {
 }
 
 export const singlePhotoView =parent =>{
-    console.log('parent',parent)
     if (parent === 'homeBlock') return Actions.singlePhotoViewAtHomeBlock
     if (parent === 'carBlock') return Actions.singlePhotoViewAtCarBlock
     if (parent === 'settingBlock') return Actions.singlePhotoViewAtSettingBlock

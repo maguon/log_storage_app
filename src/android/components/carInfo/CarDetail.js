@@ -40,7 +40,7 @@ const CarDetail = props => {
                 <Text style={globalStyles.midText}><Text style={styles.ItemTilte}>当前位置：</Text>
                     {car_status != 9 && !rel_status && '未入库'}
                     {car_status == 9 && rel_status == 2 && '已出库'}
-                    {!car_status == 9 && !rel_status && '已送达'}
+                    {car_status == 9 && !rel_status && '已送达'}
                 </Text>
             </View>
             <View style={styles.item}>

@@ -206,6 +206,9 @@ const carInfoMapDispatchToProps = (dispatch) => ({
     moveCar: param => {
         dispatch(carInfoAction.moveCar(param,carInfoAction.changeCarListCarInfo))
     },
+    sendCar: param => {
+        dispatch(carInfoAction.sendCar(param, carInfoAction.changeCarListCarInfo))
+    },
     importCar: param => {
         dispatch(carInfoAction.importCar(param,carInfoAction.changeCarListCarInfo))
     },

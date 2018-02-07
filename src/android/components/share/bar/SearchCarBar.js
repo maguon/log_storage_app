@@ -27,8 +27,6 @@ const TextBox = props => {
                         getCarListWaiting()
                         getCarList()
                     }
-                    // text.length > 5 && getCarListWaiting()
-                    // text.length > 5 && getCarList()
                 }}
                 {...restProps} />
             <Icon name="ios-search" style={[globalStyles.textColor, styles.inputIcon]} />
@@ -52,7 +50,10 @@ const SearchCarBar = props => {
                     <Field name='vin' component={TextBox} cleanCarList={cleanCarList} getCarList={getCarList} getCarListWaiting={getCarListWaiting} />
                 </Body>
                 <Right>
-                    <Button transparent onPress={() => routerDirection.addCar(parent)({ vin: searchCarFormValues.vin })}>
+                    <Button transparent onPress={() =>{
+                        cleanCarList()
+                        routerDirection.addCar(parent)({ vin: searchCarFormValues.vin })
+                    } }>
                         <Icon name="md-add" style={styles.leftIcon} />
                     </Button>
                 </Right>

@@ -41,13 +41,11 @@ export const changeCarInfo = changeField => (dispatch) => {
     })
 }
 
-
 export const getCarInfoWaiting = param => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.get_carInformation_waiting, payload: {} })
 }
 
-
-export const exportCar = (param,change) => async (dispatch, getState) => {
+export const exportCar = (param, change) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_exportCar_waiting, payload: {} })
@@ -74,18 +72,18 @@ export const exportCar = (param,change) => async (dispatch, getState) => {
                 real_out_time: moment().format()
             }))
             dispatch(imageListForCarInfoAction.getCarImageList({ carId: param.id }))
-        ToastAndroid.showWithGravity('出库成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-    } else {
-        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: { failedMsg: res.msg } })
-        ToastAndroid.showWithGravity(`出库失败:${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+            ToastAndroid.showWithGravity('出库成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        } else {
+            dispatch({ type: actionTypes.carInfoTypes.put_exportCar_failed, payload: { failedMsg: res.msg } })
+            ToastAndroid.showWithGravity(`出库失败:${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
+        }
+    } catch (err) {
+        dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: { errorMsg: err } })
+        ToastAndroid.showWithGravity(`出库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
     }
-} catch (err) {
-    dispatch({ type: actionTypes.carInfoTypes.put_exportCar_error, payload: { errorMsg: err } })
-    ToastAndroid.showWithGravity(`出库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
-}
 }
 
-export const moveCar = (param,change) => async (dispatch, getState) => {
+export const moveCar = (param, change) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_moveCar_waiting, payload: {} })
@@ -115,7 +113,7 @@ export const moveCar = (param,change) => async (dispatch, getState) => {
     }
 }
 
-export const importCar = (param,change) => async (dispatch, getState) => {
+export const importCar = (param, change) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_importCar_waiting, payload: {} })
@@ -152,27 +150,28 @@ export const importCar = (param,change) => async (dispatch, getState) => {
             ToastAndroid.showWithGravity(`入库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
         }
     } catch (err) {
-        console.log(err)
         dispatch({ type: actionTypes.carInfoTypes.put_importCar_error, payload: { errorMsg: err } })
         ToastAndroid.showWithGravity(`入库失败:${err}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)
     }
 }
 
-
-
-export const sendCar = (param) => (dispatch) => {
-    let url = `${base_host}/user/${param.requiredParam.userId}/car/${param.requiredParam.carId}/carStatus/${param.requiredParam.carStatus}`
-    dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_WAITING, payload: {} })
-    httpRequest
-        .putcallback(url, {}, (err, res) => {
-            if (err) {
-                dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_ERROR, payload: { data: err } })
-            } else {
-                if (res.success) {
-                    dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_SUCCESS, payload: {} })
-                } else {
-                    dispatch({ type: actionTypes.carInfoTypes.SEND_CAR_FAILED, payload: {} })
-                }
-            }
-        })
+export const sendCar = (param,change) => async (dispatch, getState) => {
+    const { loginReducer: { data: { user: { uid } } } } = getState()
+    try {
+        dispatch({ type: actionTypes.carInfoTypes.put_sendCar_waiting, payload: {} })
+        const url = `${base_host}/user/${uid}/car/${param.carId}/carStatus/9`
+        const res = await httpRequest.put(url, {})
+        if (res.success) {
+            dispatch({ type: actionTypes.carInfoTypes.put_sendCar_success, payload: {} })
+            dispatch(change({
+                id: param.carId,
+                car_status: 9
+            }))
+            dispatch(imageListForCarInfoAction.getCarImageList({ carId: param.carId }))
+        } else {
+            dispatch({ type: actionTypes.carInfoTypes.put_sendCar_failed, payload: { failedMsg: res.msg } })
+        }
+    } catch (err) {
+        dispatch({ type: actionTypes.carInfoTypes.put_sendCar_error, payload: { errorMsg: err } })
+    }
 }

@@ -31,6 +31,7 @@ const ApplyDamage = props => {
         getDriverListWaiting,
         getCarList,
         getCarListWaiting,
+        cleanCarList,
         applyDamageFormValues = {},
         handleSubmit,
         touch
@@ -48,12 +49,16 @@ const ApplyDamage = props => {
                     getList={()=>{}}
                     validate={[validateRequired]}
                     getListWaiting={()=>{}}
-                    showList={param => {
+                    showList={({onSelect}) => {
+                        console.log('onSelect',onSelect)
                         return Actions.listCennectDynamic({
                             mapStateToProps: vinMapStateToProps,
                             mapDispatchToProps: vinMapDispatchToProps,
                             List: DisposableList,
-                            ...param
+                            onSelect:(param)=>{
+                                cleanCarList()
+                                onSelect(param)
+                            }
                         })
                     }} />
                 {car && car.make_name && <ListItem>
@@ -181,6 +186,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     getCarListWaiting: () => {
         dispatch(selectCarAction.getCarListWaiting())
+    },
+    cleanCarList:()=>{
+        dispatch(selectCarAction.cleanCarList())
     }
 })
 
