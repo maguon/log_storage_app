@@ -100,7 +100,7 @@ export const carInfoConnect = (parent) => {
 
 
 export const popToCarInfoConnect = parent => {
-    // if (parent === 'homeBlock') return Actions.popTo('carInformationAtCarBlock')
+    if (parent === 'homeBlock') Actions.popTo('carInfoConnectAtHomeBlock')
     if (parent === 'carBlock') Actions.popTo('carInfoConnectAtCarBlock')
     // if (parent === 'storageBlock') return Actions.listCennectAtStorageBlock
     // if (parent === 'settingBlock') return Actions.listCennectAtSettingBlock

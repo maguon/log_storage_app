@@ -114,7 +114,7 @@ export default handleActions({
     },
 
 
-    [actionTypes.carListTypes.change_carInfo]: (state, action) => {
+    [actionTypes.carListTypes.change_carListCarInfo]: (state, action) => {
         const { payload: { changeField } } = action
         console.log('changeField',changeField)
         return {

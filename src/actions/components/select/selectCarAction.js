@@ -32,8 +32,13 @@ export const getCarList = () => async (dispatch, getState) => {
     }
 }
 
-export const getCarListWaiting = () => async (dispatch) => {
+export const getCarListWaiting = () =>  (dispatch) => {
     dispatch({ type: actionTypes.selectCarActionTypes.get_selectCarList_waiting, payload: {} })
+}
+
+
+export const cleanCarList=()=>(dispatch) => {
+    dispatch({ type: actionTypes.selectCarActionTypes.clean_selectCarList, payload: {} })  
 }
 
 // export const getCarListMore = () => async (dispatch, getState) => {

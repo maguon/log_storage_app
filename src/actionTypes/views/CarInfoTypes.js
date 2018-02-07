@@ -23,4 +23,6 @@ export const get_carInformation_failed ='get_carInformation_failed'
 export const get_carInformation_error ='get_carInformation_error'
 export const get_carInformation_waiting ='get_carInformation_waiting'
 
+export const change_carInfo = 'change_carInfo'
+
 

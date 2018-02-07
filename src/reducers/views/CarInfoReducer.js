@@ -243,5 +243,20 @@ export default handleActions({
                 errorMsg
             }
         }
+    },
+
+
+    [actionTypes.carInfoTypes.change_carInfo]: (state, action) => {
+        const { payload: { changeField } } = action
+        console.log('changeField',changeField)
+        return {
+            ...state,
+            data: {
+                carInfo:{
+                    ...state.data.carInfo,
+                    ...changeField
+                }
+            }
+        }
     }
 }, initialState)

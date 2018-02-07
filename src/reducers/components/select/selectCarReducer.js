@@ -112,6 +112,14 @@ export default handleActions({
                 errorMsg
             }
         }
+    },
+
+
+    [actionTypes.selectCarActionTypes.clean_selectCarList]: (state, action) => {
+        const { payload: { errorMsg } } = action
+        return {
+            ...initialState
+        }
     }
 }, initialState)
 

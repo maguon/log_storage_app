@@ -128,7 +128,7 @@ class SearchBar extends Component {
     }
 
     render() {
-        const { title, parent, getCarList, getCarListWaiting, getCarImageListWaiting, getCarImageList, getCarInfo, getCarInfoWaiting } = this.props
+        const { title, parent, getCarList, getCarListWaiting, cleanCarList,getCarImageListWaiting, getCarImageList, getCarInfo, getCarInfoWaiting } = this.props
         return (
             <View style={[styles.container, { width: width }]}>
                 <StatusBar hidden={false} />
@@ -148,6 +148,7 @@ class SearchBar extends Component {
                                 onSelect: (item) => {
                                     getCarImageListWaiting()
                                     getCarInfoWaiting()
+                                    cleanCarList()
                                     routerDirection.carInfoConnect(parent)({
                                         mapStateToProps: carInfoMapStateToProps,
                                         mapDispatchToProps: carInfoMapDispatchToProps,
@@ -264,13 +265,13 @@ const carInfoMapStateToProps = (state, ownProps) => {
 
 const carInfoMapDispatchToProps = (dispatch) => ({
     exportCar: param => {
-        dispatch(carInfoAction.exportCar(param))
+        dispatch(carInfoAction.exportCar(param,carInfoAction.changeCarInfo))
     },
     moveCar: param => {
-        dispatch(carInfoAction.moveCar(param))
+        dispatch(carInfoAction.moveCar(param,carInfoAction.changeCarInfo))
     },
     importCar: param => {
-        dispatch(carInfoAction.importCar(param))
+        dispatch(carInfoAction.importCar(param,carInfoAction.changeCarInfo))
     },
     getStorageList: () => {
         dispatch(selectStorageAction.getStorageList())
@@ -321,6 +322,9 @@ const mapDispatchToProps = (dispatch) => ({
     },
     getCarInfoWaiting: () => {
         dispatch(carInfoAction.getCarInfoWaiting())
+    },
+    cleanCarList:()=>{
+        dispatch(selectCarAction.cleanCarList())
     }
 })
 

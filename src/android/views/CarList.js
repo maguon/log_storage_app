@@ -201,13 +201,13 @@ const carInfoMapStateToProps = (state,ownProps) => {
 
 const carInfoMapDispatchToProps = (dispatch) => ({
     exportCar: param => {
-        dispatch(carInfoAction.exportCar(param))
+        dispatch(carInfoAction.exportCar(param,carInfoAction.changeCarListCarInfo))
     },
     moveCar: param => {
-        dispatch(carInfoAction.moveCar(param))
+        dispatch(carInfoAction.moveCar(param,carInfoAction.changeCarListCarInfo))
     },
     importCar: param => {
-        dispatch(carInfoAction.importCar(param))
+        dispatch(carInfoAction.importCar(param,carInfoAction.changeCarListCarInfo))
     },
     getStorageList: () => {
         dispatch(selectStorageAction.getStorageList())

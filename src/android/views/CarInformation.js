@@ -18,7 +18,7 @@ import ImageListForCarInfo from '../components/carInfo/ImageListForCarInfo'
 import RecordForCarInfo from '../components/carInfo/RecordForCarInfo'
 import DisposableList from '../views/form/select/DisposableList'
 import * as routerDirection from '../../util/RouterDirection'
-import {submit} from 'redux-form'
+import { submit } from 'redux-form'
 
 
 const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList }) => {
@@ -27,7 +27,7 @@ const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, o
         mapStateToProps: storageMapStateToProps,
         mapDispatchToProps: storageMapDispatchToProps,
         List: DisposableList,
-        title:'仓库',
+        title: '仓库',
         onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
                 onSelectArea({ param: { storage: item }, getParkingListWaiting, parent, getParkingList, getAreaList, getAreaListWaiting, onSelect })
@@ -43,7 +43,7 @@ const onSelectArea = ({ getAreaList, onSelect, getAreaListWaiting, parent, getPa
         mapStateToProps: areaMapStateToProps,
         mapDispatchToProps: areaMapDispatchToProps,
         List: DisposableList,
-        title:'区',
+        title: '区',
         onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
                 onSelectRow({ param: { ...param, area: item }, getParkingListWaiting, parent, getParkingList, onSelect })
@@ -59,7 +59,7 @@ const onSelectRow = ({ param, getParkingListWaiting, parent, getParkingList, onS
         mapStateToProps: rowMapStateToProps,
         mapDispatchToProps: rowMapDispatchToProps,
         List: DisposableList,
-        title:'排',
+        title: '排',
         onSelect: (item) => {
             InteractionManager.runAfterInteractions(() => {
                 onSelectColumn({ param: { ...param, row: item }, parent, onSelect })
@@ -75,7 +75,7 @@ const onSelectColumn = ({ param, parent, onSelect }) => {
         mapStateToProps: (state, ownProps) => columnMapStateToProps(state, ownProps, param.row),
         mapDispatchToProps: columnMapDispatchToProps,
         List: DisposableList,
-        title:'列',
+        title: '列',
         onSelect: (item) => {
             routerDirection.popToCarInfoConnect(parent)
             InteractionManager.runAfterInteractions(() => {
@@ -100,7 +100,7 @@ const CarInformation = props => {
         getParkingList,
         selectParkingReducer,
         parent } = props
-        console.log('carInfoReducer',props.carInfoReducer)
+    console.log('carInfoReducer', props.carInfoReducer)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>
@@ -111,10 +111,10 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="车辆">
                     <Content showsVerticalScrollIndicator={false}>
-                        {car_status != 9 && rel_status != 1 && <CarDetail car={car} />}
+                        {car_status == 9 && rel_status == 2 && <CarDetail car={car} />}
                         {car_status != 9 && !rel_status && <CarDetail car={car} />}
-                        {car_status == 9 && <CarDetail car={car} />}
-                        {car_status != 9 && rel_status == 1 && <CarInfoEditor car={car} parent={parent}/>}
+                        {car_status == 9 && !rel_status && <CarDetail car={car} />}
+                        {car_status != 9 && rel_status == 1 && <CarInfoEditor car={car} parent={parent} />}
                         {car_status == 9 && rel_status == 2 && <Button full
                             onPress={() => onSelectStorage({
                                 parent,
@@ -131,7 +131,16 @@ const CarInformation = props => {
                         </Button>}
                         {car_status != 9 && !rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
                             <Button full
-                                onPress={() => { }}
+                                onPress={() => onSelectStorage({
+                                    parent,
+                                    getParkingList,
+                                    getParkingListWaiting,
+                                    getAreaList,
+                                    getAreaListWaiting,
+                                    getStorageListWaiting,
+                                    getStorageList,
+                                    onSelect: (item) => importCar({ ...item, car })
+                                })}
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                 <Text style={{ color: '#fff' }}>入库</Text>
                             </Button>
@@ -184,7 +193,7 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="照片">
                     <Container>
-                        <ImageListForCarInfo car={car} parent={parent}/>
+                        <ImageListForCarInfo car={car} parent={parent} />
                         {/* {damage_status != 1 && <ImageListForDemage initParam={initParam} parent={parent} />}
                         {damage_status == 1 && <ImageEditorForDemage initParam={initParam} parent={parent} />} */}
                     </Container>
@@ -196,7 +205,7 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="记录">
                     <Container>
-                        <RecordForCarInfo car={car}/>
+                        <RecordForCarInfo car={car} />
                         {/* {damage_status == 1 && <DemageEditor initParam={initParam} parent={parent} />}
                         {damage_status != 1 && <DemageDetail initParam={initParam} />} */}
                     </Container>
