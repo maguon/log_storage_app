@@ -4,7 +4,7 @@ import * as actionTypes from '../../actionTypes'
 import { ObjectToUrl } from '../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
 
-export const uploadDamageImage = (params) => async (dispatch, getState) => {
+export const uploadDamageImage = (params,vin) => async (dispatch, getState) => {
     try {
         const cameraSuccessReses = params.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
@@ -22,7 +22,8 @@ export const uploadDamageImage = (params) => async (dispatch, getState) => {
                     username: user.real_name,
                     userId: user.uid,
                     userType: user.type,
-                    url: item.imageId
+                    url: item.imageId,
+                    vin
                 })))
                 const bindDamageSuccessReses = bindDamageReses
                     .map((item, index) => { return { imageId: imageUploadSuccessReses[index].imageId, success: item.success } })

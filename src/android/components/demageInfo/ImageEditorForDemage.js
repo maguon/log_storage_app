@@ -75,7 +75,6 @@ const ImageEditorForDemage = props => {
         uploadDamageImage,
         imageListForDemageReducer: { data: { demageImageList }, uploadDamageImage: { isResultStatus } },
         initParam: { id, vin } } = props
-    console.log(props)
     return (
         <Container >
             <FlatList

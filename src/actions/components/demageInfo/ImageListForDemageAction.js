@@ -28,7 +28,6 @@ export const uploadDamageImageWaiting = () => (dispatch, getState) => {
 }
 
 export const uploadDamageImage = param => async (dispatch, getState) => {
-    console.log('param',param)
     try {
         const { cameraReses, damageId,vin  } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
