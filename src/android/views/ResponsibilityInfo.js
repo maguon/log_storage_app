@@ -27,6 +27,20 @@ const DemageInfo = props => {
                     activeTabStyle={globalStyles.styleBackgroundColor}
                     activeTextStyle={[globalStyles.midText, { color: '#fff' }]}
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
+                    heading="处理">
+                    {(getDemageOpResult.isResultStatus == 1) ?
+                        <Container>
+                            <Spinner color={styleColor} />
+                        </Container>
+                        : <Container>
+                            <DemageOpResult damageStatus={damage_status} />
+                        </Container>}
+                </Tab>
+                <Tab
+                    tabStyle={globalStyles.styleBackgroundColor}
+                    activeTabStyle={globalStyles.styleBackgroundColor}
+                    activeTextStyle={[globalStyles.midText, { color: '#fff' }]}
+                    textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="车辆">
                     {(getCarInfo.isResultStatus == 1 || getCarInfoRecord.isResultStatus == 1) ?
                         <Container>
@@ -56,20 +70,6 @@ const DemageInfo = props => {
                     <Container>
                         <ImageListForDemage initParam={initParam} parent={parent} />
                     </Container>
-                </Tab>
-                <Tab
-                    tabStyle={globalStyles.styleBackgroundColor}
-                    activeTabStyle={globalStyles.styleBackgroundColor}
-                    activeTextStyle={[globalStyles.midText, { color: '#fff' }]}
-                    textStyle={[globalStyles.midText, { color: '#ddd' }]}
-                    heading="处理">
-                    {(getDemageOpResult.isResultStatus == 1) ?
-                        <Container>
-                            <Spinner color={styleColor} />
-                        </Container>
-                        : <Container>
-                            <DemageOpResult damageStatus={damage_status} />
-                        </Container>}
                 </Tab>
             </Tabs>
         </Container>

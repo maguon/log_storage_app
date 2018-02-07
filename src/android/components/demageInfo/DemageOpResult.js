@@ -20,13 +20,13 @@ const DemageOpResult = props => {
             {damageStatus == 3 && <View style={styles.body}>
                 <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>质损类型：</Text>{damage_type ? `${damageTypeList.find(item => item.id == damage_type).value}` : ''}</Text>
                 <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>责任人：</Text>{under_user_name ? `${under_user_name}` : ''}</Text>
-                <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>报销人：</Text>{refund_user_name ? `${refund_user_name}` : ''}</Text>
+                {/* <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>报销人：</Text>{refund_user_name ? `${refund_user_name}` : ''}</Text> */}
                 <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>质损环节：</Text>{damage_link_type ? `${damageLinkTypeList.find(item => item.id == damage_link_type).value}` : ''}</Text>
-                <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>维修费：¥</Text> {repair_cost ? `${moneyFormat(repair_cost, 2)}` : '0.00'}元</Text>
+                {/* <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>维修费：¥</Text> {repair_cost ? `${moneyFormat(repair_cost, 2)}` : '0.00'}元</Text>
                 <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>运费：¥</Text> {transport_cost ? `${moneyFormat(transport_cost, 2)}` : '0.00'}元</Text>
                 <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>降价费：¥</Text> {reduction_cost ? `${moneyFormat(reduction_cost, 2)}` : '0.00'}元</Text>
                 <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>罚款：¥</Text> {penalty_cost ? `${moneyFormat(penalty_cost, 2)}` : '0.00'}元</Text>
-                <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>盈亏：¥</Text> {profit ? `${moneyFormat(profit, 2)}` : '0.00'}元</Text>
+                <Text style={[styles.text, globalStyles.midText]}><Text style={styles.title}>盈亏：¥</Text> {profit ? `${moneyFormat(profit, 2)}` : '0.00'}元</Text> */}
                 <View style={[styles.text, styles.strikingItem]}>
                     <Text style={[styles.title, globalStyles.midText]}>责任人承担费用：</Text>
                     <Text style={globalStyles.largeText}>¥ <Text style={styles.strikingText}>{under_cost ? `${moneyFormat(under_cost, 2)}` : '0.00'}</Text> 元</Text>

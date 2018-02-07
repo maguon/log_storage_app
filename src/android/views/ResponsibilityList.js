@@ -18,9 +18,11 @@ import * as recordForDemageAction from '../../actions/components/demageInfo/Reco
 import * as demageOpResultAction from '../../actions/components/demageInfo/DemageOpResultAction'
 import * as imageListForDemageAction from '../../actions/components/demageInfo/ImageListForDemageAction'
 import moment from 'moment'
+import { moneyFormat } from '../../util/util'
+
 
 const renderListItem = props => {
-    const { item: { id, vin, damage_explain, make_name, created_on, car_id },
+    const { item: { id, vin, damage_explain, make_name, created_on, car_id ,under_cost},
         index,
         item,
         getCarInfo,
@@ -31,6 +33,7 @@ const renderListItem = props => {
         getDemageOpResultWaiting,
         getDamageImageListWaiting,
         getDamageImageList } = props
+        console.log(props)
     return (
         <TouchableOpacity style={styles.listItemContainer} onPress={() => {
             getCarInfoWaiting()
@@ -58,6 +61,9 @@ const renderListItem = props => {
                     <Text style={[globalStyles.midText, styles.text]}>{vin ? `${vin}` : ''}</Text>
                 </View>
                 <Text style={globalStyles.midText}>{make_name ? `${make_name}` : ''}</Text>
+            </View>
+            <View style={styles.listItemBottomContainer}>
+                <Text style={globalStyles.midText}>承担费用：¥ <Text style={styles.strikingText}>{under_cost ? `${moneyFormat(under_cost, 2)}` : '0.00'}</Text> 元</Text>
             </View>
             <View style={styles.listItemBottomContainer}>
                 <Icon name='ios-alert' style={styles.alertIcon} />
@@ -169,6 +175,9 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginBottom: 10,
         alignItems: 'center'
+    },
+    strikingText: {
+        color: 'red'
     },
     text: {
         paddingLeft: 5
