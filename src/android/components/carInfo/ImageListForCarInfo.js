@@ -174,7 +174,6 @@ const imageMapStateToProps = (state) => {
 const imageMapDispatchToProps = (dispatch) => ({
     delImage: (param) => {
         dispatch(imageListForCarInfoAction.delImage(param))
-
     }
 })
 
