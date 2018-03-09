@@ -9,7 +9,7 @@ import * as selectMakeAction from '../../../actions/components/select/selectMake
 import * as selectCityAction from '../../../actions/components/select/selectCityAction'
 import * as selectEntrustAction from '../../../actions/components/select/selectEntrustAction'
 import * as selectStorageAction from '../../../actions/components/select/selectStorageAction'
-import * as carListAction from '../../../actions/views/CarListAction'
+import * as carListAction from '../carList/CarListAction'
 
 import globalStyles ,{ styleColor} from '../../GlobalStyles'
 import Select from '../../components/share/form/Select'
@@ -24,12 +24,12 @@ const VinText = props => {
     const { input: { onChange, ...restProps }, meta: { error, touched } } = props
     return (
         <View style={{ backgroundColor: '#fff', flexDirection: 'row', alignItems: 'center', marginHorizontal: 15, marginTop: 10 }}>
-            <Text style={[globalStyles.largeText, globalStyles.styleColor]}>vin：</Text>
+            <Text style={[globalStyles.xlText, globalStyles.styleColor]}>vin：</Text>
             <Input
                 placeholder='请输入vin'
                 placeholderTextColor='#ddd'
                 onChangeText={onChange}
-                style={[globalStyles.largeText, globalStyles.styleColor]}
+                style={[globalStyles.xlText, globalStyles.styleColor]}
                 {...restProps} />
         </View>
     )
@@ -158,7 +158,7 @@ const QueryCar = props => {
                             itemStyle={{ width: width / 2 - 30 }} />
                     </View>
                 </View>
-                <View style={styles.buttonContainer}>
+                {/* <View style={styles.buttonContainer}>
                     <Button
                         full
                         onPress={reset}
@@ -171,7 +171,7 @@ const QueryCar = props => {
                         onPress={handleSubmit}>
                         <Text style={[globalStyles.midText, styles.buttonTitle]}>查询</Text>
                     </Button>
-                </View>
+                </View> */}
             </Content>
         </Container>
     )

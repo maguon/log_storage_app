@@ -132,7 +132,9 @@ class SearchBar extends Component {
         return (
             <View style={[styles.container, { width: width }]}>
                 <StatusBar hidden={false} />
-                <Header style={globalStyles.styleBackgroundColor}>
+                <Header 
+                androidStatusBarColor={styleColor}
+                style={globalStyles.styleBackgroundColor}>
                     <Left style={styles.left}>
                         <Button small transparent onPress={() => this.setState({ modalVisible: true })}>
                             <Icon name="ios-qr-scanner" style={styles.leftIcon} />

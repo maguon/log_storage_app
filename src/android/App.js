@@ -15,7 +15,7 @@ import Home from './views/blockInitial/Home'
 import Query from './views/blockInitial/Query'
 import StorageList from './views/blockInitial/StorageList'
 
-import CarList from './views/CarList'
+import CarList from './views/carList/CarList'
 import CarInformation from './views/CarInformation'
 import SearchVin from './views/SearchVin'
 import ImportCar from './views/ImportCar'
@@ -25,7 +25,7 @@ import RecordList from './views/RecordList'
 import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
-import AddCar from './views/AddCar'
+import AddCar from './views/createCar/AddCar'
 import RichText from './views/RichText'
 
 import * as sceneAction from '../actions/SceneAction'
@@ -37,22 +37,23 @@ import NavSearchStaticBar from './components/share/bar/NavSearchStaticBar'
 import NavSearchDynamicBar from './components/share/bar/NavSearchDynamicBar'
 import SearchBar from './components/share/bar/SearchBar'
 import SearchCarBar from './components/share/bar/SearchCarBar'
-import ApplyDamage from './views/ApplyDamage'
+import ApplyDamage from './views/applyDamage/ApplyDamage'
 import AddCarSubmit from './components/addCar/AddCarSubmit'
-import ApplyDamageUploadImage from './views/ApplyDamageUploadImage'
+import ApplyDamageUploadImage from './views/updateImageForApplyDamage/ApplyDamageUploadImage'
 import ApplyDamageSubmit from './components/applyDamage/ApplyDamageSubmit'
 import ApplyDamageUploadImageSubmit from './components/applyDamage/ApplyDamageUploadImageSubmit'
 import NavBar from './components/share/bar/NavBar'
 import LeftButton from './components/share/bar/LeftButton'
+import QueryOp from './components/query/QueryOp'
 import SinglePhotoView from './views/SinglePhotoView'
-import ResponsibilityList from './views/ResponsibilityList'
-import DemageList from './views/DemageList'
+import ResponsibilityList from './views/responsibilityList/ResponsibilityList'
+import DemageList from './views/damageList/DemageList'
 import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
-import PersonalCenter from './views/PersonalCenter'
+import PersonalCenter from './views/personalCenter/PersonalCenter'
 import UpdatePassword from './views/UpdatePassword'
 import Setting from './views/blockInitial/Setting'
-import RetrievePassword from './views/RetrievePassword'
+import RetrievePassword from './views/retrievePassword/RetrievePassword'
 import ImportCarImage from './views/ImportCarImage'
 import ImportCarImageSubmit from './components/importCarImage/ImportCarImageSubmit'
 import ImageViewConnect from './views/ImageViewConnect'
@@ -247,7 +248,8 @@ class App extends Component {
                                     initial={true}
                                     component={Query}
                                     hideNavBar={false}
-                                    navBar={NavBar} />
+                                    navBar={NavBar} 
+                                    RightButton={QueryOp}/>
                                 <Scene key="imageViewConnectAtCarBlock"
                                     clone={true}
                                     component={ImageViewConnect}

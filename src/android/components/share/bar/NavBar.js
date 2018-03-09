@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, StatusBar, StyleSheet,Dimensions } from 'react-native'
+import { Text, View, StatusBar, StyleSheet, Dimensions } from 'react-native'
 import { Header, Title, Button, Icon, Right, Left, Body, Label } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import globalStyles, { styleColor } from '../../../GlobalStyles'
 
-
-const {width} =Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 const NavBar = props => {
     const { title, RightButton, LeftButton, parent } = props
@@ -15,13 +14,13 @@ const NavBar = props => {
             <Header
                 androidStatusBarColor={styleColor}
                 style={[styles.header, globalStyles.styleBackgroundColor]}>
-                {LeftButton && <Left>
+                {LeftButton && <Left style={styles.left}>
                     <LeftButton />
                 </Left>}
-                <Body>
-                    <Title style={[globalStyles.largeText, { color: '#fff' }]}>{title}</Title>
+                <Body style={styles.body}>
+                    <Title style={[globalStyles.xlText, { color: '#fff' }]}>{title}</Title>
                 </Body>
-                <Right>
+                <Right style={styles.right}>
                     {RightButton && <RightButton parent={parent} />}
                 </Right>
             </Header>
@@ -39,6 +38,15 @@ const styles = StyleSheet.create({
     header: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    left: {
+        flex: 1
+    },
+    body: {
+        flex: 4
+    },
+    right: {
+        flex: 2
     }
 })
 

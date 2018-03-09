@@ -27,7 +27,9 @@ const NavSearchStaticBar = props => {
     return (
         <View style={[styles.container, { width: layout.initWidth }]}>
             <StatusBar hidden={false} />
-            <Header style={globalStyles.styleBackgroundColor}>
+            <Header 
+            androidStatusBarColor={styleColor}
+            style={globalStyles.styleBackgroundColor}>
                 <Left style={styles.left}>
                     <Button transparent onPress={Actions.pop}>
                         <Icon name="arrow-back" style={styles.leftIcon} />

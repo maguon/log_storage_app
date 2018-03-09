@@ -12,8 +12,8 @@ import { connect } from 'react-redux'
 import FoundationIcon from 'react-native-vector-icons/dist/Foundation'
 import { Actions } from 'react-native-router-flux'
 import globalStyles from '../../GlobalStyles'
-import * as demageListAction from '../../../actions/views/DemageListAction'
-import * as responsibilityListAction from '../../../actions/views/ResponsibilityListAction'
+import * as demageListAction from '../damageList/DemageListAction'
+import * as responsibilityListAction from '../responsibilityList/ResponsibilityListAction'
 import * as loginAction from '../../../actions/views/LoginAction'
 import { file_host } from '../../../config/Host'
 import ConfirmModal from '../../../android/components/share/ConfirmModal'
@@ -56,7 +56,7 @@ class Setting extends Component {
             <Container>
                 <Content style={globalStyles.container}>
                     <List style={styles.list}>
-                        <Separator bordered />
+                        <Separator style={globalStyles.separator} />
                         <ListItem last onPress={Actions.personalCenter}>
                             <View style={styles.avatarContainer}>
                                 <Thumbnail source={avatar_image ? { uri: `${file_host}/image/${avatar_image}` } : { uri: `personalicon` }} />
@@ -66,7 +66,7 @@ class Setting extends Component {
                                 </View>
                             </View>
                         </ListItem>
-                        <Separator bordered />
+                        <Separator style={globalStyles.separator} />
                         <ListItem icon onPress={() => {
                             getDemageListWaiting()
                             Actions.demageList()
@@ -112,7 +112,7 @@ class Setting extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
-                        <Separator bordered />
+                        <Separator style={globalStyles.separator} />
                         <ListItem icon>
                             <Left>
                                 <Icon name="ios-cube-outline" style={globalStyles.styleColor} />
@@ -138,7 +138,7 @@ class Setting extends Component {
                                 </TouchableOpacity>}
                             </Right>
                         </ListItem>
-                        <ListItem icon onPress={Actions.updatePassword}>
+                        <ListItem last icon onPress={Actions.updatePassword}>
                             <Left>
                                 <Icon name="ios-key-outline" style={globalStyles.styleColor} />
                             </Left>
