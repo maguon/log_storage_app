@@ -3,9 +3,9 @@ import { Text, View, TextInput, ToastAndroid, Alert, StyleSheet } from 'react-na
 import { connect } from 'react-redux'
 import { Icon, Button, Container } from 'native-base'
 import { Actions } from 'react-native-router-flux'
-import globalStyles, { styleColor } from '../../GlobalStyles'
+import globalStyles, { styleColor } from '../../../GlobalStyles'
 import { Field, reduxForm } from 'redux-form'
-import * as sendSMSAction from '../../../actions/components/retrievePassword/SendSMSAction'
+import * as sendSMSAction from './SendSMSAction'
 
 const TextBox = props => {
     const { input: { onChange, ...restProps } } = props

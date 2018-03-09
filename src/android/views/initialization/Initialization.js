@@ -1,20 +1,18 @@
 import React, { Component } from 'react'
 import {
     Linking,
-    ToastAndroid,
-    Platform,
     View,
     Text,
-    StyleSheet,
     Dimensions,
     Image,
-    StatusBar
+    StatusBar,
+    StyleSheet
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { Button } from 'native-base'
 // import SplashScreen from 'react-native-splash-screen'
-import * as initializationAction from '../../actions/views/InitializationAction'
+import * as initializationAction from './InitializationAction'
 
 const window = Dimensions.get('window')
 const ImageWidth = window.width

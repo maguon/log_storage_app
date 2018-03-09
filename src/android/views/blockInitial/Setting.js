@@ -14,7 +14,7 @@ import { Actions } from 'react-native-router-flux'
 import globalStyles from '../../GlobalStyles'
 import * as demageListAction from '../damageList/DemageListAction'
 import * as responsibilityListAction from '../responsibilityList/ResponsibilityListAction'
-import * as loginAction from '../../../actions/views/LoginAction'
+import * as loginAction from '../login/LoginAction'
 import { file_host } from '../../../config/Host'
 import ConfirmModal from '../../../android/components/share/ConfirmModal'
 

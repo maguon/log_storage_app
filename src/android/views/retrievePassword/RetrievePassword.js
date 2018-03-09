@@ -5,7 +5,7 @@ import { Icon, Button, Container } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import globalStyles, { styleColor } from '../../GlobalStyles'
 import { Field, reduxForm } from 'redux-form'
-import SendSMS from '../../components/retrievePassword/SendSMS'
+import SendSMS from '../../components/retrievePassword/sendSMS/SendSMS'
 import * as retrievePasswordAction from './RetrievePasswordAction'
 
 const TextBox = props => {

@@ -6,10 +6,10 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Content, List, Left, Form, ListItem, Thumbnail, Separator, Body, Right, Icon, Input, Item, Label, Button } from 'native-base'
-import globalStyles from '../GlobalStyles'
+import globalStyles from '../../GlobalStyles'
 import { Field, reduxForm } from 'redux-form'
-import * as updatePasswordAction from '../../actions/views/UpdatePasswordAction'
-import TextBox from '../components/share/form/TextBox'
+import * as updatePasswordAction from './UpdatePasswordAction'
+import TextBox from '../../components/share/form/TextBox'
 
 const UpdatePassword = props => {
     const { handleSubmit } = props

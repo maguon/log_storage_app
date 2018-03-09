@@ -3,11 +3,11 @@ import { View, Image, Dimensions, ToastAndroid, StatusBar, TouchableOpacity, Sty
 import { connect } from 'react-redux'
 import { Button, Icon, Form, Item, Text, Label, Input, Left, Body, Right, Title, List, ListItem, Container } from 'native-base'
 import { Actions } from 'react-native-router-flux'
-import globalStyles, { styleColor } from '../GlobalStyles'
+import globalStyles, { styleColor } from '../../GlobalStyles'
 import { Field, reduxForm } from 'redux-form'
-import * as loginAction from '../../actions/views/LoginAction'
-import localStorageKey from '../../util/LocalStorageKey'
-import localStorage from '../../util/LocalStorage'
+import * as loginAction from './LoginAction'
+import localStorageKey from '../../../util/LocalStorageKey'
+import localStorage from '../../../util/LocalStorage'
 
 const window = Dimensions.get('window')
 const ImageWidth = window.width

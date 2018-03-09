@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import { Header, Title, Button, Icon, Right, Left, Body, Label, Item, Input, Text } from 'native-base'
-import { View, StatusBar, StyleSheet, TextInput } from 'react-native'
+import { View, StatusBar, StyleSheet, TextInput ,Dimensions} from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import globalStyles, { styleColor } from '../../../GlobalStyles'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 import * as  selectCarAction from '../../../../actions/components/select/selectCarAction'
+
+const { width } = Dimensions.get('window')
 
 const TextBox = props => {
     const { input: { onChange, ...restProps }, getCarList, getCarListWaiting, cleanCarList} = props
@@ -34,7 +36,7 @@ const TextBox = props => {
 const NavSearchDynamicBar = props => {
     const { title, layout, getCarListWaiting, getCarList ,cleanCarList} = props
     return (
-        <View style={[styles.container, { width: layout.initWidth }]}>
+        <View style={[styles.container, { width: width }]}>
             <StatusBar hidden={false} />
             <Header 
             androidStatusBarColor={styleColor}

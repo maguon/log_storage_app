@@ -1,7 +1,7 @@
-import * as actionTypes from '../actionTypes'
-import httpRequest from '../util/HttpRequest.js'
-import { base_host } from '../config/Host'
-import { ObjectToUrl } from '../util/ObjectToUrl'
+import * as actionTypes from '../../../../actionTypes/index'
+import httpRequest from '../../../../util/HttpRequest.js'
+import { base_host } from '../../../../config/Host'
+import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 
 
 export const getStorageList = (param) => (dispatch) => {

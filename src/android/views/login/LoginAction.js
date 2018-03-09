@@ -1,13 +1,13 @@
-import httpRequest from '../../util/HttpRequest'
-import { base_host } from '../../config/Host'
-import * as actionTypes from '../../actionTypes'
-import { ObjectToUrl } from '../../util/ObjectToUrl'
+import httpRequest from '../../../util/HttpRequest'
+import { base_host } from '../../../config/Host'
+import * as actionTypes from '../../../actionTypes/index'
+import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { getFormValues, blur } from 'redux-form'
 import { Actions } from 'react-native-router-flux'
 import { ToastAndroid } from 'react-native'
-import requestHeaders from '../../util/RequestHeaders'
-import localStorageKey from '../../util/LocalStorageKey'
-import localStorage from '../../util/LocalStorage'
+import requestHeaders from '../../../util/RequestHeaders'
+import localStorageKey from '../../../util/LocalStorageKey'
+import localStorage from '../../../util/LocalStorage'
 
 //登录
 export const login = (tryCount = 1) => async (dispatch, getState) => {

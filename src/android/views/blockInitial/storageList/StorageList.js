@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as StorageListAction from '../../../actions/StorageListAction'
-import StorageListLayout from '../../layout/StorageList'
+import * as StorageListAction from './StorageListAction'
+import StorageListLayout from '../../../layout/StorageList'
 import { Actions } from 'react-native-router-flux'
 
 class StorageList extends Component {

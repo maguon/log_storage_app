@@ -1,8 +1,8 @@
-import httpRequest from '../../../util/HttpRequest'
-import { base_host } from '../../../config/Host'
-import * as actionTypes from '../../../actionTypes'
-import { ObjectToUrl } from '../../../util/ObjectToUrl'
-import { sleep } from '../../../util/util'
+import httpRequest from '../../../../util/HttpRequest'
+import { base_host } from '../../../../config/Host'
+import * as actionTypes from '../../../../actionTypes/index'
+import { ObjectToUrl } from '../../../../util/ObjectToUrl'
+import { sleep } from '../../../../util/util'
 import { getFormValues } from 'redux-form'
 import { ToastAndroid } from 'react-native'
 

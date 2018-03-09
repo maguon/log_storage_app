@@ -9,11 +9,11 @@ import Orientation from 'react-native-orientation'
 import TabIcon from './components/TabIcon'
 
 
-import Initialization from './views/Initialization'
-import Login from './views/Login'
+import Initialization from './views/initialization/Initialization'
+import Login from './views/login/Login'
 import Home from './views/blockInitial/Home'
 import Query from './views/blockInitial/Query'
-import StorageList from './views/blockInitial/StorageList'
+import StorageList from './views/blockInitial/storageList/StorageList'
 
 import CarList from './views/carList/CarList'
 import CarInformation from './views/CarInformation'
@@ -51,7 +51,7 @@ import DemageList from './views/damageList/DemageList'
 import ResponsibilityInfo from './views/ResponsibilityInfo'
 import DemageInfo from './views/DemageInfo'
 import PersonalCenter from './views/personalCenter/PersonalCenter'
-import UpdatePassword from './views/UpdatePassword'
+import UpdatePassword from './views/updatePassword/UpdatePassword'
 import Setting from './views/blockInitial/Setting'
 import RetrievePassword from './views/retrievePassword/RetrievePassword'
 import ImportCarImage from './views/ImportCarImage'
@@ -181,7 +181,6 @@ class App extends Component {
                                     hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtHomeBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtHomeBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
-                                {/* <Scene key="richTextAtHomeBlock" component={RichText} title='添加备注' hideNavBar={false} hideTabBar navBar={NavBar} /> */}
                                 <Scene key="importCarCameraAtHomeBlock"
                                     component={ImportCarImage}
                                     LeftButton={LeftButton}

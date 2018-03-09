@@ -105,7 +105,6 @@ const CarList = props => {
                 <FlatList
                     ListEmptyComponent={renderEmpty}
                     ListFooterComponent={carListReducer.getCarListMore.isResultStatus == 1 ? ListFooterComponent : <View style={{ height: 10 }} />}
-                    showsVerticalScrollIndicator={false}
                     onEndReached={() => {
                         if (carListReducer.getCarList.isResultStatus == 2 && !isComplete) {
                             getCarListMore()
