@@ -6,7 +6,7 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
-import { Button, Spinner } from 'native-base'
+import { Button, Spinner, Icon } from 'native-base'
 import { submit } from 'redux-form'
 
 const AddCarSubmit = props => {
@@ -21,7 +21,7 @@ const AddCarSubmit = props => {
                 <Text style={styles.text}>下一步</Text>
             </Button>
         )
-     }
+    }
 }
 
 const styles = StyleSheet.create({
@@ -41,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
     createCar: () => {
         dispatch(submit('addCarForm'))
     }
-    
+
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddCarSubmit)

@@ -1,4 +1,4 @@
-export const GET_STORAGELIST_SUCCESS = 'GET_STORAGELIST_SUCCESS'
-export const GET_STORAGELIST_WAITING = 'GET_STORAGELIST_WAITING'
-export const GET_STORAGELIST_FAILED = 'GET_STORAGELIST_FAILED'
-export const GET_STORAGELIST_ERROR = 'GET_STORAGELIST_ERROR'
+export const get_storageList_success = 'get_storageList_success'
+export const get_storageList_waiting = 'get_storageList_waiting'
+export const get_storageList_failed = 'get_storageList_failed'
+export const get_storageList_error = 'get_storageList_error'

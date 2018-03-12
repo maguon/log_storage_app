@@ -17,7 +17,7 @@ import StorageList from './views/blockInitial/storageList/StorageList'
 
 import CarList from './views/carList/CarList'
 import CarInformation from './views/CarInformation'
-import SearchVin from './views/SearchVin'
+// import SearchVin from './views/SearchVin'
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 
@@ -292,7 +292,7 @@ class App extends Component {
                                     component={SinglePhotoView}
                                     hideNavBar
                                     hideTabBar />
-                                <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} />
+                                {/* <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} /> */}
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtCarBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtCarBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
@@ -303,7 +303,7 @@ class App extends Component {
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
                                 <Scene key="storageList" component={StorageList} title='仓库列表' initial={true} hideNavBar={false} navBar={NavBar} />
                                 <Scene key="parkingView" navBar={NavBar} title="车位分布图" component={ParkingView} hideTabBar hideNavBar={false} />
-                                <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} />
+                                {/* <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} /> */}
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="carInformationAtStorageBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="ImagePageForImportCarAtStorageBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
@@ -316,7 +316,7 @@ class App extends Component {
                                 <Scene key="setting" component={Setting} title='设置' initial={true} hideNavBar={false} navBar={NavBar} />
                                 <Scene key="recordList" LeftButton={LeftButton} component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                                <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} />
+                                {/* <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} /> */}
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtSettingBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtSettingBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />

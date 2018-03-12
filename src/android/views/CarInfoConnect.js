@@ -11,16 +11,3 @@ const CarInfoConnect = props => {
     )
 }
 export default CarInfoConnect
-
-
-
-
-
-
-
-
-
-
-
-
-

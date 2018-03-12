@@ -8,58 +8,57 @@ import * as actionTypes from '../../../../actionTypes/index'
 //isResultStatus(执行结果状态):[0(成功)，1(错误)，2(执行失败)] 
 //isExecuteStatus(执行状态):[0(未执行)，1(正在执行)，2(执行完毕)]
 const initialState = {
+    data: {
+        storageList: []
+    },
     getStorageList: {
         isResultStatus: 0,
-        isExecStatus: 0,
         errorMsg: '',
-        failedMsg: '',
-        data: {
-            storageList: []
-        }
+        failedMsg: ''
     }
 }
 
 export default handleActions({
-    [actionTypes.storageListTypes.GET_STORAGELIST_SUCCESS]: (state, action) => {
-        const { payload: { data } } = action
+    [actionTypes.storageListTypes.get_storageList_success]: (state, action) => {
+        const { payload: { storageList } } = action
         return {
+            data: {
+                storageList
+            },
             getStorageList: {
-                ...state.getStorageList,
-                isExecStatus: 2,
-                isResultStatus: 0,
-                data: {
-                    storageList: data
-                }
+                ...initialState.getStorageList,
+                isResultStatus: 2
             }
         }
     },
-    [actionTypes.storageListTypes.GET_STORAGELIST_WAITING]: (state, action) => {
+    [actionTypes.storageListTypes.get_storageList_waiting]: (state, action) => {
         return {
+            ...state,
             getStorageList: {
-                ...state.getStorageList,
-                isExecStatus: 1
+                ...initialState.getStorageList,
+                isResultStatus: 1
             }
         }
     },
-    [actionTypes.storageListTypes.GET_STORAGELIST_ERROR]: (state, action) => {
-        const { payload: { data } } = action
+    [actionTypes.storageListTypes.get_storageList_error]: (state, action) => {
+        const { payload: { errorMsg } } = action
         return {
+            ...state,
             getStorageList: {
-                ...state.getStorageList,
-                isExecStatus: 2,
-                isResultStatus: 1,
-                errorMsg: data
+                ...initialState.getStorageList,
+                isResultStatus: 3,
+                errorMsg
             }
         }
     },
-    [actionTypes.storageListTypes.GET_STORAGELIST_FAILED]: (state, action) => {
-        const { payload: { data } } = action
+    [actionTypes.storageListTypes.get_storageList_failed]: (state, action) => {
+        const { payload: { failedMsg } } = action
         return {
+            ...state,
             getStorageList: {
-                ...state.getStorageList,
-                isExecStatus: 2,
-                isResultStatus: 2,
-                failedMsg: data
+                ...initialState.getStorageList,
+                isResultStatus: 4,
+                failedMsg
             }
         }
     }
