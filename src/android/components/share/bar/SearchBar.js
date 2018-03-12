@@ -15,6 +15,7 @@ import * as carInfoAction from '../../../../actions/views/CarInfoAction'
 import * as selectStorageAction from '../../../../actions/components/select/selectStorageAction'
 import * as selectAreaAction from '../../../../actions/components/select/selectAreaAction'
 import * as selectParkingAction from '../../../../actions/components/select/selectParkingAction'
+import { submit } from 'redux-form'
 
 const { width, height } = Dimensions.get('window')
 let mwidth = 70

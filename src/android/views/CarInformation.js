@@ -18,7 +18,7 @@ import ImageListForCarInfo from '../components/carInfo/ImageListForCarInfo'
 import RecordForCarInfo from '../components/carInfo/RecordForCarInfo'
 import DisposableList from '../views/form/select/DisposableList'
 import * as routerDirection from '../../util/RouterDirection'
-import { submit } from 'redux-form'
+
 
 
 const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList }) => {
@@ -101,6 +101,7 @@ const CarInformation = props => {
         selectParkingReducer,
         sendCar,
         parent } = props
+        console.log('props',props)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>

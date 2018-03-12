@@ -4,31 +4,42 @@ import {
   StyleSheet,
   Text,
   Vibration,
-
   View
 } from 'react-native'
 import BarcodeScanner from 'react-native-barcodescanner'
 import { connect } from 'react-redux'
-
+import Orientation from 'react-native-orientation'
 
 export default class VinScanner extends Component {
   constructor(props) {
     super(props)
+    this.barcodeReceived = this.barcodeReceived.bind(this)
+  }
 
-    this.state = {
-      cameraType: 'back',
-      torchMode: 'off'
-    }
+  componentDidMount() {
+    Orientation.lockToLandscape()
+  }
+
+  componentWillUnmount() {
+    Orientation.lockToPortrait()
+  }
+
+  barcodeReceived(e) {
+    Vibration.vibrate()
+    this.props.barcodeReceived(e)
+
   }
 
   render() {
     return (
       <View style={styles.container}>
         <BarcodeScanner
-          onBarCodeRead={this.props.barcodeReceived}
+          viewFinderHeight={80}
+          viewFinderWidth={450}
+          onBarCodeRead={this.barcodeReceived}
           style={{ flex: 1 }}
-          torchMode={this.state.torchMode}
-          cameraType={this.state.cameraType}
+          torchMode='back'
+          cameraType= 'off'
         />
       </View>
     );

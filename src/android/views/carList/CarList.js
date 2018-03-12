@@ -24,6 +24,7 @@ import * as selectStorageAction from '../../../actions/components/select/selectS
 import * as selectAreaAction from '../../../actions/components/select/selectAreaAction'
 import * as selectParkingAction from '../../../actions/components/select/selectParkingAction'
 import * as carInfoAction from '../../../actions/views/CarInfoAction'
+import { submit } from 'redux-form'
 
 const renderListItem = props => {
     const { item: { plan_out_time, make_name, storage_name, vin, colour,id, enter_time, real_out_time, col, row, area_name },
@@ -234,9 +235,6 @@ const carInfoMapDispatchToProps = (dispatch) => ({
     }
     
 })
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(CarList)
 

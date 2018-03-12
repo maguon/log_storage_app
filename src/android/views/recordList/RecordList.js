@@ -62,7 +62,7 @@ class RecordList extends Component {
         /** selectRecordListTab */
 
         if (this.props.recordListReducer.selectRecordListTab.selectedTab != recordListReducer.selectRecordListTab.selectedTab) {
-            let param = { optionalParam: { userid: this.props.user.userId, start: 0, size: 20 } }
+            let param = { optionalParam: { userid: this.props.loginReducer.data.user.uid, start: 0, size: 20 } }
             if (recordListReducer.selectRecordListTab.selectedTab == 'all') {
                // console.log(param)
             } else if (recordListReducer.selectRecordListTab.selectedTab == 'import') {

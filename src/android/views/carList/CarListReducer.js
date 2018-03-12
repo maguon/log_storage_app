@@ -116,13 +116,11 @@ export default handleActions({
 
     [actionTypes.carListTypes.change_carListCarInfo]: (state, action) => {
         const { payload: { changeField } } = action
-        console.log('changeField',changeField)
         return {
             ...state,
             data: {
                 carList: state.data.carList.map(item => {
-                    if (item.id == changeField.id) {
-                        console.log('item',item)
+                    if (item.vin == changeField.vin) {
                         return {
                             ...item,
                             ...changeField

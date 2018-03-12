@@ -51,6 +51,7 @@ export default combineReducers({
     form: formReducer,
     StorageListReducer,
     //新
+    RecordListReducer,
     recordListAtHomeReducer,
     storageListAtHomeReducer,
     selectTruckReducer,
