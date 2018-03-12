@@ -21,8 +21,8 @@ import * as selectMakeActionTypes from './components/select/selectMakeActionType
 import * as selectCityActionTypes from './components/select/selectCityActionTypes'
 import * as selectStorageActionTypes from './components/select/selectStorageActionTypes'
 import * as selectEntrustActionTypes from './components/select/selectEntrustActionTypes'
-import * as applyDamageTypes from '../android/views/applyDamage/ApplyDamageTypes'
-import * as applyDamageUploadImageTypes from '../android/views/updateImageForApplyDamage/ApplyDamageUploadImageTypes'
+import * as applyDamageTypes from '../android/views/applyDamage/applyDamage/ApplyDamageTypes'
+import * as applyDamageUploadImageTypes from '../android/views/applyDamage/updateImageForApplyDamage/ApplyDamageUploadImageTypes'
 import * as carListTypes from '../android/views/carList/CarListTypes'
 import * as responsibilityListTypes from '../android/views/responsibilityList/ResponsibilityListTypes'
 import * as personalCenterActionTypes from '../android/views/personalCenter/PersonalCenterActionTypes'
@@ -45,9 +45,9 @@ import * as imageListForCarInfoTypes from './components/carInfo/ImageListForCarI
 import * as recordForCarInfoTypes from './components/carInfo/RecordForCarInfoTypes'
 import * as sendSMSActionTypes from '../android/components/retrievePassword/sendSMS/SendSMSActionTypes'
 import * as retrievePasswordActionTypes from '../android/views/retrievePassword/RetrievePasswordActionTypes'
-import * as addCarTypes from '../android/views/createCar/AddCarTypes'
-import * as importCarImageTypes from './views/ImportCarImageTypes'
-import * as importCarTypes from './views/ImportCarTypes'
+import * as addCarTypes from '../android/views/createCar/createCar/AddCarTypes'
+import * as importCarImageTypes from '../android/views/createCar/uploadImageForCreateCar/ImportCarImageTypes'
+import * as importCarTypes from '../android/views/createCar/importCar/ImportCarTypes'
 
 
 export {

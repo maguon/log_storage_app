@@ -9,14 +9,14 @@ import {
     Dimensions,
     TouchableOpacity
 } from 'react-native'
-import ImageItem from '../components/share/ImageItem'
-import globalStyles from '../GlobalStyles'
+import ImageItem from '../../../components/share/ImageItem'
+import globalStyles from '../../../GlobalStyles'
 import { connect } from 'react-redux'
-import CameraButton from '../components/share/CameraButton'
-import { file_host } from '../../config/Host'
+import CameraButton from '../../../components/share/CameraButton'
+import { file_host } from '../../../../config/Host'
 import { Container, Content, Input, Label, Icon } from 'native-base'
-import * as  importCarImageAction from '../../actions/views/ImportCarImageAction'
-import * as routerDirection from '../../util/RouterDirection'
+import * as  importCarImageAction from './ImportCarImageAction'
+import * as routerDirection from '../../../../util/RouterDirection'
 
 const window = Dimensions.get('window')
 const containerWidth = window.width / 2

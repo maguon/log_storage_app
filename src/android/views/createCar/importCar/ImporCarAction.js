@@ -1,7 +1,7 @@
-import httpRequest from '../../util/HttpRequest'
-import { base_host, file_host } from '../../config/Host'
-import * as actionTypes from '../../actionTypes'
-import { ObjectToUrl } from '../../util/ObjectToUrl'
+import httpRequest from '../../../../util/HttpRequest'
+import { base_host, file_host } from '../../../../config/Host'
+import * as actionTypes from '../../../../actionTypes/index'
+import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { Actions } from 'react-native-router-flux'
 import { ToastAndroid } from 'react-native'
 

@@ -1,7 +1,7 @@
-import httpRequest from '../../util/HttpRequest'
-import { record_host, file_host } from '../../config/Host'
-import * as actionTypes from '../../actionTypes'
-import { ObjectToUrl } from '../../util/ObjectToUrl'
+import httpRequest from '../../../../util/HttpRequest'
+import { record_host, file_host } from '../../../../config/Host'
+import * as actionTypes from '../../../../actionTypes/index'
+import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
 
 export const pushCarImageWaiting = () => (dispatch) => {

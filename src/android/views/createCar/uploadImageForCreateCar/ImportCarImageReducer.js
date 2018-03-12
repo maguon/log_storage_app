@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import * as actionTypes from '../../actionTypes'
+import * as actionTypes from '../../../../actionTypes/index'
 
 const initialState = {
     data: {

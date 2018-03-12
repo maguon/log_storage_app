@@ -11,12 +11,12 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Content, Input, Label, Icon } from 'native-base'
-import CameraButton from '../../components/share/CameraButton'
-import globalStyles from '../../GlobalStyles'
+import CameraButton from '../../../components/share/CameraButton'
+import globalStyles from '../../../GlobalStyles'
 import * as applyDamageUploadImageAction from './ApplyDamageUploadImageAction'
-import ImageItem from '../../components/share/ImageItem'
-import { file_host } from '../../../config/Host'
-import * as routerDirection from '../../../util/RouterDirection'
+import ImageItem from '../../../components/share/ImageItem'
+import { file_host } from '../../../../config/Host'
+import * as routerDirection from '../../../../util/RouterDirection'
 import { Actions } from 'react-native-router-flux'
 
 

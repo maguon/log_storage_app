@@ -7,13 +7,13 @@ import {
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Button } from 'native-base'
-import DisposableList from '../views/form/select/DisposableList'
-import * as importCarAction from '../../actions/views/ImporCarAction'
-import * as selectStorageAction from '../../actions/components/select/selectStorageAction'
-import * as selectAreaAction from '../../actions/components/select/selectAreaAction'
-import * as selectParkingAction from '../../actions/components/select/selectParkingAction'
+import DisposableList from '../../form/select/DisposableList'
+import * as importCarAction from './ImporCarAction'
+import * as selectStorageAction from '../../../../actions/components/select/selectStorageAction'
+import * as selectAreaAction from '../../../../actions/components/select/selectAreaAction'
+import * as selectParkingAction from '../../../../actions/components/select/selectParkingAction'
 import { Actions } from 'react-native-router-flux'
-import * as routerDirection from '../../util/RouterDirection'
+import * as routerDirection from '../../../../util/RouterDirection'
 
 
 const onSelectStorage = ({ getAreaList, getStorageListWaiting, getStorageList, onSelect, getAreaListWaiting, parent, getParkingListWaiting, getParkingList }) => {
