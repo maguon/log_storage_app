@@ -101,7 +101,6 @@ const CarInformation = props => {
         selectParkingReducer,
         sendCar,
         parent } = props
-        console.log('props',props)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>

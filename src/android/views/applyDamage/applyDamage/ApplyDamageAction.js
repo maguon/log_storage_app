@@ -26,6 +26,7 @@ export const createDamage = (parent, values) => async (dispatch, getState) => {
         if (res.success) {
             ToastAndroid.showWithGravity('提交成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
             dispatch({ type: actionTypes.applyDamageTypes.create_Damage_success, payload: { damageId: res.id } })
+            dispatch({ type: actionTypes.applyDamageUploadImageTypes.clean_upload_DamageImage, payload: {  } })
             Actions.applyDamageUploadImage({vin:car.value})
         } else {
             ToastAndroid.showWithGravity(`提交失败！${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)

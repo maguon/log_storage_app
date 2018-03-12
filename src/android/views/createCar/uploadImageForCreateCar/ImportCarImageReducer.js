@@ -129,4 +129,9 @@ export default handleActions({
             }
         }
     },
+    [actionTypes.importCarImageTypes.clean_import_carImage]: (state, action) => {
+        return {
+            ...initialState
+        }
+    },
 }, initialState)

@@ -29,6 +29,7 @@ export const addCar = (values, parent) => async (dispatch, getState) => {
         if(res.success){
             ToastAndroid.showWithGravity('提交成功！', ToastAndroid.CENTER, ToastAndroid.BOTTOM)
             dispatch({ type: actionTypes.addCarTypes.add_car_success, payload: { carId: res.id,vin:values.vin } })
+            dispatch({ type: actionTypes.importCarImageTypes.clean_import_carImage, payload: {  } })
             Actions.importCarCameraAtHomeBlock()
         }else{
             ToastAndroid.showWithGravity(`提交失败！${res.msg}`, ToastAndroid.CENTER, ToastAndroid.BOTTOM)

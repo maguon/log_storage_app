@@ -4,6 +4,8 @@ import * as actionTypes from '../../../actionTypes'
 import { objectExceptNull } from '../../../util/util'
 import { ToastAndroid } from 'react-native'
 import moment from 'moment'
+
+
 export const updateCarInfo = (values) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
@@ -24,6 +26,7 @@ export const updateCarInfo = (values) => async (dispatch, getState) => {
             remark: values.remark
         }))
         if (res.success) {
+            console.log(`-${values.orderDate}`.indexOf('-'))
             dispatch({ type: actionTypes.carInfoEditorTypes.update_carInfo_success, payload: {} })
             dispatch({
                 type: actionTypes.carListTypes.change_carListCarInfo, payload: {
@@ -37,10 +40,10 @@ export const updateCarInfo = (values) => async (dispatch, getState) => {
                         route_end: values.routeEnd.value,
                         base_addr_id: values.baseAddr.id,
                         receive_id: values.receive.id,
-                        receive_name:values.receive.value,
+                        receive_name: values.receive.value,
                         entrust_id: values.entrust.id,
-                        entrust_name:values.entrust.value,
-                        order_date: values.orderDate ? values.orderDate  : null,
+                        entrust_name: values.entrust.value,
+                        order_date: values.orderDate ? values.orderDate : null,
                         remark: values.remark
                     })
                 }

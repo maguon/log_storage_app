@@ -3,6 +3,7 @@ export const import_carImage_partSuccess = 'import_carImage_partSuccess'
 export const import_carImage_failed = 'import_carImage_failed'
 export const import_carImage_waiting = 'import_carImage_waiting'
 export const import_carImage_error = 'import_carImage_error'
+export const clean_import_carImage='clean_import_carImage'
 
 export const del_importCarImage_success = 'del_importCarImage_success'
 export const del_importCarImage_failed = 'del_importCarImage_failed'

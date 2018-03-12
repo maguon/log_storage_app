@@ -24,7 +24,7 @@ const CarInfoEditor = props => {
     const { car: { vin }, car, parent, getMakeList, getMakeListWaiting, getCityList, getCityListWaiting,
         getEntrustList, getEntrustListWaiting, getReceiveList, getReceiveListWaiting, getBaseAddrList,
         getBaseAddrListWaiting,
-        carInfoEditorFormValues = { routeStart: {}, routeEnd: {},make:{},entrust:{},baseAddr:{},receive:{} } } = props
+        carInfoEditorFormValues = { routeStart: {}, routeEnd: {}, make: {}, entrust: {}, baseAddr: {}, receive: {} } } = props
     return (
         <View style={styles.container}>
             <View style={styles.headerContainer}>
@@ -41,7 +41,7 @@ const CarInfoEditor = props => {
                         mapStateToProps: makeMapStateToProps,
                         mapDispatchToProps: makeMapDispatchToProps,
                         List: DisposableList,
-                        title:'品牌',
+                        title: '品牌',
                         ...param
                     })
                 }} />
@@ -56,7 +56,7 @@ const CarInfoEditor = props => {
                         mapStateToProps: entrustMapStateToProps,
                         mapDispatchToProps: entrustMapDispatchToProps,
                         List: DisposableList,
-                        title:'委托方',
+                        title: '委托方',
                         ...param
                     })
                 }} />
@@ -71,11 +71,11 @@ const CarInfoEditor = props => {
                         mapStateToProps: cityMapStateToProps,
                         mapDispatchToProps: cityMapDispatchToProps,
                         List: DisposableList,
-                        title:'发运地',
+                        title: '发运地',
                         ...param
                     })
                 }} />
-            {carInfoEditorFormValues.routeStart.id&&<Field
+            {carInfoEditorFormValues.routeStart.id && <Field
                 label='发货地址：'
                 name='baseAddr'
                 component={Select}
@@ -86,7 +86,7 @@ const CarInfoEditor = props => {
                         mapStateToProps: baseAddrMapStateToProps,
                         mapDispatchToProps: baseAddrMapDispatchToProps,
                         List: DisposableList,
-                        title:'发货地址',
+                        title: '发货地址',
                         ...param
                     })
                 }} />}
@@ -101,12 +101,12 @@ const CarInfoEditor = props => {
                         mapStateToProps: cityMapStateToProps,
                         mapDispatchToProps: cityMapDispatchToProps,
                         List: DisposableList,
-                        title:'目的地',
+                        title: '目的地',
                         ...param
                     })
                 }} />
 
-            {carInfoEditorFormValues.routeEnd.id&&<Field
+            {carInfoEditorFormValues.routeEnd.id && <Field
                 label='经销商：'
                 name='receive'
                 component={Select}
@@ -117,7 +117,7 @@ const CarInfoEditor = props => {
                         mapStateToProps: receiveMapStateToProps,
                         mapDispatchToProps: receiveMapDispatchToProps,
                         List: DisposableList,
-                        title:'经销商',
+                        title: '经销商',
                         ...param
                     })
                 }} />}
@@ -251,6 +251,21 @@ const receiveMapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state, ownProps) => {
     const { car } = ownProps
+    let orderDate
+ 
+   
+
+    if (car.order_date) {
+        if(car.order_date.indexOf(':')>0){
+            orderDate = moment(car.order_date).format('YYYY-MM-DD')
+        }else {
+            orderDate = car.order_date
+        }
+
+           
+    } else {
+        orderDate = ''
+    }
     return {
         initialValues: {
             make: { id: car.make_id, value: car.make_name },
@@ -259,7 +274,7 @@ const mapStateToProps = (state, ownProps) => {
             entrust: { id: car.entrust_id, value: car.en_short_name },
             baseAddr: { id: car.base_addr_id, value: car.addr_name },
             receive: { id: car.receive_id, value: car.receive_name },
-            orderDate: car.order_date ? moment(car.order_date).format('YYYY-MM-DD') : '',
+            orderDate,
             remark: car.remark
         },
         carInfoEditorFormValues: getFormValues('carInfoEditorForm')(state)

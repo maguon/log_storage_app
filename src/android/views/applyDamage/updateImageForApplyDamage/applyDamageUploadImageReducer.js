@@ -72,4 +72,9 @@ export default handleActions({
             }
         }
     },
+    [actionTypes.applyDamageUploadImageTypes.clean_upload_DamageImage]: (state, action) => {
+        return {
+            ...initialState
+        }
+    }
 }, initialState)

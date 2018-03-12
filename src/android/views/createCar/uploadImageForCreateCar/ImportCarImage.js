@@ -66,9 +66,9 @@ const renderListEmpty = props => {
             <View style={styles.titleContainer}>
                 <Text style={[globalStyles.largeText, globalStyles.styleColor]}>点击按钮上传车辆照片</Text>
             </View>
-            {/* <View style={styles.subtitleContainer}>
+            <View style={styles.subtitleContainer}>
                 <Text style={[globalStyles.smallText, globalStyles.styleColor]}>若不进行此选项操作可直接点击“<Text style={styles.tagText}>完成</Text>”</Text>
-            </View> */}
+            </View>
         </View>
     )
 }
@@ -80,6 +80,7 @@ const ImportCarImage = props => {
         importCarImageReducer: { data: { imageList }, pushCarImage: { isResultStatus } },
         addCarReducer: { data: { carId, vin } },
      } = props
+     console.log('props',props)
     return (
         <Container >
             <FlatList
