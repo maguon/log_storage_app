@@ -5,13 +5,13 @@ import StorageListReducer from '../android/views/blockInitial/storageList/Storag
 // import ImportCarCameraReducer from './ImportCarCameraReducer'
 //import HomeReducer from './HomeReducer'
 
-import RecordListReducer from './RecordListReducer'
+import RecordListReducer from '../android/views/recordList/RecordListReducer'
 // import SearchVinReducer from './SearchVinReducer'
 // import ParkingViewReducer from './ParkingViewReducer'
 
 //新
-import recordListAtHomeReducer from './components/home/RecordListAtHomeReducer'
-import storageListAtHomeReducer from './components/home/StorageListAtHomeReducer'
+import recordListAtHomeReducer from '../android/components/home/record/RecordListAtHomeReducer'
+import storageListAtHomeReducer from '../android/components/home/storage/StorageListAtHomeReducer'
 import selectTruckReducer from './components/select/selectTruckReducer' 
 import selectCarReducer from './components/select/selectCarReducer' 
 import selectDriverReducer from './components/select/selectDriverReducer' 

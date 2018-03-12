@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ImageView from '../components/share/ImageView' 
+import ImageView from '../../components/share/ImageView'
 
 
 const ImageViewConnect = props => {

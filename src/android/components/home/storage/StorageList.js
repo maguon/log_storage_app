@@ -9,8 +9,8 @@ import {
 import { connect } from 'react-redux'
 import { Container, List, Text, ListItem } from 'native-base'
 import PercentageCircle from 'react-native-percentage-circle'
-import globalStyles from '../../GlobalStyles'
-import { getStorageList, getStorageListWaiting } from '../../../actions/components/home/StorageListAtHomeAction'
+import globalStyles from '../../../GlobalStyles'
+import { getStorageList, getStorageListWaiting } from './StorageListAtHomeAction'
 
 const StorageItem = props => {
     const { storage: { storage_name, total_seats, balance }, storage } = props

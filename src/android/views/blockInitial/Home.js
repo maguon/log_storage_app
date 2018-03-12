@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { StyleSheet, InteractionManager } from 'react-native'
-import RecordList from '../../components/home/RecordList'
-import StorageList from '../../components/home/StorageList'
+import RecordList from '../../components/home/record/RecordList'
+import StorageList from '../../components/home/storage/StorageList'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import { Container, Content, Spinner } from 'native-base'
 import { styleColor } from '../../GlobalStyles'
-import { getRecordList, getRecordListWaiting } from '../../../actions/components/home/RecordListAtHomeAction'
-import { getStorageList, getStorageListWaiting } from '../../../actions/components/home/StorageListAtHomeAction'
+import { getRecordList, getRecordListWaiting } from '../../components/home/record/RecordListAtHomeAction'
+import { getStorageList, getStorageListWaiting } from '../../components/home/storage/StorageListAtHomeAction'
 
 class Home extends Component {
     constructor(props) {

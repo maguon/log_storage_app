@@ -20,7 +20,7 @@ import CarInformation from './views/CarInformation'
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 
-import RecordList from './views/RecordList'
+import RecordList from './views/recordList/RecordList'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
 import AddCar from './views/createCar/AddCar'
@@ -52,8 +52,8 @@ import Setting from './views/blockInitial/Setting'
 import RetrievePassword from './views/retrievePassword/RetrievePassword'
 import ImportCarImage from './views/ImportCarImage'
 import ImportCarImageSubmit from './components/importCarImage/ImportCarImageSubmit'
-import ImageViewConnect from './views/ImageViewConnect'
-import CarInfoConnect from './views/CarInfoConnect'
+import ImageViewConnect from './views/viewConnect/ImageViewConnect'
+import CarInfoConnect from './views/viewConnect/CarInfoConnect'
 
 const styles = StyleSheet.create({
     tabBarStyle: {

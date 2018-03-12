@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { ScrollView, View, Text, Image ,InteractionManager} from 'react-native'
 import Record from './RecordListHeader'
-import { getRecordList, getRecordListWaiting } from '../../../actions/components/home/RecordListAtHomeAction'
+import { getRecordList, getRecordListWaiting } from './RecordListAtHomeAction'
 import { connect } from 'react-redux'
 
 

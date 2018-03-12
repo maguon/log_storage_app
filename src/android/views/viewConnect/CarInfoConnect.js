@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import CarInformation from './CarInformation'
+import CarInformation from '../CarInformation'
 
 
 const CarInfoConnect = props => {

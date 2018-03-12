@@ -48,7 +48,6 @@ export const validateVersion = (tryCount = 1) => async (dispatch) => {
     try {
         const url = `${base_host}/app?${ObjectToUrl({ app: 1, type: 1 })}`
         const res = await httpRequest.get(url)
-        console.log('res',res)
         if (res.success) {
             const data = {
                 currentVersion: android_app.version,
@@ -99,7 +98,6 @@ export const validateVersion = (tryCount = 1) => async (dispatch) => {
                 data.force_update = 0
                 data.newestVersion = data.currentVersion
             }
-            console.log('data',data)
             dispatch({ type: actionTypes.initializationActionTypes.Valdate_Version_Success, payload: { data, step: currentStep } })
             if (data.force_update != 1) {
                 dispatch(initApp(currentStep + 1))

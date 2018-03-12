@@ -3,8 +3,8 @@ import { View, Dimensions, ScrollView, SectionList } from 'react-native'
 import { connect } from 'react-redux'
 // import NavBar from '../components/Bar/NavBar'
 import { Segment, Button, Text } from 'native-base'
-import * as RecordListAction from '../../actions/RecordListAction'
-import RecordListItem from '../components/home/RecordListItem'
+import * as RecordListAction from './RecordListAction'
+import RecordListItem from '../../components/home/record/RecordListItem'
 import { Actions } from 'react-native-router-flux'
 
 const window = Dimensions.get('window')
