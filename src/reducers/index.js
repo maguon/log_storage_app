@@ -6,9 +6,8 @@ import StorageListReducer from '../android/views/blockInitial/storageList/Storag
 //import HomeReducer from './HomeReducer'
 
 import RecordListReducer from './RecordListReducer'
-import SearchVinReducer from './SearchVinReducer'
-import ParkingViewReducer from './ParkingViewReducer'
-import SceneReducer from './SceneReducer'
+// import SearchVinReducer from './SearchVinReducer'
+// import ParkingViewReducer from './ParkingViewReducer'
 
 //新
 import recordListAtHomeReducer from './components/home/RecordListAtHomeReducer'
@@ -50,17 +49,7 @@ import carInfoReducer from './views/CarInfoReducer'
 
 export default combineReducers({
     form: formReducer,
-    //HomeReducer,
-    
-   // ImporCarReducer,
-    // ImportCarCameraReducer,
     StorageListReducer,
-    RecordListReducer,
-    SearchVinReducer,
-    ParkingViewReducer,
-    SceneReducer,
-
-
     //新
     recordListAtHomeReducer,
     storageListAtHomeReducer,

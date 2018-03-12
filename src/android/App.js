@@ -17,18 +17,14 @@ import StorageList from './views/blockInitial/storageList/StorageList'
 
 import CarList from './views/carList/CarList'
 import CarInformation from './views/CarInformation'
-// import SearchVin from './views/SearchVin'
 import ImportCar from './views/ImportCar'
 import VinScanner from './components/VinScanner'
 
 import RecordList from './views/RecordList'
-import ParkingView from './views/ParkingView'
 import ImagePageForCarInfo from './views/ImagePageForCarInfo'
 import ImagePageForImportCar from './views/ImagePageForImportCar'
 import AddCar from './views/createCar/AddCar'
 import RichText from './views/RichText'
-
-import * as sceneAction from '../actions/SceneAction'
 
 
 //新
@@ -96,30 +92,16 @@ const mapStateToProps = (state) => {
 class App extends Component {
     constructor(props) {
         super(props)
-        //this.reducerCreate = this.reducerCreate.bind(this)
     }
 
     componentWillMount() {
         Orientation.lockToPortrait()
     }
 
-    // reducerCreate(params) {
-    //     const defaultReducer = Reducer(params)
-    //     return (state, action) => {
-    //         if (action.type == 'REACT_NATIVE_ROUTER_FLUX_FOCUS') {
-    //             if (action.scene.name != 'mainRoot') {
-    //                 this.props.changeScene(action.scene.name)
-    //             }
-    //         }
-    //         return defaultReducer(state, action)
-    //     }
-    // }
-
     render() {
         console.disableYellowBox = true
         return (
             <Router
-                //createReducer={this.reducerCreate} 
                 getSceneStyle={getSceneStyle} >
                 <Scene key="root">
                     <Scene initial={true} key="initialization" component={Initialization} hideNavBar hideTabBar />
@@ -292,7 +274,6 @@ class App extends Component {
                                     component={SinglePhotoView}
                                     hideNavBar
                                     hideTabBar />
-                                {/* <Scene key="searchVinAtCarBlock" component={SearchVin} hideTabBar hideNavBar={true} /> */}
                                 <Scene key="addCarAtCarBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtCarBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtCarBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
@@ -302,8 +283,6 @@ class App extends Component {
                             </Scene>
                             <Scene key="storageBlock" icon={TabIcon} online='ios-pin' outline='ios-pin-outline'>
                                 <Scene key="storageList" component={StorageList} title='仓库列表' initial={true} hideNavBar={false} navBar={NavBar} />
-                                <Scene key="parkingView" navBar={NavBar} title="车位分布图" component={ParkingView} hideTabBar hideNavBar={false} />
-                                {/* <Scene key="searchVinAtStorageBlock" component={SearchVin} hideTabBar hideNavBar={true} /> */}
                                 <Scene key="addCarAtStorageBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="carInformationAtStorageBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
                                 <Scene key="ImagePageForImportCarAtStorageBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
@@ -316,7 +295,6 @@ class App extends Component {
                                 <Scene key="setting" component={Setting} title='设置' initial={true} hideNavBar={false} navBar={NavBar} />
                                 <Scene key="recordList" LeftButton={LeftButton} component={RecordList} navBar={NavBar} title='工作记录' hideTabBar hideNavBar={false} />
                                 <Scene key="carInformationAtSettingBlock" title="车辆详细信息" component={CarInformation} hideNavBar={false} navBar={NavBar} hideTabBar />
-                                {/* <Scene key="searchVinAtSettingBlock" component={SearchVin} hideTabBar hideNavBar={true} /> */}
                                 <Scene key="addCarAtSettingBlock" component={AddCar} hideTabBar navBar={NavBar} title='新增车辆' hideNavBar={false} />
                                 <Scene key="ImagePageForImportCarAtSettingBlock" component={ImagePageForImportCar} hideNavBar hideTabBar />
                                 <Scene key="ImagePageForCarInfoAtSettingBlock" component={ImagePageForCarInfo} hideNavBar hideTabBar />
@@ -383,10 +361,4 @@ class App extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    changeScene: (param) => {
-        //dispatch(sceneAction.changeScene(param))
-    }
-})
-
-export default App // connect((state) => { return {} }, mapDispatchToProps)(App)
+export default App 

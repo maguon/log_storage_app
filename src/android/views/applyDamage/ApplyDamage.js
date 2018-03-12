@@ -50,7 +50,6 @@ const ApplyDamage = props => {
                     validate={[validateRequired]}
                     getListWaiting={()=>{}}
                     showList={({onSelect}) => {
-                        console.log('onSelect',onSelect)
                         return Actions.listCennectDynamic({
                             mapStateToProps: vinMapStateToProps,
                             mapDispatchToProps: vinMapDispatchToProps,

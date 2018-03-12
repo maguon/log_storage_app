@@ -6,10 +6,10 @@ import * as storageListTypes from '../android/views/blockInitial/storageList/Sto
 import * as homeTypes from './views/HomeTypes'
 import * as recordListTypes from './RecordListTypes'
 // import * as selectStorageForCarListTypes from './SelectStorageForCarListTypes'
-import * as parkingViewTypes from './ParkingViewTypes'
+// import * as parkingViewTypes from './ParkingViewTypes'
 // import * as selectReceiveTypes from './SelectReceiveTypes'
-import * as searchVinTypes from './SearchVinTypes'
-import * as sceneTypes from './SceneTypes'
+// import * as searchVinTypes from './SearchVinTypes'
+// import * as sceneTypes from './SceneTypes'
 
 
 
@@ -51,14 +51,10 @@ import * as importCarTypes from './views/ImportCarTypes'
 
 
 export {
-    sceneTypes,
     homeTypes,
     storageListTypes,
-    // imporCarTypes,
-    //importCarCameraTypes,
-    searchVinTypes,
     recordListTypes,
-    parkingViewTypes,
+
 
 
 
