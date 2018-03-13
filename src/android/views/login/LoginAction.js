@@ -20,7 +20,7 @@ export const login = (tryCount = 1) => async (dispatch, getState) => {
             password
         })
         if (res.success) {
-            if (res.result.type == 49|| res.result.type == 29) {
+            if (res.result.type == 21|| res.result.type == 29) {
                 const getUserInfoUrl = `${base_host}/user?${ObjectToUrl({ userId: res.result.userId })}`
                 const getUserInfoRes = await httpRequest.get(getUserInfoUrl)
                 if (getUserInfoRes.success) {
