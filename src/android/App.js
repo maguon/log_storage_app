@@ -57,10 +57,10 @@ import CarInfoConnect from './views/viewConnect/CarInfoConnect'
 
 const styles = StyleSheet.create({
     tabBarStyle: {
-        backgroundColor: '#ccc',
+        backgroundColor: '#E0E4E7',
     },
     tabBarSelectedItemStyle: {
-        backgroundColor: '#ccc',
+        backgroundColor: '#E0E4E7',
     },
     navigationBarStyle: {
 
