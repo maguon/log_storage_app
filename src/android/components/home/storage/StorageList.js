@@ -13,7 +13,7 @@ import globalStyles from '../../../GlobalStyles'
 import { getStorageList, getStorageListWaiting } from './StorageListAtHomeAction'
 
 const StorageItem = props => {
-    const { storage: { storage_name, total_seats, balance }, storage } = props
+    const { storage: { storage_name, total_seats = 0, balance = 0 }, storage } = props
     return (
         <View style={[globalStyles.listItem, styles.itemContainer]}>
             <View style={styles.infoView}>
@@ -28,18 +28,18 @@ const StorageItem = props => {
                         <Text style={[globalStyles.ssText, styles.smallLabel]}>今日出库</Text>
                     </View>
                     <View style={styles.infoViewCol}>
-                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{total_seats&&balance ? `${total_seats - balance}` : '0'}</Text>
+                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{`${total_seats - balance}`}</Text>
                         <Text style={[globalStyles.ssText, styles.smallLabel]}>剩余车位</Text>
                     </View>
                 </View>
             </View>
             <View style={styles.percentView}>
-                <PercentageCircle radius={35} borderWidth={6} percent={balance&&total_seats ?  Math.round(balance / total_seats * 100) : 100} color={"#00cade"} >
+                <PercentageCircle radius={35} borderWidth={6} percent={total_seats > 0 ? `${Math.round(balance / total_seats * 100)}` : '0'} color={"#00cade"} >
                     <View>
                         <Text style={globalStyles.ssText}>使用率</Text>
                     </View>
                     <View style={styles.percentCenterView}>
-                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{balance&&total_seats ? `${ Math.round(balance / total_seats * 100)}` : '100'}</Text>
+                        <Text style={[globalStyles.largeText, globalStyles.styleColor]}>{total_seats > 0 ? `${Math.round(balance / total_seats * 100)}` : '0'}</Text>
                         <Text style={[globalStyles.ssText, globalStyles.styleColor, styles.percentSign]}>%</Text>
                     </View>
                 </PercentageCircle>
