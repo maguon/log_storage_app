@@ -33,7 +33,6 @@ const renderListItem = props => {
         getDemageOpResultWaiting,
         getDamageImageListWaiting,
         getDamageImageList } = props
-        console.log(props)
     return (
         <TouchableOpacity style={styles.listItemContainer} onPress={() => {
             getCarInfoWaiting()

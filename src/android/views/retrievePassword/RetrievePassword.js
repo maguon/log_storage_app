@@ -23,7 +23,6 @@ const TextBox = props => {
                     style={[globalStyles.midText, styles.itemInput]}
                     onChangeText={onChange}
                     {...restProps }
-                    secureTextEntry={true}
                     placeholder='请输入验证码'
                     underlineColorAndroid='transparent'
                     placeholderTextColor='#ccc' />
@@ -43,7 +42,7 @@ const RetrievePassword = props => {
         <Container style={styles.container}>
             <View>
                 <SendSMS />
-                <Field name='vCode' component={TextBox} title='验证码：'  icon='ios-key' />
+                <Field name='vCode' component={TextBox} title='验证码：' icon='ios-key' />
                 <Field name='firstPassword' component={TextBox} title='新密码：' icon='ios-lock' />
                 <Field name='secondPassword' component={TextBox} title='确认密码：' icon='ios-lock' />
             </View>
