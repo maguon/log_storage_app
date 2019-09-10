@@ -48,6 +48,7 @@ import * as retrievePasswordActionTypes from '../android/views/retrievePassword/
 import * as addCarTypes from '../android/views/createCar/createCar/AddCarTypes'
 import * as importCarImageTypes from '../android/views/createCar/uploadImageForCreateCar/ImportCarImageTypes'
 import * as importCarTypes from '../android/views/createCar/importCar/ImportCarTypes'
+import * as communicationSetting from '../android/views/communicationSetting/communicationSettingActionTypes'
 
 
 export {
@@ -92,5 +93,7 @@ export {
     sendSMSActionTypes,
     addCarTypes,
     importCarImageTypes,
-    importCarTypes
+    importCarTypes,
+
+    communicationSetting
 }

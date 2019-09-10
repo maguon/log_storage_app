@@ -28,10 +28,9 @@ var photoOptions = {
 }
 
 import { postFilecallback } from '../../util/HttpRequest'
-import { base_host, file_host } from '../../config/Host'
 import ImageResizer from 'react-native-image-resizer'
 
-export default class Camera extends Component {
+class Camera extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -59,15 +58,16 @@ export default class Camera extends Component {
  
 
     openMycamera = () => {
+        const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = this.props
         ImagePicker.showImagePicker(photoOptions, (image) => {
-            console.log('response' + image);
-            console.log(image);
+            // console.log('response' + image);
+            // console.log(image);
             let sizeMax = 960  //960
             if (image.width > sizeMax && image.height > sizeMax) {
                 if (image.width > image.height) {
 
                     image.width = image.width / (image.height / sizeMax)
-                    console.log(image.height / sizeMax)
+                    // console.log(image.height / sizeMax)
                     image.height = sizeMax
 
 
@@ -75,14 +75,14 @@ export default class Camera extends Component {
                 else {
 
                     image.height = Math.round(image.height / (image.width / sizeMax))
-                    console.log(image.width / sizeMax)
+                    // console.log(image.width / sizeMax)
                     image.width = sizeMax
 
                 }
             }
             ImageResizer.createResizedImage(image.uri, image.width, image.height, 'JPEG', 80)
                 .then((resizedImageUri) => {
-                    console.log(resizedImageUri)
+                    // console.log(resizedImageUri)
                     // this.setState({
                     //     resizedImageUri,
                     // });
@@ -95,15 +95,15 @@ export default class Camera extends Component {
                         key: "image"
                     }
                     let url = `${file_host}user/${item.userId}/image?imageType=${item.imageType}`
-                    console.log(url)
+                    // console.log(url)
                     postFilecallback(item.imageUrl, url, item)
-                    console.log('testUpload')
+                    // console.log('testUpload')
                 }).catch((err) => {
                     return console.log(err);
                     // Alert.alert('Unable to resize the photo',
                     // 'Check the console for full the error message');
                 });
-            console.log(image)
+            // console.log(image)
 
             if (image.didCancel) {
                 return
@@ -113,6 +113,7 @@ export default class Camera extends Component {
     }
 
     testing = () => {
+        const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = this.props
         // console.log(ImageResizer)
         ImageResizer.createResizedImage('file:///storage/emulated/0/Android/data/com.storage_app/files/Pictures/image-f65db5f8-d000-4c0e-9894-c7b78b4fb6f8.jpg', 40, 40, 'JPEG', 80)
             .then((resizedImageUri) => {
@@ -148,20 +149,29 @@ export default class Camera extends Component {
             }
         };
         ImagePicker.launchCamera(options, (response) => {
-            console.log('Response = ', response);
+            // console.log('Response = ', response);
 
             if (response.didCancel) {
-                console.log('User cancelled video picker');
+                // console.log('User cancelled video picker');
             }
             else if (response.error) {
-                console.log('ImagePicker Error: ', response.error);
+                // console.log('ImagePicker Error: ', response.error);
             }
             else if (response.customButton) {
-                console.log('User tapped custom button: ', response.customButton);
+                // console.log('User tapped custom button: ', response.customButton);
             }
         })
     }
 }
+
+
+const mapStateToProps = (state) => {
+    return {
+        communicationSettingReducer:state.communicationSettingReducer
+    }
+}
+
+export default connect(mapStateToProps)(Camera)
 
 const styles = StyleSheet.create({
     cameraImage: {

@@ -14,7 +14,7 @@ import PhotoView from 'react-native-photo-view'
 import { Button, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { file_host } from '../../config/Host'
+
 import * as CarInfoAction from '../../actions/CarInfoAction'
 import ConfirmModal from '../components/ConfirmModal'
 
@@ -128,6 +128,7 @@ class ImagePageForCarInfo extends Component {
   }
 
   onPressOk() {
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = this.props
     this.setState({ confirmModalVisible: false })
     let { userId } = this.props.user
     let { recordId, imageList } = this.props.CarInfoReducer.data
@@ -156,7 +157,7 @@ class ImagePageForCarInfo extends Component {
   render() {
     let { index } = this.props
     let { recordId, imageList } = this.props.CarInfoReducer.data
-
+    
     return (
       <View style={{ position: 'relative', backgroundColor: '#000' }}>
         <Swiper
@@ -195,7 +196,8 @@ class ImagePageForCarInfo extends Component {
 const mapStateToProps = (state) => {
   return {
     CarInfoReducer: state.CarInfoReducer,
-    user: state.LoginReducer.user
+    user: state.LoginReducer.user,
+    communicationSettingReducer:state.communicationSettingReducer
   }
 }
 

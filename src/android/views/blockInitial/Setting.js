@@ -15,7 +15,6 @@ import globalStyles from '../../GlobalStyles'
 import * as demageListAction from '../damageList/DemageListAction'
 import * as responsibilityListAction from '../responsibilityList/ResponsibilityListAction'
 import * as loginAction from '../login/LoginAction'
-import { file_host } from '../../../config/Host'
 import ConfirmModal from '../../../android/components/share/ConfirmModal'
 
 
@@ -52,6 +51,7 @@ class Setting extends Component {
             loginReducer: { data: { user: { real_name, avatar_image, mobile } } },
             initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer
         } = this.props
+        const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = this.props
         return (
             <Container>
                 <Content style={globalStyles.container}>
@@ -191,7 +191,8 @@ const mapStateToProps = (state) => {
     return {
         loginReducer: state.loginReducer,
         settingReducer: state.settingReducer,
-        initializationReducer: state.initializationReducer
+        initializationReducer: state.initializationReducer,
+        communicationSettingReducer: state.communicationSettingReducer
     }
 }
 

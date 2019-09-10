@@ -23,7 +23,7 @@ const containerWidth = window.width / 2
 const containerHeight = containerWidth / 16 * 9
 
 const renderItem = props => {
-    const { item, index, pushCarImageWaiting, pushCarImage, imageList, parent, carId, vin } = props
+    const { item, index, pushCarImageWaiting, pushCarImage, file_host, imageList, parent, carId, vin } = props
     if (item == 'isCameraButton') {
         return renderItemCameraButton({ index, pushCarImageWaiting, pushCarImage, carId, vin })
     } else {
@@ -79,8 +79,8 @@ const ImportCarImage = props => {
         pushCarImage,
         importCarImageReducer: { data: { imageList }, pushCarImage: { isResultStatus } },
         addCarReducer: { data: { carId, vin } },
-     } = props
-     console.log('props',props)
+    } = props
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = props
     return (
         <Container >
             <FlatList
@@ -89,7 +89,7 @@ const ImportCarImage = props => {
                 data={imageList.length > 0 ? [...imageList, 'isCameraButton'] : imageList}
                 numColumns={2}
                 ListEmptyComponent={() => renderListEmpty({ pushCarImageWaiting, pushCarImage, carId, vin })}
-                renderItem={({ item, index }) => renderItem({ parent, item, index, imageList, pushCarImageWaiting, pushCarImage, carId, vin })} />
+                renderItem={({ item, index }) => renderItem({ parent, item, index, imageList, file_host, pushCarImageWaiting, pushCarImage, carId, vin })} />
             <Modal
                 animationType={"fade"}
                 transparent={true}

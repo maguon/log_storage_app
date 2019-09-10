@@ -1,11 +1,10 @@
-
 import httpRequest from '../../../util/HttpRequest'
-import { record_host } from '../../../config/Host'
 import * as actionTypes from '../../../actionTypes/index'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { Alert } from 'react-native'
 
-export const getRecordList = (param) => (dispatch) => {
+export const getRecordList = (param) => (dispatch,getState) => {
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     dispatch({ type: actionTypes.recordListTypes.GET_RECORD_LIST_VIEW_WAITING, payload: {} })
     let url = `${record_host}/opRecord?${ObjectToUrl(param.optionalParam)}`
     httpRequest
@@ -24,8 +23,9 @@ export const getRecordList = (param) => (dispatch) => {
         })
 }
 
-export const getRecordListMore = (param) => (dispatch) => {
+export const getRecordListMore = (param) => (dispatch,getState) => {
     dispatch({ type: actionTypes.recordListTypes.GET_RECORDLIST_MORE_WAITING, payload: {} })
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     let url = `${record_host}/opRecord?${ObjectToUrl(param.optionalParam)}`
     httpRequest
         .getcallback(url, (err, res) => {

@@ -12,9 +12,7 @@ import {
 import ImageItem from '../share/ImageItem'
 import globalStyles from '../../GlobalStyles'
 import { connect } from 'react-redux'
-import { Actions } from 'react-native-router-flux'
 import CameraButton from '../../components/share/CameraButton'
-import { file_host } from '../../../config/Host'
 import { Container, Content, Input, Label, Icon } from 'native-base'
 import * as  imageListForCarInfoAction from '../../../actions/components/carInfo/ImageListForCarInfoAction'
 import * as routerDirection from '../../../util/RouterDirection'
@@ -24,7 +22,7 @@ const containerWidth = window.width / 2
 const containerHeight = containerWidth / 16 * 9
 
 const renderItem = props => {
-    const { item, index, uploadCarImageWaiting, uploadCarImage, carImageList, parent, carId, vin } = props
+    const { item, index, uploadCarImageWaiting, uploadCarImage, carImageList, file_host, parent, carId, vin } = props
     if (item == 'isCameraButton') {
         return renderItemCameraButton({ index, uploadCarImageWaiting, uploadCarImage, carId, vin })
     } else {
@@ -77,6 +75,7 @@ const ImageListForCarInfo = props => {
         uploadCarImage,
         imageListForCarInfoReducer: { data: { carImageList }, uploadCarImage: { isResultStatus } },
         car: { id, vin } } = props
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = props
     return (
         <Container >
             <FlatList
@@ -85,7 +84,7 @@ const ImageListForCarInfo = props => {
                 data={carImageList.length > 0 ? [...carImageList, 'isCameraButton'] : carImageList}
                 numColumns={2}
                 ListEmptyComponent={() => renderListEmpty({ uploadCarImageWaiting, uploadCarImage, carId: id, vin })}
-                renderItem={({ item, index }) => renderItem({ parent, item, index, carImageList, uploadCarImageWaiting, uploadCarImage, carId: id, vin })} />
+                renderItem={({ item, index }) => renderItem({ parent, item, index, carImageList, file_host, uploadCarImageWaiting, uploadCarImage, carId: id, vin })} />
             <Modal
                 animationType={"fade"}
                 transparent={true}
@@ -161,6 +160,8 @@ const styles = StyleSheet.create({
 })
 
 const imageMapStateToProps = (state) => {
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = state
+
     return {
         imageViewReducer: {
             imageList: state.imageListForCarInfoReducer.data.carImageList.map(item => `${file_host}image/${item.url}`)
@@ -177,7 +178,8 @@ const imageMapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => {
     return {
-        imageListForCarInfoReducer: state.imageListForCarInfoReducer
+        imageListForCarInfoReducer: state.imageListForCarInfoReducer,
+        communicationSettingReducer: state.communicationSettingReducer
     }
 }
 

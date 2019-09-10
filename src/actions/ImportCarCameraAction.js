@@ -1,10 +1,10 @@
 import httpRequest from '../util/HttpRequest.js'
-import { record_host, file_host } from '../config/Host'
 import * as actionTypes from '../actionTypes'
 import { ObjectToUrl } from '../util/ObjectToUrl'
 
 
-export const pushCarImage = (param) => (dispatch) => {
+export const pushCarImage = (param) => (dispatch,getState) => {
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     let url = `${file_host}user/${param.requiredParam.userId}/image?${ObjectToUrl(param.optionalParam)}`
     dispatch({ type: actionTypes.importCarCameraTypes.IMPORT_CAR_IMAGE_WAITING, payload: {} })
     httpRequest
@@ -43,7 +43,8 @@ export const pushCarImage = (param) => (dispatch) => {
 
 
 
-export const delImage = (param) => (dispatch) => {
+export const delImage = (param) => (dispatch,getState) => {
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     let url = `${record_host}/user/${param.requiredParam.userId}/record/${param.requiredParam.recordId}/image/${param.requiredParam.url}`
     dispatch({ type: actionTypes.importCarCameraTypes.DELETE_IMPORTCARIMAGE_WAITING, payload: {} })
     httpRequest

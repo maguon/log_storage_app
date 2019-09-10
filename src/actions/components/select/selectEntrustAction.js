@@ -1,9 +1,10 @@
 import httpRequest from '../../../util/HttpRequest'
-import { base_host } from '../../../config/Host'
+
 import * as actionTypes from '../../../actionTypes'
 
-export const getEntrustList = () => async (dispatch) => {
+export const getEntrustList = () => async (dispatch,getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const url = `${base_host}/entrust`
         const res = await httpRequest.get(url)
         if (res.success) {

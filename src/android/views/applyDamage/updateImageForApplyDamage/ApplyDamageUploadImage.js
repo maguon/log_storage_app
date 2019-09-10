@@ -15,9 +15,8 @@ import CameraButton from '../../../components/share/CameraButton'
 import globalStyles from '../../../GlobalStyles'
 import * as applyDamageUploadImageAction from './ApplyDamageUploadImageAction'
 import ImageItem from '../../../components/share/ImageItem'
-import { file_host } from '../../../../config/Host'
 import * as routerDirection from '../../../../util/RouterDirection'
-import { Actions } from 'react-native-router-flux'
+
 
 
 const window = Dimensions.get('window')
@@ -25,7 +24,7 @@ const containerWidth = window.width / 2
 const containerHeight = containerWidth / 16 * 9
 
 const renderItem = props => {
-    const { item, index, uploadDamageImageWating, uploadDamageImage, imageList, parent, vin } = props
+    const { item, index, uploadDamageImageWating, uploadDamageImage, file_host,imageList, parent, vin } = props
     if (item == 'isCameraButton') {
         return renderItemCameraButton({ index, uploadDamageImageWating, uploadDamageImage, vin })
     } else {
@@ -73,6 +72,7 @@ const renderListEmpty = props => {
 
 const ApplyDamageUploadImage = props => {
     const { parent, vin, uploadDamageImageWating, uploadDamageImage, applyDamageUploadImageReducer: { data: { imageList }, uploadDamageImage: { isResultStatus } } } = props
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = props
     return (
         <Container >
             <FlatList
@@ -81,7 +81,7 @@ const ApplyDamageUploadImage = props => {
                 data={imageList.length > 0 ? [...imageList, 'isCameraButton'] : imageList}
                 numColumns={2}
                 ListEmptyComponent={() => renderListEmpty({ uploadDamageImageWating, uploadDamageImage, vin })}
-                renderItem={({ item, index }) => renderItem({ parent, item, index, imageList, uploadDamageImageWating, vin, uploadDamageImage })} />
+                renderItem={({ item, index }) => renderItem({ parent, item, index, imageList,file_host, uploadDamageImageWating, vin, uploadDamageImage })} />
             {isResultStatus == 1 && <Modal
                 animationType={"fade"}
                 transparent={true}
@@ -158,7 +158,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-        applyDamageUploadImageReducer: state.applyDamageUploadImageReducer
+        applyDamageUploadImageReducer: state.applyDamageUploadImageReducer,
+        communicationSettingReducer:state.communicationSettingReducer
     }
 }
 

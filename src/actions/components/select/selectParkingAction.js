@@ -1,11 +1,12 @@
 import httpRequest from '../../../util/HttpRequest'
-import { base_host, record_host, file_host } from '../../../config/Host'
+
 import * as actionTypes from '../../../actionTypes'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 
 
-export const getParkingList = param => async (dispatch) => {
+export const getParkingList = param => async (dispatch,getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const url = `${base_host}/storageParking?${ObjectToUrl({
             storageId: param.storage.storage_id,
             areaId: param.area.id

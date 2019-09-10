@@ -1,5 +1,4 @@
 import httpRequest from '../../../util/HttpRequest'
-import { base_host } from '../../../config/Host'
 import * as actionTypes from '../../../actionTypes/index'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { sleep } from '../../../util/util'
@@ -9,9 +8,10 @@ import { ToastAndroid } from 'react-native'
 
 const pageSize = 50
 
-export const getCarList = (values) => async (dispatch) => {
+export const getCarList = (values) => async (dispatch, getState) => {
     const { vinCode, make, storage, routeStart, routeEnd, entrust, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd } = values
     try {
+        const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = getState()
         const url = `${base_host}/car?${ObjectToUrl({
             vinCode,
             makeId: make ? make.id : undefined,
@@ -52,11 +52,12 @@ export const getCarListWaiting = () => (dispatch) => {
     dispatch({ type: actionTypes.carListTypes.get_carList_waiting, payload: {} })
 }
 
-export const getCarListMore = () =>async (dispatch, getState) => {
+export const getCarListMore = () => async (dispatch, getState) => {
     const state = getState()
     const {
         carListReducer: { data: { carList, isComplete } },
         carListReducer } = state
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = getState()
     let queryCarForm = getFormValues('queryCarForm')(state)
     queryCarForm = queryCarForm ? queryCarForm : {}
     const { vinCode, make, storage, routeStart, routeEnd, entrust, orderStart, orderEnd, enterStart, enterEnd, realStart, realEnd } = queryCarForm
@@ -68,7 +69,7 @@ export const getCarListMore = () =>async (dispatch, getState) => {
             dispatch({ type: actionTypes.carListTypes.get_carListMore_waiting, payload: {} })
             try {
                 const url = `${base_host}/car?${ObjectToUrl({
-                    vinCode:vinCode,
+                    vinCode: vinCode,
                     makeId: make ? make.id : undefined,
                     storageId: storage ? storage.id : undefined,
                     routeStartId: routeStart ? routeStart.id : undefined,

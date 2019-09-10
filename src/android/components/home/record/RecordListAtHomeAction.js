@@ -1,11 +1,12 @@
 import httpRequest from '../../../../util/HttpRequest'
-import { base_host, record_host } from '../../../../config/Host'
+
 import * as actionTypes from '../../../../actionTypes/index'
 import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 
 
 export const getRecordList = () => async (dispatch, getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const { loginReducer: { data: { user: { uid } } } } =  getState()
         const url = `${record_host}/opRecord?${ObjectToUrl({
             start: 0,

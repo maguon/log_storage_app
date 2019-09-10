@@ -13,7 +13,6 @@ import PhotoView from 'react-native-photo-view'
 import { Button, Icon } from 'native-base'
 import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
-import { file_host } from '../../config/Host'
 import * as ImportCarCameraAction from '../../actions/ImportCarCameraAction'
 import ConfirmModal from '../components/ConfirmModal'
 
@@ -75,6 +74,7 @@ class ImagePage extends Component {
   }
 
   onPressOk() {
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = this.props
     this.setState({ confirmModalVisible: false })
     let { userId } = this.props.user
     let { recordId, imageList } = this.props.ImportCarCameraReducer.importCarImage.data
@@ -138,7 +138,8 @@ class ImagePage extends Component {
 const mapStateToProps = (state) => {
   return {
     ImportCarCameraReducer: state.ImportCarCameraReducer,
-    user: state.LoginReducer.user
+    user: state.LoginReducer.user,
+    communicationSettingReducer:state.communicationSettingReducer
   }
 }
 

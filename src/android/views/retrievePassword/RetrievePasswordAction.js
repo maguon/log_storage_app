@@ -1,5 +1,4 @@
 import * as httpRequest from '../../../util/HttpRequest'
-import { base_host, file_host, record_host } from '../../../config/Host'
 import * as retrievePasswordActionTypes from './RetrievePasswordActionTypes'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { getFormValues } from 'redux-form'
@@ -7,6 +6,7 @@ import { ToastAndroid } from 'react-native'
 import {Actions } from 'react-native-router-flux'
 
 export const retrieve = () => async (dispatch, getState) => {
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     dispatch({ type: retrievePasswordActionTypes.Retrieve_WAITING, payload: {} })
     const state = getState()
     const sendSMSFormValues = getFormValues('sendSMSForm')(state)

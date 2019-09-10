@@ -1,5 +1,4 @@
 import httpRequest from '../../../util/HttpRequest'
-import { base_host, file_host, record_host } from '../../../config/Host'
 import * as actionTypes from '../../../actionTypes'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
@@ -7,6 +6,7 @@ import { ToastAndroid } from 'react-native'
 export const getCarImageList = (param) => async (dispatch, getState) => {
     const { carId } = param
     const { loginReducer: { data: { user: { uid } } } } = getState()
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = getState()
     try {
         const url = `${record_host}/user/${uid}/car/${carId}/record`
         const res = await httpRequest.get(url)
@@ -34,6 +34,7 @@ export const uploadCarImageWaiting = () => (dispatch, getState) => {
 
 export const uploadCarImage = param => async (dispatch, getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = getState()
         const { cameraReses, carId, vin } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
@@ -86,6 +87,7 @@ export const uploadCarImage = param => async (dispatch, getState) => {
 export const delImage = param => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } },
         recordForCarInfoReducer: { data: { recordId } } } = getState()
+    const { communicationSettingReducer: { data: { base_host, record_host, file_host } } } = getState()
     dispatch({ type: actionTypes.imageListForCarInfoTypes.del_ImageAtCarInfo_waiting, payload: {} })
     try {
         const url = `${record_host}/user/${uid}/record/${recordId}/image/${param}`

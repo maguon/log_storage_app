@@ -1,15 +1,12 @@
 import httpRequest from '../../../../util/HttpRequest'
-import { base_host, file_host, record_host } from '../../../../config/Host'
 import * as actionTypes from '../../../../actionTypes/index'
-import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { objectExceptNull } from '../../../../util/util'
-import { getFormValues } from 'redux-form'
 import { ToastAndroid, InteractionManager } from 'react-native'
-import * as routerDirection from '../../../../util/RouterDirection'
 import { Actions } from 'react-native-router-flux'
 
 export const createDamage = (parent, values) => async (dispatch, getState) => {
     dispatch({ type: actionTypes.applyDamageTypes.create_Damage_waiting, payload: {} })
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     const { loginReducer: { data: { user: { uid } } } } =  getState()
     const { car, driver, damageExplain } = values
     try {

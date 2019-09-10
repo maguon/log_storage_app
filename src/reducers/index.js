@@ -45,6 +45,7 @@ import addCarReducer from '../android/views/createCar/createCar/addCarReducer'
 import importCarImageReducer from '../android/views/createCar/uploadImageForCreateCar/ImportCarImageReducer'
 import imporCarReducer from '../android/views/createCar/importCar/ImporCarReducer'
 import carInfoReducer from './views/CarInfoReducer'
+import communicationSettingReducer from '../android/views/communicationSetting/communicationSettingReducer'
 
 
 export default combineReducers({
@@ -86,5 +87,6 @@ export default combineReducers({
     addCarReducer,
     importCarImageReducer,
     carInfoReducer,
-    imporCarReducer
+    imporCarReducer,
+    communicationSettingReducer
 })

@@ -25,7 +25,7 @@ class Initialization extends Component {
     }
 
     componentDidMount() {
-        this.props.initApp()
+        this.props.start()
         // setTimeout(SplashScreen.hide, 2000)
     }
 
@@ -51,7 +51,7 @@ class Initialization extends Component {
                 <Image source={{ uri: 'welcom_back' }}
                     style={styles.image}
                 />
-                {(validateVersion.isResultStatus == 3 || validateToken.isResultStatus == 3) &&
+                {/* {(validateVersion.isResultStatus == 3 || validateToken.isResultStatus == 3) &&
                     <Button block onPress={() => { }} style={styles.button}>
                         <Text style={styles.buttonTiltle}>联系管理员</Text>
                     </Button>}
@@ -62,7 +62,7 @@ class Initialization extends Component {
                 {initAPP.isResultStatus == 2 && data.version.force_update == 1 &&
                     <Button block onPress={() => this.linkDownload(data.version.url)} style={styles.button}>
                         <Text style={styles.buttonTiltle}>立即更新</Text>
-                    </Button>}
+                    </Button>} */}
             </View>
         )
     }
@@ -100,8 +100,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    initApp: () => {
-        dispatch(initializationAction.initApp())
+    start: () => {
+        dispatch(initializationAction.start())
     }
 })
 

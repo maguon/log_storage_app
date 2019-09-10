@@ -1,5 +1,5 @@
 import httpRequest from '../../../util/HttpRequest'
-import { base_host, file_host, record_host } from '../../../config/Host'
+
 import * as actionTypes from '../../../actionTypes'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
@@ -7,6 +7,7 @@ import { ToastAndroid } from 'react-native'
 export const getDamageImageList = (param) => async (dispatch, getState) => {
     const { id } = param
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const url = `${record_host}/damageRecord?${ObjectToUrl({ damageId: id })}`
         const res = await httpRequest.get(url)
         if (res.success) {
@@ -29,6 +30,7 @@ export const uploadDamageImageWaiting = () => (dispatch, getState) => {
 
 export const uploadDamageImage = param => async (dispatch, getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const { cameraReses, damageId,vin  } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {

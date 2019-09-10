@@ -12,12 +12,11 @@ import { Actions } from 'react-native-router-flux'
 import { connect } from 'react-redux'
 import globalStyles from '../../GlobalStyles'
 import ConfirmModal from './ConfirmModal'
-import { file_host } from '../../../config/Host'
+
 
 const { width, height } = Dimensions.get('window')
 
-
-export default class ImageView extends Component {
+class ImageView extends Component {
     constructor(props) {
         super(props)
         this.renderPagination = this.renderPagination.bind(this)
@@ -74,6 +73,7 @@ export default class ImageView extends Component {
     }
 
     onPressOk() {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = this.props
         const { imageViewReducer: { imageList } } = this.props
         this.setState({ confirmModalVisible: false })
         const str = file_host + 'image/'
@@ -127,6 +127,14 @@ export default class ImageView extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        communicationSettingReducer:state.communicationSettingReducer
+    }
+}
+
+export default connect(mapStateToProps)(ImageView)
 
 const styles = {
     wrapper: {

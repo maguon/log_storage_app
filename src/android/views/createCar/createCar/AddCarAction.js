@@ -1,5 +1,4 @@
 import httpRequest from '../../../../util/HttpRequest'
-import { base_host, record_host, file_host } from '../../../../config/Host'
 import * as actionTypes from '../../../../actionTypes/index'
 import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { objectExceptNull } from '../../../../util/util'
@@ -9,6 +8,7 @@ import { Actions } from 'react-native-router-flux'
 
 export const addCar = (values, parent) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     try {
         dispatch({ type: actionTypes.addCarTypes.add_car_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/car`

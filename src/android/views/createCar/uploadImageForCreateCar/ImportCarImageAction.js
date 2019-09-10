@@ -1,5 +1,4 @@
 import httpRequest from '../../../../util/HttpRequest'
-import { record_host, file_host } from '../../../../config/Host'
 import * as actionTypes from '../../../../actionTypes/index'
 import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
@@ -10,6 +9,7 @@ export const pushCarImageWaiting = () => (dispatch) => {
 
 export const pushCarImage = (param) => async (dispatch, getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const { cameraReses } = param
         const cameraSuccessReses = cameraReses.filter(item => item.success)
         if (cameraSuccessReses.length > 0) {
@@ -67,6 +67,7 @@ export const pushCarImage = (param) => async (dispatch, getState) => {
 export const delImage = param => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } },
     importCarImageReducer: { data: { recordId } } } = getState()
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     dispatch({ type: actionTypes.importCarImageTypes.del_importCarImage_waiting, payload: {} })
     try {
         const url = `${record_host}/user/${uid}/record/${recordId}/image/${param}`

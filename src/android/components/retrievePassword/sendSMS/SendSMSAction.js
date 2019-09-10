@@ -1,7 +1,5 @@
 import httpRequest from '../../../../util/HttpRequest'
-import { base_host } from '../../../../config/Host'
 import * as actionTypes from '../../../../actionTypes/index'
-import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { sleep } from '../../../../util/util'
 import { getFormValues } from 'redux-form'
 import { ToastAndroid } from 'react-native'
@@ -9,6 +7,7 @@ import { ToastAndroid } from 'react-native'
 export const countDown = () => async (dispatch, getState) => {
     const { sendSMSReducer: { data: { countDownTime } } } = getState()
     const sendSMSFormValues = getFormValues('sendSMSForm')(getState())
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     if (sendSMSFormValues && sendSMSFormValues.mobile) {
         try {
             if (countDownTime > 0) {
@@ -27,6 +26,7 @@ export const countDown = () => async (dispatch, getState) => {
 export const getVCode = () => async (dispatch, getState) => {
     dispatch({ type: actionTypes.sendSMSActionTypes.get_VCode_waiting, payload: {} })
     const sendSMSFormValues = getFormValues('sendSMSForm')(getState())
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     if (sendSMSFormValues && sendSMSFormValues.mobile) {
         try {
 

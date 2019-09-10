@@ -1,5 +1,5 @@
 import httpRequest from '../../../util/HttpRequest'
-import { base_host, file_host, record_host } from '../../../config/Host'
+
 import * as actionTypes from '../../../actionTypes'
 import { ObjectToUrl } from '../../../util/ObjectToUrl'
 import { getFormValues } from 'redux-form'
@@ -7,6 +7,7 @@ import { ToastAndroid } from 'react-native'
 import { objectExceptNull } from '../../../util/util'
 
 export const updateDamage = (param) => async (dispatch, getState) => {
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     dispatch({ type: actionTypes.demageEditorTypes.update_Damage_waiting, payload: {} })
     const { damageId, carId, vin } = param
     const state = getState()

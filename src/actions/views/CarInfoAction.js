@@ -1,5 +1,4 @@
 import httpRequest from '../../util/HttpRequest'
-import { base_host, record_host, file_host } from '../../config/Host'
 import * as actionTypes from '../../actionTypes'
 import { ObjectToUrl } from '../../util/ObjectToUrl'
 import { ToastAndroid } from 'react-native'
@@ -9,6 +8,7 @@ import * as imageListForCarInfoAction from '../components/carInfo/ImageListForCa
 
 export const getCarInfo = param => async (dispatch, getState) => {
     try {
+        const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
         const url = `${base_host}/car?${ObjectToUrl({ carId: param.car.id, active: 1 })}`
         const res = await httpRequest.get(url)
         if (res.success) {
@@ -46,6 +46,7 @@ export const getCarInfoWaiting = param => (dispatch) => {
 }
 
 export const exportCar = (param, change) => async (dispatch, getState) => {
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     const { loginReducer: { data: { user: { uid } } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_exportCar_waiting, payload: {} })
@@ -85,6 +86,7 @@ export const exportCar = (param, change) => async (dispatch, getState) => {
 
 export const moveCar = (param, change) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_moveCar_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/storageParking/${param.col.id}?${ObjectToUrl({ carId: param.carId })}`
@@ -115,6 +117,7 @@ export const moveCar = (param, change) => async (dispatch, getState) => {
 
 export const importCar = (param, change) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_importCar_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/car/${param.car.id}/carStorageRel?${ObjectToUrl({
@@ -157,6 +160,7 @@ export const importCar = (param, change) => async (dispatch, getState) => {
 
 export const sendCar = (param,change) => async (dispatch, getState) => {
     const { loginReducer: { data: { user: { uid } } } } = getState()
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     try {
         dispatch({ type: actionTypes.carInfoTypes.put_sendCar_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/car/${param.carId}/carStatus/9`

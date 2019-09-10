@@ -1,5 +1,4 @@
 import httpRequest from '../../../../util/HttpRequest'
-import { base_host, file_host } from '../../../../config/Host'
 import * as actionTypes from '../../../../actionTypes/index'
 import { ObjectToUrl } from '../../../../util/ObjectToUrl'
 import { Actions } from 'react-native-router-flux'
@@ -8,7 +7,9 @@ import { ToastAndroid } from 'react-native'
 export const importCar = (param) =>async (dispatch,getState) => {
     const { loginReducer: { data: { user: { uid } } }, 
     addCarReducer: { data: { carId, vin } } } = getState()
+    const { communicationSettingReducer: { data: { base_host,record_host,file_host } } } = getState()
     try{
+
         dispatch({ type: actionTypes.importCarTypes.import_car_waiting, payload: {} })
         const url = `${base_host}/user/${uid}/car/${carId}/carStorageRel?${ObjectToUrl({
             vin:vin
