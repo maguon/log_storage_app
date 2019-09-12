@@ -15,6 +15,7 @@ import globalStyles from '../../GlobalStyles'
 import * as demageListAction from '../damageList/DemageListAction'
 import * as responsibilityListAction from '../responsibilityList/ResponsibilityListAction'
 import * as loginAction from '../login/LoginAction'
+import * as RecordListAction from '../recordList/RecordListAction'
 import ConfirmModal from '../../../android/components/share/ConfirmModal'
 
 
@@ -48,6 +49,7 @@ class Setting extends Component {
             getResponsibilityListWaiting,
             getResponsibilityList,
             cleanLogin,
+            getRecordList,
             loginReducer: { data: { user: { real_name, avatar_image, mobile } } },
             initializationReducer: { data: { version: { force_update, currentVersion, url } } }, initializationReducer
         } = this.props
@@ -101,7 +103,9 @@ class Setting extends Component {
                                 <Icon name="arrow-forward" />
                             </Right>
                         </ListItem>
-                        <ListItem icon last onPress={() => { Actions.recordList() }}>
+                        <ListItem icon last onPress={() => {
+                            getRecordList({})
+                            Actions.recordList() }}>
                             <Left>
                                 <Icon name="ios-paper" style={globalStyles.styleColor} />
                             </Left>
@@ -197,6 +201,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+    getRecordList: (param) => {
+        dispatch(RecordListAction.getRecordList(param))
+    },
     getDemageList: () => {
         dispatch(demageListAction.getDemageList())
     },

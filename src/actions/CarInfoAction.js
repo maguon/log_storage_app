@@ -249,4 +249,3 @@ export const sendCar = (param) => (dispatch,getState) => {
 export const resetSendCar = () => (dispatch) => {
     dispatch({ type: actionTypes.carInfoTypes.RESET_SEND_CAR, payload: {} })
 }
-

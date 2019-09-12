@@ -23,6 +23,11 @@ export const get_carInformation_failed ='get_carInformation_failed'
 export const get_carInformation_error ='get_carInformation_error'
 export const get_carInformation_waiting ='get_carInformation_waiting'
 
+export const save_carSort_success ='save_carSort_success'
+export const save_carSort_failed ='save_carSort_failed'
+export const save_carSort_error ='save_carSort_error'
+export const save_carSort_waiting ='save_carSort_waiting'
+
 export const change_carInfo = 'change_carInfo'
 
 

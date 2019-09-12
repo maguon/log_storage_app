@@ -232,6 +232,9 @@ const carInfoMapDispatchToProps = (dispatch) => ({
     },
     updateCarInfo:()=>{
         dispatch(submit('carInfoEditorForm'))
+    },
+    carSort:param=>{
+        dispatch(carInfoAction.carSort(param))
     }
     
 })

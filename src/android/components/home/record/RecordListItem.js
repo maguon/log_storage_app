@@ -45,6 +45,11 @@ export default class RecordListItem extends Component {
             opImgUri.uri = 'icon_note_send'
             textStyle = styles.sendText
         }
+        else if (op == '17') {
+            op = '分拣'
+            opImgUri.uri = 'icon_note_send'
+            textStyle = styles.sendText
+        }
 
         return (
             <TouchableHighlight key={_id} underlayColor='rgba(0,0,0,0.1)' onPress={() => {

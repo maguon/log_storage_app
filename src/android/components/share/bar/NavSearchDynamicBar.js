@@ -35,6 +35,7 @@ const TextBox = props => {
 
 const NavSearchDynamicBar = props => {
     const { title, layout, getCarListWaiting, getCarList ,cleanCarList} = props
+    console.log(111)
     return (
         <View style={[styles.container, { width: width }]}>
             <StatusBar hidden={false} />

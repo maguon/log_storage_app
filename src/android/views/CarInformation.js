@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {
     StyleSheet,
     View,
-    InteractionManager
+    InteractionManager,
+    Alert
 } from 'react-native'
 import { connect } from 'react-redux'
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text, ListItem, Spinner, Content, Button } from 'native-base'
@@ -100,7 +101,9 @@ const CarInformation = props => {
         getParkingList,
         selectParkingReducer,
         sendCar,
+        carSort,
         parent } = props
+    console.log('props', props)
     return (
         <Container style={globalStyles.listBackgroundColor}>
             <Tabs>
@@ -111,25 +114,9 @@ const CarInformation = props => {
                     textStyle={[globalStyles.midText, { color: '#ddd' }]}
                     heading="车辆">
                     <Content showsVerticalScrollIndicator={false}>
-                        {car_status == 9 && rel_status == 2 && <CarDetail car={car} />}
-                        {car_status != 9 && !rel_status && <CarDetail car={car} />}
-                        {car_status == 9 && !rel_status && <CarDetail car={car} />}
-                        {car_status != 9 && rel_status == 1 && <CarInfoEditor car={car} parent={parent} />}
-                        {car_status == 9 && rel_status == 2 && <Button full
-                            onPress={() => onSelectStorage({
-                                parent,
-                                getParkingList,
-                                getParkingListWaiting,
-                                getAreaList,
-                                getAreaListWaiting,
-                                getStorageListWaiting,
-                                getStorageList,
-                                onSelect: (item) => importCar({ ...item, car })
-                            })}
-                            style={{ margin: 15, backgroundColor: '#00cade' }}>
-                            <Text style={{ color: '#fff' }}>入库</Text>
-                        </Button>}
-                        {car_status != 9 && !rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
+                        {!(rel_status == 1) && <CarDetail car={car} />}
+                        {rel_status == 1 && <CarInfoEditor car={car} parent={parent} />}
+                        {rel_status == 2 && <View style={{ flexDirection: 'row', margin: 10 }}>
                             <Button full
                                 onPress={() => onSelectStorage({
                                     parent,
@@ -145,12 +132,80 @@ const CarInformation = props => {
                                 <Text style={{ color: '#fff' }}>入库</Text>
                             </Button>
                             <Button full
-                                onPress={() => sendCar({ carId: car.id })}
+                                onPress={() => {
+                                    Alert.alert(
+                                        '提示',
+                                        '确定要分拣吗？',
+                                        [
+                                            { text: '取消', onPress: () => { }, style: 'cancel' },
+                                            {
+                                                text: '确定', onPress: () => {
+                                                    carSort({ carId: car.id, vin: car.vin })
+                                                }
+                                            },
+                                        ],
+                                        { cancelable: false }
+                                    )
+                                }}
+                                style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
+                                <Text style={{ color: '#fff' }}>分拣</Text>
+                            </Button>
+                        </View>}
+                        {!rel_status && <View style={{ flexDirection: 'row', margin: 10 }}>
+                            <Button full
+                                onPress={() => onSelectStorage({
+                                    parent,
+                                    getParkingList,
+                                    getParkingListWaiting,
+                                    getAreaList,
+                                    getAreaListWaiting,
+                                    getStorageListWaiting,
+                                    getStorageList,
+                                    onSelect: (item) => importCar({ ...item, car })
+                                })}
+                                style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
+                                <Text style={{ color: '#fff' }}>入库</Text>
+                            </Button>
+                            <Button full
+                                onPress={() =>{
+                                    Alert.alert(
+                                        '提示',
+                                        '确定已送达吗？',
+                                        [
+                                            { text: '取消', onPress: () => { }, style: 'cancel' },
+                                            {
+                                                text: '确定', onPress: () => {
+                                                    sendCar({ carId: car.id })
+                                                }
+                                            },
+                                        ],
+                                        { cancelable: false }
+                                    )
+                                } }
                                 style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                 <Text style={{ color: '#fff' }}>送达</Text>
                             </Button>
+                            <Button full
+                                onPress={() => {
+                                    Alert.alert(
+                                        '提示',
+                                        '确定要分拣吗？',
+                                        [
+                                            { text: '取消', onPress: () => { }, style: 'cancel' },
+                                            {
+                                                text: '确定', onPress: () => {
+                                                    carSort({ carId: car.id, vin: car.vin })
+                                                }
+                                            },
+                                        ],
+                                        { cancelable: false }
+                                    )
+                                }}
+                                style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
+                                <Text style={{ color: '#fff' }}>分拣</Text>
+                            </Button>
                         </View>}
-                        {car_status != 9 && rel_status == 1 &&
+                        {rel_status == 1 &&
                             <View style={{ flexDirection: 'row', margin: 10 }}>
                                 <Button full
                                     onPress={updateCarInfo}
@@ -158,7 +213,23 @@ const CarInformation = props => {
                                     <Text style={{ color: '#fff' }}>修改</Text>
                                 </Button>
                                 <Button full
-                                    onPress={() => exportCar(car)}
+                                    onPress={() => {
+                                       
+                                            Alert.alert(
+                                                '提示',
+                                                '确定要出库吗？',
+                                                [
+                                                    { text: '取消', onPress: () => { }, style: 'cancel' },
+                                                    {
+                                                        text: '确定', onPress: () => {
+                                                            exportCar(car)
+                                                        }
+                                                    },
+                                                ],
+                                                { cancelable: false }
+                                            )
+                                        }}
+                                    
                                     style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                     <Text style={{ color: '#fff' }}>出库</Text>
                                 </Button>
@@ -175,16 +246,27 @@ const CarInformation = props => {
                                     style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
                                     <Text style={{ color: '#fff' }}>移位</Text>
                                 </Button>
+                                <Button full
+                                    onPress={() => {
+                                        Alert.alert(
+                                            '提示',
+                                            '确定要分拣吗？',
+                                            [
+                                                { text: '取消', onPress: () => { }, style: 'cancel' },
+                                                {
+                                                    text: '确定', onPress: () => {
+                                                        carSort({ carId: car.id, vin: car.vin })
+                                                    }
+                                                },
+                                            ],
+                                            { cancelable: false }
+                                        )
+                                    }}
+                                    style={{ margin: 5, backgroundColor: '#00cade', flex: 1 }}>
+                                    <Text style={{ color: '#fff' }}>分拣</Text>
+                                </Button>
                             </View>}
                     </Content>
-                    {/* {(getCarInfo.isResultStatus == 1 || getCarInfoRecord.isResultStatus == 1) ?
-                        <Container>
-                            <Spinner color={styleColor} />
-                        </Container>
-                        : <Container>
-                            <CarInfoForDemage />
-                            <RecordForDemage />
-                        </Container>} */}
                 </Tab>
                 <Tab
                     tabStyle={globalStyles.styleBackgroundColor}
